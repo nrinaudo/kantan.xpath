@@ -1,0 +1,20 @@
+language: scala
+scala:
+  - 2.10.6
+  - 2.11.7
+jdk:
+  - oraclejdk7
+  - oraclejdk8
+script:
+  - sbt clean coverage test coverageReport coverageAggregate
+before_install:
+  - pip install --user codecov
+after_success:
+  - codecov
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/727319a7e328c69e31e7
+    on_success: change
+    on_failure: always
+    on_start: never

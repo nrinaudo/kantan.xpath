@@ -4,17 +4,18 @@ import java.io._
 import java.net.{URI, URL}
 
 import org.xml.sax.InputSource
-import simulacrum.typeclass
+import simulacrum.{noop, typeclass}
 
 import scala.io.Codec
 
 @typeclass
 trait XmlSource[-A] { self =>
   def asNode(a: A): Node
+
+  @noop
   def contramap[B](f: B => A): XmlSource[B] = XmlSource(b => self.asNode(f(b)))
 
   // TODO: helper methods to execute XPath expressions directly.
-  //def evaluate[B: NodeDecoder](a: A, expr: Expression): B = expr.evaluate(asNode(a))
 }
 
 object XmlSource {

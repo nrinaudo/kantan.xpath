@@ -1,6 +1,6 @@
-package xerus
+package grind
 
-import xerus.DecodeResult.{NotFound, Failure, Success}
+import grind.DecodeResult.{NotFound, Failure, Success}
 
 sealed trait DecodeResult[+A] {
   def isSuccess: Boolean

@@ -1,4 +1,4 @@
-package xerus
+package grind
 
 object ops extends NodeDecoder.ToNodeDecoderOps
                    with XmlSource.ToXmlSourceOps {

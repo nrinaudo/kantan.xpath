@@ -1,4 +1,4 @@
-package xerus
+package grind
 
 import java.io._
 import java.net.{URI, URL}

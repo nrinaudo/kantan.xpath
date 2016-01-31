@@ -1,8 +1,8 @@
-package interop.xeru
+package interop.grind
 
 import org.apache.xerces.parsers.DOMParser
 import org.cyberneko.html.HTMLConfiguration
-import xerus.XmlParser
+import grind.XmlParser
 
 package object nekohtml {
   implicit val defaultParser: XmlParser = XmlParser { s =>

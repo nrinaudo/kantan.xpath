@@ -1,4 +1,4 @@
-package xerus
+package grind
 
 import java.net.{URI, URL}
 import java.util.UUID

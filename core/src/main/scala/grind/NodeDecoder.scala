@@ -3,6 +3,7 @@ package grind
 import java.net.{URI, URL}
 import java.util.UUID
 
+import grind.DecodeResult.{Failure, Success}
 import simulacrum.{noop, typeclass}
 
 @typeclass
@@ -10,11 +11,10 @@ trait NodeDecoder[A] { self =>
   def decode(n: Node): DecodeResult[A]
 
   @noop
-  def map[B](f: A => B): NodeDecoder[B] = NodeDecoder { n => for {
-    a <- self.decode(n)
-    b <- DecodeResult(f(a))
-  } yield b
-  }
+  def map[B](f: A => B): NodeDecoder[B] = NodeDecoder { n => self.decode(n).map(f) }
+
+  @noop
+  def mapResult[B](f: A => DecodeResult[B]): NodeDecoder[B] = NodeDecoder { n => self.decode(n).flatMap(f) }
 }
 
 object NodeDecoder extends Decoders with TupleDecoders {
@@ -30,17 +30,17 @@ object NodeDecoder extends Decoders with TupleDecoders {
   implicit val element: NodeDecoder[Element] = unsafe(n => n.asInstanceOf[Element])
   implicit val attr: NodeDecoder[Attr] = unsafe(n => n.asInstanceOf[Attr])
   implicit val string: NodeDecoder[String] = unsafe(_.getTextContent)
-  implicit val char: NodeDecoder[Char] = string.map(s => if(s.length != 1) sys.error("todo") else s.charAt(0))
-  implicit val int: NodeDecoder[Int] = string.map(_.toInt)
-  implicit val float: NodeDecoder[Float] = string.map(_.toFloat)
-  implicit val double: NodeDecoder[Double] = string.map(_.toDouble)
-  implicit val long: NodeDecoder[Long] = string.map(_.toLong)
-  implicit val short: NodeDecoder[Short] = string.map(_.toShort)
-  implicit val byte: NodeDecoder[Byte] = string.map(_.toByte)
-  implicit val boolean: NodeDecoder[Boolean] = string.map(_.toBoolean)
-  implicit val bigInt: NodeDecoder[BigInt] = string.map(BigInt.apply)
-  implicit val bigDecimal: NodeDecoder[BigDecimal] = string.map(BigDecimal.apply)
-  implicit val uuid: NodeDecoder[UUID] = string.map(UUID.fromString)
-  implicit val url: NodeDecoder[URL] = string.map(s => new URL(s))
-  implicit val uri: NodeDecoder[URI] = string.map(s => new URI(s))
+  implicit val char: NodeDecoder[Char] = string.mapResult(s => if(s.length == 1) Success(s.charAt(0)) else Failure)
+  implicit val int: NodeDecoder[Int] = string.mapResult(s => DecodeResult(s.toInt))
+  implicit val float: NodeDecoder[Float] = string.mapResult(s => DecodeResult(s.toFloat))
+  implicit val double: NodeDecoder[Double] = string.mapResult(s => DecodeResult(s.toDouble))
+  implicit val long: NodeDecoder[Long] = string.mapResult(s => DecodeResult(s.toLong))
+  implicit val short: NodeDecoder[Short] = string.mapResult(s => DecodeResult(s.toShort))
+  implicit val byte: NodeDecoder[Byte] = string.mapResult(s => DecodeResult(s.toByte))
+  implicit val boolean: NodeDecoder[Boolean] = string.mapResult(s => DecodeResult(s.toBoolean))
+  implicit val bigInt: NodeDecoder[BigInt] = string.mapResult(s => DecodeResult(BigInt(s)))
+  implicit val bigDecimal: NodeDecoder[BigDecimal] = string.mapResult(s => DecodeResult(BigDecimal(s)))
+  implicit val uuid: NodeDecoder[UUID] = string.mapResult(s => DecodeResult(UUID.fromString(s)))
+  implicit val url: NodeDecoder[URL] = string.mapResult(s => DecodeResult(new URL(s)))
+  implicit val uri: NodeDecoder[URI] = string.mapResult(s => DecodeResult(new URI(s)))
 }

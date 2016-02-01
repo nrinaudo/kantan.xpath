@@ -5,6 +5,8 @@ import UnidocKeys._
 val simulacrumVersion    = "0.6.1"
 val macroParadiseVersion = "2.1.0"
 val nekoHtmlVersion      = "1.9.22"
+val scalatestVersion     = "3.0.0-M9"
+val scalaCheckVersion    = "1.12.5"
 
 lazy val buildSettings = Seq(
   organization       := "com.nrinaudo",
@@ -77,6 +79,10 @@ lazy val core = project
     moduleName := "grind",
     name       := "core"
   )
+  .settings(libraryDependencies ++= Seq(
+    "org.scalatest"  %% "scalatest"  % scalatestVersion  % "test",
+    "org.scalacheck" %% "scalacheck" % scalaCheckVersion % "test"
+  ))
   .settings(sourceGenerators in Compile <+= (sourceManaged in Compile).map(Boilerplate.gen))
   .settings(allSettings: _*)
 

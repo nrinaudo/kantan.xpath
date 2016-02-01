@@ -2,11 +2,12 @@ import com.typesafe.sbt.SbtGhPages.GhPagesKeys._
 import com.typesafe.sbt.SbtSite.SiteKeys._
 import UnidocKeys._
 
-val simulacrumVersion    = "0.6.1"
+val simulacrumVersion    = "0.7.0"
 val macroParadiseVersion = "2.1.0"
 val nekoHtmlVersion      = "1.9.22"
 val scalatestVersion     = "3.0.0-M9"
 val scalaCheckVersion    = "1.12.5"
+val disciplineVersion    = "0.4"
 
 lazy val buildSettings = Seq(
   organization       := "com.nrinaudo",
@@ -71,18 +72,14 @@ lazy val root = Project(id = "grind", base = file("."))
   .settings(moduleName := "root")
   .settings(allSettings)
   .settings(noPublishSettings)
-  .aggregate(core, nekohtml)
-  .dependsOn(core)
+  .aggregate(core, nekohtml, docs, laws, tests)
+  .dependsOn(core, nekohtml)
 
 lazy val core = project
   .settings(
     moduleName := "grind",
     name       := "core"
   )
-  .settings(libraryDependencies ++= Seq(
-    "org.scalatest"  %% "scalatest"  % scalatestVersion  % "test",
-    "org.scalacheck" %% "scalacheck" % scalaCheckVersion % "test"
-  ))
   .settings(sourceGenerators in Compile <+= (sourceManaged in Compile).map(Boilerplate.gen))
   .settings(allSettings: _*)
 
@@ -90,6 +87,25 @@ lazy val nekohtml = project
   .settings(libraryDependencies += "net.sourceforge.nekohtml" % "nekohtml" % nekoHtmlVersion)
   .settings(allSettings: _*)
   .dependsOn(core)
+
+lazy val laws = project
+  .settings(
+    moduleName := "grind-laws",
+    name       := "laws"
+  )
+  .settings(libraryDependencies ++= Seq(
+    "org.scalacheck" %% "scalacheck" % scalaCheckVersion,
+    "org.typelevel"  %% "discipline" % disciplineVersion
+  ))
+  .settings(allSettings: _*)
+  .dependsOn(core)
+
+lazy val tests = project
+  .settings(allSettings: _*)
+  .settings(noPublishSettings: _*)
+  .settings(libraryDependencies += "org.scalatest" %% "scalatest" % scalatestVersion % "test")
+  .dependsOn(core, laws % "test")
+
 
 lazy val docs = project
   .settings(allSettings: _*)

@@ -13,9 +13,7 @@ object XPathCompiler {
     override def compile(str: String) = f(str)
   }
 
-  def unsafe(f: String => Expression): XPathCompiler = new XPathCompiler {
-    override def compile(str: String): Option[Expression] = Try(f(str)).toOption
-  }
+  def unsafe(f: String => Expression): XPathCompiler = XPathCompiler(s => Try(f(s)).toOption)
 
   implicit val builtIn: XPathCompiler = {
     val cmp = XPathFactory.newInstance().newXPath()

@@ -41,5 +41,5 @@ case class Expression(expr: XPathExpression) {
 
 object Expression {
   def apply(str: String)(implicit compiler: XPathCompiler): Option[Expression] =
-    Try(compiler.compile(str)).toOption
+    compiler.compile(str)
 }

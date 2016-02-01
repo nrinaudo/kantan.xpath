@@ -2,18 +2,23 @@ package grind
 
 import javax.xml.xpath.XPathFactory
 
-// TODO: error handling.
+import scala.util.Try
+
 trait XPathCompiler {
-  def compile(str: String): Expression
+  def compile(str: String): Option[Expression]
 }
 
 object XPathCompiler {
-  def apply(f: String => Expression): XPathCompiler = new XPathCompiler {
-    override def compile(str: String): Expression = f(str)
+  def apply(f: String => Option[Expression]): XPathCompiler = new XPathCompiler {
+    override def compile(str: String) = f(str)
+  }
+
+  def unsafe(f: String => Expression): XPathCompiler = new XPathCompiler {
+    override def compile(str: String): Option[Expression] = Try(f(str)).toOption
   }
 
   implicit val builtIn: XPathCompiler = {
     val cmp = XPathFactory.newInstance().newXPath()
-    XPathCompiler(s => Expression(cmp.compile(s)))
+    unsafe(s => Expression(cmp.compile(s)))
   }
 }

@@ -4,8 +4,9 @@ import java.io._
 import java.net.{URI, URL}
 
 import org.xml.sax.InputSource
-import simulacrum.{noop, typeclass}
+import simulacrum.{op, noop, typeclass}
 
+import scala.collection.generic.CanBuildFrom
 import scala.io.Codec
 
 @typeclass
@@ -15,7 +16,19 @@ trait XmlSource[-A] { self =>
   @noop
   def contramap[B](f: B => A): XmlSource[B] = XmlSource(b => self.asNode(f(b)))
 
-  // TODO: helper methods to execute XPath expressions directly.
+  @op("evalFirst")
+  def first[B: NodeDecoder](a: A, xpath: Expression): DecodeResult[B] = xpath.first(asNode(a))
+
+  @op("unsafeEvalFirst")
+  def unsafeFirst[B: NodeDecoder](a: A, xpath: Expression): B = xpath.unsafeFirst(asNode(a))
+
+  @op("evalAll")
+  def all[F[_], B: NodeDecoder](a: A, xpath: Expression)(implicit cbf: CanBuildFrom[Nothing, DecodeResult[B], F[DecodeResult[B]]]): F[DecodeResult[B]] =
+    xpath.all(asNode(a))
+
+  @op("unsafeEvalAll")
+  def unsafeAll[F[_], B: NodeDecoder](a: A, xpath: Expression)(implicit cbf: CanBuildFrom[Nothing, B, F[B]]): F[B] =
+    xpath.unsafeAll(asNode(a))
 }
 
 object XmlSource {

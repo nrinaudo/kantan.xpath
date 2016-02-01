@@ -17,7 +17,7 @@ trait NodeDecoder[A] { self =>
   }
 }
 
-object NodeDecoder {
+object NodeDecoder extends Decoders with TupleDecoders {
   def apply[A](f: Node => DecodeResult[A]) = new NodeDecoder[A] {
     override def decode(e: Node) = f(e)
   }

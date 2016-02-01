@@ -77,6 +77,7 @@ lazy val core = project
     moduleName := "grind",
     name       := "core"
   )
+  .settings(sourceGenerators in Compile <+= (sourceManaged in Compile).map(Boilerplate.gen))
   .settings(allSettings: _*)
 
 lazy val nekohtml = project

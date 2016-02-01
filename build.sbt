@@ -37,6 +37,7 @@ lazy val baseSettings = Seq(
     "com.github.mpilquist" %% "simulacrum"    % simulacrumVersion % "provided",
     compilerPlugin("org.scalamacros" % "paradise" % macroParadiseVersion cross CrossVersion.full)
   ),
+  coverageExcludedPackages := "grind\\.laws\\..*",
   incOptions     := incOptions.value.withNameHashing(true)
 )
 

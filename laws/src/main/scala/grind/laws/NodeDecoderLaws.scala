@@ -9,7 +9,12 @@ trait NodeDecoderLaws[A] {
   def encode(a: A, name: String): Node
 
   def decodeFirst(value: A): Boolean = "//e".xpath.first[A](encode(value, "e")) == DecodeResult.Success(value)
+
   def unsafeDecodeFirst(value: A): Boolean = "//e".xpath.unsafeFirst[A](encode(value, "e")) == value
+
+  def liftFirst(value: A): Boolean = "//e".xpath.liftFirst[A](decoder)(encode(value, "e")) == DecodeResult.Success(value)
+
+  def liftUnsafeFirst(value: A): Boolean = "//e".xpath.liftUnsafeFirst[A](decoder)(encode(value, "e")) == value
 }
 
 

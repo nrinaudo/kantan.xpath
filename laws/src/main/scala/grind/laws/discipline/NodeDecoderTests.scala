@@ -1,6 +1,6 @@
 package grind.laws.discipline
 
-import grind.{Node, NodeDecoder}
+import grind.{Document, Element, Node, NodeDecoder}
 import grind.laws.NodeDecoderLaws
 import grind.ops._
 import org.scalacheck.Prop._
@@ -17,15 +17,20 @@ trait NodeDecoderTests[A] extends Laws {
     "decode first"         -> forAll(laws.decodeFirst _),
     "unsafe decode first"  -> forAll(laws.unsafeDecodeFirst _),
     "lift first"           -> forAll(laws.liftFirst _),
-    "lift unsafe first"    -> forAll(laws.liftUnsafeFirst _)
+    "lift unsafe first"    -> forAll(laws.liftUnsafeFirst _),
+    "decode all"           -> forAll(laws.decodeAll _)
   )
 }
 
 object NodeDecoderTests {
   def cdataEncoded[A: NodeDecoder: Arbitrary](f: A => String): NodeDecoderTests[A] =
-    NodeDecoderTests { (a, name) => s"<root><$name>${f(a)}</$name></root>".asNode }
+  NodeDecoderTests { (a, name) =>
+    val n = s"<$name></$name>".asNode.getFirstChild.asInstanceOf[Element]
+    n.setTextContent(f(a))
+    n
+  }
 
-  def apply[A: NodeDecoder](f: (A, String) => Node)(implicit aa: Arbitrary[A]): NodeDecoderTests[A] = new NodeDecoderTests[A] {
+  def apply[A: NodeDecoder](f: (A, String) => Element)(implicit aa: Arbitrary[A]): NodeDecoderTests[A] = new NodeDecoderTests[A] {
     override val laws = NodeDecoderLaws(f)
     override implicit val arbA = aa
   }

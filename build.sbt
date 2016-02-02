@@ -2,6 +2,7 @@ import com.typesafe.sbt.SbtGhPages.GhPagesKeys._
 import com.typesafe.sbt.SbtSite.SiteKeys._
 import UnidocKeys._
 
+val catsVersion          = "0.3.0"
 val simulacrumVersion    = "0.7.0"
 val macroParadiseVersion = "2.1.0"
 val nekoHtmlVersion      = "1.9.22"
@@ -73,7 +74,7 @@ lazy val root = Project(id = "grind", base = file("."))
   .settings(moduleName := "root")
   .settings(allSettings)
   .settings(noPublishSettings)
-  .aggregate(core, nekohtml, docs, laws, tests)
+  .aggregate(core, nekohtml, docs, laws, tests, cats)
   .dependsOn(core, nekohtml)
 
 lazy val core = project
@@ -88,6 +89,20 @@ lazy val nekohtml = project
   .settings(libraryDependencies += "net.sourceforge.nekohtml" % "nekohtml" % nekoHtmlVersion)
   .settings(allSettings: _*)
   .dependsOn(core)
+
+lazy val cats = project
+  .settings(
+    moduleName := "grind-cats",
+    name       := "cats"
+  )
+  .settings(libraryDependencies ++= Seq(
+    "org.spire-math" %% "cats"      % catsVersion,
+    "org.spire-math" %% "cats-laws" % catsVersion      % "test",
+    "org.scalatest"  %% "scalatest" % scalatestVersion % "test"
+  ))
+  .settings(allSettings: _*)
+  .dependsOn(core, laws % "test")
+
 
 lazy val laws = project
   .settings(

@@ -14,6 +14,9 @@ trait NodeDecoder[A] { self =>
   def map[B](f: A => B): NodeDecoder[B] = NodeDecoder { n => self.decode(n).map(f) }
 
   @noop
+  def flatMap[B](f: A => NodeDecoder[B]): NodeDecoder[B] = NodeDecoder(s => decode(s).flatMap(a => f(a).decode(s)))
+
+  @noop
   def mapResult[B](f: A => DecodeResult[B]): NodeDecoder[B] = NodeDecoder { n => self.decode(n).flatMap(f) }
 }
 

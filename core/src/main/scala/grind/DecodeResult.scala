@@ -25,6 +25,10 @@ sealed trait DecodeResult[+A] {
 }
 
 object DecodeResult {
+  def success[A](a: A): DecodeResult[A]  = Success(a)
+  def failure[A]: DecodeResult[A] = Failure
+  def notFound[A]: DecodeResult[A]  = NotFound
+
   def apply[A](a: => A): DecodeResult[A] =
     try {
       val actual = a

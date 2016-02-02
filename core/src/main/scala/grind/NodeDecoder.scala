@@ -41,6 +41,6 @@ object NodeDecoder extends Decoders with TupleDecoders {
   implicit val bigInt: NodeDecoder[BigInt] = string.mapResult(s => DecodeResult(BigInt(s)))
   implicit val bigDecimal: NodeDecoder[BigDecimal] = string.mapResult(s => DecodeResult(BigDecimal(s)))
   implicit val uuid: NodeDecoder[UUID] = string.mapResult(s => DecodeResult(UUID.fromString(s)))
-  implicit val url: NodeDecoder[URL] = string.mapResult(s => DecodeResult(new URL(s)))
   implicit val uri: NodeDecoder[URI] = string.mapResult(s => DecodeResult(new URI(s)))
+  implicit val url: NodeDecoder[URL] = uri.map(u => u.toURL)
 }

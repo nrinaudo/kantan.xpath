@@ -1,8 +1,9 @@
 package grind
 
 import grind.laws.discipline.NodeDecoderTests
-import org.scalacheck.{Gen, Arbitrary}
+import grind.laws.discipline.arbitrary._
 import org.scalacheck.Gen._
+import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline

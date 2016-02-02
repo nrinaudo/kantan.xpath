@@ -1,40 +1,29 @@
 package grind.laws.discipline
 
-import grind.{Document, Element, Node, NodeDecoder}
-import grind.laws.NodeDecoderLaws
-import grind.ops._
-import org.scalacheck.Prop._
+import grind._
+import grind.laws.{IllegalValue, NodeDecoderLaws}
 import org.scalacheck.Arbitrary
-import org.typelevel.discipline.Laws
+import org.scalacheck.Prop._
 
-trait NodeDecoderTests[A] extends Laws {
+trait NodeDecoderTests[A] extends SafeNodeDecoderTests[A] {
   def laws: NodeDecoderLaws[A]
-  implicit def arbA: Arbitrary[A]
+  implicit def arbIllegalA: Arbitrary[IllegalValue[A]]
 
-  def nodeDecoder: RuleSet = new DefaultRuleSet(
-    name = "nodeDecoder",
-    parent = None,
-    "decode first"         -> forAll(laws.decodeFirst _),
-    "unsafe decode first"  -> forAll(laws.unsafeDecodeFirst _),
-    "lift first"           -> forAll(laws.liftFirst _),
-    "lift unsafe first"    -> forAll(laws.liftUnsafeFirst _),
-    "decode all"           -> forAll(laws.decodeAll _),
-    "unsafe decode all"    -> forAll(laws.unsafeDecodeAll _),
-    "lift all"             -> forAll(laws.liftAll _),
-    "lift unsafe all"      -> forAll(laws.liftUnsafeAll _)
-  )
+  def nodeDecoder: RuleSet = new RuleSet {
+      def name = "nodeDecoder"
+      def bases = Nil
+      def parents = Seq(safeNodeDecoder)
+      def props = Seq("decode first failure" -> forAll(laws.decodeFirstFail _))
+    }
 }
 
 object NodeDecoderTests {
-  def cdataEncoded[A: NodeDecoder: Arbitrary](f: A => String): NodeDecoderTests[A] =
-  NodeDecoderTests { (a, name) =>
-    val n = s"<$name></$name>".asNode.getFirstChild.asInstanceOf[Element]
-    n.setTextContent(f(a))
-    n
-  }
+  def cdataEncoded[A: NodeDecoder: Arbitrary](f: A => String)(implicit ia: Arbitrary[IllegalValue[A]]): NodeDecoderTests[A] =
+    NodeDecoderTests[A]((a, name) => SafeNodeDecoderTests.cdataEncode(f(a), name))((s, name) => SafeNodeDecoderTests.cdataEncode(s, name) )
 
-  def apply[A: NodeDecoder](f: (A, String) => Element)(implicit aa: Arbitrary[A]): NodeDecoderTests[A] = new NodeDecoderTests[A] {
-    override val laws = NodeDecoderLaws(f)
+  def apply[A: NodeDecoder](f: (A, String) => Element)(g: (String, String) => Element)(implicit aa: Arbitrary[A], ia: Arbitrary[IllegalValue[A]]): NodeDecoderTests[A] = new NodeDecoderTests[A] {
+    override val laws = NodeDecoderLaws(f)(g)
     override implicit val arbA = aa
+    override implicit def arbIllegalA = ia
   }
 }

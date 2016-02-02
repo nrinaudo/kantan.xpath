@@ -3,7 +3,6 @@ package grind
 import javax.xml.xpath.{XPathConstants, XPathExpression}
 
 import scala.collection.generic.CanBuildFrom
-import scala.util.Try
 
 case class Expression(expr: XPathExpression) {
   def first[A](n: Node)(implicit da: NodeDecoder[A]): DecodeResult[A] = {

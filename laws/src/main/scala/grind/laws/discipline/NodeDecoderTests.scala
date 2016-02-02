@@ -13,7 +13,16 @@ trait NodeDecoderTests[A] extends SafeNodeDecoderTests[A] {
       def name = "nodeDecoder"
       def bases = Nil
       def parents = Seq(safeNodeDecoder)
-      def props = Seq("decode first failure" -> forAll(laws.decodeFirstFail _))
+      def props = Seq(
+        "decode first failure" -> forAll(laws.decodeFirstFail _),
+        "unsafe decode first failure" -> forAll(laws.unsafeDecodeFirstFail _),
+        "lift first failure" -> forAll(laws.liftFirstFail _),
+        "lift unsafe first failure" -> forAll(laws.liftUnsafeFirstFail _),
+        "decode all failure" -> forAll(laws.decodeAllFail _),
+        "unsafe decode all failure" -> forAll(laws.unsafeDecodeAllFail _),
+        "lift all failure" -> forAll(laws.liftAllFail _),
+        "lift unsafe all failure" -> forAll(laws.liftUnsafeAllFail _)
+      )
     }
 }
 

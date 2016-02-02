@@ -5,6 +5,7 @@ import grind.DecodeResult.{NotFound, Failure, Success}
 sealed trait DecodeResult[+A] {
   def isSuccess: Boolean
   def isFailure: Boolean = !isSuccess
+  def toOption: Option[A]
 
   def get: A = this match {
     case Success(a) => a
@@ -39,13 +40,16 @@ object DecodeResult {
 
   final case class Success[A](value: A) extends DecodeResult[A] {
     override def isSuccess: Boolean = true
+    override def toOption: Option[A] = Some(value)
   }
 
   case object Failure extends DecodeResult[Nothing] {
     override def isSuccess: Boolean = false
+    override def toOption: Option[Nothing] = None
   }
 
   case object NotFound extends DecodeResult[Nothing] {
     override def isSuccess: Boolean = false
+    override def toOption: Option[Nothing] = None
   }
 }

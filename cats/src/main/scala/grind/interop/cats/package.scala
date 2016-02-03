@@ -24,14 +24,14 @@ package object cats {
   }
 
   /** `Monad` instance for `NodeDecoder`. */
-  implicit val cellDecoder = new Monad[NodeDecoder] {
+  implicit val nodeDecoder = new Monad[NodeDecoder] {
     override def map[A, B](fa: NodeDecoder[A])(f: A => B) = fa.map(f)
     override def flatMap[A, B](fa: NodeDecoder[A])(f: A => NodeDecoder[B]) = fa.flatMap(f)
     override def pure[A](x: A) = NodeDecoder(_ => DecodeResult(x))
   }
 
   /** `Contravariant` instance for `XmlSource`. */
-  implicit val cellEncoder = new Contravariant[XmlSource] {
+  implicit val xmlSource = new Contravariant[XmlSource] {
     override def contramap[A, B](fa: XmlSource[A])(f: B => A) = fa.contramap(f)
   }
 }

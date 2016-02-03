@@ -1,5 +1,6 @@
 package grind.laws.discipline
 
+import java.io.File
 import java.util.UUID
 
 import grind.laws.IllegalValue
@@ -9,6 +10,13 @@ import org.scalacheck.Gen._
 import org.scalacheck.{Arbitrary, Gen}
 
 object arbitrary {
+  // TODO: maybe this should be moved to a different project, to be shared with tabulate?
+  val genFile: Gen[File] = for(suffix <- Gen.listOfN(3, Gen.alphaChar)) yield {
+    val file = File.createTempFile("scalacheck", suffix.mkString)
+    file.deleteOnExit()
+    file
+  }
+
   def success[A: Arbitrary]: Gen[DecodeResult[A]] = arb[A].map(DecodeResult.success)
   implicit def arbDecodeResult[A: Arbitrary]: Arbitrary[DecodeResult[A]] =
     Arbitrary(oneOf(const(DecodeResult.failure[A]), success[A], const(DecodeResult.notFound[A])))

@@ -1,5 +1,7 @@
 package grind.interop.cats
 
+import _root_.cats.Eq
+import eqs._
 import _root_.cats.laws.discipline.MonadTests
 import grind.DecodeResult
 import grind.laws.discipline.arbitrary._

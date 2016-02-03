@@ -2,7 +2,7 @@ import com.typesafe.sbt.SbtGhPages.GhPagesKeys._
 import com.typesafe.sbt.SbtSite.SiteKeys._
 import UnidocKeys._
 
-val catsVersion          = "0.3.0"
+val catsVersion          = "0.4.0"
 val simulacrumVersion    = "0.7.0"
 val macroParadiseVersion = "2.1.0"
 val nekoHtmlVersion      = "1.9.22"
@@ -97,8 +97,8 @@ lazy val cats = project
     name       := "cats"
   )
   .settings(libraryDependencies ++= Seq(
-    "org.spire-math" %% "cats"      % catsVersion,
-    "org.spire-math" %% "cats-laws" % catsVersion      % "test",
+    "org.typelevel" %% "cats"       % catsVersion,
+    "org.typelevel" %% "cats-laws"  % catsVersion      % "test",
     "org.scalatest"  %% "scalatest" % scalatestVersion % "test"
   ))
   .settings(allSettings: _*)

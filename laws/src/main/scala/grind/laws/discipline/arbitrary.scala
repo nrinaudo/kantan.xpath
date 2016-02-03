@@ -2,17 +2,19 @@ package grind.laws.discipline
 
 import java.util.UUID
 
+import grind.laws.IllegalValue
+import grind.{DecodeResult, Node, NodeDecoder}
 import org.scalacheck.Arbitrary.{arbitrary => arb}
 import org.scalacheck.Gen._
 import org.scalacheck.{Arbitrary, Gen}
-import grind.DecodeResult
-import grind.laws.IllegalValue
 
 object arbitrary {
   def success[A: Arbitrary]: Gen[DecodeResult[A]] = arb[A].map(DecodeResult.success)
   implicit def arbDecodeResult[A: Arbitrary]: Arbitrary[DecodeResult[A]] =
     Arbitrary(oneOf(const(DecodeResult.failure[A]), success[A], const(DecodeResult.notFound[A])))
 
+  implicit def arbCellDecoder[A: Arbitrary]: Arbitrary[NodeDecoder[A]] =
+    Arbitrary(arb[Node => DecodeResult[A]].map(f => NodeDecoder(f)))
 
 
   private def illegalNum[A]: Arbitrary[IllegalValue[A]] = Arbitrary(Gen.alphaStr.map(IllegalValue.apply))

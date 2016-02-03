@@ -3,6 +3,7 @@ package grind.laws.discipline
 import java.io.File
 import java.util.UUID
 
+import grind.DecodeResult.Success
 import grind.laws.IllegalValue
 import grind.{DecodeResult, Node, NodeDecoder}
 import org.scalacheck.Arbitrary.{arbitrary => arb}

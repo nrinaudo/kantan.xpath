@@ -23,7 +23,7 @@ trait NodeDecoderTests[A] extends Laws {
 
 object NodeDecoderTests {
   def cdataEncode(value: String, name: String): Element = {
-    val n = s"<$name></$name>".getAsNode.getFirstChild.asInstanceOf[Element]
+    val n = s"<$name></$name>".asUnsafeNode.getFirstChild.asInstanceOf[Element]
     n.setTextContent(value)
     n
   }

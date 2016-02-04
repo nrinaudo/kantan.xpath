@@ -27,9 +27,9 @@ trait NodeDecoderLaws[A] {
 
   // - Laws ------------------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
-  def decodeFirst(a: A): Boolean = encode(a, "e").evalFirst[A]("//e".xpath) == DecodeResult.Success(a)
+  def decodeFirst(a: A): Boolean = "//e".xpath.first[A](encode(a, "e")) == DecodeResult.Success(a)
 
-  def decodeAll(as: List[A]): Boolean = encodeAll(as, "e").evalAll[List, A]("//e".xpath) == as.map(a => DecodeResult(a))
+  def decodeAll(as: List[A]): Boolean = "//e".xpath.all[List, A](encodeAll(as, "e")) == as.map(a => DecodeResult(a))
 
   def liftFirst(a: A): Boolean = "//e".xpath.liftFirst[A](decoder)(encode(a, "e")) == DecodeResult.Success(a)
 

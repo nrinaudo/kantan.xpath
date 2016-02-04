@@ -4,12 +4,19 @@ import javax.xml.xpath.{XPathConstants, XPathExpression}
 
 import scala.collection.generic.CanBuildFrom
 
-class Expression private[grind] (val expr: XPathExpression) { self =>
+class Expression private[grind] (val expr: XPathExpression) {
+  /** Finds the first node that matches the expression and evaluates it as an `A`. */
   def first[A: NodeDecoder](n: Node): DecodeResult[A] = Expression.first(n, expr)
 
-  def all[A, F[_]](n: Node)(implicit da: NodeDecoder[A], cbf: CanBuildFrom[Nothing, DecodeResult[A], F[DecodeResult[A]]]): F[DecodeResult[A]] =
+  /** Finds all nodes matching the expression and evaluate them as an `F[A]]`, where `F` is a collection class. */
+  def all[F[_], A](n: Node)(implicit da: NodeDecoder[A], cbf: CanBuildFrom[Nothing, DecodeResult[A], F[DecodeResult[A]]]): F[DecodeResult[A]] =
     Expression.all(n, expr)(da.decode)
 
+  /** Turns this expression into an unsafe one
+    *
+    * An unsafe expression is one that throws exception when error occurs, as opposed to wrapping them in a
+    * [[DecodeResult.Failure]].
+    */
   def unsafe: UnsafeExpression = new UnsafeExpression(expr)
 
   def liftFirst[A: NodeDecoder]: (Node => DecodeResult[A]) = n => first(n)
@@ -19,7 +26,7 @@ class Expression private[grind] (val expr: XPathExpression) { self =>
 
 class UnsafeExpression private[grind] (val expr: XPathExpression) {
   def first[A: NodeDecoder](n: Node): A = Expression.first(n, expr).get
-  def all[A, F[_]](n: Node)(implicit da: NodeDecoder[A], cbf: CanBuildFrom[Nothing, A, F[A]]): F[A] =
+  def all[F[_], A](n: Node)(implicit da: NodeDecoder[A], cbf: CanBuildFrom[Nothing, A, F[A]]): F[A] =
     Expression.all(n, expr)(n => da.decode(n).get)
   def liftFirst[A: NodeDecoder]: (Node => A) = n => first(n)
   def liftAll[F[_], A: NodeDecoder](implicit cbf: CanBuildFrom[Nothing, A, F[A]]): (Node => F[A]) = n => all(n)

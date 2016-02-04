@@ -15,7 +15,7 @@ object equality {
   }
 
   def nodeDecoder[A: Arbitrary](c1: NodeDecoder[A], c2: NodeDecoder[A])(e: A => String)(f: (DecodeResult[A], DecodeResult[A]) => Boolean): Boolean = {
-    implicit val arbNode: Arbitrary[Node] = Arbitrary(arb[A].map(a => s"<root>$a</root>".getAsNode))
+    implicit val arbNode: Arbitrary[Node] = Arbitrary(arb[A].map(a => s"<root>$a</root>".asUnsafeNode))
     eq(c1.decode, c2.decode)(f)
   }
 }

@@ -3,7 +3,6 @@ package grind
 import java.util.UUID
 
 import grind.laws.discipline.NodeDecoderTests
-import grind.laws.discipline.arbitrary._
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks

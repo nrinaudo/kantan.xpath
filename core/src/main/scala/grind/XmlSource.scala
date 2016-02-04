@@ -8,38 +8,46 @@ import simulacrum.{op, noop, typeclass}
 
 import scala.collection.generic.CanBuildFrom
 import scala.io.Codec
+import scala.util.Try
 
 @typeclass
 trait XmlSource[-A] { self =>
-  def asNode(a: A): Node
+  def asNode(a: A): Option[Node]
+
+  def getAsNode(a: A): Node = asNode(a).get
 
   @noop
   def contramap[B](f: B => A): XmlSource[B] = XmlSource(b => self.asNode(f(b)))
 
   @op("evalFirst")
-  def first[B: NodeDecoder](a: A, xpath: Expression): DecodeResult[B] = xpath.first(asNode(a))
+  def first[B: NodeDecoder](a: A, xpath: Expression): DecodeResult[B] =
+    asNode(a).fold(DecodeResult.failure[B])(n => xpath.first(n))
 
-  @op("unsafeEvalFirst")
-  def unsafeFirst[B: NodeDecoder](a: A, xpath: Expression): B = xpath.unsafeFirst(asNode(a))
+  @op("evalFirst")
+  def first[B: NodeDecoder](a: A, xpath: UnsafeExpression): B =
+    xpath.first(asNode(a).get)
 
   @op("evalAll")
   def all[F[_], B: NodeDecoder](a: A, xpath: Expression)(implicit cbf: CanBuildFrom[Nothing, DecodeResult[B], F[DecodeResult[B]]]): F[DecodeResult[B]] =
-    xpath.all(asNode(a))
+    asNode(a).fold(cbf().result())(n => xpath.all(n))
 
-  @op("unsafeEvalAll")
-  def unsafeAll[F[_], B: NodeDecoder](a: A, xpath: Expression)(implicit cbf: CanBuildFrom[Nothing, B, F[B]]): F[B] =
-    xpath.unsafeAll(asNode(a))
+  @op("evalAll")
+  def all[F[_], B: NodeDecoder](a: A, xpath: UnsafeExpression)(implicit cbf: CanBuildFrom[Nothing, B, F[B]]): F[B] =
+    asNode(a).fold(cbf().result())(n => xpath.all(n))
 }
 
 object XmlSource {
-  def apply[A](f: A => Node): XmlSource[A] = new XmlSource[A] {
+  def apply[A](f: A => Option[Node]): XmlSource[A] = new XmlSource[A] {
     override def asNode(a: A) = f(a)
   }
 
-  implicit val node: XmlSource[Node] = XmlSource(n => n)
+  /** Construction method for types that cannot fail to parse as a `Node`. */
+  def safe[A](f: A => Node): XmlSource[A] = XmlSource(a => Some(f(a)))
+
+  implicit val node: XmlSource[Node] = XmlSource.safe(n => n)
 
   implicit def inputSource(implicit parser: XmlParser): XmlSource[InputSource] =
-    XmlSource(s => parser.parse(s))
+    XmlSource(s => Try(parser.parse(s)).toOption)
 
   implicit def reader(implicit parser: XmlParser): XmlSource[Reader] = inputSource.contramap(r => new InputSource(r))
   implicit def inputStream(implicit codec: Codec, parser: XmlParser): XmlSource[InputStream] = reader.contramap(i => new InputStreamReader(i, codec.charSet))

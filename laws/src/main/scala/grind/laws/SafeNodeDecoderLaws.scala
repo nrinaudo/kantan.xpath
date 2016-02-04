@@ -9,7 +9,7 @@ trait SafeNodeDecoderLaws[A] {
   def encode(a: A, name: String): Element
 
   def encodeAll[B](bs: List[B], name: String)(f: (B, String) => Element): Element = {
-    val n = bs.foldLeft("<root></root>".asNode.asInstanceOf[Document]) { (doc, b) =>
+    val n = bs.foldLeft("<root></root>".asNode.get.asInstanceOf[Document]) { (doc, b) =>
       val an = f(b, "e")
       doc.adoptNode(an)
       doc.getFirstChild.appendChild(an)
@@ -24,9 +24,9 @@ trait SafeNodeDecoderLaws[A] {
 
   def decodeAll(as: List[A]): Boolean = encodeAll(as, "e").evalAll[List, A]("//e".xpath) == as.map(a => DecodeResult(a))
 
-  def unsafeDecodeFirst(a: A): Boolean = encode(a, "e").unsafeEvalFirst[A]("//e".xpath) == a
+  def unsafeDecodeFirst(a: A): Boolean = encode(a, "e").evalFirst[A]("//e".xpath.unsafe) == a
 
-  def unsafeDecodeAll(as: List[A]): Boolean = encodeAll(as, "e").unsafeEvalAll[List, A]("//e".xpath) == as
+  def unsafeDecodeAll(as: List[A]): Boolean = encodeAll(as, "e").evalAll[List, A]("//e".xpath.unsafe) == as
 
   def liftFirst(a: A): Boolean = "//e".xpath.liftFirst[A](decoder)(encode(a, "e")) == DecodeResult.Success(a)
 
@@ -35,10 +35,10 @@ trait SafeNodeDecoderLaws[A] {
     f(encodeAll(as, "e")) == as.map(a => DecodeResult(a))
   }
 
-  def liftUnsafeFirst(a: A): Boolean = "//e".xpath.liftUnsafeFirst[A](decoder)(encode(a, "e")) == a
+  def liftUnsafeFirst(a: A): Boolean = "//e".xpath.unsafe.liftFirst[A](decoder)(encode(a, "e")) == a
 
   def liftUnsafeAll(as: List[A]): Boolean = {
-    val f = "//e".xpath.liftUnsafeAll[List, A]
+    val f = "//e".xpath.unsafe.liftAll[List, A]
     f(encodeAll(as, "e")) == as
   }
 }

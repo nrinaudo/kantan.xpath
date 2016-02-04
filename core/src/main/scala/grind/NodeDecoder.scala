@@ -25,14 +25,14 @@ object NodeDecoder extends Decoders with TupleDecoders {
     override def decode(e: Node) = f(e)
   }
 
-  def unsafe[A](f: Node => A): NodeDecoder[A] = new NodeDecoder[A] {
+  def safe[A](f: Node => A): NodeDecoder[A] = new NodeDecoder[A] {
     override def decode(n: Node): DecodeResult[A] = DecodeResult(f(n))
   }
 
-  implicit val node: NodeDecoder[Node] = unsafe(n => n)
-  implicit val element: NodeDecoder[Element] = unsafe(n => n.asInstanceOf[Element])
-  implicit val attr: NodeDecoder[Attr] = unsafe(n => n.asInstanceOf[Attr])
-  implicit val string: NodeDecoder[String] = unsafe(_.getTextContent)
+  implicit val node: NodeDecoder[Node] = safe(n => n)
+  implicit val element: NodeDecoder[Element] = safe(n => n.asInstanceOf[Element])
+  implicit val attr: NodeDecoder[Attr] = safe(n => n.asInstanceOf[Attr])
+  implicit val string: NodeDecoder[String] = safe(_.getTextContent)
   implicit val char: NodeDecoder[Char] = string.mapResult(s => if(s.length == 1) Success(s.charAt(0)) else Failure)
   implicit val int: NodeDecoder[Int] = string.mapResult(s => DecodeResult(s.toInt))
   implicit val float: NodeDecoder[Float] = string.mapResult(s => DecodeResult(s.toFloat))

@@ -30,7 +30,7 @@ object XmlSource {
   implicit val node: XmlSource[Node] = XmlSource.safe(n => n)
 
   implicit def inputSource(implicit parser: XmlParser): XmlSource[InputSource] =
-    XmlSource(s => Try(parser.parse(s)).toOption)
+    XmlSource(s => parser.parse(s))
 
   implicit def reader(implicit parser: XmlParser): XmlSource[Reader] = inputSource.contramap(r => new InputSource(r))
   implicit def inputStream(implicit codec: Codec, parser: XmlParser): XmlSource[InputStream] = reader.contramap(i => new InputStreamReader(i, codec.charSet))

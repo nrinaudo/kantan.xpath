@@ -35,6 +35,6 @@ object XmlSource {
   implicit def inputStream(implicit codec: Codec, parser: XmlParser): XmlSource[InputStream] = reader.contramap(i => new InputStreamReader(i, codec.charSet))
   implicit def file(implicit codec: Codec, parser: XmlParser): XmlSource[File] = inputStream.contramap(f => new FileInputStream(f))
   implicit def string(implicit parser: XmlParser): XmlSource[String] = reader.contramap(s => new StringReader(s))
-  implicit def url(implicit codec: Codec, parser: XmlParser): XmlSource[URL] = inputStream.contramap(u => u.openStream())
-  implicit def uri(implicit codec: Codec, parser: XmlParser): XmlSource[URI] = url.contramap(u => u.toURL)
+  implicit def url(implicit codec: Codec, parser: XmlParser): RemoteXmlSource[URL] = RemoteXmlSource(identity)
+  implicit def uri(implicit codec: Codec, parser: XmlParser): RemoteXmlSource[URI] = url.contramap(_.toURL)//RemoteXmlSource((u: URI) => u.toURL)
 }

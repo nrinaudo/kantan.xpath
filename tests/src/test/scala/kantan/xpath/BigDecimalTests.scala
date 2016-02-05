@@ -1,6 +1,6 @@
 package kantan.xpath
 
-import kantan.xpath.laws.discipline.discipline.NodeDecoderTests
+import laws.discipline.discipline.NodeDecoderTests
 import org.scalacheck.Gen._
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.FunSuite

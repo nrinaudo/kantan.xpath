@@ -2,7 +2,7 @@ package kantan.xpath
 
 import java.util.UUID
 
-import kantan.xpath.laws.discipline.discipline.NodeDecoderTests
+import laws.discipline.discipline.NodeDecoderTests
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks

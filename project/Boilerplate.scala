@@ -35,7 +35,7 @@ object Boilerplate {
 
   def buildTrait(name: String)(f: (Int, StringBuilder) => Unit): String = {
     val out = new StringBuilder()
-    out.append("package grind\n")
+    out.append("package kantan.xpath\n")
     out.append(s"trait $name {\n")
     (1 to 22).foreach(i => f(i, out))
     out.append("}\n")
@@ -45,10 +45,10 @@ object Boilerplate {
   val traits: List[(String, (Int, StringBuilder) => Unit)] = List("TupleDecoders" -> tuple, "Decoders" -> decoder)
 
   def gen(dir: File): Seq[File] = {
-    new File(dir, "grind").mkdir()
+    new File(dir, "kantan/xpath").mkdir()
     traits.map {
       case (name, f) =>
-        val file = new File(dir, s"grind/$name.scala")
+        val file = new File(dir, s"kantan/xpath/$name.scala")
         IO.write(file, buildTrait(name)(f), java.nio.charset.Charset.forName("UTF-8"))
         file
     }

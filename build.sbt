@@ -39,7 +39,7 @@ lazy val baseSettings = Seq(
     "com.github.mpilquist" %% "simulacrum"    % simulacrumVersion % "provided",
     compilerPlugin("org.scalamacros" % "paradise" % macroParadiseVersion cross CrossVersion.full)
   ),
-  coverageExcludedPackages := "grind\\.laws\\..*",
+  coverageExcludedPackages := "kantan\\.xpath\\.laws\\..*",
   incOptions     := incOptions.value.withNameHashing(true)
 )
 
@@ -50,13 +50,13 @@ lazy val noPublishSettings = Seq(
 )
 
 lazy val publishSettings = Seq(
-  homepage := Some(url("https://nrinaudo.github.io/grind")),
+  homepage := Some(url("https://nrinaudo.github.io/kantan.xpath")),
   licenses := Seq("MIT License" -> url("http://www.opensource.org/licenses/mit-license.php")),
-  apiURL := Some(url("https://nrinaudo.github.io/grind/api/")),
+  apiURL := Some(url("https://nrinaudo.github.io/kantan.xpath/api/")),
   scmInfo := Some(
     ScmInfo(
-      url("https://github.com/nrinaudo/grind"),
-      "scm:git:git@github.com:nrinaudo/grind.git"
+      url("https://github.com/nrinaudo/kantan.xpath"),
+      "scm:git:git@github.com:nrinaudo/kantan.xpath.git"
     )
   ),
   pomExtra := <developers>
@@ -71,7 +71,7 @@ lazy val publishSettings = Seq(
 
 lazy val allSettings = buildSettings ++ baseSettings ++ publishSettings
 
-lazy val root = Project(id = "grind", base = file("."))
+lazy val root = Project(id = "kantan-xpath", base = file("."))
   .settings(moduleName := "root")
   .settings(allSettings)
   .settings(noPublishSettings)
@@ -80,7 +80,7 @@ lazy val root = Project(id = "grind", base = file("."))
 
 lazy val core = project
   .settings(
-    moduleName := "grind",
+    moduleName := "kantan.xpath",
     name       := "core"
   )
   .settings(sourceGenerators in Compile <+= (sourceManaged in Compile).map(Boilerplate.gen))
@@ -93,7 +93,7 @@ lazy val nekohtml = project
 
 lazy val cats = project
   .settings(
-    moduleName := "grind-cats",
+    moduleName := "kantan.xpath-cats",
     name       := "cats"
   )
   .settings(libraryDependencies ++= Seq(
@@ -106,7 +106,7 @@ lazy val cats = project
 
 lazy val scalaz = project
   .settings(
-    moduleName := "grind-scalaz",
+    moduleName := "kantan.xpath-scalaz",
     name       := "scalaz"
   )
   .settings(allSettings: _*)
@@ -120,7 +120,7 @@ lazy val scalaz = project
 
 lazy val laws = project
   .settings(
-    moduleName := "grind-laws",
+    moduleName := "kantan.xpath-laws",
     name       := "laws"
   )
   .settings(libraryDependencies ++= Seq(
@@ -144,7 +144,7 @@ lazy val docs = project
   .settings(unidocSettings: _*)
   .settings(
     autoAPIMappings := true,
-    apiURL := Some(url("http://nrinaudo.github.io/grind/api/")),
+    apiURL := Some(url("http://nrinaudo.github.io/kantan.xpath/api/")),
     scalacOptions in (ScalaUnidoc, unidoc) ++= Seq(
       "-doc-source-url", scmInfo.value.get.browseUrl + "/tree/master€{FILE_PATH}.scala",
       "-sourcepath", baseDirectory.in(LocalRootProject).value.getAbsolutePath
@@ -154,7 +154,7 @@ lazy val docs = project
   .settings(
     site.addMappingsToSiteDir(mappings in (ScalaUnidoc, packageDoc), "api"),
     site.addMappingsToSiteDir(tut, "_tut"),
-    git.remoteRepo := "git@github.com:nrinaudo/grind.git",
+    git.remoteRepo := "git@github.com:nrinaudo/kantan.xpath.git",
     ghpagesNoJekyll := false,
     includeFilter in makeSite := "*.yml" | "*.md" | "*.html" | "*.css" | "*.png" | "*.jpg" | "*.gif" | "*.js" |
                                  "*.eot" | "*.svg" | "*.ttf" | "*.woff" | "*.woff2" | "*.otf"

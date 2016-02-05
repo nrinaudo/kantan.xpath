@@ -32,7 +32,7 @@ object NodeDecoder extends Decoders with TupleDecoders {
   implicit val node: NodeDecoder[Node] = safe(n => n)
   implicit val element: NodeDecoder[Element] = safe(n => n.asInstanceOf[Element])
   implicit val attr: NodeDecoder[Attr] = safe(n => n.asInstanceOf[Attr])
-  implicit val string: NodeDecoder[String] = safe(_.getTextContent)
+  implicit val string: NodeDecoder[String] = safe(_.getTextContent.trim)
   implicit val char: NodeDecoder[Char] = string.mapResult(s => if(s.length == 1) Success(s.charAt(0)) else Failure)
   implicit val int: NodeDecoder[Int] = string.mapResult(s => DecodeResult(s.toInt))
   implicit val float: NodeDecoder[Float] = string.mapResult(s => DecodeResult(s.toFloat))

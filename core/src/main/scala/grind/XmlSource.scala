@@ -7,7 +7,6 @@ import org.xml.sax.InputSource
 import simulacrum.{noop, typeclass}
 
 import scala.io.Codec
-import scala.util.Try
 
 @typeclass
 trait XmlSource[-A] { self =>

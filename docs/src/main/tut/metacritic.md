@@ -67,8 +67,17 @@ def gamesFromIndex(index: URI): List[URI] =
 ```
 
 ```tut:silent
-implicit val review: NodeDecoder[Review] =
-  NodeDecoder.decoder2(Review.apply)(".//div[@class='review_critic']".xpath, ".//div[@class='review_grade']".xpath)
+val critic = ".//div[@class='review_critic']".xpath
+val score = ".//div[@class='review_grade']".xpath
+implicit val reviewND: NodeDecoder[Review] = NodeDecoder.decoder2(Review.apply)(critic, score)
+```
+
+```tut:silent
+val title = "//h1[@class='product_title']/a".xpath
+val reviews = "//div[contains(@class, 'critic_reviews_module')]//div[@class='review_content']".xpath
+
+implicit val gameND: NodeDecoder[Game] =
+  NodeDecoder.decoder2(Game.apply)(title, reviews).map(g => g.copy(name = g.name.trim))
 ```
 
 ```tut:silent
@@ -87,5 +96,8 @@ val platforms = List("ps4", "xboxone", "ps3", "xbox360", "pc", "wii-u", "3ds", "
   "ps2", "ps", "xbox", "wii", "ds", "gamecube", "n64", "gba", "psp", "dreamcast")
 ```
 
+```scala
+val allGames: List[Game] = platforms.flatMap(indexes).flatMap(gamesFromIndex).map(game)
+```
 
 [`URI`]:https://docs.oracle.com/javase/7/docs/api/java/net/URI.html

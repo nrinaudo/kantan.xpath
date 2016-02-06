@@ -4,14 +4,15 @@ import java.io.File
 object Boilerplate {
   def decoder(arity: Int, out: StringBuilder): Unit = {
     out.append(s"  def decoder$arity")
-    out.append((1 to arity).map(i => s"I$i: NodeDecoder").mkString("[", ", ", ", "))
+    out.append((1 to arity).map(i => s"I$i").mkString("[", ", ", ", "))
     out.append("O](f: ")
     out.append((1 to arity).map(i => s"I$i").mkString("(", ", ", ")"))
     out.append(" => O)")
     out.append((1 to arity).map(i => s"x$i: Expression").mkString("(", ", ", ")"))
+    out.append((1 to arity).map(i => s"e$i: Evaluator[I$i]").mkString("(implicit ", ", ", ")"))
     out.append(": NodeDecoder[O] = NodeDecoder { n =>\n")
     out.append("    for {\n")
-    (1 to arity).foreach { i => out.append(s"      i$i <- x$i.first[I$i](n)\n") }
+    (1 to arity).foreach { i => out.append(s"      i$i <- e$i.evaluate(x$i, n)\n") }
     out.append("    } yield f")
     out.append((1 to arity).map(i => s"i$i").mkString("(", ",", ")\n"))
     out.append("  }\n")
@@ -20,7 +21,7 @@ object Boilerplate {
 
   def tuple(arity: Int, out: StringBuilder): Unit = {
     out.append(s"  def tuple$arity")
-    out.append((1 to arity).map(i => s"I$i: NodeDecoder").mkString("[", ", ", "]"))
+    out.append((1 to arity).map(i => s"I$i: Evaluator").mkString("[", ", ", "]"))
     out.append((1 to arity).map(i => s"x$i: Expression").mkString("(", ", ", ")"))
     out.append(": NodeDecoder")
     out.append((1 to arity).map(i => s"I$i").mkString("[(", ", ", ")] =\n"))

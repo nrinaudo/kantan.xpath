@@ -34,7 +34,7 @@ object DecodeResult {
     try {
       val actual = a
       if(actual == null) NotFound
-      else               Success(a)
+      else               Success(actual)
     }
     catch { case _: Exception => Failure }
 

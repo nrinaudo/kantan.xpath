@@ -17,7 +17,7 @@ trait XmlSource[-A] { self =>
 
   def first[B: NodeDecoder](a: A, expr: Expression): DecodeResult[B] = for {
     node <- asNode(a)
-    b    <- expr.first(node)
+    b    <- expr.first[B](node)
   } yield b
 
   def every[F[_], B: NodeDecoder](a: A, expr: Expression)(implicit cbf: CanBuildFrom[Nothing, B, F[B]]): DecodeResult[F[B]] = for {

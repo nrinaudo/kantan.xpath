@@ -32,6 +32,6 @@ object XmlParser {
     */
   implicit val builtIn: XmlParser = {
     val factory: DocumentBuilderFactory = DocumentBuilderFactory.newInstance()
-    XmlParser(source => Try(factory.newDocumentBuilder().parse(source)).map(DecodeResult.success).getOrElse(DecodeResult.failure))
+    XmlParser(source => DecodeResult(factory.newDocumentBuilder().parse(source)))
   }
 }

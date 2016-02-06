@@ -10,7 +10,7 @@ import org.xml.sax.InputSource
   * it's typically necessary to change the default user agent to something a bit more browser-like.
   */
 case class RemoteXmlSource[A](toURL: A => URL, headers: Map[String, String] = Map.empty)(implicit parser: XmlParser) extends XmlSource[A] {
-  override def asNode(a: A): Option[Node] = {
+  override def asNode(a: A): DecodeResult[Node] = {
     val con = toURL(a).openConnection()
     headers.foreach { case (n, v) => con.setRequestProperty(n, v) }
     con.connect()

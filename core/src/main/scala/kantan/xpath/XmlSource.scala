@@ -6,25 +6,36 @@ import java.net.{URI, URL}
 import org.xml.sax.InputSource
 import simulacrum.{noop, typeclass}
 
+import scala.collection.generic.CanBuildFrom
 import scala.io.Codec
 
 @typeclass
 trait XmlSource[-A] { self =>
-  def asNode(a: A): Option[Node]
+  def asNode(a: A): DecodeResult[Node]
 
   def asUnsafeNode(a: A): Node = asNode(a).get
+
+  def first[B: NodeDecoder](a: A, expr: Expression): DecodeResult[B] = for {
+    node <- asNode(a)
+    b    <- expr.first(node)
+  } yield b
+
+  def every[F[_], B: NodeDecoder](a: A, expr: Expression)(implicit cbf: CanBuildFrom[Nothing, B, F[B]]): DecodeResult[F[B]] = for {
+    node <- asNode(a)
+    bs    <- expr.every[F, B](node)
+  } yield bs
 
   @noop
   def contramap[B](f: B => A): XmlSource[B] = XmlSource(b => self.asNode(f(b)))
 }
 
 object XmlSource {
-  def apply[A](f: A => Option[Node]): XmlSource[A] = new XmlSource[A] {
+  def apply[A](f: A => DecodeResult[Node]): XmlSource[A] = new XmlSource[A] {
     override def asNode(a: A) = f(a)
   }
 
   /** Construction method for types that cannot fail to parse as a `Node`. */
-  def safe[A](f: A => Node): XmlSource[A] = XmlSource(a => Some(f(a)))
+  def safe[A](f: A => Node): XmlSource[A] = XmlSource(a => DecodeResult.success(f(a)))
 
   implicit val node: XmlSource[Node] = XmlSource.safe(n => n)
 

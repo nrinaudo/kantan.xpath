@@ -13,7 +13,7 @@ trait Evaluator[A] {
 
 object Evaluator {
   implicit def collection[A: NodeDecoder, F[_]](implicit cbf: CanBuildFrom[Nothing, A, F[A]]): Evaluator[F[A]] = new Evaluator[F[A]] {
-    override def evaluate(exp: Expression, node: Node) = exp.every[F, A](node)
+    override def evaluate(exp: Expression, node: Node) = exp.all[F, A](node)
   }
 
   implicit def node[A: NodeDecoder]: Evaluator[A] = new Evaluator[A] {

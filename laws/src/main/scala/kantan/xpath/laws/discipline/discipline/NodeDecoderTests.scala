@@ -18,7 +18,8 @@ trait NodeDecoderTests[A] extends Laws {
     "decode first"         -> forAll(laws.decodeFirst _),
     "lift first"           -> forAll(laws.liftFirst _),
     "decode all"           -> forAll(laws.decodeAll _),
-    "lift all"             -> forAll(laws.liftAll _)
+    "lift all"             -> forAll(laws.liftAll _),
+    "lift every"           -> forAll(laws.liftEvery _)
   )
 }
 

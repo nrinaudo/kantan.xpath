@@ -22,7 +22,7 @@ trait XmlSource[-A] { self =>
 
   def every[F[_], B: NodeDecoder](a: A, expr: Expression)(implicit cbf: CanBuildFrom[Nothing, B, F[B]]): DecodeResult[F[B]] = for {
     node <- asNode(a)
-    bs    <- expr.every[F, B](node)
+    bs    <- expr.all[F, B](node)
   } yield bs
 
   @noop

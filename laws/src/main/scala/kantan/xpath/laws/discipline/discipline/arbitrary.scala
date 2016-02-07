@@ -13,4 +13,7 @@ object arbitrary {
 
   implicit def arbCellDecoder[A: Arbitrary]: Arbitrary[NodeDecoder[A]] =
     Arbitrary(arb[Node => DecodeResult[A]].map(f => NodeDecoder(f)))
+
+  implicit def arbTuple1[A: Arbitrary]: Arbitrary[Tuple1[A]] =
+    Arbitrary(arb[A].map(a => Tuple1(a)))
 }

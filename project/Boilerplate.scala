@@ -24,13 +24,43 @@ object Boilerplate {
     out.append((1 to arity).map(i => s"I$i: Evaluator").mkString("[", ", ", "]"))
     out.append((1 to arity).map(i => s"x$i: Expression").mkString("(", ", ", ")"))
     out.append(": NodeDecoder")
-    out.append((1 to arity).map(i => s"I$i").mkString("[(", ", ", ")] =\n"))
+    out.append((1 to arity).map(i => s"I$i").mkString(s"[Tuple$arity[", ", ", "]] =\n"))
     out.append(s"    NodeDecoder.decoder$arity(")
     out.append((1 to arity).map(i => s"i$i: I$i").mkString("(", ", ", ")"))
     out.append(" => ")
-    out.append((1 to arity).map(i => s"i$i").mkString("(", ", ", ")"))
+    out.append((1 to arity).map(i => s"i$i").mkString(s"Tuple$arity(", ", ", ")"))
     out.append(")")
     out.append((1 to arity).map(i => s"x$i").mkString("(", ", ", ")\n"))
+    ()
+  }
+
+  def tupleTests(out: StringBuilder): Unit = {
+    out.append("package kantan.xpath\n")
+    out.append("import kantan.xpath.laws.discipline.discipline.NodeDecoderTests\n")
+    out.append("import kantan.xpath.laws.discipline.discipline.arbitrary._\n")
+    out.append("import org.scalatest.FunSuite\n")
+    out.append("import kantan.xpath.ops._\n")
+    out.append("import org.scalatest.prop.GeneratorDrivenPropertyChecks\n")
+    out.append("import org.typelevel.discipline.scalatest.Discipline\n")
+
+    out.append("class TupleTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {\n")
+    (1 to 22).foreach { arity =>
+      out.append(s"  implicit val decoder$arity: NodeDecoder[")
+      out.append((1 to arity).map(_ => "Int").mkString(s"Tuple$arity[", ", ", "]"))
+      out.append(s"] = NodeDecoder.tuple$arity")
+      out.append((1 to arity).map(i => "\"@field" + i + "\".xpath").mkString("(", ", ", ")\n"))
+
+      out.append("  checkAll(\"NodeDecoder[")
+      out.append((1 to arity).map(_ => "Int").mkString(s"Tuple$arity[", ", ", "]]"))
+      out.append("\", NodeDecoderTests[")
+      out.append((1 to arity).map(_ => "Int").mkString(s"Tuple$arity[", ", ", "]"))
+      out.append("]((t, name) => s\"<$name ")
+      out.append((1 to arity).map(i => s"field$i='$${t._$i}'").mkString(" "))
+      out.append("/>\".asUnsafeNode.getFirstChild.asInstanceOf[Element]).nodeDecoder)\n")
+
+      out.append("\n")
+    }
+    out.append("}")
     ()
   }
 
@@ -51,6 +81,20 @@ object Boilerplate {
       case (name, f) =>
         val file = new File(dir, s"kantan/xpath/$name.scala")
         IO.write(file, buildTrait(name)(f), java.nio.charset.Charset.forName("UTF-8"))
+        file
+    }
+  }
+
+  val tests: List[(String, (StringBuilder) => Unit)] = List("TupleTests" -> tupleTests)
+
+  def genTests(dir: File): Seq[File] = {
+    new File(dir, "kantan/xpath").mkdir()
+    tests.map {
+      case (name, f) =>
+        val file = new File(dir, s"kantan/xpath/$name.scala")
+        val out = new StringBuilder
+        f(out)
+        IO.write(file, out.result, java.nio.charset.Charset.forName("UTF-8"))
         file
     }
   }

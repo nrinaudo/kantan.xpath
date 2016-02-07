@@ -134,6 +134,7 @@ lazy val tests = project
   .settings(allSettings: _*)
   .settings(noPublishSettings: _*)
   .settings(libraryDependencies += "org.scalatest" %% "scalatest" % scalatestVersion % "test")
+  .settings(sourceGenerators in Test <+= (sourceManaged in Test).map(Boilerplate.genTests))
   .dependsOn(core, laws % "test")
 
 

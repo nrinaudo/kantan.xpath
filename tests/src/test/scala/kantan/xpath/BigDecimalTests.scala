@@ -31,5 +31,5 @@ class BigDecimalTests extends FunSuite with GeneratorDrivenPropertyChecks with D
   }
 
 
-  checkAll("BigDecimal", NodeDecoderTests.cdataEncoded[BigDecimal](_.toString).nodeDecoder)
+  checkAll("NodeDecoder[BigDecimal]", NodeDecoderTests.cdataEncoded[BigDecimal](_.toString).nodeDecoder)
 }

@@ -6,5 +6,5 @@ import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline
 
 class StringTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
-  checkAll("String", NodeDecoderTests.cdataEncoded[String](_.toString).nodeDecoder)
+  checkAll("NodeDecoder[String]", NodeDecoderTests.cdataEncoded[String](_.toString).nodeDecoder)
 }

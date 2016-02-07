@@ -15,11 +15,11 @@ trait NodeDecoderTests[A] extends Laws {
   def nodeDecoder: RuleSet = new DefaultRuleSet(
     name = "nodeDecoder",
     parent = None,
-    "decode first"         -> forAll(laws.decodeFirst _),
-    "lift first"           -> forAll(laws.liftFirst _),
-    "decode all"           -> forAll(laws.decodeAll _),
-    "lift all"             -> forAll(laws.liftAll _),
-    "lift every"           -> forAll(laws.liftEvery _)
+    "decode first" -> forAll(laws.decodeFirst _),
+    "lift first"   -> forAll(laws.liftFirst _),
+    "decode all"   -> forAll(laws.decodeAll _),
+    "lift all"     -> forAll(laws.liftAll _),
+    "lift every"   -> forAll(laws.liftEvery _)
   )
 }
 

@@ -13,7 +13,7 @@ trait NodeDecoderLaws[A] {
   // -------------------------------------------------------------------------------------------------------------------
   def encodeAll[B](bs: List[B], name: String)(f: (B, String) => Element): Element = {
     val n = bs.foldLeft("<root></root>".asNode.get.asInstanceOf[Document]) { (doc, b) =>
-      val an = f(b, "e")
+      val an = f(b, "e").cloneNode(true)
       doc.adoptNode(an)
       doc.getFirstChild.appendChild(an)
       doc

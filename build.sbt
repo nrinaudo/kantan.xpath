@@ -1,6 +1,8 @@
 import com.typesafe.sbt.SbtGhPages.GhPagesKeys._
 import com.typesafe.sbt.SbtSite.SiteKeys._
+import spray.boilerplate.BoilerplatePlugin._
 import UnidocKeys._
+
 
 val catsVersion          = "0.4.0"
 val simulacrumVersion    = "0.7.0"
@@ -41,7 +43,7 @@ lazy val baseSettings = Seq(
   ),
   coverageExcludedPackages := "kantan\\.xpath\\.laws\\..*",
   incOptions     := incOptions.value.withNameHashing(true)
-)
+) ++ Boilerplate.settings
 
 lazy val noPublishSettings = Seq(
   publish         := (),
@@ -83,7 +85,6 @@ lazy val core = project
     moduleName := "kantan.xpath",
     name       := "core"
   )
-  .settings(sourceGenerators in Compile <+= (sourceManaged in Compile).map(Boilerplate.gen))
   .settings(allSettings: _*)
 
 lazy val nekohtml = project
@@ -134,7 +135,6 @@ lazy val tests = project
   .settings(allSettings: _*)
   .settings(noPublishSettings: _*)
   .settings(libraryDependencies += "org.scalatest" %% "scalatest" % scalatestVersion % "test")
-  .settings(sourceGenerators in Test <+= (sourceManaged in Test).map(Boilerplate.genTests))
   .dependsOn(core, laws % "test")
 
 

@@ -1,6 +1,6 @@
 package kantan.xpath.cats
 
-import _root_.cats.laws.discipline.MonadTests
+import cats.laws.discipline.MonadTests
 import cats.std.int._
 import kantan.xpath.NodeDecoder
 import kantan.xpath.cats.eqs._

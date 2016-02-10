@@ -8,13 +8,12 @@ videogame Metacritic data - are there, for instance, interesting correlations be
 do some publications consistently rank titles from a given publisher higher than others?
 
 As is often the case, the main difficulty was not to analyse the data but actually get my hands on it. I hoped
-Metacritic would provide an API or, baring that, acceptably up-to-date dumps of their data, but no such luck. So I set
-about writing a scrapper, which turned out to be a huge hassle - not because of anything smart Metacritic was doing
-to protect their data, but because the standard Scala XML library fought me every step of the way.
+Metacritic would provide an API or, baring that, acceptably up-to-date dumps, but no such luck. So I set about writing a
+scrapper, which turned out to be rather painful - not because of anything smart Metacritic was doing to protect their
+data, but because the standard Scala XML library fought me every step of the way.
 
 That's how kantan.xpath came about, and this tutorial shows how comparatively simple scrapping can be, with the proper
 tools.
-
 
 ## Setting things up
 
@@ -43,7 +42,7 @@ a filter on a request's user agent, apparently a simple black list of known prog
 Bypassing this is relatively trivial: simply setting your user-agent to something other than Java's default will do the
 trick.
 
-Kantan.xpath having been made with scrapping in mind, it has specific support for this. All you need to do is to
+kantan.xpath having been made with scrapping in mind, it has specific support for this. All you need to do is to
 write an appropriate [`XmlSource`] instance for [`URI`], which can be achieved as follows:
 
 ```tut:silent
@@ -53,51 +52,39 @@ implicit val uriSource = XmlSource.uri.withUserAgent("kantan.xpath/0.1.0")
 ## Getting a list of game URIs
 
 ```tut:silent
-def indexes(platform: String): List[URI] = {
+def indexes(platform: String): DecodeResult[List[URI]] = {
   val root = new URI(s"http://www.metacritic.com/browse/games/title/$platform")
 
-  root :: "//ul[@class='letternav']//a/@href".xpath.unsafe.all[List, URI](root.asUnsafeNode).map(root.resolve)
+  root.all[List, URI]("//ul[@class='letternav']//a/@href".xpath).map(root :: _.map(root.resolve))
 }
 ```
 
 ```tut:silent
-def gamesFromIndex(index: URI): List[URI] =
-  "//div[@class='basic_stat product_title']/a/@href".xpath.unsafe.all[List, URI](index.asUnsafeNode).
-    map(u => index.resolve(u + "/critic-reviews"))
+def gamesFromIndex(index: URI): DecodeResult[List[URI]] =
+  index.all[List, URI]("//div[@class='basic_stat product_title']/a/@href".xpath).
+    map(_.map(u => index.resolve(u + "/critic-reviews")))
 ```
 
 ```tut:silent
 val critic = ".//div[@class='review_critic']".xpath
 val score = ".//div[@class='review_grade']".xpath
-implicit val reviewND: NodeDecoder[Review] = NodeDecoder.decoder2(Review.apply)(critic, score)
+implicit val reviewDecoder: NodeDecoder[Review] = NodeDecoder.decoder2(Review.apply)(critic, score)
 ```
 
 ```tut:silent
 val title = "//h1[@class='product_title']/a".xpath
 val reviews = "//div[contains(@class, 'critic_reviews_module')]//div[@class='review_content']".xpath
 
-implicit val gameND: NodeDecoder[Game] =
+implicit val gameDecoder: NodeDecoder[Game] =
   NodeDecoder.decoder2(Game.apply)(title, reviews).map(g => g.copy(name = g.name.trim))
 ```
 
 ```tut:silent
-def game(gameUri: URI): Game = {
-  val doc = gameUri.asUnsafeNode
-
-  Game("//h1[@class='product_title']/a".xpath.unsafe.first[String](doc).trim,
-    "//div[contains(@class, 'critic_reviews_module')]//div[@class='review_content']".xpath.unsafe.all[List, Review](doc))
-}
-```
-
-```tut:silent
-def games(platform: String): List[Game] = indexes(platform).flatMap(gamesFromIndex).map(game)
-
-val platforms = List("ps4", "xboxone", "ps3", "xbox360", "pc", "wii-u", "3ds", "vita",
-  "ps2", "ps", "xbox", "wii", "ds", "gamecube", "n64", "gba", "psp", "dreamcast")
+def game(uri: URI): DecodeResult[Game] = uri.first[Game]("//body".xpath)
 ```
 
 ```scala
-val allGames: List[Game] = platforms.flatMap(indexes).flatMap(gamesFromIndex).map(game)
+val games: List[Game] = indexes("dreamcast").get.flatMap(i => gamesFromIndex(i).get).map(uri => game(uri).get)
 ```
 
 [`URI`]:https://docs.oracle.com/javase/7/docs/api/java/net/URI.html

@@ -46,4 +46,15 @@ object NodeDecoder extends Decoders with TupleDecoders {
   implicit val uuid: NodeDecoder[UUID] = string.mapResult(s => DecodeResult(UUID.fromString(s.trim)))
   implicit val uri: NodeDecoder[URI] = string.mapResult(s => DecodeResult(new URI(s.trim)))
   implicit val url: NodeDecoder[URL] = uri.map(u => u.toURL)
+
+  implicit def either[A, B](implicit da: NodeDecoder[A], db: NodeDecoder[B]): NodeDecoder[Either[A, B]] = NodeDecoder { node =>
+    da.decode(node).map(a => Left(a)).orElse(db.decode(node).map(b => Right(b)))
+  }
+
+  implicit def option[A](implicit da: NodeDecoder[A]): NodeDecoder[Option[A]] = NodeDecoder { node =>
+    da.decode(node) match {
+      case DecodeResult.NotFound => DecodeResult.success(None)
+      case ra => ra.map(Some.apply)
+    }
+  }
 }

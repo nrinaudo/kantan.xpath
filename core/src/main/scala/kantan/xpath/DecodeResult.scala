@@ -7,6 +7,15 @@ sealed trait DecodeResult[+A] {
   def isFailure: Boolean = !isSuccess
   def toOption: Option[A]
 
+  def getOrElse[B >: A](a: => B): B = this match {
+    case Success(v) => v
+    case _          => a
+  }
+
+  def orElse[B >: A](result: => DecodeResult[B]): DecodeResult[B] =
+    if(isSuccess) this
+    else          result
+
   def get: A = this match {
     case Success(a) => a
     case _          => sys.error("get on non-success")

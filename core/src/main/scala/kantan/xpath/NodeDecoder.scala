@@ -20,7 +20,10 @@ trait NodeDecoder[A] { self =>
   def mapResult[B](f: A => DecodeResult[B]): NodeDecoder[B] = NodeDecoder { n => self.decode(n).flatMap(f) }
 }
 
-object NodeDecoder extends Decoders with TupleDecoders {
+@export.imports[NodeDecoder]
+trait LowPriorityNodeDecoders
+
+object NodeDecoder extends LowPriorityNodeDecoders with Decoders with TupleDecoders {
   def apply[A](f: Node => DecodeResult[A]) = new NodeDecoder[A] {
     override def decode(e: Node) = f(e)
   }

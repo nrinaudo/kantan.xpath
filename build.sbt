@@ -3,7 +3,7 @@ import com.typesafe.sbt.SbtSite.SiteKeys._
 import spray.boilerplate.BoilerplatePlugin._
 import UnidocKeys._
 
-
+val exportHookVersion    = "1.1.0"
 val catsVersion          = "0.4.0"
 val simulacrumVersion    = "0.7.0"
 val macroParadiseVersion = "2.1.0"
@@ -39,6 +39,8 @@ lazy val baseSettings = Seq(
   scalacOptions ++= compilerOptions,
   libraryDependencies ++= Seq(
     "com.github.mpilquist" %% "simulacrum"    % simulacrumVersion % "provided",
+    "org.typelevel"        %% "export-hook"   % exportHookVersion,
+    "org.scala-lang"        % "scala-reflect" % scalaVersion.value  % "provided",
     compilerPlugin("org.scalamacros" % "paradise" % macroParadiseVersion cross CrossVersion.full)
   ),
   coverageExcludedPackages := "kantan\\.xpath\\.laws\\..*",

@@ -4,7 +4,7 @@ import spray.boilerplate.BoilerplatePlugin._
 import UnidocKeys._
 
 val exportHookVersion    = "1.1.0"
-val catsVersion          = "0.4.0"
+val catsVersion          = "0.4.1"
 val simulacrumVersion    = "0.7.0"
 val macroParadiseVersion = "2.1.0"
 val nekoHtmlVersion      = "1.9.22"

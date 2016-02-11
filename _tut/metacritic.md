@@ -100,7 +100,7 @@ This can be represented as a Scala object fairly easily through the [`xpath`] me
 
 ```scala
 scala> "//ul[@class='letternav']//a/@href".xpath
-res4: kantan.xpath.Expression = kantan.xpath.Expression@26d10bd
+res4: kantan.xpath.Expression = kantan.xpath.Expression@14f9d603
 ```
 
 Note that this method is unsafe: it will throw an exception on ill-formed XPath expressions. Should you prefer a safe
@@ -108,7 +108,7 @@ alternative, you can always use [`Expression.apply`], which wraps the result in 
 
 ```scala
 scala> Expression("//ul[@class='letternav']//a/@href")
-res5: Option[kantan.xpath.Expression] = Some(kantan.xpath.Expression@7687f09a)
+res5: Option[kantan.xpath.Expression] = Some(kantan.xpath.Expression@222b098)
 ```
 
 Now that we have this expression, we simply need to evaluate it on our platform page. kantan.xpath provides various ways
@@ -151,7 +151,7 @@ Turning an index page URI into a list of game URIs is thus as simple as:
 ```scala
 def gamesFromIndex(index: URI): DecodeResult[List[URI]] =
   index.all[List, URI]("//div[@class='basic_stat product_title']/a/@href".xpath).
-    map(_.map(u => index.resolve(u + "/critic-reviews")))
+    map(_.map(u ⇒ index.resolve(u + "/critic-reviews")))
 ```
 
 Note that there's a small subtlety here: we don't use the raw URI, but append `/critic-reviews` instead. This is just
@@ -192,7 +192,7 @@ val title = "//h1[@class='product_title']/a".xpath
 val reviews = "//div[contains(@class, 'critic_reviews_module')]//div[@class='review_content']".xpath
 
 implicit val gameDecoder: NodeDecoder[Game] =
-  NodeDecoder.decoder2(Game.apply)(title, reviews).map(g => g.copy(name = g.name.trim))
+  NodeDecoder.decoder2(Game.apply)(title, reviews).map(g ⇒ g.copy(name = g.name.trim))
 ```
 
 Having done that, turning a [`URI`] into a `Game` is almost the same thing as turning one into a list of [`URI`] as
@@ -206,7 +206,7 @@ Putting everything together, we can now write a simple function that takes a pla
 
 ```scala
 def gamesFor(platform: String): List[Game] =
-  indexes(platform).get.flatMap(i => gamesFromIndex(i).get).map(uri => game(uri).get)
+  indexes(platform).get.flatMap(i ⇒ gamesFromIndex(i).get).map(uri ⇒ game(uri).get)
 ```
 
 Note that this last function is unsafe: it will throw an exception as soon as an error occurs, rather than encode

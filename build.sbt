@@ -90,6 +90,10 @@ lazy val core = project
   .settings(allSettings: _*)
 
 lazy val nekohtml = project
+  .settings(
+    moduleName := "kantan.xpath-nekohtml",
+    name       := "nekohtml"
+  )
   .settings(libraryDependencies += "net.sourceforge.nekohtml" % "nekohtml" % nekoHtmlVersion)
   .settings(allSettings: _*)
   .dependsOn(core)

@@ -1,4 +1,4 @@
-e---
+---
 layout: default
 title:  "Scrapping Metacritic"
 section: tutorial
@@ -100,7 +100,7 @@ This can be represented as a Scala object fairly easily through the [`xpath`] me
 
 ```scala
 scala> "//ul[@class='letternav']//a/@href".xpath
-res4: kantan.xpath.Expression = kantan.xpath.Expression@2c75cc8a
+res4: kantan.xpath.Expression = kantan.xpath.Expression@71ffa1c2
 ```
 
 Note that this method is unsafe: it will throw an exception on ill-formed XPath expressions. Should you prefer a safe
@@ -108,7 +108,7 @@ alternative, you can always use [`Expression.apply`], which wraps the result in 
 
 ```scala
 scala> Expression("//ul[@class='letternav']//a/@href")
-res5: Option[kantan.xpath.Expression] = Some(kantan.xpath.Expression@2127fb1f)
+res5: Option[kantan.xpath.Expression] = Some(kantan.xpath.Expression@1b6382de)
 ```
 
 Now that we have this expression, we simply need to evaluate it on our platform page. kantan.xpath provides various ways

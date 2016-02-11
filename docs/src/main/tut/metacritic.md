@@ -1,4 +1,4 @@
-e---
+---
 layout: default
 title:  "Scrapping Metacritic"
 section: tutorial

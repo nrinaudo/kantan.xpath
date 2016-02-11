@@ -15,11 +15,11 @@ trait NodeDecoderTests[A] extends Laws {
   def nodeDecoder: RuleSet = new DefaultRuleSet(
     name = "nodeDecoder",
     parent = None,
-    "decode first" -> forAll(laws.decodeFirst _),
-    "lift first"   -> forAll(laws.liftFirst _),
-    "decode all"   -> forAll(laws.decodeAll _),
-    "lift all"     -> forAll(laws.liftAll _),
-    "lift every"   -> forAll(laws.liftEvery _)
+    "decode first" → forAll(laws.decodeFirst _),
+    "lift first"   → forAll(laws.liftFirst _),
+    "decode all"   → forAll(laws.decodeAll _),
+    "lift all"     → forAll(laws.liftAll _),
+    "lift every"   → forAll(laws.liftEvery _)
   )
 }
 
@@ -30,11 +30,11 @@ object NodeDecoderTests {
     n
   }
 
-  def cdataEncoded[A: NodeDecoder: Arbitrary](f: A => String): NodeDecoderTests[A] =
-    NodeDecoderTests((a, name) => cdataEncode(f(a), name))
+  def cdataEncoded[A: NodeDecoder: Arbitrary](f: A ⇒ String): NodeDecoderTests[A] =
+    NodeDecoderTests((a, name) ⇒ cdataEncode(f(a), name))
 
 
-  def apply[A: NodeDecoder](f: (A, String) => Element)(implicit aa: Arbitrary[A]): NodeDecoderTests[A] = new NodeDecoderTests[A] {
+  def apply[A: NodeDecoder](f: (A, String) ⇒ Element)(implicit aa: Arbitrary[A]): NodeDecoderTests[A] = new NodeDecoderTests[A] {
     override val laws = NodeDecoderLaws(f)
     override implicit val arbA = aa
   }

@@ -9,12 +9,12 @@ trait XPathCompiler {
 }
 
 object XPathCompiler {
-  def apply(f: String => Option[Expression]): XPathCompiler = new XPathCompiler {
+  def apply(f: String ⇒ Option[Expression]): XPathCompiler = new XPathCompiler {
     override def compile(str: String) = f(str)
   }
 
   implicit val builtIn: XPathCompiler = {
     val cmp = XPathFactory.newInstance().newXPath()
-    XPathCompiler(s => Try(Expression(cmp.compile(s))).toOption)
+    XPathCompiler(s ⇒ Try(Expression(cmp.compile(s))).toOption)
   }
 }

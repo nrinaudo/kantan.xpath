@@ -21,7 +21,7 @@ trait XmlParser {
 /** Declares the default [[kantan.xpath.XmlParser]] instance in the implicit scope. */
 object XmlParser {
   /** Helper creation method, turns the specified function into an `Xmlparser`. */
-  def apply(f: InputSource => DecodeResult[Document]): XmlParser = new XmlParser {
+  def apply(f: InputSource ⇒ DecodeResult[Document]): XmlParser = new XmlParser {
     override def parse(source: InputSource) = f(source)
   }
 
@@ -32,6 +32,6 @@ object XmlParser {
     */
   implicit val builtIn: XmlParser = {
     val factory: DocumentBuilderFactory = DocumentBuilderFactory.newInstance()
-    XmlParser(source => DecodeResult(factory.newDocumentBuilder().parse(source)))
+    XmlParser(source ⇒ DecodeResult(factory.newDocumentBuilder().parse(source)))
   }
 }

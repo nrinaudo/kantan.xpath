@@ -55,7 +55,7 @@ lazy val noPublishSettings = Seq(
 
 lazy val publishSettings = Seq(
   homepage := Some(url("https://nrinaudo.github.io/kantan.xpath")),
-  licenses := Seq("MIT License" -> url("http://www.opensource.org/licenses/mit-license.php")),
+  licenses := Seq("MIT License" → url("http://www.opensource.org/licenses/mit-license.php")),
   apiURL := Some(url("https://nrinaudo.github.io/kantan.xpath/api/")),
   scmInfo := Some(
     ScmInfo(

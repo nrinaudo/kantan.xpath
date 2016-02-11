@@ -31,4 +31,3 @@ URI("http://some.other.server.com").all[Set, (String, Boolean)]("//name".xpath)
 // Same as above, but only looks for the first match.
 URI("http://some.other.server.com").first[(String, Boolean)]("//name".xpath)
 ```
- 

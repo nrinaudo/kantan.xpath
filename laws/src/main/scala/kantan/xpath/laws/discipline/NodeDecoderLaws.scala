@@ -11,8 +11,8 @@ trait NodeDecoderLaws[A] {
 
   // - Helper methods --------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
-  def encodeAll[B](bs: List[B], name: String)(f: (B, String) => Element): Element = {
-    val n = bs.foldLeft("<root></root>".asNode.get.asInstanceOf[Document]) { (doc, b) =>
+  def encodeAll[B](bs: List[B], name: String)(f: (B, String) ⇒ Element): Element = {
+    val n = bs.foldLeft("<root></root>".asNode.get.asInstanceOf[Document]) { (doc, b) ⇒
       val an = f(b, "e").cloneNode(true)
       doc.adoptNode(an)
       doc.getFirstChild.appendChild(an)
@@ -31,7 +31,7 @@ trait NodeDecoderLaws[A] {
 
   def decodeAll(as: List[A]): Boolean = "//e".xpath.all[List, A](encodeAll(as, "e")) == DecodeResult.success(as)
 
-  def decodeEvery(as: List[A]): Boolean = "//e".xpath.every[List, A](encodeAll(as, "e")) == as.map(a => DecodeResult(a))
+  def decodeEvery(as: List[A]): Boolean = "//e".xpath.every[List, A](encodeAll(as, "e")) == as.map(a ⇒ DecodeResult(a))
 
   def liftFirst(a: A): Boolean = "//e".xpath.liftFirst[A](decoder)(encode(a, "e")) == DecodeResult.Success(a)
 
@@ -42,13 +42,13 @@ trait NodeDecoderLaws[A] {
 
   def liftEvery(as: List[A]): Boolean = {
     val f = "//e".xpath.liftEvery[List, A]
-    f(encodeAll(as, "e")) == as.map(a => DecodeResult.success(a))
+    f(encodeAll(as, "e")) == as.map(a ⇒ DecodeResult.success(a))
   }
 }
 
 
 object NodeDecoderLaws {
-  def apply[A](f: (A, String) => Element)(implicit da: NodeDecoder[A]): NodeDecoderLaws[A] = new NodeDecoderLaws[A] {
+  def apply[A](f: (A, String) ⇒ Element)(implicit da: NodeDecoder[A]): NodeDecoderLaws[A] = new NodeDecoderLaws[A] {
     override def encode(a: A, name: String) = f(a, name)
     override val decoder = da
   }

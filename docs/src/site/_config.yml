@@ -1,10 +1,10 @@
 name: kantan.xpath
-markdown: redcarpet
-highlighter: pygments
+markdown: kramdown
+highlighter: rouge
 baseurl: /kantan.xpath
 
-redcarpet:
-  extensions: ["tables", "autolink", "strikethrough", "space_after_headers", "with_toc_data", "fenced_code_blocks"]
+kramdown:
+  input: GFM
 
 collections:
   tut:

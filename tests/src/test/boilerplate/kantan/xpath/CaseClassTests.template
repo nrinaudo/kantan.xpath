@@ -11,12 +11,12 @@ class CaseClassTests extends FunSuite with GeneratorDrivenPropertyChecks with Di
   [#case class CClass1([#i1: Int#])
   object CClass1 {
     implicit val arbitrary = Arbitrary { for {
-        [#i1 <- Arbitrary.arbitrary[Int]#
+        [#i1 ← Arbitrary.arbitrary[Int]#
         ]
       } yield CClass1([#i1#])
     }
   }
   implicit val decoder1: NodeDecoder[CClass1] = NodeDecoder.decoder1(CClass1.apply)([#"@field1".xpath#])
-  checkAll("NodeDecoder[CaseClass[[#Int#]]]", NodeDecoderTests[CClass1]((t, name) => s"<$name [#field1='${t.i1}'# ]/>".asUnsafeNode.getFirstChild.asInstanceOf[Element]).nodeDecoder)#
+  checkAll("NodeDecoder[CaseClass[[#Int#]]]", NodeDecoderTests[CClass1]((t, name) ⇒ s"<$name [#field1='${t.i1}'# ]/>".asUnsafeNode.getFirstChild.asInstanceOf[Element]).nodeDecoder)#
   ]
 }

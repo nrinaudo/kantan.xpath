@@ -9,20 +9,20 @@ class DecodeResultTests extends FunSuite with GeneratorDrivenPropertyChecks {
   // instance in the cats and scalaz modules.
 
   test("Success should be a success") {
-    forAll { s: Int =>
+    forAll { s: Int ⇒
       assert(success(s).isSuccess)
       assert(!success(s).isFailure)
     }
   }
 
   test("Success.toOption should be a Some") {
-    forAll { s: Int =>
+    forAll { s: Int ⇒
       assert(success(s).toOption == Some(s))
     }
   }
 
   test("apply on value should be a Success") {
-    forAll { s: Int => assert(DecodeResult(s) == Success(s)) }
+    forAll { s: Int ⇒ assert(DecodeResult(s) == Success(s)) }
   }
 
   test("apply on exception should be a Failure") {
@@ -34,7 +34,7 @@ class DecodeResultTests extends FunSuite with GeneratorDrivenPropertyChecks {
   }
 
   test("get on a Success should return the expected value") {
-    forAll { s: Int => assert(success(s).get == s) }
+    forAll { s: Int ⇒ assert(success(s).get == s) }
   }
 
   test("get on a Failure should return the expected value") {

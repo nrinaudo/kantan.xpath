@@ -7,7 +7,7 @@ import kantan.xpath.NodeDecoder
 @exports
 object codecs {
   @export(Orphan)
-  implicit def xor[A, B](implicit da: NodeDecoder[A], db: NodeDecoder[B]): NodeDecoder[Xor[A, B]] = NodeDecoder { node =>
-    da.decode(node).map(a => Xor.left(a)).orElse(db.decode(node).map(b => Xor.right(b)))
+  implicit def xor[A, B](implicit da: NodeDecoder[A], db: NodeDecoder[B]): NodeDecoder[Xor[A, B]] = NodeDecoder { node ⇒
+    da.decode(node).map(a ⇒ Xor.left(a)).orElse(db.decode(node).map(b ⇒ Xor.right(b)))
   }
 }

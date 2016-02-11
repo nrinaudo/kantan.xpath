@@ -1,0 +1,648 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>xpath - kantan.xpath</title>
+          <meta name="description" content="xpath - kantan.xpath" />
+          <meta name="keywords" content="xpath kantan.xpath" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../index.html';
+            var hash = 'kantan.xpath.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img alt="Package" src="../../lib/package_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="kantan">kantan</a></p>
+        <h1>xpath</h1><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">xpath</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/nrinaudo/kantan.xpath/tree/master/core/src/main/scala/kantan/xpath/package.scala" target="_blank">package.scala</a></dd></dl><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Any" class="extype" target="_top">Any</a></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="kantan.xpath"><span>xpath</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="kantan.xpath.Attr" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Attr=org.w3c.dom.Attr"></a>
+      <a id="Attr:Attr"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Attr</span><span class="result"> = <span class="extype" name="org.w3c.dom.Attr">org.w3c.dom.Attr</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@Attr=org.w3c.dom.Attr" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.DecodeResult" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="DecodeResult[+A]extendsAnyRef"></a>
+      <a id="DecodeResult[+A]:DecodeResult[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="DecodeResult.html"><span class="name">DecodeResult</span></a><span class="tparams">[<span name="A">+A</span>]</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@DecodeResult[+A]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.Decoders" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="DecodersextendsAnyRef"></a>
+      <a id="Decoders:Decoders"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Decoders.html"><span class="name">Decoders</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@DecodersextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.Document" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Document=org.w3c.dom.Document"></a>
+      <a id="Document:Document"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Document</span><span class="result"> = <span class="extype" name="org.w3c.dom.Document">org.w3c.dom.Document</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@Document=org.w3c.dom.Document" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.Element" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Element=org.w3c.dom.Element"></a>
+      <a id="Element:Element"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Element</span><span class="result"> = <span class="extype" name="org.w3c.dom.Element">org.w3c.dom.Element</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@Element=org.w3c.dom.Element" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.Evaluator" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="Evaluator[A]extendsAnyRef"></a>
+      <a id="Evaluator[A]:Evaluator[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Evaluator.html"><span class="name">Evaluator</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@Evaluator[A]extendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Evaluates an expression on a given node.</p><div class="fullcomment"><div class="comment cmt"><p>Evaluates an expression on a given node.</p><p>This is a bit of a crutch and should not really be used directly. Its sole purpose is to allow compound decoders
+to work for lists and other collection types.
+</p></div></div>
+    </li><li name="kantan.xpath.Expression" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ExpressionextendsAnyRef"></a>
+      <a id="Expression:Expression"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Expression.html"><span class="name">Expression</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@ExpressionextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.LowPriorityNodeDecoders" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="LowPriorityNodeDecodersextendsLowPriorityNodeDecoders.fresh$macro$3"></a>
+      <a id="LowPriorityNodeDecoders:LowPriorityNodeDecoders"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="LowPriorityNodeDecoders.html"><span class="name">LowPriorityNodeDecoders</span></a><span class="result"> extends <a href="LowPriorityNodeDecoders$$fresh$macro$3.html" class="extype" name="kantan.xpath.LowPriorityNodeDecoders.fresh$macro$3">fresh$macro$3</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@LowPriorityNodeDecodersextendsLowPriorityNodeDecoders.fresh$macro$3" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.Node" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Node=org.w3c.dom.Node"></a>
+      <a id="Node:Node"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Node</span><span class="result"> = <span class="extype" name="org.w3c.dom.Node">org.w3c.dom.Node</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@Node=org.w3c.dom.Node" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.NodeDecoder" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="NodeDecoder[A]extendsAnywithSerializable"></a>
+      <a id="NodeDecoder[A]:NodeDecoder[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="NodeDecoder.html"><span class="name">NodeDecoder</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@NodeDecoder[A]extendsAnywithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.NodeList" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NodeList=org.w3c.dom.NodeList"></a>
+      <a id="NodeList:NodeList"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">NodeList</span><span class="result"> = <span class="extype" name="org.w3c.dom.NodeList">org.w3c.dom.NodeList</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@NodeList=org.w3c.dom.NodeList" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.RemoteXmlSource" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="RemoteXmlSource[A]extendsXmlSource[A]withProductwithSerializable"></a>
+      <a id="RemoteXmlSource[A]:RemoteXmlSource[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="RemoteXmlSource.html"><span class="name">RemoteXmlSource</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="toURL">toURL: (<span class="extype" name="kantan.xpath.RemoteXmlSource.A">A</span>) ⇒ <span class="extype" name="java.net.URL">URL</span></span>, <span name="headers">headers: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">Map.empty</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="parser">parser: <a href="XmlParser.html" class="extype" name="kantan.xpath.XmlParser">XmlParser</a></span>)</span><span class="result"> extends <a href="XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a>[<span class="extype" name="kantan.xpath.RemoteXmlSource.A">A</span>] with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@RemoteXmlSource[A]extendsXmlSource[A]withProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt"><a href="XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a> implementation anything that can be turned into a <code>java.io.URL</code>.</p><div class="fullcomment"><div class="comment cmt"><p><a href="XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a> implementation anything that can be turned into a <code>java.io.URL</code>.</p><p>The main purpose here is to allow application developers to set their own HTTP headers: when scrapping websites,
+it's typically necessary to change the default user agent to something a bit more browser-like.
+</p></div></div>
+    </li><li name="kantan.xpath.TupleDecoders" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="TupleDecodersextendsAnyRef"></a>
+      <a id="TupleDecoders:TupleDecoders"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="TupleDecoders.html"><span class="name">TupleDecoders</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@TupleDecodersextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.UnsafeExpression" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UnsafeExpressionextendsAnyRef"></a>
+      <a id="UnsafeExpression:UnsafeExpression"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="UnsafeExpression.html"><span class="name">UnsafeExpression</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@UnsafeExpressionextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.XPathCompiler" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="XPathCompilerextendsAnyRef"></a>
+      <a id="XPathCompiler:XPathCompiler"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="XPathCompiler.html"><span class="name">XPathCompiler</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@XPathCompilerextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.XmlParser" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="XmlParserextendsAnyRef"></a>
+      <a id="XmlParser:XmlParser"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="XmlParser.html"><span class="name">XmlParser</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@XmlParserextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Contract for anything that knows how to parse XML.</p><div class="fullcomment"><div class="comment cmt"><p>Contract for anything that knows how to parse XML.</p><p>The default implementation is always in scope and uses the standard java <code>javax.xml.parsers.DocumentBuilderFactory</code>,
+with no special option. This can be overridden to set some options or, more drastically, to change the parsing
+mechanism entirely. A typical use case is the <code>nekohtml</code> module, which needs to take control of the entire parsing
+process to tidy up messy HTML documents.
+</p></div></div>
+    </li><li name="kantan.xpath.XmlSource" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="XmlSource[-A]extendsAnywithSerializable"></a>
+      <a id="XmlSource[-A]:XmlSource[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="XmlSource.html"><span class="name">XmlSource</span></a><span class="tparams">[<span name="A">-A</span>]</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@XmlSource[-A]extendsAnywithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="kantan.xpath.DecodeResult" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="DecodeResult"></a>
+      <a id="DecodeResult:DecodeResult"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="DecodeResult$.html"><span class="name">DecodeResult</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@DecodeResult" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.Evaluator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Evaluator"></a>
+      <a id="Evaluator:Evaluator"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Evaluator$.html"><span class="name">Evaluator</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@Evaluator" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.Expression" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Expression"></a>
+      <a id="Expression:Expression"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Expression$.html"><span class="name">Expression</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@Expression" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.LowPriorityNodeDecoders" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LowPriorityNodeDecoders"></a>
+      <a id="LowPriorityNodeDecoders:LowPriorityNodeDecoders"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="LowPriorityNodeDecoders$.html"><span class="name">LowPriorityNodeDecoders</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@LowPriorityNodeDecoders" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.NodeDecoder" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NodeDecoder"></a>
+      <a id="NodeDecoder:NodeDecoder"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="NodeDecoder$.html"><span class="name">NodeDecoder</span></a><span class="result"> extends <a href="LowPriorityNodeDecoders.html" class="extype" name="kantan.xpath.LowPriorityNodeDecoders">LowPriorityNodeDecoders</a> with <a href="Decoders.html" class="extype" name="kantan.xpath.Decoders">Decoders</a> with <a href="TupleDecoders.html" class="extype" name="kantan.xpath.TupleDecoders">TupleDecoders</a> with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@NodeDecoder" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.XPathCompiler" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="XPathCompiler"></a>
+      <a id="XPathCompiler:XPathCompiler"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="XPathCompiler$.html"><span class="name">XPathCompiler</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@XPathCompiler" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.XmlParser" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="XmlParser"></a>
+      <a id="XmlParser:XmlParser"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="XmlParser$.html"><span class="name">XmlParser</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@XmlParser" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Declares the default <a href="XmlParser.html" class="extype" name="kantan.xpath.XmlParser">kantan.xpath.XmlParser</a> instance in the implicit scope.</p>
+    </li><li name="kantan.xpath.XmlSource" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="XmlSource"></a>
+      <a id="XmlSource:XmlSource"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="XmlSource$.html"><span class="name">XmlSource</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@XmlSource" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.cats" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="cats"></a>
+      <a id="cats:cats"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="cats/package.html"><span class="name">cats</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@cats" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.laws" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="laws"></a>
+      <a id="laws:laws"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="laws/package.html"><span class="name">laws</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@laws" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.nekohtml" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="nekohtml"></a>
+      <a id="nekohtml:nekohtml"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="nekohtml/package.html"><span class="name">nekohtml</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@nekohtml" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.ops" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ops"></a>
+      <a id="ops:ops"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ops$.html"><span class="name">ops</span></a><span class="result"> extends <a href="NodeDecoder$$ToNodeDecoderOps.html" class="extype" name="kantan.xpath.NodeDecoder.ToNodeDecoderOps">ToNodeDecoderOps</a> with <a href="XmlSource$$ToXmlSourceOps.html" class="extype" name="kantan.xpath.XmlSource.ToXmlSourceOps">ToXmlSourceOps</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@ops" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.scalaz" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="scalaz"></a>
+      <a id="scalaz:scalaz"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="scalaz/package.html"><span class="name">scalaz</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@scalaz" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Any" class="extype" target="_top">Any</a></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

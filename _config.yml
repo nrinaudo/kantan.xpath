@@ -1,5 +1,5 @@
 name: kantan.xpath
-markdown: redcarpet
+markdown: kramdown
 highlighter: pygments
 baseurl: /kantan.xpath
 

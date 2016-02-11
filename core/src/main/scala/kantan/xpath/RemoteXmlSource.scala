@@ -13,8 +13,10 @@ case class RemoteXmlSource[A](toURL: A => URL, headers: Map[String, String] = Ma
   override def asNode(a: A): DecodeResult[Node] = {
     val con = toURL(a).openConnection()
     headers.foreach { case (n, v) => con.setRequestProperty(n, v) }
-    con.connect()
-    parser.parse(new InputSource(con.getInputStream))
+    DecodeResult {
+      con.connect()
+      new InputSource(con.getInputStream)
+    }.flatMap(parser.parse)
   }
 
   override def contramap[B](f: B => A): RemoteXmlSource[B] = copy(toURL = f andThen toURL)

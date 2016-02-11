@@ -5,6 +5,7 @@ baseurl: /kantan.xpath
 
 kramdown:
   input: GFM
+  hard_wrap: false
 
 collections:
   tut:

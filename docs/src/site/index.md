@@ -39,7 +39,7 @@ The standard Java library, on the other hand, has an acceptably efficient XPath 
 Scala perspective, by terrible types and safety issues. Everything throws and everything is a node.
 
 kantan.xpath, then, is a thin layer over that Java API that attempts to provide much needed safety, useful types
-and as much boilerplate removal as possible.
+and as little boilerplate as possible.
 
 ## Tutorials
 

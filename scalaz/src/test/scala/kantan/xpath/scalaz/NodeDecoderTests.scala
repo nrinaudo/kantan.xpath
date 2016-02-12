@@ -1,8 +1,8 @@
 package kantan.xpath.scalaz
 
+import kantan.xpath.laws.discipline.{equality, arbitrary}
 import kantan.xpath.{NodeDecoder, DecodeResult}
-import kantan.xpath.laws.discipline.discipline.equality
-import kantan.xpath.laws.discipline.discipline.arbitrary._
+import arbitrary._
 
 import scalaz.Equal
 import scalaz.scalacheck.ScalazProperties.monad

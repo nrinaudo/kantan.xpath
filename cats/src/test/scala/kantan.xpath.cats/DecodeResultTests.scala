@@ -3,7 +3,7 @@ package kantan.xpath.cats
 import cats.laws.discipline.MonadTests
 import cats.std.int._
 import kantan.xpath.cats.eqs._
-import kantan.xpath.laws.discipline.discipline.arbitrary._
+import kantan.xpath.laws.discipline.arbitrary._
 import kantan.xpath.DecodeResult
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks

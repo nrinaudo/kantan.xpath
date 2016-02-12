@@ -1,8 +1,7 @@
 package kantan.xpath
 
 import java.util.UUID
-
-import laws.discipline.discipline.NodeDecoderTests
+import kantan.xpath.laws.discipline.NodeDecoderTests
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks

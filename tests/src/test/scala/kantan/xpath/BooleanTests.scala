@@ -1,6 +1,6 @@
 package kantan.xpath
 
-import laws.discipline.discipline.NodeDecoderTests
+import kantan.xpath.laws.discipline.NodeDecoderTests
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline

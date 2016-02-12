@@ -1,4 +1,4 @@
-package kantan.xpath.laws.discipline
+package kantan.xpath.laws
 
 import kantan.xpath._
 import kantan.xpath.ops._

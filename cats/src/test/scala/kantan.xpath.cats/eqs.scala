@@ -3,7 +3,7 @@ package kantan.xpath.cats
 import algebra.Eq
 import algebra.std.int._
 import kantan.xpath.NodeDecoder
-import kantan.xpath.laws.discipline.discipline.equality
+import kantan.xpath.laws.discipline.equality
 import kantan.xpath.{NodeDecoder, DecodeResult}
 
 object eqs {

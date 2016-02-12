@@ -1,4 +1,4 @@
-package kantan.xpath.laws.discipline.discipline
+package kantan.xpath.laws.discipline
 
 import kantan.xpath.{Node, NodeDecoder}
 import kantan.xpath.DecodeResult

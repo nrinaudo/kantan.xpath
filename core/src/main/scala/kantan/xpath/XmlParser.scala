@@ -4,8 +4,6 @@ import javax.xml.parsers.DocumentBuilderFactory
 
 import org.xml.sax.InputSource
 
-import scala.util.Try
-
 /** Contract for anything that knows how to parse XML.
   *
   * The default implementation is always in scope and uses the standard java `javax.xml.parsers.DocumentBuilderFactory`,
@@ -15,13 +13,13 @@ import scala.util.Try
   */
 trait XmlParser {
   /** Turns the specified `InputSource` into a `Document`. */
-  def parse(source: InputSource): DecodeResult[Document]
+  def parse(source: InputSource): LoadingResult
 }
 
-/** Declares the default [[kantan.xpath.XmlParser]] instance in the implicit scope. */
+/** Declares the default [[XmlParser]] instance in the implicit scope. */
 object XmlParser {
   /** Helper creation method, turns the specified function into an `Xmlparser`. */
-  def apply(f: InputSource ⇒ DecodeResult[Document]): XmlParser = new XmlParser {
+  def apply(f: InputSource ⇒ LoadingResult): XmlParser = new XmlParser {
     override def parse(source: InputSource) = f(source)
   }
 
@@ -32,6 +30,6 @@ object XmlParser {
     */
   implicit val builtIn: XmlParser = {
     val factory: DocumentBuilderFactory = DocumentBuilderFactory.newInstance()
-    XmlParser(source ⇒ DecodeResult(factory.newDocumentBuilder().parse(source)))
+    XmlParser(source ⇒ LoadingResult(factory.newDocumentBuilder().parse(source)))
   }
 }

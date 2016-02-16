@@ -11,16 +11,16 @@ import scala.io.Codec
 
 @typeclass
 trait XmlSource[-A] { self ⇒
-  def asNode(a: A): DecodeResult[Node]
+  def asNode(a: A): LoadingResult
 
   def asUnsafeNode(a: A): Node = asNode(a).get
 
-  def first[B: NodeDecoder](a: A, expr: Expression): DecodeResult[B] = for {
+  def first[B: NodeDecoder](a: A, expr: Expression): XPathResult[B] = for {
     node ← asNode(a)
     b    ← expr.first[B](node)
   } yield b
 
-  def all[F[_], B: NodeDecoder](a: A, expr: Expression)(implicit cbf: CanBuildFrom[Nothing, B, F[B]]): DecodeResult[F[B]] = for {
+  def all[F[_], B: NodeDecoder](a: A, expr: Expression)(implicit cbf: CanBuildFrom[Nothing, B, F[B]]): XPathResult[F[B]] = for {
     node ← asNode(a)
     bs   ←  expr.all[F, B](node)
   } yield bs
@@ -30,14 +30,11 @@ trait XmlSource[-A] { self ⇒
 }
 
 object XmlSource {
-  def apply[A](f: A ⇒ DecodeResult[Node]): XmlSource[A] = new XmlSource[A] {
+  def apply[A](f: A ⇒ LoadingResult): XmlSource[A] = new XmlSource[A] {
     override def asNode(a: A) = f(a)
   }
 
-  /** Construction method for types that cannot fail to parse as a `Node`. */
-  def safe[A](f: A ⇒ Node): XmlSource[A] = XmlSource(a ⇒ DecodeResult.success(f(a)))
-
-  implicit val node: XmlSource[Node] = XmlSource.safe(n ⇒ n)
+  implicit val node: XmlSource[Node] = XmlSource(n ⇒ LoadingResult(n))
 
   implicit def inputSource(implicit parser: XmlParser): XmlSource[InputSource] =
     XmlSource(s ⇒ parser.parse(s))

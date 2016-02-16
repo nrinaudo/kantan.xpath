@@ -1,5 +1,6 @@
-package kantan.xpath.laws.discipline
+package kantan.xpath.laws
 
+import kantan.codecs.DecodeResult
 import kantan.xpath._
 import kantan.xpath.ops._
 
@@ -31,7 +32,7 @@ trait NodeDecoderLaws[A] {
 
   def decodeAll(as: List[A]): Boolean = "//e".xpath.all[List, A](encodeAll(as, "e")) == DecodeResult.success(as)
 
-  def decodeEvery(as: List[A]): Boolean = "//e".xpath.every[List, A](encodeAll(as, "e")) == as.map(a ⇒ DecodeResult(a))
+  def decodeEvery(as: List[A]): Boolean = "//e".xpath.every[List, A](encodeAll(as, "e")) == as.map(a ⇒ EvaluationResult(a))
 
   def liftFirst(a: A): Boolean = "//e".xpath.liftFirst[A](decoder)(encode(a, "e")) == DecodeResult.Success(a)
 

@@ -10,7 +10,7 @@ package object nekohtml {
     conf.setProperty("http://cyberneko.org/html/properties/names/elems", "lower")
 
     val parser = new DOMParser(conf)
-    DecodeResult {
+    LoadingResult {
       parser.parse(s)
       parser.getDocument
     }

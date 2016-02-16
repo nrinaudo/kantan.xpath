@@ -1,6 +1,6 @@
-package kantan.xpath.laws.discipline.discipline
+package kantan.xpath.laws.discipline
 
-import kantan.xpath.laws.discipline.NodeDecoderLaws
+import kantan.xpath.laws.NodeDecoderLaws
 import kantan.xpath.ops
 import ops._
 import kantan.xpath.{Element, NodeDecoder}

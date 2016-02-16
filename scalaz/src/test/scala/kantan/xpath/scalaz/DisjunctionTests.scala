@@ -1,9 +1,9 @@
 package kantan.xpath.scalaz
 
-import kantan.xpath.laws.discipline.discipline.{NodeDecoderTests ⇒ NDTests}
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline
+import kantan.xpath.laws.discipline.{NodeDecoderTests ⇒ NDTests}
 import codecs._
 
 import scalaz.{-\/, \/, \/-}

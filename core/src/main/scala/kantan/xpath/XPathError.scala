@@ -9,6 +9,8 @@ object XPathError {
   sealed abstract class EvaluationError extends XPathError
   case object NotFound extends EvaluationError
   final case class DecodeError(cause: Throwable) extends EvaluationError {
+    override def toString: String = s"DecodeError(${cause.getMessage})"
+
     override def equals(obj: Any) = obj match {
       case DecodeError(cause2) ⇒ cause.getClass == cause2.getClass
       case _                   ⇒ false
@@ -22,12 +24,16 @@ object XPathError {
   /** Category of errors that occur while loading an XML document. */
   sealed abstract class LoadingError extends XPathError
   final case class ParseError(cause: Throwable) extends LoadingError {
+    override def toString: String = s"ParseError(${cause.getMessage})"
+
     override def equals(obj: Any) = obj match {
       case ParseError(cause2) ⇒ cause.getClass == cause2.getClass
       case _                   ⇒ false
     }
   }
   final case class IOError(cause: Throwable) extends LoadingError {
+    override def toString: String = s"IOError(${cause.getMessage})"
+
     override def equals(obj: Any) = obj match {
       case IOError(cause2) ⇒ cause.getClass == cause2.getClass
       case _                   ⇒ false

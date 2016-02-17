@@ -3,20 +3,13 @@ package kantan.xpath
 import java.net.{URI, URL}
 import java.util.UUID
 
-import simulacrum.{noop, typeclass}
+import kantan.codecs.Decoder
+import simulacrum.typeclass
 
 @typeclass
-trait NodeDecoder[A] { self ⇒
-  def decode(n: Node): EvaluationResult[A]
-
-  @noop
-  def map[B](f: A ⇒ B): NodeDecoder[B] = NodeDecoder { n ⇒ self.decode(n).map(f) }
-
-  @noop
-  def flatMap[B](f: A ⇒ NodeDecoder[B]): NodeDecoder[B] = NodeDecoder(s ⇒ decode(s).flatMap(a ⇒ f(a).decode(s)))
-
-  @noop
-  def mapResult[B](f: A ⇒ EvaluationResult[B]): NodeDecoder[B] = NodeDecoder { n: Node ⇒ self.decode(n).flatMap(f) }
+trait NodeDecoder[A] extends Decoder[Node, A, XPathError.EvaluationError, NodeDecoder] { self ⇒
+  override def decode(n: Node): EvaluationResult[A]
+  override protected def copy[DD](f: Node => EvaluationResult[DD]) = NodeDecoder(f)
 }
 
 @export.imports[NodeDecoder]

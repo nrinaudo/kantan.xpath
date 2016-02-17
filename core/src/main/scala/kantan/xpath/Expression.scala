@@ -40,11 +40,6 @@ class Expression private[xpath] (val expr: XPathExpression) {
     loop(0, cbf())
   }
 
-  /** Turns this expression into an unsafe one
-    *
-    * An unsafe expression is one that throws exception when error occurs, as opposed to wrapping them in a
-    * [[DecodeResult.Failure]].
-    */
   def unsafe: UnsafeExpression = new UnsafeExpression(this)
 
   def liftFirst[A: NodeDecoder]: (Node ⇒ EvaluationResult[A]) = n ⇒ first(n)

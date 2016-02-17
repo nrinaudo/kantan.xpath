@@ -1,10 +1,9 @@
 package kantan.xpath
 
 import _root_.cats.functor.Contravariant
-import _root_.cats.{Eq, Monad}
-import kantan.codecs.DecodeResult
+import _root_.cats.{Eq, Functor}
 import kantan.codecs.cats.CatsInstances
-import kantan.xpath.XPathError.{LoadingError, EvaluationError}
+import kantan.xpath.XPathError.{EvaluationError, LoadingError}
 
 package object cats extends CatsInstances {
   /** `Eq` instance for errors. */
@@ -20,11 +19,9 @@ package object cats extends CatsInstances {
     override def eqv(x: LoadingError, y: LoadingError) = x == y
   }
 
-  /** `Monad` instance for `NodeDecoder`. */
-  implicit val nodeDecoder = new Monad[NodeDecoder] {
+  /** `Functor` instance for `NodeDecoder`. */
+  implicit val nodeDecoder = new Functor[NodeDecoder] {
     override def map[A, B](fa: NodeDecoder[A])(f: A ⇒ B) = fa.map(f)
-    override def flatMap[A, B](fa: NodeDecoder[A])(f: A ⇒ NodeDecoder[B]) = fa.flatMap(f)
-    override def pure[A](x: A) = NodeDecoder(_ ⇒ DecodeResult.success(x))
   }
 
   /** `Contravariant` instance for `XmlSource`. */

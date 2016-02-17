@@ -1,10 +1,9 @@
 package kantan.xpath
 
-import kantan.codecs.DecodeResult
 import kantan.codecs.scalaz.ScalazInstances
 import kantan.xpath.XPathError.{EvaluationError, LoadingError}
 
-import _root_.scalaz.{Contravariant, Equal, Monad}
+import _root_.scalaz.{Contravariant, Equal, Functor}
 
 package object scalaz extends ScalazInstances {
   implicit val errorEqual = new Equal[XPathError] {
@@ -19,11 +18,9 @@ package object scalaz extends ScalazInstances {
     override def equal(x: LoadingError, y: LoadingError) = x == y
   }
 
-  /** `Monad` instance for `NodeDecoder`. */
-  implicit val nodeDecoder = new Monad[NodeDecoder] {
+  /** `Functor` instance for `NodeDecoder`. */
+  implicit val nodeDecoder = new Functor[NodeDecoder] {
     override def map[A, B](fa: NodeDecoder[A])(f: A ⇒ B) = fa.map(f)
-    override def bind[A, B](fa: NodeDecoder[A])(f: A ⇒ NodeDecoder[B]) = fa.flatMap(f)
-    override def point[A](x: ⇒ A) = NodeDecoder(_ ⇒ DecodeResult.success(x))
   }
 
   /** `Contravariant` instance for `XmlSource`. */

@@ -1,5 +1,6 @@
 package kantan.xpath.scalaz
 
+import codecs._
 import kantan.codecs.laws.discipline.arbitrary
 import kantan.codecs.laws.{IllegalString, LegalString}
 import kantan.xpath.laws.discipline.arbitrary._

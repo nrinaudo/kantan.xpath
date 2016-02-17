@@ -39,7 +39,6 @@ object arbitrary {
     n
   }
 
-
   implicit def arbLegalValue[A](implicit la: Arbitrary[LegalString[A]]): Arbitrary[LegalNode[A]] =
     Arbitrary(la.arbitrary.map(_.mapEncoded(asCDataNode)))
   implicit def arbIllegalValue[A](implicit ia: Arbitrary[IllegalString[A]]): Arbitrary[IllegalNode[A]] =

@@ -56,7 +56,7 @@ as an XML document. Default instances are provided for most common types where i
 "<root><node>text</node></root>".asNode
 ```
 
-Note that the return value is actually wrapped in a [`DecodeResult`], which you can correctly think of as a specialised
+Note that the return value is actually wrapped in a [`LoadingResult`], which you can correctly think of as a specialised
 version of [`Option`].
 
 More interesting for our purposes, there is a default [`XmlSource`] instance for [`URI`], which allows us to turn any
@@ -111,7 +111,7 @@ of doing that, the simplest, most idiomatic one being the [`all`] method that en
 [`XmlSource`] in scope. We could then write, as a first attempt:
 
 ```tut:silent
-def indexes(platform: String): DecodeResult[List[URI]] =
+def indexes(platform: String): XPathResult[List[URI]] =
   new URI(s"http://www.metacritic.com/browse/games/title/$platform").all[List, URI]("//ul[@class='letternav']//a/@href".xpath)
 ```
 
@@ -131,7 +131,7 @@ Our implementation suffers from two issues, however:
 Fixing these issues is relatively simple:
 
 ```tut:silent
-def indexes(platform: String): DecodeResult[List[URI]] = {
+def indexes(platform: String): XPathResult[List[URI]] = {
   val root = new URI(s"http://www.metacritic.com/browse/games/title/$platform")
 
   root.all[List, URI]("//ul[@class='letternav']//a/@href".xpath).map(root :: _.map(root.resolve))
@@ -144,7 +144,7 @@ Each index page contains a list of games, the URI of which can be extracted with
 Turning an index page URI into a list of game URIs is thus as simple as:
 
 ```tut:silent
-def gamesFromIndex(index: URI): DecodeResult[List[URI]] =
+def gamesFromIndex(index: URI): XPathResult[List[URI]] =
   index.all[List, URI]("//div[@class='basic_stat product_title']/a/@href".xpath).
     map(_.map(u ⇒ index.resolve(u + "/critic-reviews")))
 ```
@@ -194,7 +194,7 @@ Having done that, turning a [`URI`] into a `Game` is almost the same thing as tu
 we've done so far, with the small difference that, since we only want one, we use [`first`] rather than [`all`]:
 
 ```tut:silent
-def game(uri: URI): DecodeResult[Game] = uri.first[Game]("//body".xpath)
+def game(uri: URI): XPathResult[Game] = uri.first[Game]("//body".xpath)
 ```
 
 Putting everything together, we can now write a simple function that takes a platform name and returns a list of games:
@@ -212,13 +212,13 @@ off topic for a simple XPath tutorial.
 [`URI`]:https://docs.oracle.com/javase/7/docs/api/java/net/URI.html
 [Metacritic]:http://www.metacritic.com
 [`XmlSource`]:{{ site.baseurl }}/api/#kantan.xpath.XmlSource
-[`asNode`]:{{ site.baseurl }}/api/#kantan.xpath.XmlSource@asNode(a:A):kantan.xpath.DecodeResult[kantan.xpath.Node]
-[`DecodeResult`]:{{ site.baseurl }}/api/#kantan.xpath.DecodeResult
+[`asNode`]:{{ site.baseurl }}/api/#kantan.xpath.XmlSource@asNode(a:A):kantan.xpath.LoadingResult
+[`LoadingResult`]:{{ site.baseurl }}/api/#kantan.xpath.package@LoadingResult=kantan.codecs.Result[kantan.xpath.XPathError.LoadingError,kantan.xpath.package.Node]
 [`Option`]:http://www.scala-lang.org/api/current/index.html#scala.Option
 [`xpath`]:{{ site.baseurl }}/api/#kantan.xpath.ops$$RichString@xpath(implicitcomp:kantan.xpath.XPathCompiler):kantan.xpath.Expression
 [`Expression.apply`]:{{ site.baseurl }}/api/#kantan.xpath.Expression$@apply(str:String)(implicitcompiler:kantan.xpath.XPathCompiler):Option[kantan.xpath.Expression]
-[`all`]:{{ site.baseurl }}/api/#kantan.xpath.XmlSource@all[F[_],B](a:A,expr:kantan.xpath.Expression)(implicitevidence$2:kantan.xpath.NodeDecoder[B],implicitcbf:scala.collection.generic.CanBuildFrom[Nothing,B,F[B]]):kantan.xpath.DecodeResult[F[B]]
-[`first`]:{{ site.baseurl }}/api/#kantan.xpath.XmlSource@first[B](a:A,expr:kantan.xpath.Expression)(implicitevidence$1:kantan.xpath.NodeDecoder[B]):kantan.xpath.DecodeResult[B]
+[`all`]:{{ site.baseurl }}/api/#kantan.xpath.XmlSource@all[F[_],B](a:A,expr:kantan.xpath.Expression)(implicitevidence$2:kantan.xpath.NodeDecoder[B],implicitcbf:scala.collection.generic.CanBuildFrom[Nothing,B,F[B]]):kantan.xpath.XPathResult[F[B]]
+[`first`]:{{ site.baseurl }}/api/#kantan.xpath.XmlSource@first[B](a:A,expr:kantan.xpath.Expression)(implicitevidence$1:kantan.xpath.NodeDecoder[B]):kantan.xpath.XPathResult[B]
 [`List`]:http://www.scala-lang.org/api/current/index.html#scala.collection.immutable.List
 [`CanBuildFrom`]:http://www.scala-lang.org/api/current/index.html#scala.collection.generic.CanBuildFrom
 [`NodeDecoder`]:{{ site.baseurl }}/api/#kantan.xpath.NodeDecoder

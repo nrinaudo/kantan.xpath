@@ -3,6 +3,7 @@ package kantan.xpath.laws.discipline
 import kantan.codecs.Result
 import kantan.codecs.laws.CodecValue.{IllegalValue, LegalValue}
 import kantan.codecs.laws.discipline.arbitrary._
+import kantan.codecs.laws._
 import kantan.xpath._
 import kantan.xpath.ops._
 import org.scalacheck.Arbitrary
@@ -39,9 +40,9 @@ object arbitrary {
   }
 
 
-  implicit def arbLegalValue[A](implicit la: Arbitrary[LegalValue[String, A]]): Arbitrary[LegalValue[Node, A]] =
+  implicit def arbLegalValue[A](implicit la: Arbitrary[LegalString[A]]): Arbitrary[LegalNode[A]] =
     Arbitrary(la.arbitrary.map(_.mapEncoded(asCDataNode)))
-  implicit def arbIllegalValue[A](implicit ia: Arbitrary[IllegalValue[String, A]]): Arbitrary[IllegalValue[Node, A]] =
+  implicit def arbIllegalValue[A](implicit ia: Arbitrary[IllegalString[A]]): Arbitrary[IllegalNode[A]] =
     Arbitrary(ia.arbitrary.map(_.mapEncoded(asCDataNode)))
 
 

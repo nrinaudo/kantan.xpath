@@ -1,11 +1,13 @@
 package kantan.xpath.laws.discipline
 
 import kantan.codecs.DecodeResult
+import kantan.codecs.laws.CodecValue.{IllegalValue, LegalValue}
 import kantan.codecs.laws.discipline.arbitrary._
 import kantan.xpath._
-import org.scalacheck.Arbitrary.{arbitrary ⇒ arb}
+import kantan.xpath.ops._
+import org.scalacheck.Arbitrary
+import org.scalacheck.Arbitrary.{arbitrary => arb}
 import org.scalacheck.Gen._
-import org.scalacheck.{Arbitrary, Gen}
 
 object arbitrary {
   // - Arbitrary errors ------------------------------------------------------------------------------------------------
@@ -23,9 +25,24 @@ object arbitrary {
   // -------------------------------------------------------------------------------------------------------------------
   implicit def arbEvaluationResult[A: Arbitrary]: Arbitrary[EvaluationResult[A]] =
     Arbitrary(oneOf(arb[DecodeResult.Failure[XPathError.EvaluationError]], arb[DecodeResult.Success[A]]))
-    implicit def arbXPathResult[A: Arbitrary]: Arbitrary[XPathResult[A]] =
+  implicit def arbXPathResult[A: Arbitrary]: Arbitrary[XPathResult[A]] =
     Arbitrary(oneOf(arb[DecodeResult.Failure[XPathError]], arb[DecodeResult.Success[A]]))
 
+
+
+  // - Arbitrary values ------------------------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------------------------------------------
+  private def asCDataNode(value: String): Node = {
+    val n = s"<element></element>".asUnsafeNode.getFirstChild.asInstanceOf[Element]
+    n.setTextContent(value)
+    n
+  }
+
+
+  implicit def arbLegalValue[A](implicit la: Arbitrary[LegalValue[String, A]]): Arbitrary[LegalValue[Node, A]] =
+    Arbitrary(la.arbitrary.map(_.map(asCDataNode)))
+  implicit def arbIllegalValue[A](implicit ia: Arbitrary[IllegalValue[String, A]]): Arbitrary[IllegalValue[Node, A]] =
+    Arbitrary(ia.arbitrary.map(_.map(asCDataNode)))
 
 
   // - Misc. arbitraries -----------------------------------------------------------------------------------------------

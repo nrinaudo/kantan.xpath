@@ -1,6 +1,7 @@
 package kantan.xpath
 
 import kantan.xpath.laws.discipline.NodeDecoderTests
+import kantan.xpath.laws.discipline.arbitrary._
 import org.scalacheck.Gen._
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.FunSuite
@@ -31,5 +32,5 @@ class BigDecimalTests extends FunSuite with GeneratorDrivenPropertyChecks with D
   }
 
 
-  checkAll("NodeDecoder[BigDecimal]", NodeDecoderTests.cdataEncoded[BigDecimal](_.toString).nodeDecoder)
+  checkAll("NodeDecoder[BigDecimal]", NodeDecoderTests[BigDecimal].decoder[Int, Int])
 }

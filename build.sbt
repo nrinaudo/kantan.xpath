@@ -146,7 +146,7 @@ lazy val tests = project
   .settings(allSettings: _*)
   .settings(noPublishSettings: _*)
   .settings(libraryDependencies += "org.scalatest" %% "scalatest" % scalatestVersion % "test")
-  .dependsOn(core, laws % "test")
+  .dependsOn(core, cats, laws % "test")
 
 
 lazy val docs = project

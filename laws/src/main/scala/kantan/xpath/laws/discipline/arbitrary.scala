@@ -1,6 +1,6 @@
 package kantan.xpath.laws.discipline
 
-import kantan.codecs.DecodeResult
+import kantan.codecs.Result
 import kantan.codecs.laws.CodecValue.{IllegalValue, LegalValue}
 import kantan.codecs.laws.discipline.arbitrary._
 import kantan.xpath._
@@ -24,9 +24,9 @@ object arbitrary {
   // - Arbitrary results -----------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
   implicit def arbEvaluationResult[A: Arbitrary]: Arbitrary[EvaluationResult[A]] =
-    Arbitrary(oneOf(arb[DecodeResult.Failure[XPathError.EvaluationError]], arb[DecodeResult.Success[A]]))
+    Arbitrary(oneOf(arb[Result.Failure[XPathError.EvaluationError]], arb[Result.Success[A]]))
   implicit def arbXPathResult[A: Arbitrary]: Arbitrary[XPathResult[A]] =
-    Arbitrary(oneOf(arb[DecodeResult.Failure[XPathError]], arb[DecodeResult.Success[A]]))
+    Arbitrary(oneOf(arb[Result.Failure[XPathError]], arb[Result.Success[A]]))
 
 
 

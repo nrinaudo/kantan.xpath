@@ -1,8 +1,8 @@
 package kantan.xpath
 
-import kantan.codecs.DecodeResult
+import kantan.codecs.Result
 
 object EvaluationResult {
-  val NotFound: EvaluationResult[Nothing] = DecodeResult.failure(XPathError.NotFound)
-  def apply[A](a: ⇒ A): EvaluationResult[A] = DecodeResult.nonFatal(a).leftMap(XPathError.DecodeError.apply)
+  val NotFound: EvaluationResult[Nothing] = Result.failure(XPathError.NotFound)
+  def apply[A](a: ⇒ A): EvaluationResult[A] = Result.nonFatal(a).leftMap(XPathError.DecodeError.apply)
 }

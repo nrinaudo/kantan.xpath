@@ -1,13 +1,13 @@
 package kantan
 
-import kantan.codecs.DecodeResult
+import kantan.codecs.Result
 
 package object xpath {
   // - Result types ----------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
-  type XPathResult[A] = DecodeResult[XPathError, A]
-  type EvaluationResult[A] = DecodeResult[XPathError.EvaluationError, A]
-  type LoadingResult = DecodeResult[XPathError.LoadingError, Node]
+  type XPathResult[A] = Result[XPathError, A]
+  type EvaluationResult[A] = Result[XPathError.EvaluationError, A]
+  type LoadingResult = Result[XPathError.LoadingError, Node]
 
 
   // - XML types -------------------------------------------------------------------------------------------------------

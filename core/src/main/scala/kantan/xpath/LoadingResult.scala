@@ -1,9 +1,9 @@
 package kantan.xpath
 
-import kantan.codecs.DecodeResult
+import kantan.codecs.Result
 
 object LoadingResult {
   def open[A](acquire: ⇒ A)(parse: A ⇒ LoadingResult): LoadingResult =
-    DecodeResult.nonFatal(acquire).leftMap(XPathError.IOError).flatMap(parse)
-  def apply(node: ⇒ Node): LoadingResult = DecodeResult.nonFatal(node).leftMap(XPathError.ParseError.apply)
+    Result.nonFatal(acquire).leftMap(XPathError.IOError).flatMap(parse)
+  def apply(node: ⇒ Node): LoadingResult = Result.nonFatal(node).leftMap(XPathError.ParseError.apply)
 }

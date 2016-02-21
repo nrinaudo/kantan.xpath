@@ -1,8 +1,6 @@
 package kantan.xpath.laws.discipline
 
 import kantan.codecs.Result
-import kantan.codecs.laws.CodecValue.{IllegalValue, LegalValue}
-import kantan.codecs.laws.discipline.arbitrary._
 import kantan.codecs.laws._
 import kantan.xpath._
 import kantan.xpath.ops._
@@ -10,7 +8,7 @@ import org.scalacheck.Arbitrary
 import org.scalacheck.Arbitrary.{arbitrary => arb}
 import org.scalacheck.Gen._
 
-object arbitrary {
+object arbitrary extends kantan.codecs.laws.discipline.ArbitraryInstances {
   // - Arbitrary errors ------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
   implicit val arbEvaluationError: Arbitrary[XPathError.EvaluationError] =

@@ -18,5 +18,7 @@ class XorTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipli
   implicit def arbIllegalXor(implicit a: Arbitrary[IllegalString[Either[Int, Boolean]]]): Arbitrary[IllegalString[Int Xor Boolean]] =
     Arbitrary(a.arbitrary.map(_.mapDecoded(v ⇒ Xor.fromEither(v))))
 
-  checkAll("NodeDecoder[Int Xor Boolean]", NDTests[Int Xor Boolean].decoder[Int, Int])
+
+  checkAll("NodeDecoder[Int Xor Boolean]", NDTests[Int Xor Boolean]
+    .decoder[Int, Int])
 }

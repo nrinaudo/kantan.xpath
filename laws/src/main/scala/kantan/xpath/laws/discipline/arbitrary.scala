@@ -37,9 +37,9 @@ object arbitrary extends kantan.codecs.laws.discipline.ArbitraryInstances {
     n
   }
 
-  implicit def arbLegalValue[A](implicit la: Arbitrary[LegalString[A]]): Arbitrary[LegalNode[A]] =
+  implicit def arbLegalNode[A](implicit la: Arbitrary[LegalString[A]]): Arbitrary[LegalNode[A]] =
     Arbitrary(la.arbitrary.map(_.mapEncoded(asCDataNode)))
-  implicit def arbIllegalValue[A](implicit ia: Arbitrary[IllegalString[A]]): Arbitrary[IllegalNode[A]] =
+  implicit def arbIllegalNode[A](implicit ia: Arbitrary[IllegalString[A]]): Arbitrary[IllegalNode[A]] =
     Arbitrary(ia.arbitrary.map(_.mapEncoded(asCDataNode)))
 
 

@@ -10,7 +10,7 @@ import scala.collection.generic.CanBuildFrom
 import scala.io.Codec
 
 @typeclass
-trait XmlSource[-A] { self ⇒
+trait XmlSource[-A] extends Serializable { self ⇒
   def asNode(a: A): LoadingResult
 
   def asUnsafeNode(a: A): Node = asNode(a).get

@@ -3,7 +3,7 @@ package kantan.xpath
 import kantan.codecs.scalaz.ScalazInstances
 import kantan.xpath.XPathError.{EvaluationError, LoadingError}
 
-import _root_.scalaz.{Contravariant, Equal, Functor}
+import _root_.scalaz.{Contravariant, Equal}
 
 package object scalaz extends ScalazInstances {
   implicit val errorEqual = new Equal[XPathError] {
@@ -19,9 +19,7 @@ package object scalaz extends ScalazInstances {
   }
 
   /** `Functor` instance for `NodeDecoder`. */
-  implicit val nodeDecoder = new Functor[NodeDecoder] {
-    override def map[A, B](fa: NodeDecoder[A])(f: A ⇒ B) = fa.map(f)
-  }
+  implicit val nodeDecoder = decoderFunctor[Node, XPathError.EvaluationError, NodeDecoder]
 
   /** `Contravariant` instance for `XmlSource`. */
   implicit val xmlSource = new Contravariant[XmlSource] {

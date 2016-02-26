@@ -1,7 +1,7 @@
 package kantan.xpath
 
+import _root_.cats.Eq
 import _root_.cats.functor.Contravariant
-import _root_.cats.{Eq, Functor}
 import kantan.codecs.cats.CatsInstances
 import kantan.xpath.XPathError.{EvaluationError, LoadingError}
 
@@ -20,9 +20,7 @@ package object cats extends CatsInstances {
   }
 
   /** `Functor` instance for `NodeDecoder`. */
-  implicit val nodeDecoder = new Functor[NodeDecoder] {
-    override def map[A, B](fa: NodeDecoder[A])(f: A ⇒ B) = fa.map(f)
-  }
+  implicit val nodeDecoder = decoderFunctor[Node, XPathError.EvaluationError, NodeDecoder]
 
   /** `Contravariant` instance for `XmlSource`. */
   implicit val xmlSource = new Contravariant[XmlSource] {

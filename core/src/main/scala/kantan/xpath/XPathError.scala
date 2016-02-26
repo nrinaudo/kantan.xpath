@@ -1,6 +1,6 @@
 package kantan.xpath
 
-sealed abstract class XPathError
+sealed abstract class XPathError extends Product with Serializable
 
 object XPathError {
   // - XPath related errors --------------------------------------------------------------------------------------------

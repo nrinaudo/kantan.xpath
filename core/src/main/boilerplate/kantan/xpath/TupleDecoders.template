@@ -1,7 +1,0 @@
-package kantan.xpath
-
-trait TupleDecoders {
-  [#def tuple1[[#I1: Evaluator#]]([#x1: Expression#]): NodeDecoder[Tuple1[[#I1#]]] =
-    NodeDecoder.decoder1(([#i1: I1#]) ⇒ Tuple1([#i1#]))([#x1#])#
-  ]
-}

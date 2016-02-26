@@ -15,7 +15,7 @@ trait NodeDecoder[A] extends Decoder[Node, A, XPathError.EvaluationError, NodeDe
 @export.imports[NodeDecoder]
 trait LowPriorityNodeDecoders
 
-object NodeDecoder extends LowPriorityNodeDecoders with Decoders with TupleDecoders {
+object NodeDecoder extends LowPriorityNodeDecoders with GeneratedDecoders {
   def apply[A](f: Node ⇒ EvaluationResult[A]) = new NodeDecoder[A] {
     override def decode(e: Node) = f(e)
   }

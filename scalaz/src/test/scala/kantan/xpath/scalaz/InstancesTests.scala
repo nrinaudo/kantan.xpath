@@ -10,7 +10,7 @@ import scalaz.scalacheck.ScalazProperties.{equal, functor}
 import scalaz.std.anyVal._
 
 class InstancesTests extends ScalazSuite {
-  implicit val nodeDecoderEq: Equal[NodeDecoder[Int]] = new Equal[NodeDecoder[Int]] {
+  implicit val nodeDecoderEqual: Equal[NodeDecoder[Int]] = new Equal[NodeDecoder[Int]] {
     override def equal(a1: NodeDecoder[Int], a2: NodeDecoder[Int]): Boolean =
       equality.nodeDecoder(a1, a2)(_.toString)(Equal[EvaluationResult[Int]].equal)
   }

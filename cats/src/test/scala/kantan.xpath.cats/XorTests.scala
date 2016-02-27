@@ -1,10 +1,11 @@
 package kantan.xpath.cats
 
+import kantan.codecs.laws.{IllegalString, LegalString}
+
 import codecs._
 import cats.data.Xor
-import kantan.codecs.laws._
 import kantan.xpath.laws.discipline.arbitrary._
-import kantan.xpath.laws.discipline.{NodeDecoderTests => NDTests}
+import kantan.xpath.laws.discipline.NodeDecoderTests
 import org.scalacheck.Arbitrary
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
@@ -19,6 +20,5 @@ class XorTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipli
     Arbitrary(a.arbitrary.map(_.mapDecoded(v ⇒ Xor.fromEither(v))))
 
 
-  checkAll("NodeDecoder[Int Xor Boolean]", NDTests[Int Xor Boolean]
-    .decoder[Int, Int])
+  checkAll("NodeDecoder[Int Xor Boolean]", NodeDecoderTests[Int Xor Boolean].decoder[Int, Int])
 }

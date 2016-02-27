@@ -1,9 +1,8 @@
 package kantan.xpath
 
 import kantan.codecs.laws.CodecValue
-import kantan.codecs.laws.CodecValue._
-import kantan.xpath.ops._
 import kantan.xpath.laws.discipline.arbitrary._
+import kantan.xpath.ops._
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import _root_.cats.Traverse.ops._

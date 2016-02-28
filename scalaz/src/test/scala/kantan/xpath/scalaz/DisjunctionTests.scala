@@ -1,9 +1,9 @@
 package kantan.xpath.scalaz
 
 import codecs._
+import arbitrary._
 import kantan.codecs.laws.{IllegalString, LegalString}
 import kantan.xpath.laws.discipline.NodeDecoderTests
-import kantan.xpath.laws.discipline.arbitrary._
 import org.scalacheck.Arbitrary
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks

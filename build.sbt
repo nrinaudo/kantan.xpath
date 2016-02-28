@@ -3,7 +3,7 @@ import com.typesafe.sbt.SbtSite.SiteKeys._
 import spray.boilerplate.BoilerplatePlugin._
 import UnidocKeys._
 
-val kantanCodecsVersion  = "0.1.0"
+val kantanCodecsVersion  = "0.1.1-SNAPSHOT"
 val exportHookVersion    = "1.1.0"
 val catsVersion          = "0.4.1"
 val simulacrumVersion    = "0.7.0"
@@ -106,10 +106,9 @@ lazy val cats = project
     name       := "cats"
   )
   .settings(libraryDependencies ++= Seq(
-    "com.nrinaudo"  %% "kantan.codecs-cats" % kantanCodecsVersion,
-    "org.typelevel" %% "cats"               % catsVersion,
-    "org.typelevel" %% "cats-laws"          % catsVersion      % "test",
-    "org.scalatest" %% "scalatest"         % scalatestVersion % "test"
+    "com.nrinaudo"  %% "kantan.codecs-cats"      % kantanCodecsVersion,
+    "com.nrinaudo"  %% "kantan.codecs-cats-laws" % kantanCodecsVersion  % "test",
+    "org.scalatest" %% "scalatest"               % scalatestVersion     % "test"
   ))
   .settings(allSettings: _*)
   .dependsOn(core, laws % "test")
@@ -122,9 +121,8 @@ lazy val scalaz = project
   .settings(allSettings: _*)
   .settings(libraryDependencies ++= Seq(
     "com.nrinaudo"  %% "kantan.codecs-scalaz"      % kantanCodecsVersion,
-    "org.scalaz"    %% "scalaz-core"               % scalazVersion,
-    "org.scalaz"    %% "scalaz-scalacheck-binding" % scalazVersion    % "test",
-    "org.scalatest" %% "scalatest"                 % scalatestVersion % "test"
+    "com.nrinaudo"  %% "kantan.codecs-scalaz-laws" % kantanCodecsVersion % "test",
+    "org.scalatest" %% "scalatest"                 % scalatestVersion    % "test"
   ))
   .dependsOn(core, laws % "test")
 

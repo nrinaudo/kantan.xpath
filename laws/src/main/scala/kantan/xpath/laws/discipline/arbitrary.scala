@@ -8,7 +8,9 @@ import org.scalacheck.Arbitrary
 import org.scalacheck.Arbitrary.{arbitrary => arb}
 import org.scalacheck.Gen._
 
-object arbitrary extends kantan.codecs.laws.discipline.ArbitraryInstances {
+object arbitrary extends ArbitraryInstances
+
+trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstances {
   // - Arbitrary errors ------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
   implicit val arbEvaluationError: Arbitrary[XPathError.EvaluationError] =
@@ -45,6 +47,8 @@ object arbitrary extends kantan.codecs.laws.discipline.ArbitraryInstances {
 
   // - Misc. arbitraries -----------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
+  def arbNode[A: Arbitrary](f: A ⇒ String): Arbitrary[Node] = Arbitrary(Arbitrary.arbitrary[A].map(a ⇒ s"<root>${f(a)}</root>".asUnsafeNode))
+
   implicit def arbCellDecoder[A: Arbitrary]: Arbitrary[NodeDecoder[A]] =
     Arbitrary(arb[Node ⇒ EvaluationResult[A]].map(f ⇒ NodeDecoder(f)))
 

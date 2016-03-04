@@ -1,8 +1,11 @@
 package kantan
 
-import kantan.codecs.Result
+import kantan.codecs.{Decoder, Result}
+import kantan.xpath.XPathError.EvaluationError
 
 package object xpath {
+  type NodeDecoder[A] = Decoder[Node, A, EvaluationError, Codecs.type]
+
   // - Result types ----------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
   type XPathResult[A] = Result[XPathError, A]

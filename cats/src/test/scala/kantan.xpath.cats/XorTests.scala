@@ -1,8 +1,6 @@
 package kantan.xpath.cats
 
 import kantan.codecs.laws.{IllegalString, LegalString}
-
-import codecs._
 import arbitrary._
 import cats.data.Xor
 import kantan.xpath.Node

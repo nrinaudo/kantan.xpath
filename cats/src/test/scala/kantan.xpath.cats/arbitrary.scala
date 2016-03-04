@@ -1,3 +1,3 @@
 package kantan.xpath.cats
 
-object arbitrary extends kantan.codecs.cats.laws.ArbitraryInstances with kantan.xpath.laws.discipline.ArbitraryInstances
+object arbitrary extends kantan.codecs.cats.laws.discipline.ArbitraryInstances with kantan.xpath.laws.discipline.ArbitraryInstances

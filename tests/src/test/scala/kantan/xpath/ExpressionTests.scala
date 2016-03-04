@@ -33,7 +33,7 @@ class ExpressionTests extends FunSuite with GeneratorDrivenPropertyChecks {
 
   test("decodeAll should fail on lists containing at least one illegal value and succeed on others") {
     forAll { values: List[Value[Int]] ⇒
-      assert("//element".xpath.all[List, Int](encodeAll(values)) == values.map(v ⇒ NodeDecoder[Int].decode(v.encoded)).sequence)
+      assert("//element".xpath.all[List, Int](encodeAll(values)) == values.map(v ⇒ NodeDecoder[Int].decode(v.encoded)).sequenceU)
     }
   }
 
@@ -53,14 +53,14 @@ class ExpressionTests extends FunSuite with GeneratorDrivenPropertyChecks {
   test("liftAll should fail on lists containing at least one illegal value and succeed on others") {
     forAll { values: List[Value[Int]] ⇒
       val f ="//element".xpath.liftAll[List, Int]
-      assert(f(encodeAll(values)) == values.map(v ⇒ NodeDecoder[Int].decode(v.encoded)).sequence)
+      assert(f(encodeAll(values)) == values.map(v ⇒ NodeDecoder[Int].decode(v.encoded)).sequenceU)
     }
   }
 
   test("liftEvery should fail on illegal values and succeed on legal ones") {
-      forAll { values: List[Value[Int]] ⇒
-        val f ="//element".xpath.liftEvery[List, Int]
-        assert(f(encodeAll(values)) == values.map(v ⇒ NodeDecoder[Int].decode(v.encoded)))
-      }
+    forAll { values: List[Value[Int]] ⇒
+      val f ="//element".xpath.liftEvery[List, Int]
+      assert(f(encodeAll(values)) == values.map(v ⇒ NodeDecoder[Int].decode(v.encoded)))
     }
+  }
 }

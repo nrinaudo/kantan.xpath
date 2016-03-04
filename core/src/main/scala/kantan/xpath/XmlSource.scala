@@ -4,12 +4,11 @@ import java.io._
 import java.net.{URI, URL}
 
 import org.xml.sax.InputSource
-import simulacrum.{noop, typeclass}
+import simulacrum.noop
 
 import scala.collection.generic.CanBuildFrom
 import scala.io.Codec
 
-@typeclass
 trait XmlSource[-A] extends Serializable { self ⇒
   def asNode(a: A): LoadingResult
 

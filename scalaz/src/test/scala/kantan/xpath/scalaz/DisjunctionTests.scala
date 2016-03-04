@@ -1,6 +1,5 @@
 package kantan.xpath.scalaz
 
-import codecs._
 import arbitrary._
 import kantan.xpath.laws.discipline.NodeDecoderTests
 import org.scalatest.FunSuite

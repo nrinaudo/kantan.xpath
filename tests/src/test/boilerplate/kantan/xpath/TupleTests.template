@@ -1,7 +1,7 @@
 package kantan.xpath
 
-import kantan.xpath.laws.discipline.discipline.NodeDecoderTests
-import kantan.xpath.laws.discipline.discipline.arbitrary._
+import kantan.xpath.laws.discipline.NodeDecoderTests
+import kantan.xpath.laws.discipline.arbitrary._
 import org.scalatest.FunSuite
 import kantan.xpath.ops._
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
@@ -9,6 +9,6 @@ import org.typelevel.discipline.scalatest.Discipline
 
 class TupleTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
   [#implicit val decoder1: NodeDecoder[Tuple1[[#Int#]]] = NodeDecoder.tuple1([#"@field1".xpath#])
-    checkAll("NodeDecoder[Tuple1[[#Int#]]]", NodeDecoderTests[Tuple1[[#Int#]]]((t, name) ⇒ s"<$name [#field1='${t._1}'# ]/>".asUnsafeNode.getFirstChild.asInstanceOf[Element]).nodeDecoder)#
+  checkAll("NodeDecoder[Tuple1[[#Int#]]]", NodeDecoderTests[Tuple1[[#Int#]]].decoder[Int, Int])#
   ]
 }

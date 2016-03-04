@@ -10,7 +10,7 @@ import org.scalacheck.Gen._
 
 object arbitrary extends ArbitraryInstances
 
-trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstances {
+trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstances with kantan.xpath.laws.discipline.ArbitraryArities {
   // - Arbitrary errors ------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
   implicit val arbEvaluationError: Arbitrary[XPathError.EvaluationError] =

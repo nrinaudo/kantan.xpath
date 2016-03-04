@@ -177,6 +177,7 @@ for which default instances of [`NodeDecoder`] exist, so we can go ahead and use
 ```tut:silent
 val critic = ".//div[@class='review_critic']".xpath
 val score = ".//div[@class='review_grade']".xpath
+
 implicit val reviewDecoder: NodeDecoder[Review] = NodeDecoder.decoder2(Review.apply)(critic, score)
 ```
 

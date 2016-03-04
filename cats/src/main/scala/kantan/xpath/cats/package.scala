@@ -1,11 +1,16 @@
 package kantan.xpath
 
 import _root_.cats.Eq
+import _root_.cats.data.Xor
 import _root_.cats.functor.Contravariant
 import kantan.codecs.cats.CatsInstances
 import kantan.xpath.XPathError.{EvaluationError, LoadingError}
 
 package object cats extends CatsInstances {
+  implicit def xor[A, B](implicit da: NodeDecoder[A], db: NodeDecoder[B]): NodeDecoder[A Xor B] = NodeDecoder { node ⇒
+    da.decode(node).map(a ⇒ Xor.left(a)).orElse(db.decode(node).map(b ⇒ Xor.right(b)))
+  }
+
   /** `Eq` instance for errors. */
   implicit val errorEq = new Eq[XPathError] {
     override def eqv(x: XPathError, y: XPathError) = x == y
@@ -18,9 +23,6 @@ package object cats extends CatsInstances {
   implicit val loadingErrorEq = new Eq[XPathError.LoadingError] {
     override def eqv(x: LoadingError, y: LoadingError) = x == y
   }
-
-  /** `Functor` instance for `NodeDecoder`. */
-  implicit val nodeDecoder = decoderFunctor[Node, XPathError.EvaluationError, NodeDecoder]
 
   /** `Contravariant` instance for `XmlSource`. */
   implicit val xmlSource = new Contravariant[XmlSource] {

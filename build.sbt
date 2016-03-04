@@ -1,6 +1,5 @@
 import com.typesafe.sbt.SbtGhPages.GhPagesKeys._
 import com.typesafe.sbt.SbtSite.SiteKeys._
-import spray.boilerplate.BoilerplatePlugin._
 import UnidocKeys._
 
 val kantanCodecsVersion  = "0.1.1-SNAPSHOT"
@@ -46,7 +45,7 @@ lazy val baseSettings = Seq(
   ),
   coverageExcludedPackages := "kantan\\.xpath\\.laws\\..*",
   incOptions     := incOptions.value.withNameHashing(true)
-) ++ Boilerplate.settings
+)
 
 lazy val noPublishSettings = Seq(
   publish         := (),
@@ -88,6 +87,7 @@ lazy val core = project
     moduleName := "kantan.xpath",
     name       := "core"
   )
+  .enablePlugins(spray.boilerplate.BoilerplatePlugin)
   .settings(allSettings: _*)
   .settings(libraryDependencies += "com.nrinaudo" %% "kantan.codecs" % kantanCodecsVersion)
 
@@ -137,10 +137,12 @@ lazy val laws = project
     "org.scalacheck" %% "scalacheck" % scalaCheckVersion,
     "org.typelevel"  %% "discipline" % disciplineVersion
   ))
+  .enablePlugins(spray.boilerplate.BoilerplatePlugin)
   .settings(allSettings: _*)
   .dependsOn(core)
 
 lazy val tests = project
+  .enablePlugins(spray.boilerplate.BoilerplatePlugin)
   .settings(allSettings: _*)
   .settings(noPublishSettings: _*)
   .settings(libraryDependencies += "org.scalatest" %% "scalatest" % scalatestVersion % "test")

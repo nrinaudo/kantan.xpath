@@ -3,9 +3,13 @@ package kantan.xpath
 import kantan.codecs.scalaz.ScalazInstances
 import kantan.xpath.XPathError.{EvaluationError, LoadingError}
 
-import _root_.scalaz.{Contravariant, Equal}
+import _root_.scalaz._
 
 package object scalaz extends ScalazInstances {
+  implicit def or[A, B](implicit da: NodeDecoder[A], db: NodeDecoder[B]): NodeDecoder[A \/ B] = NodeDecoder { node ⇒
+    da.decode(node).map(a ⇒ -\/(a)).orElse(db.decode(node).map(b ⇒ \/-(b)))
+  }
+
   implicit val errorEqual = new Equal[XPathError] {
     override def equal(a1: XPathError, a2: XPathError) = a1 == a2
   }
@@ -17,9 +21,6 @@ package object scalaz extends ScalazInstances {
   implicit val loadingErrorEqual = new Equal[XPathError.LoadingError] {
     override def equal(x: LoadingError, y: LoadingError) = x == y
   }
-
-  /** `Functor` instance for `NodeDecoder`. */
-  implicit val nodeDecoder = decoderFunctor[Node, XPathError.EvaluationError, NodeDecoder]
 
   /** `Contravariant` instance for `XmlSource`. */
   implicit val xmlSource = new Contravariant[XmlSource] {

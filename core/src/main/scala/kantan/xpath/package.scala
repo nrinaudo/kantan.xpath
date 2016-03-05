@@ -4,7 +4,7 @@ import kantan.codecs.{Decoder, Result}
 import kantan.xpath.XPathError.EvaluationError
 
 package object xpath {
-  type NodeDecoder[A] = Decoder[Node, A, EvaluationError, Codecs.type]
+  type NodeDecoder[A] = Decoder[Node, A, EvaluationError, codecs.type]
 
   // - Result types ----------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------

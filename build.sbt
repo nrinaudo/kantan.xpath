@@ -152,6 +152,7 @@ lazy val tests = project
 lazy val docs = project
   .settings(allSettings: _*)
   .settings(site.settings: _*)
+  .settings(site.preprocessSite(): _*)
   .settings(ghpages.settings: _*)
   .settings(unidocSettings: _*)
   .settings(

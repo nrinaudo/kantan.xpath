@@ -13,21 +13,21 @@ kantan.xpath is an XPath expression evaluation library for the [Scala programmin
 
 kantan.xpath is currently available both for Scala 2.10 and 2.11.
 
-The current version is `0.1.0`, which can be added to your project with one or more of the following line(s)
+The current version is `@VERSION@`, which can be added to your project with one or more of the following line(s)
 in your SBT build file:
 
 ```scala
 // Core library, included automatically if any other module is imported.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath" % "0.1.0"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath" % "@VERSION@"
 
 // Provides scalaz type class instances.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-scalaz" % "0.1.0"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-scalaz" % "@VERSION@"
 
 // Provides cats type class instances.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-cats" % "0.1.0"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-cats" % "@VERSION@"
 
 // Provides "dirty" HTML parsing through NekoHTML.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-nekohtml" % "0.1.0"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-nekohtml" % "@VERSION@"
 ```
 
 ## Motivation

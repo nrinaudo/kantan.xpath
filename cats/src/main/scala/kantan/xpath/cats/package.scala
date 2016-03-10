@@ -7,10 +7,6 @@ import kantan.codecs.cats.CatsInstances
 import kantan.xpath.XPathError.{EvaluationError, LoadingError}
 
 package object cats extends CatsInstances {
-  implicit def xor[A, B](implicit da: NodeDecoder[A], db: NodeDecoder[B]): NodeDecoder[A Xor B] = NodeDecoder { node ⇒
-    da.decode(node).map(a ⇒ Xor.left(a)).orElse(db.decode(node).map(b ⇒ Xor.right(b)))
-  }
-
   /** `Eq` instance for errors. */
   implicit val errorEq = new Eq[XPathError] {
     override def eqv(x: XPathError, y: XPathError) = x == y

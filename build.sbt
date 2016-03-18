@@ -43,6 +43,10 @@ lazy val baseSettings = Seq(
     "org.scala-lang"        % "scala-reflect" % scalaVersion.value  % "provided",
     compilerPlugin("org.scalamacros" % "paradise" % macroParadiseVersion cross CrossVersion.full)
   ),
+  resolvers ++= Seq(
+    Resolver.sonatypeRepo("releases"),
+    Resolver.sonatypeRepo("snapshots")
+  ),
   coverageExcludedPackages := "kantan\\.xpath\\.laws\\..*",
   incOptions     := incOptions.value.withNameHashing(true)
 )

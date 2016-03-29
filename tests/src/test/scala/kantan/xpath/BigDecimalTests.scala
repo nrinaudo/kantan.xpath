@@ -2,8 +2,8 @@ package kantan.xpath
 
 import kantan.xpath.laws.discipline.NodeDecoderTests
 import kantan.xpath.laws.discipline.arbitrary._
+import org.scalacheck._
 import org.scalacheck.Gen._
-import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline
@@ -25,7 +25,8 @@ class BigDecimalTests extends FunSuite with GeneratorDrivenPropertyChecks with D
         try {
           BigDecimal(x, scale, mc)
         } catch {
-          case ae: java.lang.ArithmeticException ⇒ BigDecimal(x, scale, UNLIMITED) // Handle the case where scale/precision conflict
+          // Handle the case where scale/precision conflict
+          case ae: java.lang.ArithmeticException ⇒ BigDecimal(x, scale, UNLIMITED)
         }
       }
     Arbitrary(bdGen)

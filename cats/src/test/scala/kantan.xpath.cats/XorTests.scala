@@ -1,11 +1,8 @@
 package kantan.xpath.cats
 
-import kantan.codecs.laws.{IllegalString, LegalString}
-import arbitrary._
-import cats.data.Xor
-import kantan.xpath.Node
+import _root_.cats.data.Xor
+import kantan.xpath.cats.arbitrary._
 import kantan.xpath.laws.discipline.NodeDecoderTests
-import org.scalacheck.Arbitrary
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline

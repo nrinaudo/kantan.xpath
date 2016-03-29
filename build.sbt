@@ -15,8 +15,8 @@ val disciplineVersion    = "0.4"
 
 lazy val buildSettings = Seq(
   organization       := "com.nrinaudo",
-  scalaVersion       := "2.11.7",
-  crossScalaVersions := Seq("2.10.6", "2.11.7")
+  scalaVersion       := "2.11.8",
+  crossScalaVersions := Seq("2.10.6", "2.11.8")
 )
 
 lazy val compilerOptions = Seq("-deprecation",

@@ -1,9 +1,8 @@
 package kantan.xpath
 
+import _root_.scalaz._
 import kantan.codecs.scalaz.ScalazInstances
 import kantan.xpath.XPathError.{EvaluationError, LoadingError}
-
-import _root_.scalaz._
 
 package object scalaz extends ScalazInstances {
   implicit val errorEqual = new Equal[XPathError] {

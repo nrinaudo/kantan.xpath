@@ -1,7 +1,6 @@
 package kantan.xpath
 
 import javax.xml.xpath.XPathFactory
-
 import scala.util.Try
 
 trait XPathCompiler {

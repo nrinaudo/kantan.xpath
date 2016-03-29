@@ -1,7 +1,6 @@
 package kantan.xpath
 
 import java.net.URL
-
 import org.xml.sax.InputSource
 
 /** [[XmlSource]] implementation anything that can be turned into a `java.io.URL`.
@@ -9,7 +8,8 @@ import org.xml.sax.InputSource
   * The main purpose here is to allow application developers to set their own HTTP headers: when scrapping websites,
   * it's typically necessary to change the default user agent to something a bit more browser-like.
   */
-case class RemoteXmlSource[A](toURL: A ⇒ URL, headers: Map[String, String] = Map.empty)(implicit parser: XmlParser) extends XmlSource[A] {
+case class RemoteXmlSource[A](toURL: A ⇒ URL, headers: Map[String, String] = Map.empty)(implicit parser: XmlParser)
+  extends XmlSource[A] {
   override def asNode(a: A): LoadingResult = {
     val con = toURL(a).openConnection()
     headers.foreach { case (n, v) ⇒ con.setRequestProperty(n, v) }

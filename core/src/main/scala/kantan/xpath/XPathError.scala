@@ -15,6 +15,8 @@ object XPathError {
       case DecodeError(cause2) ⇒ cause.getClass == cause2.getClass
       case _                   ⇒ false
     }
+
+    override def hashCode(): Int = cause.hashCode()
   }
 
 
@@ -30,6 +32,8 @@ object XPathError {
       case ParseError(cause2) ⇒ cause.getClass == cause2.getClass
       case _                   ⇒ false
     }
+
+    override def hashCode(): Int = cause.hashCode()
   }
   final case class IOError(cause: Throwable) extends LoadingError {
     override def toString: String = s"IOError(${cause.getMessage})"
@@ -38,5 +42,7 @@ object XPathError {
       case IOError(cause2) ⇒ cause.getClass == cause2.getClass
       case _                   ⇒ false
     }
+
+    override def hashCode(): Int = cause.hashCode()
   }
 }

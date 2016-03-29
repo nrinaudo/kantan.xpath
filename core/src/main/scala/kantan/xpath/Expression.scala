@@ -1,9 +1,7 @@
 package kantan.xpath
 
 import javax.xml.xpath.{XPathConstants, XPathExpression}
-
 import kantan.codecs.Result
-
 import scala.annotation.tailrec
 import scala.collection.generic.CanBuildFrom
 import scala.collection.mutable
@@ -17,14 +15,17 @@ class Expression private[xpath] (val expr: XPathExpression) {
   }
 
   /** Finds all nodes matching the expression and evaluate them as an `F[A]]`, where `F` is a collection class. */
-  def every[F[_], A](n: Node)(implicit da: NodeDecoder[A], cbf: CanBuildFrom[Nothing, EvaluationResult[A], F[EvaluationResult[A]]]): F[EvaluationResult[A]] = {
+  def every[F[_], A](n: Node)(implicit da: NodeDecoder[A],
+                              cbf: CanBuildFrom[Nothing, EvaluationResult[A], F[EvaluationResult[A]]])
+  : F[EvaluationResult[A]] = {
     val res = expr.evaluate(n, XPathConstants.NODESET).asInstanceOf[NodeList]
     val out = cbf()
     for(i ← 0 until res.getLength) out += da.decode(res.item(i))
     out.result()
   }
 
-  def all[F[_], A](n: Node)(implicit da: NodeDecoder[A], cbf: CanBuildFrom[Nothing, A, F[A]]): EvaluationResult[F[A]] = {
+  def all[F[_], A](n: Node)
+                  (implicit da: NodeDecoder[A], cbf: CanBuildFrom[Nothing, A, F[A]]): EvaluationResult[F[A]] = {
     val res = expr.evaluate(n, XPathConstants.NODESET).asInstanceOf[NodeList]
 
     @tailrec
@@ -46,8 +47,9 @@ class Expression private[xpath] (val expr: XPathExpression) {
   def liftAll[F[_], A: NodeDecoder](implicit cbf: CanBuildFrom[Nothing, A, F[A]]): (Node ⇒ EvaluationResult[F[A]]) =
     n ⇒ all(n)
 
-  def liftEvery[F[_], A](implicit da: NodeDecoder[A], cbf: CanBuildFrom[Nothing, EvaluationResult[A], F[EvaluationResult[A]]]): (Node ⇒ F[EvaluationResult[A]]) =
-    n ⇒ every(n)
+  def liftEvery[F[_], A]
+  (implicit da: NodeDecoder[A], cbf: CanBuildFrom[Nothing, EvaluationResult[A], F[EvaluationResult[A]]])
+  : (Node ⇒ F[EvaluationResult[A]]) = n ⇒ every(n)
 }
 
 class UnsafeExpression private[xpath] (val expr: Expression) {

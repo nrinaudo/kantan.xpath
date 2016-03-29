@@ -7,8 +7,9 @@ object ops {
     def asUnsafeNode(implicit source: XmlSource[A]): Node = source.asUnsafeNode(a)
     def asNode(implicit source: XmlSource[A]): LoadingResult = source.asNode(a)
     def first[B: NodeDecoder](expr: Expression)(implicit source: XmlSource[A]): XPathResult[B] = source.first(a, expr)
-    def all[F[_], B: NodeDecoder](expr: Expression)(implicit source: XmlSource[A], cbf: CanBuildFrom[Nothing, B, F[B]]): XPathResult[F[B]] =
-      source.all(a, expr)
+    def all[F[_], B: NodeDecoder](expr: Expression)
+                                 (implicit s: XmlSource[A], cbf: CanBuildFrom[Nothing, B, F[B]]): XPathResult[F[B]] =
+      s.all(a, expr)
   }
 
   implicit class RichString(val str: String) extends AnyVal {

@@ -1,8 +1,8 @@
 package kantan.xpath.laws.discipline
 
 import kantan.codecs.laws.discipline.DecoderTests
+import kantan.xpath._
 import kantan.xpath.laws.discipline.arbitrary._
-import kantan.xpath.{codecs, Node, XPathError}
 import org.scalacheck.Arbitrary
 
 object NodeDecoderTests {

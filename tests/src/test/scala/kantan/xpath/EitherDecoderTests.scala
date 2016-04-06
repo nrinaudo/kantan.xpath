@@ -6,6 +6,6 @@ import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline
 
-class DoubleTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
-  checkAll("NodeDecoder[Double]", NodeDecoderTests[Double].decoder[Int, Int])
+class EitherDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
+  checkAll("NodeDecoder[Either[Int, Boolean]]", NodeDecoderTests[Either[Int, Boolean]].decoder[Int, Int])
 }

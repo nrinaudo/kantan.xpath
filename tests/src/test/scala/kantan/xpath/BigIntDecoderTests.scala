@@ -6,6 +6,6 @@ import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline
 
-class ShortTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
-  checkAll("NodeDecoder[Short]", NodeDecoderTests[Short].decoder[Int, Int])
+class BigIntDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
+  checkAll("NodeDecoder[BigInt]", NodeDecoderTests[BigInt].decoder[Int, Int])
 }

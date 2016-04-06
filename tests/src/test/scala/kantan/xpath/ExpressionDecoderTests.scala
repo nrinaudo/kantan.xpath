@@ -12,7 +12,7 @@ import org.scalatest.prop.GeneratorDrivenPropertyChecks
 // TODO: these tests rely on CodeValue serializing values to a node named 'element'. This is fragile.
 // TODO: Arbitrary[List[CodecValue[Node, A]]] never ends up generating lists of legal values only, which sorts of
 //       defeats the purpose.
-class ExpressionTests extends FunSuite with GeneratorDrivenPropertyChecks {
+class ExpressionDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks {
   type Value[A] = CodecValue[Node, A]
 
   def encodeAll[A](bs: List[Value[A]]): Element = {

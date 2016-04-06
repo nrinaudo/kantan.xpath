@@ -1,5 +1,6 @@
 package kantan.xpath
 
+import java.net.{URI, URL}
 import kantan.codecs.strings.StringDecoder
 import kantan.xpath.XPathError.DecodeError
 

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: index
 ---
 
 [![Build Status](https://travis-ci.org/nrinaudo/kantan.xpath.svg)](https://travis-ci.org/nrinaudo/kantan.xpath)
@@ -40,12 +40,3 @@ Scala perspective, by terrible types and safety issues. Everything throws and ev
 
 kantan.xpath, then, is a thin layer over that Java API that attempts to provide much needed safety, useful types
 and as little boilerplate as possible.
-
-## Tutorials
-
-The following tutorials are available:
-{% for x in site.tut %}
-{% if x.status != "wip" and x.section == "tutorial" %}
-* [{{ x.title }}]({{ site.baseurl }}{{ x.url }})
-{% endif %}
-{% endfor %}

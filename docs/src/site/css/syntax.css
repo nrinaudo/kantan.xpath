@@ -1,5 +1,5 @@
 .highlight pre code {
-  white-space: pre;
+  white-space: pre;       // forces <code> to respect <pre> formatting
 }
 
 .highlight pre, pre, .highlight .hll { background-color: #f8f8f8; padding: 6px 10px; border-radius: 5pt; }

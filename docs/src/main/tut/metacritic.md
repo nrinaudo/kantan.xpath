@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: tutorial
 title:  "Scrapping Metacritic"
 section: tutorial
 ---
@@ -9,7 +9,7 @@ Or do some publications consistently rank titles from a given publisher higher t
 
 As is often the case, the main difficulty was not to analyse the data but actually get my hands on it. I hoped
 [Metacritic] would provide an API or, baring that, acceptably up-to-date dumps, but no such luck. I then set about
-writing a scrapper, which turned out to be rather painful - not because of anything smart [Metacritic] was doing to 
+writing a scrapper, which turned out to be rather painful - not because of anything smart [Metacritic] was doing to
 protect their data, but because the [standard Scala XML library](https://github.com/scala/scala-xml) fought me every step of the way.
 
 That's how kantan.xpath came about, and this tutorial shows how comparatively simple scrapping can be, with the proper
@@ -44,7 +44,7 @@ case class Review(critic: String, score: Int)
 
 case class Game(name: String, reviews: List[Review])
 ```
-  
+
 More data could be scrapped (developer, genre, rating...) but what we've defined there is sufficient for demonstration
 purposes.
 
@@ -89,7 +89,7 @@ new URI("http://www.metacritic.com/browse/games/title/gamecube").asNode
 ## Retrieving a list of game URIs
 [Metacritic] organises its game listings by platforms, then by first letter in the name. We'll focus on a single
 platform here, so our first step needs to be, for a given platform, to retrieve the URIs of each "letter" page.
-  
+
 Exploring the DOM of a platform page with, for example, a browser's debugging tools, we find that the following XPath
 expression yields the URIs we're after: `//ul[@class='letternav']//a/@href`.
 

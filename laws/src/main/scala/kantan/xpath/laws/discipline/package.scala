@@ -9,6 +9,6 @@ package object discipline {
   type LegalNode[A] = LegalValue[Node, A]
   type IllegalNode[A] = IllegalValue[Node, A]
 
-  type NodeDecoderLaws[A] = DecoderLaws[Node, A, XPathError.EvaluationError, codecs.type]
-  type NodeDecoderTests[A] = DecoderTests[Node, A, XPathError.EvaluationError, codecs.type]
+  type NodeDecoderLaws[A] = DecoderLaws[Node, A, DecodeError, codecs.type]
+  type NodeDecoderTests[A] = DecoderTests[Node, A, DecodeError, codecs.type]
 }

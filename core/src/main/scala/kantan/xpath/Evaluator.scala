@@ -8,7 +8,7 @@ import scala.collection.generic.CanBuildFrom
   * to work for lists and other collection types.
   */
 trait Evaluator[A] {
-  def evaluate(exp: Expression, node: Node): EvaluationResult[A]
+  def evaluate(exp: Expression, node: Node): DecodeResult[A]
 }
 
 object Evaluator {
@@ -18,6 +18,6 @@ object Evaluator {
     }
 
   implicit def node[A: NodeDecoder]: Evaluator[A] = new Evaluator[A] {
-    override def evaluate(exp: Expression, node: Node): EvaluationResult[A] = exp.first(node)
+    override def evaluate(exp: Expression, node: Node): DecodeResult[A] = exp.first(node)
   }
 }

@@ -7,5 +7,5 @@ import org.scalacheck.Arbitrary
 
 object NodeDecoderTests {
   def apply[A](implicit la: NodeDecoderLaws[A], al: Arbitrary[LegalNode[A]]): NodeDecoderTests[A] =
-    DecoderTests[Node, A, XPathError.EvaluationError, codecs.type]
+    DecoderTests[Node, A, DecodeError, codecs.type]
 }

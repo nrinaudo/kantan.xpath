@@ -10,11 +10,11 @@ import org.xml.sax.InputSource
   */
 case class RemoteXmlSource[A](toURL: A ⇒ URL, headers: Map[String, String] = Map.empty)(implicit parser: XmlParser)
   extends XmlSource[A] {
-  override def asNode(a: A): LoadingResult = {
+  override def asNode(a: A): ParseResult = {
     val con = toURL(a).openConnection()
     headers.foreach { case (n, v) ⇒ con.setRequestProperty(n, v) }
 
-    LoadingResult.open {
+    ParseResult.open {
       con.connect()
       new InputSource(con.getInputStream)
     }(parser.parse)

@@ -1,12 +1,11 @@
 package kantan.xpath.scalaz
 
-import kantan.xpath.XPathError
-import kantan.xpath.XPathError.{EvaluationError, LoadingError}
+import kantan.xpath.{DecodeError, ParseError, ReadError}
 import kantan.xpath.laws.discipline.arbitrary._
 import scalaz.scalacheck.ScalazProperties.equal
 
 class InstancesTests extends ScalazSuite {
-  checkAll("XPathError", equal.laws[XPathError])
-  checkAll("EvaluationError", equal.laws[EvaluationError])
-  checkAll("LoadingError", equal.laws[LoadingError])
+  checkAll("ReadError", equal.laws[ReadError])
+  checkAll("DecodeError", equal.laws[DecodeError])
+  checkAll("ParseError", equal.laws[ParseError])
 }

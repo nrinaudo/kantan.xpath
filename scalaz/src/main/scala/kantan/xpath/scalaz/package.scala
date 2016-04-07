@@ -2,19 +2,18 @@ package kantan.xpath
 
 import _root_.scalaz._
 import kantan.codecs.scalaz.ScalazInstances
-import kantan.xpath.XPathError.{EvaluationError, LoadingError}
 
 package object scalaz extends ScalazInstances {
-  implicit val errorEqual = new Equal[XPathError] {
-    override def equal(a1: XPathError, a2: XPathError) = a1 == a2
+  implicit val readErrorEqual = new Equal[ReadError] {
+    override def equal(a1: ReadError, a2: ReadError) = a1 == a2
   }
 
-  implicit val evaluationErrorEqual = new Equal[XPathError.EvaluationError] {
-    override def equal(x: EvaluationError, y: EvaluationError) = x == y
+  implicit val decodeErrorEqual = new Equal[DecodeError] {
+    override def equal(x: DecodeError, y: DecodeError) = x == y
   }
 
-  implicit val loadingErrorEqual = new Equal[XPathError.LoadingError] {
-    override def equal(x: LoadingError, y: LoadingError) = x == y
+  implicit val loadingErrorEqual = new Equal[ParseError] {
+    override def equal(x: ParseError, y: ParseError) = x == y
   }
 
   /** `Contravariant` instance for `XmlSource`. */

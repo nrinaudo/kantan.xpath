@@ -8,17 +8,17 @@ import scala.io.Codec
 import simulacrum.noop
 
 trait XmlSource[-A] extends Serializable { self ⇒
-  def asNode(a: A): LoadingResult
+  def asNode(a: A): ParseResult
 
   def asUnsafeNode(a: A): Node = asNode(a).get
 
-  def first[B: NodeDecoder](a: A, expr: Expression): XPathResult[B] = for {
+  def first[B: NodeDecoder](a: A, expr: Expression): ReadResult[B] = for {
     node ← asNode(a)
     b    ← expr.first[B](node)
   } yield b
 
   def all[F[_], B: NodeDecoder](a: A, expr: Expression)
-                               (implicit cbf: CanBuildFrom[Nothing, B, F[B]]): XPathResult[F[B]] =
+                               (implicit cbf: CanBuildFrom[Nothing, B, F[B]]): ReadResult[F[B]] =
     for {
       node ← asNode(a)
       bs   ←  expr.all[F, B](node)
@@ -29,11 +29,11 @@ trait XmlSource[-A] extends Serializable { self ⇒
 }
 
 object XmlSource {
-  def apply[A](f: A ⇒ LoadingResult): XmlSource[A] = new XmlSource[A] {
+  def apply[A](f: A ⇒ ParseResult): XmlSource[A] = new XmlSource[A] {
     override def asNode(a: A) = f(a)
   }
 
-  implicit val node: XmlSource[Node] = XmlSource(n ⇒ LoadingResult(n))
+  implicit val node: XmlSource[Node] = XmlSource(n ⇒ ParseResult(n))
 
   implicit def inputSource(implicit parser: XmlParser): XmlSource[InputSource] =
     XmlSource(s ⇒ parser.parse(s))

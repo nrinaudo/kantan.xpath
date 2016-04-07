@@ -12,13 +12,13 @@ import org.xml.sax.InputSource
   */
 trait XmlParser {
   /** Turns the specified `InputSource` into a `Document`. */
-  def parse(source: InputSource): LoadingResult
+  def parse(source: InputSource): ParseResult
 }
 
 /** Declares the default [[XmlParser]] instance in the implicit scope. */
 object XmlParser {
   /** Helper creation method, turns the specified function into an `Xmlparser`. */
-  def apply(f: InputSource ⇒ LoadingResult): XmlParser = new XmlParser {
+  def apply(f: InputSource ⇒ ParseResult): XmlParser = new XmlParser {
     override def parse(source: InputSource) = f(source)
   }
 
@@ -29,6 +29,6 @@ object XmlParser {
     */
   implicit val builtIn: XmlParser = {
     val factory: DocumentBuilderFactory = DocumentBuilderFactory.newInstance()
-    XmlParser(source ⇒ LoadingResult(factory.newDocumentBuilder().parse(source)))
+    XmlParser(source ⇒ ParseResult(factory.newDocumentBuilder().parse(source)))
   }
 }

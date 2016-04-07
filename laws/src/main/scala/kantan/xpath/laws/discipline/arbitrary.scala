@@ -14,21 +14,21 @@ trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstance
                                  with kantan.xpath.laws.discipline.ArbitraryArities {
   // - Arbitrary errors ------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
-  implicit val arbEvaluationError: Arbitrary[XPathError.EvaluationError] =
-    Arbitrary(oneOf(const(XPathError.NotFound), const(kantan.xpath.XPathError.DecodeError(new Exception))))
-  implicit val arbLoadingError: Arbitrary[XPathError.LoadingError] =
-    Arbitrary(oneOf(const(XPathError.ParseError(new Exception())), const(XPathError.IOError(new Exception()))))
-  implicit val arbXPathError: Arbitrary[XPathError] =
-    Arbitrary(oneOf(arb[XPathError.EvaluationError], arb[XPathError.LoadingError]))
+  implicit val arbDecodeError: Arbitrary[DecodeError] =
+    Arbitrary(oneOf(const(DecodeError.NotFound), const(DecodeError.TypeError(new Exception))))
+  implicit val arbParseError: Arbitrary[ParseError] =
+    Arbitrary(oneOf(const(ParseError.SyntaxError(new Exception())), const(ParseError.IOError(new Exception()))))
+  implicit val arbXPathError: Arbitrary[ReadError] =
+    Arbitrary(oneOf(arb[DecodeError], arb[ParseError]))
 
 
 
   // - Arbitrary results -----------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
-  implicit def arbEvaluationResult[A: Arbitrary]: Arbitrary[EvaluationResult[A]] =
-    Arbitrary(oneOf(arb[Result.Failure[XPathError.EvaluationError]], arb[Result.Success[A]]))
-  implicit def arbXPathResult[A: Arbitrary]: Arbitrary[XPathResult[A]] =
-    Arbitrary(oneOf(arb[Result.Failure[XPathError]], arb[Result.Success[A]]))
+  implicit def arbDecodeResult[A: Arbitrary]: Arbitrary[DecodeResult[A]] =
+    Arbitrary(oneOf(arb[Result.Failure[DecodeError]], arb[Result.Success[A]]))
+  implicit def arbXPathResult[A: Arbitrary]: Arbitrary[ReadResult[A]] =
+    Arbitrary(oneOf(arb[Result.Failure[ReadError]], arb[Result.Success[A]]))
 
 
 
@@ -52,7 +52,7 @@ trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstance
     Arbitrary(Arbitrary.arbitrary[A].map(a ⇒ s"<root>${f(a)}</root>".asUnsafeNode))
 
   implicit def arbCellDecoder[A: Arbitrary]: Arbitrary[NodeDecoder[A]] =
-    Arbitrary(arb[Node ⇒ EvaluationResult[A]].map(f ⇒ NodeDecoder(f)))
+    Arbitrary(arb[Node ⇒ DecodeResult[A]].map(f ⇒ NodeDecoder(f)))
 
   implicit def arbTuple1[A: Arbitrary]: Arbitrary[Tuple1[A]] =
     Arbitrary(arb[A].map(a ⇒ Tuple1(a)))

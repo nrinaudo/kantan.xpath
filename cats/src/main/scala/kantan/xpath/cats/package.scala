@@ -1,23 +1,21 @@
 package kantan.xpath
 
 import _root_.cats.Eq
-import _root_.cats.data.Xor
 import _root_.cats.functor.Contravariant
 import kantan.codecs.cats.CatsInstances
-import kantan.xpath.XPathError.{EvaluationError, LoadingError}
 
 package object cats extends CatsInstances {
   /** `Eq` instance for errors. */
-  implicit val errorEq = new Eq[XPathError] {
-    override def eqv(x: XPathError, y: XPathError) = x == y
+  implicit val readErrorEq = new Eq[ReadError] {
+    override def eqv(x: ReadError, y: ReadError) = x == y
   }
 
-  implicit val evaluationErrorEq = new Eq[XPathError.EvaluationError] {
-    override def eqv(x: EvaluationError, y: EvaluationError) = x == y
+  implicit val decodeErrorEq = new Eq[DecodeError] {
+    override def eqv(x: DecodeError, y: DecodeError) = x == y
   }
 
-  implicit val loadingErrorEq = new Eq[XPathError.LoadingError] {
-    override def eqv(x: LoadingError, y: LoadingError) = x == y
+  implicit val parseErrorEq = new Eq[ParseError] {
+    override def eqv(x: ParseError, y: ParseError) = x == y
   }
 
   /** `Contravariant` instance for `XmlSource`. */

@@ -83,8 +83,18 @@ lazy val root = Project(id = "kantan-xpath", base = file("."))
   .settings(moduleName := "root")
   .settings(allSettings)
   .settings(noPublishSettings)
-  .aggregate(core, nekohtml, docs, laws, tests, cats, scalaz)
-  .dependsOn(core, nekohtml)
+  .aggregate(core, nekohtml, docs, laws, tests, cats, scalaz, jodaTime)
+  .dependsOn(core, nekohtml, jodaTime)
+  .settings(
+    initialCommands in console :=
+    """
+      |import kantan.xpath._
+      |import kantan.xpath.ops._
+      |import kantan.xpath.nekohtml._
+      |import kantan.xpath.joda.time._
+    """.stripMargin
+  )
+
 
 lazy val core = project
   .settings(
@@ -94,6 +104,19 @@ lazy val core = project
   .enablePlugins(spray.boilerplate.BoilerplatePlugin)
   .settings(allSettings: _*)
   .settings(libraryDependencies += "com.nrinaudo" %% "kantan.codecs" % kantanCodecsVersion)
+
+lazy val jodaTime = Project(id = "joda-time", base = file("joda-time"))
+  .settings(
+    moduleName := "kantan.xath-joda-time",
+    name       := "joda-time"
+  )
+  .settings(libraryDependencies ++= Seq(
+    "com.nrinaudo"  %% "kantan.codecs-joda-time"      % kantanCodecsVersion,
+    "com.nrinaudo"  %% "kantan.codecs-joda-time-laws" % kantanCodecsVersion % "test",
+    "org.scalatest" %% "scalatest"                    % scalatestVersion    % "test"
+  ))
+  .settings(allSettings: _*)
+  .dependsOn(core, laws % "test")
 
 lazy val nekohtml = project
   .settings(

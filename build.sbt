@@ -1,6 +1,7 @@
 import com.typesafe.sbt.SbtGhPages.GhPagesKeys._
 import com.typesafe.sbt.SbtSite.SiteKeys._
 import UnidocKeys._
+import de.heikoseeberger.sbtheader.license.Apache2_0
 
 val kantanCodecsVersion  = "0.1.2-SNAPSHOT"
 val exportHookVersion    = "1.1.0"
@@ -43,6 +44,7 @@ lazy val baseSettings = Seq(
     "org.scala-lang"        % "scala-reflect" % scalaVersion.value  % "provided",
     compilerPlugin("org.scalamacros" % "paradise" % macroParadiseVersion cross CrossVersion.full)
   ),
+  headers := Map("scala" -> Apache2_0("2016", "Nicolas Rinaudo")),
   resolvers ++= Seq(
     Resolver.sonatypeRepo("releases"),
     Resolver.sonatypeRepo("snapshots")
@@ -59,7 +61,7 @@ lazy val noPublishSettings = Seq(
 
 lazy val publishSettings = Seq(
   homepage := Some(url("https://nrinaudo.github.io/kantan.xpath")),
-  licenses := Seq("MIT License" → url("http://www.opensource.org/licenses/mit-license.php")),
+  licenses := Seq("Apache-2.0" → url("https://www.apache.org/licenses/LICENSE-2.0.html")),
   apiURL := Some(url("https://nrinaudo.github.io/kantan.xpath/api/")),
   scmInfo := Some(
     ScmInfo(
@@ -94,6 +96,7 @@ lazy val root = Project(id = "kantan-xpath", base = file("."))
       |import kantan.xpath.joda.time._
     """.stripMargin
   )
+  .enablePlugins(AutomateHeaderPlugin)
 
 
 lazy val core = project
@@ -104,6 +107,7 @@ lazy val core = project
   .enablePlugins(spray.boilerplate.BoilerplatePlugin)
   .settings(allSettings: _*)
   .settings(libraryDependencies += "com.nrinaudo" %% "kantan.codecs" % kantanCodecsVersion)
+  .enablePlugins(AutomateHeaderPlugin)
 
 lazy val jodaTime = Project(id = "joda-time", base = file("joda-time"))
   .settings(
@@ -117,6 +121,7 @@ lazy val jodaTime = Project(id = "joda-time", base = file("joda-time"))
   ))
   .settings(allSettings: _*)
   .dependsOn(core, laws % "test")
+  .enablePlugins(AutomateHeaderPlugin)
 
 lazy val nekohtml = project
   .settings(
@@ -126,6 +131,7 @@ lazy val nekohtml = project
   .settings(libraryDependencies += "net.sourceforge.nekohtml" % "nekohtml" % nekoHtmlVersion)
   .settings(allSettings: _*)
   .dependsOn(core)
+  .enablePlugins(AutomateHeaderPlugin)
 
 lazy val cats = project
   .settings(
@@ -139,6 +145,7 @@ lazy val cats = project
   ))
   .settings(allSettings: _*)
   .dependsOn(core, laws % "test")
+  .enablePlugins(AutomateHeaderPlugin)
 
 lazy val scalaz = project
   .settings(
@@ -152,7 +159,7 @@ lazy val scalaz = project
     "org.scalatest" %% "scalatest"                 % scalatestVersion    % "test"
   ))
   .dependsOn(core, laws % "test")
-
+  .enablePlugins(AutomateHeaderPlugin)
 
 lazy val laws = project
   .settings(
@@ -167,6 +174,7 @@ lazy val laws = project
   .enablePlugins(spray.boilerplate.BoilerplatePlugin)
   .settings(allSettings: _*)
   .dependsOn(core)
+  .enablePlugins(AutomateHeaderPlugin)
 
 lazy val tests = project
   .enablePlugins(spray.boilerplate.BoilerplatePlugin)
@@ -174,7 +182,7 @@ lazy val tests = project
   .settings(noPublishSettings: _*)
   .settings(libraryDependencies += "org.scalatest" %% "scalatest" % scalatestVersion % "test")
   .dependsOn(core, cats, laws % "test")
-
+  .enablePlugins(AutomateHeaderPlugin)
 
 lazy val docs = project
   .settings(allSettings: _*)
@@ -201,3 +209,4 @@ lazy val docs = project
   )
   .settings(noPublishSettings:_*)
   .dependsOn(core, nekohtml)
+  .enablePlugins(AutomateHeaderPlugin)

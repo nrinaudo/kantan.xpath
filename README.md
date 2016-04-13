@@ -31,3 +31,5 @@ URI("http://some.other.server.com").all[Set, (String, Boolean)]("//name".xpath)
 // Same as above, but only looks for the first match.
 URI("http://some.other.server.com").first[(String, Boolean)]("//name".xpath)
 ```
+
+kantan.xpath is distributed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0.html).

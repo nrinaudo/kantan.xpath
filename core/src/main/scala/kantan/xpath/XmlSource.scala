@@ -21,7 +21,6 @@ import java.net.{URI, URL}
 import org.xml.sax.InputSource
 import scala.collection.generic.CanBuildFrom
 import scala.io.Codec
-import simulacrum.noop
 
 trait XmlSource[-A] extends Serializable { self ⇒
   def asNode(a: A): ParseResult
@@ -40,7 +39,6 @@ trait XmlSource[-A] extends Serializable { self ⇒
       bs   ←  expr.all[F, B](node)
     } yield bs
 
-  @noop
   def contramap[B](f: B ⇒ A): XmlSource[B] = XmlSource(b ⇒ self.asNode(f(b)))
 }
 

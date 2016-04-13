@@ -3,15 +3,14 @@ import com.typesafe.sbt.SbtSite.SiteKeys._
 import UnidocKeys._
 import de.heikoseeberger.sbtheader.license.Apache2_0
 
-val kantanCodecsVersion  = "0.1.2-SNAPSHOT"
+val kantanCodecsVersion  = "0.1.3"
 val exportHookVersion    = "1.1.0"
 val catsVersion          = "0.4.1"
-val simulacrumVersion    = "0.7.0"
 val macroParadiseVersion = "2.1.0"
 val nekoHtmlVersion      = "1.9.22"
 val scalatestVersion     = "3.0.0-M9"
 val scalaCheckVersion    = "1.12.5"
-val scalazVersion        = "7.2.0"
+val scalazVersion        = "7.2.2"
 val disciplineVersion    = "0.4"
 
 lazy val buildSettings = Seq(
@@ -39,7 +38,6 @@ lazy val compilerOptions = Seq("-deprecation",
 lazy val baseSettings = Seq(
   scalacOptions ++= compilerOptions,
   libraryDependencies ++= Seq(
-    "com.github.mpilquist" %% "simulacrum"    % simulacrumVersion % "provided",
     "org.typelevel"        %% "export-hook"   % exportHookVersion,
     "org.scala-lang"        % "scala-reflect" % scalaVersion.value  % "provided",
     compilerPlugin("org.scalamacros" % "paradise" % macroParadiseVersion cross CrossVersion.full)

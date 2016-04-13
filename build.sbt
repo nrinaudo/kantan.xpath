@@ -4,7 +4,6 @@ import UnidocKeys._
 import de.heikoseeberger.sbtheader.license.Apache2_0
 
 val kantanCodecsVersion  = "0.1.3"
-val exportHookVersion    = "1.1.0"
 val catsVersion          = "0.4.1"
 val macroParadiseVersion = "2.1.0"
 val nekoHtmlVersion      = "1.9.22"
@@ -37,11 +36,6 @@ lazy val compilerOptions = Seq("-deprecation",
 
 lazy val baseSettings = Seq(
   scalacOptions ++= compilerOptions,
-  libraryDependencies ++= Seq(
-    "org.typelevel"        %% "export-hook"   % exportHookVersion,
-    "org.scala-lang"        % "scala-reflect" % scalaVersion.value  % "provided",
-    compilerPlugin("org.scalamacros" % "paradise" % macroParadiseVersion cross CrossVersion.full)
-  ),
   headers := Map("scala" -> Apache2_0("2016", "Nicolas Rinaudo")),
   resolvers ++= Seq(
     Resolver.sonatypeRepo("releases"),

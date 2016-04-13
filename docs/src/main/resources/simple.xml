@@ -1,0 +1,6 @@
+<root>
+    <element id="1" enabled="true"/>
+    <element id="2" enabled="false"/>
+    <element id="3" enabled="true"/>
+    <element id="4" enabled="false"/>
+</root>

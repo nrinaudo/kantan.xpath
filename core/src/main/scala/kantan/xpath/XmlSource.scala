@@ -18,6 +18,7 @@ package kantan.xpath
 
 import java.io._
 import java.net.{URI, URL}
+import kantan.codecs.Result
 import org.xml.sax.InputSource
 import scala.collection.generic.CanBuildFrom
 import scala.io.Codec
@@ -25,19 +26,34 @@ import scala.io.Codec
 trait XmlSource[-A] extends Serializable { self ⇒
   def asNode(a: A): ParseResult
 
-  def asUnsafeNode(a: A): Node = asNode(a).get
+  // TODO: unsafe versions?
 
-  def first[B: NodeDecoder](a: A, expr: Expression): ReadResult[B] = for {
+  def first[B](a: A, expr: Expression[DecodeResult[B]]): ReadResult[B] = for {
     node ← asNode(a)
-    b    ← expr.first[B](node)
+    b    ← expr.first(node)
   } yield b
 
-  def all[F[_], B: NodeDecoder](a: A, expr: Expression)
-                               (implicit cbf: CanBuildFrom[Nothing, B, F[B]]): ReadResult[F[B]] =
+  def all[F[X] <: TraversableOnce[X], B](a: A, expr: Expression[DecodeResult[B]])
+                                        (implicit cbf1: CanBuildFrom[Nothing, DecodeResult[B], F[DecodeResult[B]]],
+                                         cbf2: CanBuildFrom[F[DecodeResult[B]], B, F[B]]
+                                        ): ReadResult[F[B]] =
     for {
       node ← asNode(a)
-      bs   ←  expr.all[F, B](node)
+      bs   ← Result.sequence(expr.all[F](node))
     } yield bs
+
+
+  // TODO: HORRIBLE, UNSAFE OPTION.GET!!!!
+  def first[B: NodeDecoder](a: A, expr: String)(implicit compiler: Compiler): ReadResult[B] =
+    first(a, compiler.compile(expr).get)
+
+  def all[F[X] <: TraversableOnce[X], B: NodeDecoder](a: A, expr: String)
+                                                     (implicit compiler: Compiler,
+                                                      cbf1: CanBuildFrom[Nothing, DecodeResult[B], F[DecodeResult[B]]],
+                                                      cbf2: CanBuildFrom[F[DecodeResult[B]], B, F[B]]
+                                                     ): ReadResult[F[B]] =
+    all(a, compiler.compile(expr).get)
+
 
   def contramap[B](f: B ⇒ A): XmlSource[B] = XmlSource(b ⇒ self.asNode(f(b)))
 }

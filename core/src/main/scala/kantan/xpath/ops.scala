@@ -20,16 +20,29 @@ import scala.collection.generic.CanBuildFrom
 
 object ops {
   implicit class XmlSourceOps[A](val a: A) extends AnyVal {
-    def asUnsafeNode(implicit source: XmlSource[A]): Node = source.asUnsafeNode(a)
     def asNode(implicit source: XmlSource[A]): ParseResult = source.asNode(a)
-    def first[B: NodeDecoder](expr: Expression)(implicit source: XmlSource[A]): ReadResult[B] = source.first(a, expr)
-    def all[F[_], B: NodeDecoder](expr: Expression)
-                                 (implicit s: XmlSource[A], cbf: CanBuildFrom[Nothing, B, F[B]]): ReadResult[F[B]] =
+
+    def first[B](expr: Expression[DecodeResult[B]])(implicit source: XmlSource[A]): ReadResult[B] =
+      source.first(a, expr)
+
+    def first[B: NodeDecoder](expr: String)(implicit compiler: Compiler, source: XmlSource[A]): ReadResult[B] =
+      source.first(a, expr)
+
+    def all[F[X] <: TraversableOnce[X], B](expr: Expression[DecodeResult[B]])
+                                          (implicit s: XmlSource[A],
+                                           cbf1: CanBuildFrom[Nothing, DecodeResult[B], F[DecodeResult[B]]],
+                                           cbf2: CanBuildFrom[F[DecodeResult[B]], B, F[B]]): ReadResult[F[B]] =
+      s.all(a, expr)
+
+    def all[F[X] <: TraversableOnce[X], B: NodeDecoder](expr: String)
+                                          (implicit s: XmlSource[A], compiler: Compiler,
+                                           cbf1: CanBuildFrom[Nothing, DecodeResult[B], F[DecodeResult[B]]],
+                                           cbf2: CanBuildFrom[F[DecodeResult[B]], B, F[B]]): ReadResult[F[B]] =
       s.all(a, expr)
   }
 
   implicit class StringOps(val str: String) extends AnyVal {
-    def xpath(implicit comp: XPathCompiler): Expression =
-      Expression(str)(comp).getOrElse(sys.error(s"Not a valid XPath expression: '$str'."))
+    def xpath[A: NodeDecoder](implicit comp: Compiler): Expression[DecodeResult[A]] =
+      comp.compile[A](str).getOrElse(sys.error(s"Not a valid XPath expression: '$str'."))
   }
 }

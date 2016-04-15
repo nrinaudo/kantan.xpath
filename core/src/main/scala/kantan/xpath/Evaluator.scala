@@ -16,6 +16,7 @@
 
 package kantan.xpath
 
+import kantan.codecs.Result
 import scala.collection.generic.CanBuildFrom
 
 /** Evaluates an expression on a given node.
@@ -24,16 +25,18 @@ import scala.collection.generic.CanBuildFrom
   * to work for lists and other collection types.
   */
 trait Evaluator[A] {
-  def evaluate(exp: Expression, node: Node): DecodeResult[A]
+  def evaluate(exp: SafeExpression[A], node: Node): DecodeResult[A]
 }
 
 object Evaluator {
-  implicit def collection[A: NodeDecoder, F[_]](implicit cbf: CanBuildFrom[Nothing, A, F[A]]): Evaluator[F[A]] =
+  implicit def collection[A: NodeDecoder, F[X] <: TraversableOnce[X]]
+  (implicit cbf1: CanBuildFrom[Nothing, DecodeResult[A], F[DecodeResult[A]]],
+   cbf2: CanBuildFrom[F[DecodeResult[A]], A, F[A]]): Evaluator[F[A]] =
     new Evaluator[F[A]] {
-      override def evaluate(exp: Expression, node: Node) = exp.all[F, A](node)
+      override def evaluate(exp: SafeExpression[A], node: Node) = Result.sequence(exp.all[F](node))
     }
 
-  implicit def node[A: NodeDecoder]: Evaluator[A] = new Evaluator[A] {
-    override def evaluate(exp: Expression, node: Node): DecodeResult[A] = exp.first(node)
+  implicit def node[A]: Evaluator[A] = new Evaluator[A] {
+    override def evaluate(exp: SafeExpression[A], node: Node): DecodeResult[A] = exp.first(node)
   }
 }

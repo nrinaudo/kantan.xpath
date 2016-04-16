@@ -20,11 +20,11 @@ import kantan.codecs.{Decoder, Result}
 
 package object xpath {
   type NodeDecoder[A] = Decoder[Node, A, DecodeError, codecs.type]
-  type SafeExpression[A] = Expression[DecodeResult[A]]
 
 
   // - Result types ----------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
+  type XPathResult[A] = Result[XPathError, A]
   type ReadResult[A] = Result[ReadError, A]
   type DecodeResult[A] = Result[DecodeError, A]
   type ParseResult = Result[ParseError, Node]

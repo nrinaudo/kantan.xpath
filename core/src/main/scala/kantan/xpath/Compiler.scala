@@ -16,33 +16,48 @@
 
 package kantan.xpath
 
-import javax.xml.xpath.{XPath, XPathConstants, XPathExpression, XPathFactory}
+import javax.xml.xpath.XPathConstants
+import kantan.codecs.Result
 import scala.collection.generic.CanBuildFrom
-import scala.util.Try
+import scala.collection.mutable
 
-trait  Compiler {
-  // TODO: use something else than Option here. We might want a specialised Result.
-  def compile[A: NodeDecoder](str: String): Option[Expression[DecodeResult[A]]]
+trait Compiler[A] {
+  def compile(str: String): XPathResult[Expression[DecodeResult[A]]]
 }
 
 object Compiler {
-  private case class XPathImpl[A](expr: XPathExpression, decode: Node ⇒ A) extends Expression[A] {
-    override def all[F[_]](n: Node)(implicit cbf: CanBuildFrom[Nothing, A, F[A]]) = {
-      val res = expr.evaluate(n, XPathConstants.NODESET).asInstanceOf[NodeList]
-      val out = cbf()
-      for(i ← 0 until res.getLength) out += decode(res.item(i))
-      out.result()
+  type Id[A] = A
+
+  implicit def xpath1[A](implicit xpath: XPathCompiler, da: NodeDecoder[A]): Compiler[Id[A]] = new Compiler[Id[A]] {
+    override def compile(str: String) =
+      xpath.compile(str).map(expr ⇒ new Expression[DecodeResult[A]] {
+        override def apply(n: Node) = {
+          val res = expr.evaluate(n, XPathConstants.NODE).asInstanceOf[Node]
+          if(res == null) DecodeResult.NotFound
+          else            da.decode(res)
+        }
+      })
+  }
+
+  implicit def xpathN[F[_], A]
+  (implicit xpath: XPathCompiler, da: NodeDecoder[A], cbf: CanBuildFrom[Nothing, A, F[A]]): Compiler[F[A]] =
+    new Compiler[F[A]] {
+      def fold(i: Int, nodes: NodeList, out: mutable.Builder[A, F[A]]): DecodeResult[F[A]] = {
+        if(i < nodes.getLength) {
+          da.decode(nodes.item(i)) match {
+            case Result.Success(a) ⇒
+              out += a
+              fold(i + 1, nodes, out)
+            case f@Result.Failure(_) ⇒ f
+          }
+        }
+        else DecodeResult.success(out.result())
+
+      }
+
+      override def compile(str: String) =
+        xpath.compile(str).map(expr ⇒ new Expression[DecodeResult[F[A]]] {
+          override def apply(n: Node) = fold(0, expr.evaluate(n, XPathConstants.NODESET).asInstanceOf[NodeList], cbf())
+        })
     }
-
-    override def first(n: Node) = decode(expr.evaluate(n, XPathConstants.NODE).asInstanceOf[Node])
-
-    override def map[B](f: A ⇒ B) = copy(decode = decode andThen f)
-  }
-
-  implicit val defaultXPath = XPathFactory.newInstance().newXPath()
-
-  implicit def xpath(implicit factory: XPath): Compiler = new Compiler {
-    override def compile[A](str: String)(implicit da: NodeDecoder[A]) =
-      Try(XPathImpl(factory.compile(str), da.decode)).toOption
-  }
 }

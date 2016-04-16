@@ -16,7 +16,20 @@
 
 package kantan.xpath
 
-sealed abstract class ReadError extends Product with Serializable
+sealed abstract class XPathError extends Product with Serializable
+
+final case class CompileError(cause: Throwable) extends XPathError {
+  override def toString: String = s"CompileError(${cause.getMessage})"
+
+  override def equals(obj: Any) = obj match {
+    case CompileError(cause2) ⇒ cause.getClass == cause2.getClass
+    case _                 ⇒ false
+  }
+
+  override def hashCode(): Int = cause.hashCode()
+}
+
+sealed abstract class ReadError extends XPathError
 
 sealed abstract class DecodeError extends ReadError
 

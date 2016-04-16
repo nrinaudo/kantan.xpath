@@ -16,19 +16,20 @@
 
 package kantan.xpath
 
-object ops {
-  implicit class XmlSourceOps[A](val a: A) extends AnyVal {
-    def asNode(implicit source: XmlSource[A]): ParseResult = source.asNode(a)
+import javax.xml.xpath.{XPathExpression, XPathFactory}
+import kantan.codecs.Result
 
-    def evaluate[B: Compiler](expr: String)(implicit source: XmlSource[A]): XPathResult[B] =
-      source.evaluate(a, expr)
+trait XPathCompiler {
+  def compile(str: String): XPathResult[XPathExpression]
+}
 
-    def evaluate[B](expr: Expression[DecodeResult[B]])(implicit source: XmlSource[A]): ReadResult[B] =
-      source.evaluate(a, expr)
+object XPathCompiler {
+  def apply(f: String ⇒ XPathResult[XPathExpression]): XPathCompiler = new XPathCompiler {
+    override def compile(str: String) = f(str)
   }
 
-  implicit class StringOps(val str: String) extends AnyVal {
-    def xpath[A](implicit comp: Compiler[A]): Expression[DecodeResult[A]] =
-      comp.compile(str).getOrElse(sys.error(s"Not a valid XPath expression: '$str'."))
+  implicit val builtInt: XPathCompiler = {
+    val xpath = XPathFactory.newInstance().newXPath()
+    XPathCompiler(str ⇒ Result.nonFatal(xpath.compile(str)).leftMap(CompileError.apply))
   }
 }

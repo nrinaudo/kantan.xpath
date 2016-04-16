@@ -16,14 +16,13 @@
 
 package kantan.xpath
 
-import scala.collection.generic.CanBuildFrom
+trait Expression[A] extends (Node ⇒ A) { self ⇒
+  def apply(n: Node): A
+  def map[B](f: A ⇒ B): Expression[B] = new Expression[B] {
+    override def apply(n: Node) = f(self(n))
+  }
+}
 
-trait Expression[A] {
-  def all[F[_]](n: Node)(implicit cbf: CanBuildFrom[Nothing, A, F[A]]): F[A]
-  def first(n: Node): A
-
-  def liftAll[F[_]](implicit cbf: CanBuildFrom[Nothing, A, F[A]]): Node ⇒ F[A] = (n: Node) ⇒ all(n)
-  def liftFirst: Node ⇒ A = (n: Node) ⇒ first(n)
-
-  def map[B](f: A ⇒ B): Expression[B]
+object Expression {
+  def apply[A](str: String)(implicit cmp: Compiler[A]): XPathResult[Expression[DecodeResult[A]]] = cmp.compile(str)
 }

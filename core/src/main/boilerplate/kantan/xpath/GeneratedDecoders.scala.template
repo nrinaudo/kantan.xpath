@@ -1,15 +1,26 @@
 package kantan.xpath
 
 trait GeneratedDecoders {
-  [#def decoder1[[#I1#], O](f: ([#I1#]) ⇒ O)([#x1: Expression#])(implicit [#e1: Evaluator[I1]#]): NodeDecoder[O] = NodeDecoder { n ⇒
+  [#def decoder1[[#I1#], O]([#x1: Expression[DecodeResult[I1]]#])(f: ([#I1#]) ⇒ O): NodeDecoder[O] = NodeDecoder { n ⇒
       for {
-        [#i1 ← e1.evaluate(x1, n)#
+        [#i1 ← x1(n)#
         ]
       } yield f([#i1#])
     }#
   ]
 
-  [#def tuple1[[#I1: Evaluator#]]([#x1: Expression#]): NodeDecoder[Tuple1[[#I1#]]] =
-    decoder1(([#i1: I1#]) ⇒ Tuple1([#i1#]))([#x1#])#
+  [#def decoder1[[#I1#], O]([#x1: String#])(f: ([#I1#]) ⇒ O)(implicit [#c1: Compiler[I1]#]): NodeDecoder[O] =
+    decoder1([#c1.compile(x1).get#])(f)#
+
+  ]
+
+  [#def tuple1[[#I1#]]([#x1: Expression[DecodeResult[I1]]#]): NodeDecoder[Tuple1[[#I1#]]] =
+    decoder1([#x1#])(([#i1: I1#]) ⇒ Tuple1([#i1#]))#
+
+  ]
+
+  [#def tuple1[[#I1#]]([#x1: String#])(implicit [#c1: Compiler[I1]#]): NodeDecoder[Tuple1[[#I1#]]] =
+    tuple1([#c1.compile(x1).get#])#
+
   ]
 }

@@ -33,7 +33,7 @@ trait XmlParser {
 
 /** Declares the default [[XmlParser]] instance in the implicit scope. */
 object XmlParser {
-  /** Helper creation method, turns the specified function into an `Xmlparser`. */
+  /** Helper creation method, turns the specified function into an `XmlParser`. */
   def apply(f: InputSource ⇒ ParseResult): XmlParser = new XmlParser {
     override def parse(source: InputSource) = f(source)
   }

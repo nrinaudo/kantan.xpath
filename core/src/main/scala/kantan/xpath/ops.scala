@@ -19,12 +19,17 @@ package kantan.xpath
 object ops {
   implicit class XmlSourceOps[A](val a: A) extends AnyVal {
     def asNode(implicit source: XmlSource[A]): ParseResult = source.asNode(a)
+    def asUnsafeNode(implicit source: XmlSource[A]): Node = source.asUnsafeNode(a)
 
-    def evaluate[B: Compiler](expr: String)(implicit source: XmlSource[A]): XPathResult[B] =
-      source.evaluate(a, expr)
+    def unsafeEvalXPath[B: Compiler](expr: String)(implicit source: XmlSource[A]): B = evalXPath(expr).get
 
-    def evaluate[B](expr: Expression[DecodeResult[B]])(implicit source: XmlSource[A]): ReadResult[B] =
-      source.evaluate(a, expr)
+    def evalXPath[B: Compiler](expr: String)(implicit source: XmlSource[A]): XPathResult[B] =
+      source.eval(a, expr)
+
+    def unsafeEvalXPath[B](expr: Expression[DecodeResult[B]])(implicit source: XmlSource[A]): B = evalXPath(expr).get
+
+    def evalXPath[B](expr: Expression[DecodeResult[B]])(implicit source: XmlSource[A]): ReadResult[B] =
+      source.eval(a, expr)
   }
 
   implicit class StringOps(val str: String) extends AnyVal {

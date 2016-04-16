@@ -24,10 +24,17 @@ import scala.io.Codec
 trait XmlSource[-A] extends Serializable { self ⇒
   def asNode(a: A): ParseResult
 
-  def evaluate[B](a: A, expr: String)(implicit cmp: Compiler[B]): XPathResult[B] =
-    cmp.compile(expr).flatMap(e ⇒ evaluate(a, e))
+  def asUnsafeNode(a: A): Node = asNode(a).get
 
-  def evaluate[B](a: A, expr: Expression[DecodeResult[B]]): ReadResult[B] = for {
+  def unsafeEval[B](a: A, expr: String)(implicit cmp: Compiler[B]): B =
+    eval(a, expr).get
+
+  def eval[B](a: A, expr: String)(implicit cmp: Compiler[B]): XPathResult[B] =
+    cmp.compile(expr).flatMap(e ⇒ eval(a, e))
+
+  def unsafeEval[B](a: A, expr: Expression[DecodeResult[B]]): B = eval(a, expr).get
+
+  def eval[B](a: A, expr: Expression[DecodeResult[B]]): ReadResult[B] = for {
     node ← asNode(a)
     b    ← expr(node)
   } yield b

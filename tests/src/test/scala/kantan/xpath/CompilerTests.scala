@@ -16,8 +16,8 @@
 
 package kantan.xpath
 
-import _root_.cats.std.list._
 import _root_.cats.Traverse.ops._
+import _root_.cats.std.list._
 import cats._
 import kantan.codecs.laws.CodecValue
 import kantan.xpath.laws.discipline.arbitrary._
@@ -28,7 +28,7 @@ import org.scalatest.prop.GeneratorDrivenPropertyChecks
 // TODO: these tests rely on CodeValue serializing values to a node named 'element'. This is fragile.
 // TODO: Arbitrary[List[CodecValue[Node, A]]] never ends up generating lists of legal values only, which sorts of
 //       defeats the purpose.
-class ExpressionDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks {
+class CompilerTests extends FunSuite with GeneratorDrivenPropertyChecks {
   type Value[A] = CodecValue[Node, A]
 
   def encodeAll[A](bs: List[Value[A]]): Element = {
@@ -41,44 +41,22 @@ class ExpressionDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks
     n.getFirstChild.asInstanceOf[Element]
   }
 
-  test("decodeFirst should fail on illegal values and succeed on legal ones") {
+  test("'first' expressions should fail on illegal values and succeed on legal ones") {
     forAll { value: Value[Int] ⇒
-      assert("//element".xpath.first[Int](value.encoded) == NodeDecoder[Int].decode(value.encoded))
+      assert(value.encoded.evalXPath[Int]("//element") == NodeDecoder[Int].decode(value.encoded))
     }
   }
 
-  test("decodeAll should fail on lists containing at least one illegal value and succeed on others") {
+  test("'all' expressions should fail on lists containing at least one illegal value and succeed on others") {
     forAll { values: List[Value[Int]] ⇒
-      assert("//element".xpath.all[List, Int](encodeAll(values)) ==
+      assert(encodeAll(values).evalXPath[List[Int]]("//element") ==
              values.map(v ⇒ NodeDecoder[Int].decode(v.encoded)).sequenceU)
     }
   }
 
-  test("decodeEvery should always succeed, with failures for individual illegal nodes") {
-    forAll { values: List[Value[Int]] ⇒
-      assert("//element".xpath.every[List, Int](encodeAll(values)) ==
-             values.map(v ⇒ NodeDecoder[Int].decode(v.encoded)))
-    }
-  }
-
-  test("liftFirst should fail on illegal values and succeed on legal ones") {
-    forAll { value: Value[Int] ⇒
-      val f ="//element".xpath.liftFirst[Int]
-      assert(f(value.encoded) == NodeDecoder[Int].decode(value.encoded))
-    }
-  }
-
-  test("liftAll should fail on lists containing at least one illegal value and succeed on others") {
-    forAll { values: List[Value[Int]] ⇒
-      val f ="//element".xpath.liftAll[List, Int]
-      assert(f(encodeAll(values)) == values.map(v ⇒ NodeDecoder[Int].decode(v.encoded)).sequenceU)
-    }
-  }
-
-  test("liftEvery should fail on illegal values and succeed on legal ones") {
-    forAll { values: List[Value[Int]] ⇒
-      val f ="//element".xpath.liftEvery[List, Int]
-      assert(f(encodeAll(values)) == values.map(v ⇒ NodeDecoder[Int].decode(v.encoded)))
-    }
+  test("Illegal expressions should fail to compile") {
+    assert(Expression[Int]("/@!@#-").isFailure)
+    intercept[Exception] {"/@!@#-".xpath[Int]}
+    ()
   }
 }

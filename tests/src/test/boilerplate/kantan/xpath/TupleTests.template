@@ -8,7 +8,11 @@ import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline
 
 class TupleTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
-  [#implicit val decoder1: NodeDecoder[Tuple1[[#Int#]]] = NodeDecoder.tuple1([#"@field1".xpath[Int]#])
+  [#implicit val intDecoder1: NodeDecoder[Tuple1[[#Int#]]] = NodeDecoder.tuple1([#"@field1".xpath[Int]#])
   checkAll("NodeDecoder[Tuple1[[#Int#]]]", NodeDecoderTests[Tuple1[[#Int#]]].decoder[Int, Int])#
+  ]
+
+  [#implicit val floatDecoder1: NodeDecoder[Tuple1[[#Float#]]] = NodeDecoder.tuple1([#"@field1"#])
+  checkAll("NodeDecoder[Tuple1[[#Float#]]]", NodeDecoderTests[Tuple1[[#Float#]]].decoder[Int, Int])#
   ]
 }

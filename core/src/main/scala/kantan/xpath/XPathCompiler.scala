@@ -20,11 +20,11 @@ import javax.xml.xpath.{XPathExpression, XPathFactory}
 import kantan.codecs.Result
 
 trait XPathCompiler {
-  def compile(str: String): XPathResult[XPathExpression]
+  def compile(str: String): CompileResult[XPathExpression]
 }
 
 object XPathCompiler {
-  def apply(f: String ⇒ XPathResult[XPathExpression]): XPathCompiler = new XPathCompiler {
+  def apply(f: String ⇒ CompileResult[XPathExpression]): XPathCompiler = new XPathCompiler {
     override def compile(str: String) = f(str)
   }
 

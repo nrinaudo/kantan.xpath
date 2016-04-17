@@ -21,8 +21,9 @@ import kantan.codecs.Result
 import scala.collection.generic.CanBuildFrom
 import scala.collection.mutable
 
+
 trait Compiler[A] {
-  def compile(str: String): XPathResult[Expression[DecodeResult[A]]]
+  def compile(str: String): CompileResult[Expression[DecodeResult[A]]]
 }
 
 object Compiler {

@@ -17,11 +17,11 @@
 package kantan.xpath.laws.discipline
 
 import kantan.codecs.Result
-import kantan.codecs.laws.CodecValue.{IllegalValue, LegalValue}
 import kantan.codecs.laws._
+import kantan.codecs.laws.CodecValue.{IllegalValue, LegalValue}
 import kantan.xpath._
 import kantan.xpath.ops._
-import org.scalacheck.{Arbitrary, Gen}
+import org.scalacheck._
 import org.scalacheck.Arbitrary.{arbitrary => arb}
 import org.scalacheck.Gen._
 

@@ -17,10 +17,11 @@
 package kantan.xpath.laws.discipline
 
 import kantan.codecs.Result
+import kantan.codecs.laws.CodecValue.{IllegalValue, LegalValue}
 import kantan.codecs.laws._
 import kantan.xpath._
 import kantan.xpath.ops._
-import org.scalacheck.Arbitrary
+import org.scalacheck.{Arbitrary, Gen}
 import org.scalacheck.Arbitrary.{arbitrary => arb}
 import org.scalacheck.Gen._
 
@@ -55,6 +56,18 @@ trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstance
     n.setTextContent(value)
     n
   }
+
+  implicit val arbLegalXml: Arbitrary[LegalValue[String, Node]] = Arbitrary(for {
+    element ← Gen.identifier
+    content ← Gen.identifier
+  } yield {
+    val n = s"<$element>$content</$element>"
+    LegalValue(n, n.asUnsafeNode)
+  })
+
+  implicit val arbIllegalXml: Arbitrary[IllegalValue[String, Node]] =
+    Arbitrary(Gen.alphaStr.suchThat(_.asNode.isFailure).map(IllegalValue.apply))
+
 
   implicit def arbLegalNode[A](implicit la: Arbitrary[LegalString[A]]): Arbitrary[LegalNode[A]] =
     Arbitrary(la.arbitrary.map(_.mapEncoded(asCDataNode)))

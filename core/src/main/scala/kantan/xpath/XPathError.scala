@@ -65,7 +65,7 @@ object ParseError {
 
     override def equals(obj: Any) = obj match {
       case IOError(cause2) ⇒ cause.getClass == cause2.getClass
-      case _                   ⇒ false
+      case _               ⇒ false
     }
 
     override def hashCode(): Int = cause.hashCode()

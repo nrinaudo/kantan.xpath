@@ -20,18 +20,17 @@ import _root_.scalaz._
 import kantan.codecs.scalaz.ScalazInstances
 
 package object scalaz extends ScalazInstances {
-  implicit val readErrorEqual = new Equal[ReadError] {
-    override def equal(a1: ReadError, a2: ReadError) = a1 == a2
-  }
+  // - Equal instances for errors --------------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------------------------------------------
+  implicit val compileErrorEq: Equal[CompileError] = Equal.equalA[CompileError]
+  implicit val readErrorEq: Equal[ReadError] = Equal.equalA[ReadError]
+  implicit val decodeErrorEq: Equal[DecodeError] = Equal.equalA[DecodeError]
+  implicit val parseErrorEq: Equal[ParseError] = Equal.equalA[ParseError]
 
-  implicit val decodeErrorEqual = new Equal[DecodeError] {
-    override def equal(x: DecodeError, y: DecodeError) = x == y
-  }
 
-  implicit val loadingErrorEqual = new Equal[ParseError] {
-    override def equal(x: ParseError, y: ParseError) = x == y
-  }
 
+  // - Misc. instances -------------------------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------------------------------------------
   /** `Contravariant` instance for `XmlSource`. */
   implicit val xmlSource = new Contravariant[XmlSource] {
     override def contramap[A, B](fa: XmlSource[A])(f: B ⇒ A) = fa.contramap(f)

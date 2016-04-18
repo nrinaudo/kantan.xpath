@@ -21,13 +21,17 @@ import _root_.cats.functor.Contravariant
 import kantan.codecs.cats.CatsInstances
 
 package object cats extends CatsInstances {
+  // - Eq instances for errors -----------------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------------------------------------------
+  implicit val compileErrorEq: Eq[CompileError] = Eq.fromUniversalEquals[CompileError]
   implicit val readErrorEq: Eq[ReadError] = Eq.fromUniversalEquals[ReadError]
-
   implicit val decodeErrorEq: Eq[DecodeError] = Eq.fromUniversalEquals[DecodeError]
-
   implicit val parseErrorEq: Eq[ParseError] = Eq.fromUniversalEquals[ParseError]
 
 
+
+  // - Misc. instances -------------------------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------------------------------------------
   /** `Contravariant` instance for `XmlSource`. */
   implicit val xmlSource = new Contravariant[XmlSource] {
     override def contramap[A, B](fa: XmlSource[A])(f: B ⇒ A) = fa.contramap(f)

@@ -35,10 +35,10 @@ rawData.evalXPath[Int]("//element/@id")
 
 
 There are a few things worth pointing out here. First, the return type: you might expect an `Int`, since this is what
-you requested from [`evalXPath`], but we got an [`XPathResult`] instead. An [`XPathResult`] is either a failure if
-something went wrong (the XPath expression is not valid, the `id` field is not a valid `Int`....) or a success
-otherwise. This mechanism ensures that [`evalXPath`] is safe: no exception will be thrown and break the flow of your
-code.
+you requested from [`evalXPath`], but we got an [`XPathResult[Int]`][`XPathResult`] instead. An [`XPathResult`] is 
+either a failure if something went wrong (the XPath expression is not valid, the `id` field is not a valid `Int`....) or
+a success otherwise. This mechanism ensures that [`evalXPath`] is safe: no exception will be thrown and break the flow 
+of your code.
 
 In some cases, however, we don't really care for runtime safety and are fine with our program crashing at the first
 error. This is what the [`unsafeEvalXPath`] method was designed for:  
@@ -58,8 +58,8 @@ type, we told kantan.xpath that we only wanted the first result. We could get th
 rawData.evalXPath[List[Int]]("//element/@id")
 ```
 
-Any type constructor that has a [`CanBuildFrom`] instance could have been used instead of [`List`]. By the same token,
-any primitive time could have been used instead of `Int`. For example:
+Any type constructor that has a [`CanBuildFrom`] instance could have been used instead of [`List`] - that's essentially
+all collections. By the same token, any primitive time could have been used instead of `Int`. For example:
 
 ```tut
 rawData.evalXPath[Vector[Boolean]]("//element/@enabled")

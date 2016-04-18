@@ -44,7 +44,7 @@ trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstance
   // -------------------------------------------------------------------------------------------------------------------
   implicit def arbDecodeResult[A: Arbitrary]: Arbitrary[DecodeResult[A]] =
     Arbitrary(oneOf(arb[Result.Failure[DecodeError]], arb[Result.Success[A]]))
-  implicit def arbXPathResult[A: Arbitrary]: Arbitrary[ReadResult[A]] =
+  implicit def arbReadResult[A: Arbitrary]: Arbitrary[ReadResult[A]] =
     Arbitrary(oneOf(arb[Result.Failure[ReadError]], arb[Result.Success[A]]))
 
 

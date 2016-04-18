@@ -21,18 +21,12 @@ import _root_.cats.functor.Contravariant
 import kantan.codecs.cats.CatsInstances
 
 package object cats extends CatsInstances {
-  /** `Eq` instance for errors. */
-  implicit val readErrorEq = new Eq[ReadError] {
-    override def eqv(x: ReadError, y: ReadError) = x == y
-  }
+  implicit val readErrorEq: Eq[ReadError] = Eq.fromUniversalEquals[ReadError]
 
-  implicit val decodeErrorEq = new Eq[DecodeError] {
-    override def eqv(x: DecodeError, y: DecodeError) = x == y
-  }
+  implicit val decodeErrorEq: Eq[DecodeError] = Eq.fromUniversalEquals[DecodeError]
 
-  implicit val parseErrorEq = new Eq[ParseError] {
-    override def eqv(x: ParseError, y: ParseError) = x == y
-  }
+  implicit val parseErrorEq: Eq[ParseError] = Eq.fromUniversalEquals[ParseError]
+
 
   /** `Contravariant` instance for `XmlSource`. */
   implicit val xmlSource = new Contravariant[XmlSource] {

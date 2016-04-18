@@ -38,4 +38,8 @@ object ops {
     def xpath[A](implicit comp: Compiler[A]): Expression[DecodeResult[A]] =
       comp.compile(str).getOrElse(sys.error(s"Not a valid XPath expression: '$str'."))
   }
+
+  implicit class ExpressionOps[A](val expr: Expression[DecodeResult[A]]) extends AnyVal {
+    def mapResult[B](f: A ⇒ B): Expression[DecodeResult[B]] = expr.map(_.map(f))
+  }
 }

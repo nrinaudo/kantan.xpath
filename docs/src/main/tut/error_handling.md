@@ -2,6 +2,6 @@
 layout: tutorial
 title: "Error handling"
 section: tutorial
-sort: 5
+sort: 7
 status: wip
 ---

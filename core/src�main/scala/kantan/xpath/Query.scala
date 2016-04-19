@@ -16,13 +16,15 @@
 
 package kantan.xpath
 
-trait Expression[A] extends (Node ⇒ A) { self ⇒
+trait Query[A] extends (Node ⇒ A) { self ⇒
   def apply(n: Node): A
-  def map[B](f: A ⇒ B): Expression[B] = new Expression[B] {
+  def map[B](f: A ⇒ B): Query[B] = new Query[B] {
     override def apply(n: Node) = f(self(n))
   }
 }
 
-object Expression {
-  def apply[A](str: String)(implicit cmp: Compiler[A]): XPathResult[Expression[DecodeResult[A]]] = cmp.compile(str)
+object Query {
+  def apply[A](str: String)(implicit cmp: Compiler[A]): XPathResult[Query[DecodeResult[A]]] = cmp.compile(str)
+  def unsafe[A](str: String)(implicit cmp: Compiler[A]): Query[DecodeResult[A]] =
+    Query(str).getOrElse(sys.error(s"Not a valid XPath expression: '$str'."))
 }

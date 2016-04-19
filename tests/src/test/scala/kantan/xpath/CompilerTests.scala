@@ -62,7 +62,7 @@ class CompilerTests extends FunSuite with GeneratorDrivenPropertyChecks {
   }
 
   test("Illegal expressions should fail to compile") {
-    assert(Expression[Int]("/@!@#-").isFailure)
+    assert(Query[Int]("/@!@#-").isFailure)
     intercept[Exception] {"/@!@#-".xpath[Int]}
     ()
   }

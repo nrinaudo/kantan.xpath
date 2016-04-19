@@ -1,7 +1,7 @@
 package kantan.xpath
 
 trait GeneratedDecoders {
-  [#def decoder[[#I1#], O]([#x1: Expression[DecodeResult[I1]]#])(f: ([#I1#]) ⇒ O): NodeDecoder[O] = NodeDecoder { n ⇒
+  [#def decoder[[#I1#], O]([#x1: Query[DecodeResult[I1]]#])(f: ([#I1#]) ⇒ O): NodeDecoder[O] = NodeDecoder { n ⇒
       for {
         [#i1 ← x1(n)#
         ]
@@ -17,7 +17,7 @@ trait GeneratedDecoders {
 
   ]
 
-  [#def tuple[[#I1#]]([#x1: Expression[DecodeResult[I1]]#]): NodeDecoder[Tuple1[[#I1#]]] =
+  [#def tuple[[#I1#]]([#x1: Query[DecodeResult[I1]]#]): NodeDecoder[Tuple1[[#I1#]]] =
     decoder([#x1#])(Tuple1.apply)#
 
   ]

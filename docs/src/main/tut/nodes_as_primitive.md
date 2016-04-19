@@ -8,7 +8,6 @@ The simplest possible use of kantan.xpath is to extract primitive types from XML
 
 In order to show how that works, we'll first need some sample XML data, which we'll get from this project's resources:
 
-
 ```tut:silent
 val rawData: java.net.URL = getClass.getResource("/simple.xml")
 ```

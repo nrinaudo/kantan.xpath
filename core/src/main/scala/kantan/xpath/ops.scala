@@ -17,13 +17,25 @@
 package kantan.xpath
 
 object ops {
-  /** Provides syntax for all types that have an implicit instance of [[XmlSource]] in scope. */
+  /** Provides syntax for all types that have an implicit instance of [[XmlSource]] in scope.
+    *
+    * The most common use case is to evaluate an XPath expression directly on a value:
+    * {{{
+    * val f: java.io.File = ???
+    * f.evalXPath[List[java.net.URI]]("//a/@href")
+    * }}}
+    */
   implicit class XmlSourceOps[A](val a: A) extends AnyVal {
+    /** Shorthand for [[XmlSource.asNode]]. */
     def asNode(implicit source: XmlSource[A]): ParseResult = source.asNode(a)
+
+    /** Shorthand for [[XmlSource.asUnsafeNode]]. */
     def asUnsafeNode(implicit source: XmlSource[A]): Node = source.asUnsafeNode(a)
 
+    /** Shorthand for [[XmlSource.unsafeEval[B](a:A,expr:String)*]]. */
     def unsafeEvalXPath[B: Compiler](expr: String)(implicit source: XmlSource[A]): B = source.unsafeEval(a, expr)
 
+    /** Shorthand for [[XmlSource.eval[B](a:A,expr:String)*]]. */
     def evalXPath[B: Compiler](expr: String)(implicit source: XmlSource[A]): XPathResult[B] =
       source.eval(a, expr)
 

@@ -39,19 +39,19 @@ object ops {
     def evalXPath[B: Compiler](expr: String)(implicit source: XmlSource[A]): XPathResult[B] =
       source.eval(a, expr)
 
-    def unsafeEvalXPath[B](expr: Expression[DecodeResult[B]])(implicit source: XmlSource[A]): B =
+    def unsafeEvalXPath[B](expr: Query[DecodeResult[B]])(implicit source: XmlSource[A]): B =
       source.unsafeEval(a, expr)
 
-    def evalXPath[B](expr: Expression[DecodeResult[B]])(implicit source: XmlSource[A]): ReadResult[B] =
+    def evalXPath[B](expr: Query[DecodeResult[B]])(implicit source: XmlSource[A]): ReadResult[B] =
       source.eval(a, expr)
   }
 
   implicit class StringOps(val str: String) extends AnyVal {
-    def xpath[A](implicit comp: Compiler[A]): Expression[DecodeResult[A]] =
-      comp.compile(str).getOrElse(sys.error(s"Not a valid XPath expression: '$str'."))
+    def xpath[A](implicit comp: Compiler[A]): Query[DecodeResult[A]] =
+      Query.unsafe(str)
   }
 
-  implicit class ExpressionOps[A](val expr: Expression[DecodeResult[A]]) extends AnyVal {
-    def mapResult[B](f: A ⇒ B): Expression[DecodeResult[B]] = expr.map(_.map(f))
+  implicit class ExpressionOps[A](val expr: Query[DecodeResult[A]]) extends AnyVal {
+    def mapResult[B](f: A ⇒ B): Query[DecodeResult[B]] = expr.map(_.map(f))
   }
 }

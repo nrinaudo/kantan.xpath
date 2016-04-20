@@ -24,6 +24,7 @@ package object nekohtml {
     // Sane default configuration
     val conf = new HTMLConfiguration
     conf.setProperty("http://cyberneko.org/html/properties/names/elems", "lower")
+    conf.setFeature("http://xml.org/sax/features/namespaces", false)
 
     val parser = new DOMParser(conf)
     ParseResult {

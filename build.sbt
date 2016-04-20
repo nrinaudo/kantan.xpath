@@ -120,7 +120,10 @@ lazy val nekohtml = project
     moduleName := "kantan.xpath-nekohtml",
     name       := "nekohtml"
   )
-  .settings(libraryDependencies += "net.sourceforge.nekohtml" % "nekohtml" % nekoHtmlVersion)
+  .settings(libraryDependencies ++= Seq(
+    "net.sourceforge.nekohtml" %  "nekohtml"  % nekoHtmlVersion,
+    "org.scalatest"            %% "scalatest" % scalatestVersion    % "test"
+  ))
   .settings(allSettings: _*)
   .dependsOn(core)
   .enablePlugins(AutomateHeaderPlugin)

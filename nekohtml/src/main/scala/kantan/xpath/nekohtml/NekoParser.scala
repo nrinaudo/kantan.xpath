@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package kantan.xpath
+package kantan.xpath.nekohtml
 
+import kantan.xpath.{InputSource, ParseResult, XmlParser}
+import org.apache.xerces.parsers.DOMParser
 import org.cyberneko.html.HTMLConfiguration
 
-package object nekohtml {
-  def defaultConfiguration: HTMLConfiguration = {
-    val conf = new HTMLConfiguration
+class NekoParser(val conf: HTMLConfiguration) extends XmlParser {
+    override def parse(source: InputSource): ParseResult = {
+      val parser = new DOMParser(conf)
 
-    conf.setProperty("http://cyberneko.org/html/properties/names/elems", "lower")
-    conf.setFeature("http://xml.org/sax/features/namespaces", false)
-
-    conf
-  }
-
-  implicit val defaultParser: XmlParser = new NekoParser(defaultConfiguration)
+      ParseResult {
+        parser.parse(source)
+        parser.getDocument
+      }
+    }
 }

@@ -16,15 +16,31 @@
 
 package kantan.xpath
 
+/** Compiled XPath expression.
+  *
+  * Instance creation is achieved through the [[Query$ companion object]].
+  */
 trait Query[A] extends (Node ⇒ A) { self ⇒
-  def apply(n: Node): A
+  /** Turns this instance into a `Query[B]`. */
   def map[B](f: A ⇒ B): Query[B] = new Query[B] {
     override def apply(n: Node) = f(self(n))
   }
 }
 
+/** Provides convenient methods for XPath expression compilation.
+  *
+  * Actual compilation is done through instances of [[Compiler]]. Methods declared here will simply summon the right
+  * implicit value.
+  */
 object Query {
+  /** Compiles the specified XPath expression. */
   def compile[A](str: String)(implicit cmp: Compiler[A]): XPathResult[Query[DecodeResult[A]]] = cmp.compile(str)
+
+  /** Compiles the specified XPath expression.
+    *
+    * Note that this method is unsafe - if the specified XPath expression is not valid, an exception will be thrown.
+    * [[compile]] should almost always be preferred.
+    */
   def unsafeCompile[A](str: String)(implicit cmp: Compiler[A]): Query[DecodeResult[A]] =
     Query.compile(str).getOrElse(sys.error(s"Not a valid XPath expression: '$str'."))
 }

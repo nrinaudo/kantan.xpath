@@ -21,13 +21,17 @@ import kantan.codecs.Result
 import scala.collection.generic.CanBuildFrom
 import scala.collection.mutable
 
+/** Compiles XPath expression. */
 trait Compiler[A] {
+  /** Turns the specified XPath expression into a valid [[Query]]. */
   def compile(str: String): CompileResult[Query[DecodeResult[A]]]
 }
 
 object Compiler {
+  /** Type level trickery, this lets us makes the difference between types and type constructors. */
   type Id[A] = A
 
+  /** Compiles XPath expressions into [[Query]] instances that will only retrieve the first match. */
   implicit def xpath1[A](implicit xpath: XPathCompiler, da: NodeDecoder[A]): Compiler[Id[A]] = new Compiler[Id[A]] {
     override def compile(str: String) =
       xpath.compile(str).map(expr ⇒ new Query[DecodeResult[A]] {
@@ -39,6 +43,7 @@ object Compiler {
       })
   }
 
+  /** Compiles XPath expressions into [[Query]] instances that retrieve very match. */
   implicit def xpathN[F[_], A]
   (implicit xpath: XPathCompiler, da: NodeDecoder[A], cbf: CanBuildFrom[Nothing, A, F[A]]): Compiler[F[A]] =
     new Compiler[F[A]] {

@@ -33,7 +33,7 @@ val query = Query.compile[List[Int]]("//element/@id").get
 ```
 
 Note that we called [`get`] on the return value: compiling an XPath expression might fail if the expression is invalid,
-and [`Query.compile`] wraps its return value in a [`CompileResult`]. It's usually better to deal with errors rather than
+and [`compile`] wraps its return value in a [`CompileResult`]. It's usually better to deal with errors rather than
 let them turn into runtime exceptions, but if you don't mind them, you can also use the [`xpath`] method that enriches
 strings:
 

@@ -36,7 +36,7 @@ date / time API.
 Instead of providing a default implementation that is likely going to be incorrect for most people, kantan.xpath expects 
 an implicit [`DateFormat`] instance in scope, and will decode using that format.
 
-We could for example declare a formatter for something ISO8601-like:
+We could for example declare a formatter for something ISO 8601-like:
 
 ```tut:silent
 import kantan.xpath.ops._
@@ -50,6 +50,8 @@ And we're now capable of decoding XML content as dates:
 ```tut
 "<date>2000-01-00T00:00:00.000</date>".evalXPath[Date]("/date")
 ```
+
+Note that kantan.xpath has a joda-time module, a very well thought out alternative to `java.util.Date`. 
 
 ### `Either`
 

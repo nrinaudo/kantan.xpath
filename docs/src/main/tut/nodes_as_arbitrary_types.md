@@ -6,8 +6,8 @@ sort: 4
 ---
 We've seen in a previous tutorial how to extract [primitive types](nodes_as_primitive.html),
 [tuples](nodes_as_tuples.html) and [case classes](nodes_as_case_classes.html) from XML documents. Sometimes however,
-none of these fit your requirements. kantan.xpath provides support for extracting arbitrary types, which works almost
-exactly like case classes do.
+none of these fit our requirements. kantan.xpath provides support for extracting arbitrary types, which works almost
+exactly the same as case classes.
 
 In order to show how that works, we'll first need some sample XML data, which we'll get from this project's resources:
 
@@ -30,8 +30,8 @@ class El(val id: Int, val enabled: Boolean) {
 ```
 
 This is done as usual, by declaring an  implicit [`NodeDecoder[El]`][`NodeDecoder`] value. We'll be using the same
-[`decoder`] method as for case classes, but we don't have a convenient, pre-existing instance creation function to
-provide as a parameter and will need to write it ourselves:
+[`decoder`] method as for [case classes](nodes_as_case_classes.html), but we don't have a convenient, pre-existing 
+instance creation function to provide as a parameter and will need to write it ourselves:
 
 ```tut:silent
 import kantan.xpath._

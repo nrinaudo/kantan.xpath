@@ -46,7 +46,9 @@ object ops {
       source.eval(a, expr)
   }
 
+  /** Enriches strings with an [[xpath]] method that attempts to compile them as an XPath expression. */
   implicit class StringOps(val str: String) extends AnyVal {
+    /** Attempts to compile the string as an XPath expression. */
     def xpath[A](implicit comp: Compiler[A]): Query[DecodeResult[A]] =
       Query.unsafeCompile(str)
   }

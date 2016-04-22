@@ -37,18 +37,14 @@ trait XmlSource[-A] extends Serializable { self ⇒
     */
   def asNode(a: A): ParseResult[Node]
 
-  /** Turns the sppecified value into a [[Node]].
+  /** Turns the specified value into a [[Node]].
     *
     * This method is unsafe - it will throw an exception should any error occur during parsing. For a safe alternative,
     * see [[asNode]].
     */
   def asUnsafeNode(a: A): Node = asNode(a).get
 
-  /** Compiles the specified XPath expression and evaluates it against specified value.
-    *
-    * This method is unsafe - it will throw an exception should any error occur. For a safe alternative, see
-    * [[eval[B](a:A,expr:String)*]].
-    */
+  /** Compiles the specified XPath expression and evaluates it against specified value. */
   def unsafeEval[B](a: A, expr: String)(implicit cmp: Compiler[B]): B =
     eval(a, expr).get
 
@@ -56,11 +52,7 @@ trait XmlSource[-A] extends Serializable { self ⇒
   def eval[B](a: A, expr: String)(implicit cmp: Compiler[B]): XPathResult[B] =
     cmp.compile(expr).flatMap(e ⇒ eval(a, e))
 
-  /** Evaluates the specified XPath expression against specified value.
-    *
-    * This method is unsafe - it will throw an exception should any error occur. For a safe alternative, see
-    * [[unsafeEval[B](a:A,expr:String)*]].
-    */
+  /** Evaluates the specified XPath expression against specified value. */
   def unsafeEval[B](a: A, expr: Query[DecodeResult[B]]): B = eval(a, expr).get
 
   /** Evaluates the specified XPath expression against specified value. */

@@ -20,45 +20,100 @@ import java.io._
 import java.net.{URI, URL}
 import scala.io.Codec
 
+/** Type class for turning instances of `A` into valid instances of [[Node]].
+  *
+  * While it's certainly possible, instances of [[XmlSource]] are rarely used directly. The preferred, idiomatic way
+  * is to use the implicit syntax provided by [[kantan.xpath.ops.XmlSourceOps XmlSourceOps]], brought in scope by
+  * importing `kantan.xpath.ops._`.
+  *
+  * See the [[XmlSource$ companion object]] for construction methods and default instances.
+  */
 trait XmlSource[-A] extends Serializable { self ⇒
+  /** Turns the specified value into a [[Node]].
+    *
+    * Results are wrapped in a [[ParseResult]], which makes this method safe. For an unsafe alternative, see
+    * [[asUnsafeNode]].
+    */
   def asNode(a: A): ParseResult
 
+  /** Turns the sppecified value into a [[Node]].
+    *
+    * This method is unsafe - it will throw an exception should any error occur during parsing. For a safe alternative,
+    * see [[asNode]].
+    */
   def asUnsafeNode(a: A): Node = asNode(a).get
 
+  /** Compiles the specified XPath expression and evaluates it against specified value.
+    *
+    * This method is unsafe - it will throw an exception should any error occur. For a safe alternative, see
+    * [[eval[B](a:A,expr:String)*]].
+    */
   def unsafeEval[B](a: A, expr: String)(implicit cmp: Compiler[B]): B =
     eval(a, expr).get
 
+  /** Compiles the specified XPath expression and evaluates it against the specified value. */
   def eval[B](a: A, expr: String)(implicit cmp: Compiler[B]): XPathResult[B] =
     cmp.compile(expr).flatMap(e ⇒ eval(a, e))
 
+  /** Evaluates the specified XPath expression against specified value.
+    *
+    * This method is unsafe - it will throw an exception should any error occur. For a safe alternative, see
+    * [[unsafeEval[B](a:A,expr:String)*]].
+    */
   def unsafeEval[B](a: A, expr: Query[DecodeResult[B]]): B = eval(a, expr).get
 
+  /** Evaluates the specified XPath expression against specified value. */
   def eval[B](a: A, expr: Query[DecodeResult[B]]): ReadResult[B] = for {
     node ← asNode(a)
     b    ← expr(node)
   } yield b
 
+  /** Turns an `XmlSource[A]` into an `XmlSource[B]`. */
   def contramap[B](f: B ⇒ A): XmlSource[B] = XmlSource(b ⇒ self.asNode(f(b)))
 }
 
+/** Defines convenience methods for creating and summoning [[XmlSource]] instances.
+  *
+  * Default implementation of standard types are declared here, always bringing them in scope without requirnig an
+  * explicit import.
+  *
+  * The default implementations can also be useful when writing new instances: if you need to write an `XmlSource[T]`
+  * and already have an `XmlSource[S]` and a `T ⇒ S`, you just need to call [[XmlSource.contramap]] to get your
+  * implementation.
+  */
 object XmlSource {
+  /** Summons an [[XmlSource]] instance if one can be found. */
   def apply[A](implicit s: XmlSource[A]): XmlSource[A] = s
 
+  /** Turns the specified function into a new [[XmlSource]] instance. */
   def apply[A](f: A ⇒ ParseResult): XmlSource[A] = new XmlSource[A] {
     override def asNode(a: A) = f(a)
   }
 
+  /** Turns a [[Node]] into a source of XML data. */
   implicit val node: XmlSource[Node] = XmlSource(n ⇒ ParseResult.success(n))
 
+  /** Turns an [[InputSource]] into a source of XML data. */
   implicit def inputSource(implicit parser: XmlParser): XmlSource[InputSource] =
     XmlSource(s ⇒ parser.parse(s))
 
+  /** Turns a `Reader` into a source of XML data. */
   implicit def reader(implicit parser: XmlParser): XmlSource[Reader] = inputSource.contramap(r ⇒ new InputSource(r))
+
+  /** Turns an `InputStream` into a source of XML data. */
   implicit def inputStream(implicit codec: Codec, parser: XmlParser): XmlSource[InputStream] =
     reader.contramap(i ⇒ new InputStreamReader(i, codec.charSet))
+
+  /** Turns a `File` into a source of XML data. */
   implicit def file(implicit codec: Codec, parser: XmlParser): XmlSource[File] =
     inputStream.contramap(f ⇒ new FileInputStream(f))
+
+  /** Turns a `String` into a source of XML data. */
   implicit def string(implicit parser: XmlParser): XmlSource[String] = reader.contramap(s ⇒ new StringReader(s))
+
+  /** Turns an `URL` into a source of XML data. */
   implicit def url(implicit codec: Codec, parser: XmlParser): RemoteXmlSource[URL] = RemoteXmlSource(identity)
+
+  /** Turns an `URI` into a source of XML data. */
   implicit def uri(implicit codec: Codec, parser: XmlParser): RemoteXmlSource[URI] = url.contramap(_.toURL)
 }

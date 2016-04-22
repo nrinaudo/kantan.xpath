@@ -48,7 +48,7 @@ object ops {
 
   implicit class StringOps(val str: String) extends AnyVal {
     def xpath[A](implicit comp: Compiler[A]): Query[DecodeResult[A]] =
-      Query.unsafe(str)
+      Query.unsafeCompile(str)
   }
 
   implicit class ExpressionOps[A](val expr: Query[DecodeResult[A]]) extends AnyVal {

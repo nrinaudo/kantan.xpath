@@ -5,7 +5,7 @@ section: tutorial
 sort: 6
 ---
 In the examples we've seen so far, XPath expressions were passed around as strings. This can be inefficient, since they
-must be recompiled each time they're applied to a document.
+must be recompiled each time they're evaluated against a document.
 
 When working with expressions that will need to be applied over and over, it's more efficient to compile them as
 [queries][`Query`].
@@ -23,13 +23,13 @@ scala.io.Source.fromURL(rawData).mkString
 ```
 
 We'll be trying to extract the `id` attribute of each `element` node as an `int`. Compiling the corresponding XPath
-expression is done through [`Query.apply`]:
+expression is done through [`compile`]:
 
 ```tut:silent
 import kantan.xpath._
 import kantan.xpath.ops._
 
-val query = Query[List[Int]]("//element/@id").get
+val query = Query.compile[List[Int]]("//element/@id").get
 ```
 
 Note that we called [`get`] on the return value: compiling an XPath expression might fail if the expression is invalid,
@@ -57,7 +57,7 @@ query(rawData.asUnsafeNode)
 ```
 
 [`Query`]:{{ site.baseUrl }}/api/#kantan.xpath.Query
-[`Query.apply`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.Query$@apply[A](str:String)(implicitcmp:kantan.xpath.Compiler[A]):kantan.xpath.XPathResult[kantan.xpath.Query[kantan.xpath.DecodeResult[A]]]
+[`compile`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.Query$@compile[A](str:String)(implicitcmp:kantan.xpath.Compiler[A]):kantan.xpath.XPathResult[kantan.xpath.Query[kantan.xpath.DecodeResult[A]]]
 [`get`]:https://nrinaudo.github.io/kantan.codecs/api/index.html#kantan.codecs.Result@get:S
 [`CompileResult`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.package@CompileResult[A]=kantan.codecs.Result[kantan.xpath.CompileError,A]
 [`xpath`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.ops$$StringOps@xpath[A](implicitcomp:kantan.xpath.Compiler[A]):kantan.xpath.Query[kantan.xpath.DecodeResult[A]]

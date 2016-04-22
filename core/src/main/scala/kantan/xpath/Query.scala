@@ -24,7 +24,7 @@ trait Query[A] extends (Node ⇒ A) { self ⇒
 }
 
 object Query {
-  def apply[A](str: String)(implicit cmp: Compiler[A]): XPathResult[Query[DecodeResult[A]]] = cmp.compile(str)
-  def unsafe[A](str: String)(implicit cmp: Compiler[A]): Query[DecodeResult[A]] =
-    Query(str).getOrElse(sys.error(s"Not a valid XPath expression: '$str'."))
+  def compile[A](str: String)(implicit cmp: Compiler[A]): XPathResult[Query[DecodeResult[A]]] = cmp.compile(str)
+  def unsafeCompile[A](str: String)(implicit cmp: Compiler[A]): Query[DecodeResult[A]] =
+    Query.compile(str).getOrElse(sys.error(s"Not a valid XPath expression: '$str'."))
 }

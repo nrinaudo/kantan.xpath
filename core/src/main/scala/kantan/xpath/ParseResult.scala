@@ -17,10 +17,13 @@
 package kantan.xpath
 
 import kantan.codecs.Result
+import kantan.codecs.Result.Success
 
 object ParseResult {
   def open[A](acquire: ⇒ A)(parse: A ⇒ ParseResult): ParseResult =
     Result.nonFatal(acquire).leftMap(ParseError.IOError).flatMap(parse)
+
+  def success(node: Node): ParseResult = Success(node)
 
   def apply(node: ⇒ Node): ParseResult = Result.nonFatal(node).leftMap(ParseError.SyntaxError.apply)
 }

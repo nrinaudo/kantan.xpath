@@ -70,4 +70,5 @@ package object xpath {
   type Document = org.w3c.dom.Document
   type Attr = org.w3c.dom.Attr
   type NodeList = org.w3c.dom.NodeList
+  type InputSource = org.xml.sax.InputSource
 }

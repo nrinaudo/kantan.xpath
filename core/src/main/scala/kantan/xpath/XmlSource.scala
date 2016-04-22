@@ -18,7 +18,6 @@ package kantan.xpath
 
 import java.io._
 import java.net.{URI, URL}
-import org.xml.sax.InputSource
 import scala.io.Codec
 
 trait XmlSource[-A] extends Serializable { self ⇒
@@ -43,11 +42,13 @@ trait XmlSource[-A] extends Serializable { self ⇒
 }
 
 object XmlSource {
+  def apply[A](implicit s: XmlSource[A]): XmlSource[A] = s
+
   def apply[A](f: A ⇒ ParseResult): XmlSource[A] = new XmlSource[A] {
     override def asNode(a: A) = f(a)
   }
 
-  implicit val node: XmlSource[Node] = XmlSource(n ⇒ ParseResult(n))
+  implicit val node: XmlSource[Node] = XmlSource(n ⇒ ParseResult.success(n))
 
   implicit def inputSource(implicit parser: XmlParser): XmlSource[InputSource] =
     XmlSource(s ⇒ parser.parse(s))

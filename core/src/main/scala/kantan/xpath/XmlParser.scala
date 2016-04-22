@@ -17,7 +17,6 @@
 package kantan.xpath
 
 import javax.xml.parsers.DocumentBuilderFactory
-import org.xml.sax.InputSource
 
 /** Contract for anything that knows how to parse XML.
   *

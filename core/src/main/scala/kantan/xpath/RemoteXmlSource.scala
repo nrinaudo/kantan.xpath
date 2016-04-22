@@ -17,7 +17,6 @@
 package kantan.xpath
 
 import java.net.URL
-import org.xml.sax.InputSource
 
 /** [[XmlSource]] implementation anything that can be turned into a `java.io.URL`.
   *

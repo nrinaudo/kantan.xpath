@@ -55,11 +55,11 @@ package object xpath {
     */
   type DecodeResult[A] = Result[DecodeError, A]
 
-  /** Represents the result of taking some raw data and turning it into a [[Node]].
+  /** Represents the result of taking some raw data and turning it into a usable type.
     *
     * @see kantan.codecs.Result
     */
-  type ParseResult = Result[ParseError, Node]
+  type ParseResult[A] = Result[ParseError, A]
 
 
 

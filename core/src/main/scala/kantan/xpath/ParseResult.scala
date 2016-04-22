@@ -20,10 +20,10 @@ import kantan.codecs.Result
 import kantan.codecs.Result.Success
 
 object ParseResult {
-  def open[A](acquire: ⇒ A)(parse: A ⇒ ParseResult): ParseResult =
+  def open[A, B](acquire: ⇒ A)(parse: A ⇒ ParseResult[B]): ParseResult[B] =
     Result.nonFatal(acquire).leftMap(ParseError.IOError).flatMap(parse)
 
-  def success(node: Node): ParseResult = Success(node)
+  def success[A](a: A): ParseResult[A] = Success(a)
 
-  def apply(node: ⇒ Node): ParseResult = Result.nonFatal(node).leftMap(ParseError.SyntaxError.apply)
+  def apply[A](a: ⇒ A): ParseResult[A] = Result.nonFatal(a).leftMap(ParseError.SyntaxError.apply)
 }

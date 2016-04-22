@@ -27,7 +27,7 @@ object ops {
     */
   implicit class XmlSourceOps[A](val a: A) extends AnyVal {
     /** Shorthand for [[XmlSource.asNode]]. */
-    def asNode(implicit source: XmlSource[A]): ParseResult = source.asNode(a)
+    def asNode(implicit source: XmlSource[A]): ParseResult[Node] = source.asNode(a)
 
     /** Shorthand for [[XmlSource.asUnsafeNode]]. */
     def asUnsafeNode(implicit source: XmlSource[A]): Node = source.asUnsafeNode(a)

@@ -27,13 +27,13 @@ import javax.xml.parsers.DocumentBuilderFactory
   */
 trait XmlParser {
   /** Turns the specified `InputSource` into a `Document`. */
-  def parse(source: InputSource): ParseResult
+  def parse(source: InputSource): ParseResult[Node]
 }
 
 /** Declares the default [[XmlParser]] instance in the implicit scope. */
 object XmlParser {
   /** Helper creation method, turns the specified function into an `XmlParser`. */
-  def apply(f: InputSource ⇒ ParseResult): XmlParser = new XmlParser {
+  def apply(f: InputSource ⇒ ParseResult[Node]): XmlParser = new XmlParser {
     override def parse(source: InputSource) = f(source)
   }
 

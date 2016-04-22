@@ -16,26 +16,35 @@
 
 package kantan.xpath
 
-import java.net.URL
+import java.net.{URL, URLConnection}
 
 /** [[XmlSource]] implementation anything that can be turned into a `java.io.URL`.
   *
   * The main purpose here is to allow application developers to set their own HTTP headers: when scrapping websites,
   * it's typically necessary to change the default user agent to something a bit more browser-like.
   */
-case class RemoteXmlSource[A](toURL: A ⇒ URL, headers: Map[String, String] = Map.empty)(implicit parser: XmlParser)
-  extends XmlSource[A] {
-  override def asNode(a: A): ParseResult = {
-    val con = toURL(a).openConnection()
+case class RemoteXmlSource[A](toURL: A ⇒ ParseResult[URL], headers: Map[String, String] = Map.empty)
+                             (implicit parser: XmlParser) extends XmlSource[A] {
+  private def open(url: URL): URLConnection = {
+    val con = url.openConnection()
     headers.foreach { case (n, v) ⇒ con.setRequestProperty(n, v) }
-
-    ParseResult.open {
-      con.connect()
-      new InputSource(con.getInputStream)
-    }(parser.parse)
+    con
   }
 
-  override def contramap[B](f: B ⇒ A): RemoteXmlSource[B] = copy(toURL = f andThen toURL)
+  override def asNode(a: A): ParseResult[Node] = {
+    for {
+      url ← toURL(a)
+      con ← ParseResult(open(url))
+      res ← ParseResult.open {
+        con.connect()
+        new InputSource(con.getInputStream)
+      }(parser.parse)
+    } yield res
+  }
+
+  override def contramap[B](f: B ⇒ A) = copy(toURL = f andThen toURL)
+
+  override def contramapResult[B](f: B => ParseResult[A]): XmlSource[B] = copy(toURL = (b: B) ⇒ f(b).flatMap(toURL))
 
   /** Sets the specified header to the specified value. */
   def withHeader(name: String, value: String): RemoteXmlSource[A] =

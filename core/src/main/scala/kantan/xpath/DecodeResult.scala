@@ -18,8 +18,17 @@ package kantan.xpath
 
 import kantan.codecs.Result
 
+/** Provides instance creation methods for [[DecodeResult]]. */
 object DecodeResult {
+  /** Failure with an error of [[DecodeError.NotFound]]. */
   val NotFound: DecodeResult[Nothing] = Result.failure(DecodeError.NotFound)
-  def apply[A](a: ⇒ A): DecodeResult[A] = Result.nonFatal(a).leftMap(DecodeError.TypeError.apply)
+
+  /** Creates a success with the specified value. */
   def success[A](a: A): DecodeResult[A] = Result.success(a)
+
+  /** Evaluates the specified by-name parameter, wrapping it in a success if successful or a
+    * failure otherwise.
+    */
+  def apply[A](a: ⇒ A): DecodeResult[A] = Result.nonFatal(a).leftMap(DecodeError.TypeError.apply)
+
 }

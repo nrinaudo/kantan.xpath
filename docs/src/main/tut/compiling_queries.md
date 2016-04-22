@@ -8,7 +8,7 @@ In the examples we've seen so far, XPath expressions were passed around as strin
 must be recompiled each time they're evaluated against a document.
 
 When working with expressions that will need to be applied over and over, it's more efficient to compile them as
-[queries][`Query`].
+instances of [`Query`].
 
 In order to show how that works, we'll need some sample XML data, which we'll get from this project's resources:
 
@@ -33,7 +33,7 @@ val query = Query.compile[List[Int]]("//element/@id").get
 ```
 
 Note that we called [`get`] on the return value: compiling an XPath expression might fail if the expression is invalid,
-and [`Query.apply`] wraps its return value in a [`CompileResult`]. It's usually better to deal with errors rather than
+and [`Query.compile`] wraps its return value in a [`CompileResult`]. It's usually better to deal with errors rather than
 let them turn into runtime exceptions, but if you don't mind them, you can also use the [`xpath`] method that enriches
 strings:
 
@@ -41,7 +41,7 @@ strings:
 val query = "//element/@id".xpath[List[Int]]
 ```
 
-You can now use the compiled query where you used to specify strings:
+You can now use the compiled query where you used to specify strings, such as in [`evalXPath`]:
 
 ```tut
 rawData.evalXPath(query)
@@ -53,7 +53,7 @@ parameters to [`evalXPath`].
 [`Query`] also acts as a `Node ⇒ A`, which means you can apply them directly on an XML document:
 
 ```tut
-query(rawData.asUnsafeNode)
+rawData.asNode.flatMap(query)
 ```
 
 [`Query`]:{{ site.baseUrl }}/api/#kantan.xpath.Query

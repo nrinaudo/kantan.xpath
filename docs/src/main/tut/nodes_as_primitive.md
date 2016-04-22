@@ -37,7 +37,12 @@ There are a few things worth pointing out here. First, the return type: you migh
 you requested from [`evalXPath`], but we got an [`XPathResult[Int]`][`XPathResult`] instead. An [`XPathResult`] is 
 either a failure if something went wrong (the XPath expression is not valid, the `id` field is not a valid `Int`....) or
 a success otherwise. This mechanism ensures that [`evalXPath`] is safe: no exception will be thrown and break the flow 
-of your code.
+of your code. For example:
+
+```tut
+// Note that we're trying to parse ints as URLs.
+rawData.evalXPath[java.net.URL]("//element/@id")
+```
 
 In some cases, however, we don't really care for runtime safety and are fine with our program crashing at the first
 error. This is what the [`unsafeEvalXPath`] method was designed for:  

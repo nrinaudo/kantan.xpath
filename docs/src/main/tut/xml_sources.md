@@ -21,8 +21,8 @@ Implementing our own [`XmlSource`] for types that aren't supported by default is
 
 ## Implementation from scratch
 
-Reduced to its simplest expression, an [`XmlSource[A]`][`XmlSource`] is essentially a `A ⇒ ParseResult` - that is, a 
-function that takes an `A` and turns it into a [`Node`], with the possibility of safe failure encoded in
+Reduced to its simplest expression, an [`XmlSource[A]`][`XmlSource`] is essentially an `A ⇒ ParseResult[Node]` - that 
+is, a function that takes an `A` and turns it into a [`Node`], with the possibility of safe failure encoded in
 [`ParseResult`].
 
 If you can write such a function, you can trivially turn it into a valid instance of [`XmlSource`]. A simple example
@@ -36,7 +36,8 @@ implicit val node: XmlSource[Node] = XmlSource(n ⇒ ParseResult.success(n))
 
 ## Adapting existing instances
 
-A more idiomatic way of writing new [`XmlSource`] instances, however, is to adapt existing ones through [`contramap`].
+A more idiomatic way of writing new [`XmlSource`] instances, however, is to adapt existing ones through [`contramap`]
+or [`contramapResult`].
 The most useful instance for such purpose is the one that exists for [`InputSource`], provided an implicit instance of
 [`XmlParser`] is in scope.
 
@@ -65,3 +66,4 @@ implicit def stringSource(implicit parser: XmlParser): XmlSource[String] =
 [`contramap`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.XmlSource@contramap[B](f:B=>A):kantan.xpath.XmlSource[B]
 [`nekohtml`]:{{ site.baseUrl }}/api/#kantan.xpath.nekohtml.package
 [`evalXPath`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.ops$$XmlSourceOps@evalXPath[B](expr:String)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]
+[`contramapResult`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.XmlSource@contramapResult[B](f:B=>kantan.xpath.ParseResult[A]):kantan.xpath.XmlSource[B]

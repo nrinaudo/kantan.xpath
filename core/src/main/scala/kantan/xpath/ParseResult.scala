@@ -19,11 +19,19 @@ package kantan.xpath
 import kantan.codecs.Result
 import kantan.codecs.Result.Success
 
+/** Provides instance creation methods for [[ParseResult]]. */
 object ParseResult {
-  def open[A, B](acquire: ⇒ A)(parse: A ⇒ ParseResult[B]): ParseResult[B] =
-    Result.nonFatal(acquire).leftMap(ParseError.IOError).flatMap(parse)
-
+  /** Creates a success with the specified value. */
   def success[A](a: A): ParseResult[A] = Success(a)
 
+  /** Evaluates the specified by-name parameter, wrapping it in a success if successful or a
+    * failure otherwise.
+    */
   def apply[A](a: ⇒ A): ParseResult[A] = Result.nonFatal(a).leftMap(ParseError.SyntaxError.apply)
+
+  /** Evaluates the specified by-name parameter and passes it to the specified parsing function, wrapping any error
+    * along the way in a failure.
+    */
+  def open[A, B](a: ⇒ A)(parse: A ⇒ ParseResult[B]): ParseResult[B] =
+    Result.nonFatal(a).leftMap(ParseError.IOError).flatMap(parse)
 }

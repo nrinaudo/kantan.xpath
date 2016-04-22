@@ -6,7 +6,7 @@ sort: 4
 ---
 We've seen in a previous tutorial how to extract [primitive types](nodes_as_primitive.html),
 [tuples](nodes_as_tuples.html) and [case classes](nodes_as_case_classes.html) from XML documents. Sometimes however,
-none of these match your requirements. kantan.xpath provides support for extracting arbitrary types, which works almost
+none of these fit your requirements. kantan.xpath provides support for extracting arbitrary types, which works almost
 exactly like case classes do.
 
 In order to show how that works, we'll first need some sample XML data, which we'll get from this project's resources:
@@ -29,11 +29,9 @@ class El(val id: Int, val enabled: Boolean) {
 }
 ```
 
-In order to do that, we need to declare an  implicit [`NodeDecoder[El]`][`NodeDecoder`] value: this will be
-automatically picked up by kantan.xpath and  used when we request XML nodes to be interpreted as `El` values.
-
-The easier way to declare a [`NodeDecoder`] instance for arbitrary types is to use the dedicated [`decoder`] method,
-which takes one XPath expression per field to extract and a construction function:
+This is done as usual, by declaring an  implicit [`NodeDecoder[El]`][`NodeDecoder`] value. We'll be using the same
+[`decoder`] method as for case classes, but we don't have a convenient, pre-existing instance creation function to
+provide as a parameter and will need to write it ourselves:
 
 ```tut:silent
 import kantan.xpath._
@@ -44,7 +42,7 @@ implicit val elDecoder = NodeDecoder.decoder("./@id", "./@enabled") { (id: Int, 
 }.get
 ```
 
-It's worth pointing out that we had to call [`get`] on the result of that call: [`decode`] might fail if one of the
+It's worth pointing out that we had to call [`get`] on the result of that call: [`decoder`] might fail if one of the
 specified XPath expressions is not legal, and its result is wrapped in a [`CompileResult`].
 
 Now that we have told kantan.xpath how to decode an XML node to an instance of `El`, we can simply call

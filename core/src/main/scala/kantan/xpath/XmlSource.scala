@@ -71,15 +71,13 @@ trait XmlSource[-A] extends Serializable { self ⇒
 
   /** Turns an `XmlSource[A]` into an `XmlSource[B]`.
     *
-    * This function assumes that `f` cannot fail. If there's a chance that it might throw an expression, prefer
-    * [[contramapResult]].
+    * @see [[contramapResult]].
     */
   def contramap[B](f: B ⇒ A): XmlSource[B] = XmlSource(b ⇒ self.asNode(f(b)))
 
   /** Turns an `XmlSource[A]` into an `XmlSource[B]`.
     *
-    * This function assumes that `f` might fail. If it's entirely safe and cannot throw an exception, prefer
-    * [[contramap]] instead.
+    * @see [[contramap]]
     */
   def contramapResult[B](f: B ⇒ ParseResult[A]): XmlSource[B] = XmlSource((b: B) ⇒ f(b).flatMap(self.asNode))
 }

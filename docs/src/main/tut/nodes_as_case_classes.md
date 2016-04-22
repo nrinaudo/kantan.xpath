@@ -25,21 +25,19 @@ We'll be trying to turn each `element` node into values of the following type:
 case class El(id: Int, enabled: Boolean)
 ```
 
-In order to do that, we need to declare an  implicit [`NodeDecoder[El]`][`NodeDecoder`] value: this will be
-automatically picked up by kantan.xpath and  used when we request XML nodes to be interpreted as `El` values.
-
-The easier way to declare a [`NodeDecoder`] instance for case classes is to use the dedicated [`decoder`] method, which
-takes one XPath expression per field to extract and a construction function:
+In the same way that we had to declare a [`NodeCoder[(Int, Boolean)]`][`NodeDecoder`] to decode tuples, we'll need a
+[`NodeDecoder[El]`][`NodeDecoder`] for this case class, which we can easily create through the [`decoder`] method:
 
 
 ```tut:silent
 import kantan.xpath._
 import kantan.xpath.ops._
 
-implicit val elDecoder = NodeDecoder.decoder("./@id", "./@enabled")(El).get
+// There is no need to specify type parameters here, the Scala compiler works them out from El.apply.
+implicit val elDecoder = NodeDecoder.decoder("./@id", "./@enabled")(El.apply).get
 ```
 
-It's worth pointing out that we had to call [`get`] on the result of that call: [`decode`] might fail if one of the
+It's worth pointing out that we had to call [`get`] on the result of that call: [`decoder`] might fail if one of the
 specified XPath expressions is not legal, and its result is wrapped in a [`CompileResult`].
 
 Now that we have told kantan.xpath how to decode an XML node to an instance of `El`, we can simply call
@@ -50,7 +48,7 @@ rawData.evalXPath[List[El]]("//element")
 ```
 
 [`NodeDecoder`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.package@NodeDecoder[A]=kantan.codecs.Decoder[kantan.xpath.package.Node,A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]
-[`decoder`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.NodeDecoder$@decoder[I1,I2,O](x1:kantan.xpath.Expression[kantan.xpath.DecodeResult[I1]],x2:kantan.xpath.Expression[kantan.xpath.DecodeResult[I2]])(f:(I1,I2)=>O):kantan.xpath.NodeDecoder[O]
+[`decoder`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.NodeDecoder$@decoder[I1,I2,O](x1:kantan.xpath.Query[kantan.xpath.DecodeResult[I1]],x2:kantan.xpath.Query[kantan.xpath.DecodeResult[I2]])(f:(I1,I2)=>O):kantan.xpath.NodeDecoder[O]
 [`CompileResult`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.package@CompileResult[A]=kantan.codecs.Result[kantan.xpath.CompileError,A]
 [`get`]:https://nrinaudo.github.io/kantan.codecs/api/index.html#kantan.codecs.Result@get:S
 [`evalXPath`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.ops$$XmlSourceOps@evalXPath[B](expr:String)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]

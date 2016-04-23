@@ -19,15 +19,23 @@ package kantan.xpath
 import javax.xml.xpath.{XPathExpression, XPathFactory}
 import kantan.codecs.Result
 
+/** Compiles XPath expressions.
+  *
+  * There's always a [[XPathCompiler$.builtInt default instance]] in scope, which should be perfectly suitable for
+  * most circumstances. Still, if some non-standard options are required, one can always declare a local implicit
+  * instance.
+  */
 trait XPathCompiler {
   def compile(str: String): CompileResult[XPathExpression]
 }
 
 object XPathCompiler {
+  /** Creates a new [[XPathCompiler]] from the specified function. */
   def apply(f: String ⇒ CompileResult[XPathExpression]): XPathCompiler = new XPathCompiler {
     override def compile(str: String) = f(str)
   }
 
+  /** Default compiler, always in scope. */
   implicit val builtInt: XPathCompiler = {
     val xpath = XPathFactory.newInstance().newXPath()
     XPathCompiler(str ⇒ Result.nonFatal(xpath.compile(str)).leftMap(CompileError.apply))

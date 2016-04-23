@@ -19,11 +19,16 @@ package kantan.xpath
 import kantan.codecs.strings.StringDecoder
 import kantan.xpath.DecodeError.TypeError
 
+/** Provides default [[NodeDecoder]] instances. */
 object codecs {
+  /** Decodes nodes as nodes. */
   implicit val node: NodeDecoder[Node] = NodeDecoder(n ⇒ DecodeResult.success(n))
+  /** Decodes nodes as elements. */
   implicit val element: NodeDecoder[Element] = NodeDecoder(n ⇒ DecodeResult(n.asInstanceOf[Element]))
+  /** Decodes nodes as attributes. */
   implicit val attr: NodeDecoder[Attr] = NodeDecoder(n ⇒ DecodeResult(n.asInstanceOf[Attr]))
 
+  /** Turns any of the string decodes provided by kantan.codecs into node decoders. */
   implicit def fromString[A](implicit da: StringDecoder[A]): NodeDecoder[A] =
     da.tag[codecs.type].contramapEncoded((n: Node) ⇒ n.getTextContent).mapError(TypeError.apply)
 }

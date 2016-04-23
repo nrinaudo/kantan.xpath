@@ -21,12 +21,17 @@ import kantan.codecs.Result
 import scala.collection.generic.CanBuildFrom
 import scala.collection.mutable
 
-/** Compiles XPath expression. */
+/** Compiles XPath expressions.
+  *
+  * There's very little reason to interact with this class directly, it's only meant to act as a bridge between
+  * [[XPathCompiler]] and [[Query]].
+  */
 trait Compiler[A] {
   /** Turns the specified XPath expression into a valid [[Query]]. */
   def compile(str: String): CompileResult[Query[DecodeResult[A]]]
 }
 
+/** Provides implicit methods to summon [[Compiler]] instances. */
 object Compiler {
   /** Type level trickery, this lets us makes the difference between types and type constructors. */
   type Id[A] = A

@@ -18,7 +18,11 @@ package kantan.xpath
 
 import kantan.codecs.Decoder
 
+/** Provides instance creation and summoning methods. */
 object NodeDecoder extends GeneratedDecoders {
+  /** Returns an implicit instance of `NodeDecoder[A]` if one is found in scope, fails compilation otherwise. */
   def apply[A](implicit da: NodeDecoder[A]): NodeDecoder[A] = da
+
+  /** Creates a new [[NodeDecoder]] from the specified function. */
   def apply[A](f: Node ⇒ DecodeResult[A]): NodeDecoder[A] = Decoder(f)
 }

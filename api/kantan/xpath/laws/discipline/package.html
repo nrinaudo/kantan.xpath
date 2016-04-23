@@ -47,13 +47,35 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"></div>
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/nrinaudo/kantan.xpath/tree/master/laws/src/main/scala/kantan/xpath/laws/discipline/package.scala" target="_blank">package.scala</a></dd></dl><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
         
 
       <div id="mbrsel">
         <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
-        
-        
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="kantan.xpath.laws.discipline"><span>discipline</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show All</span></li>
+            </ol>
+          </div>
         <div id="visbl">
             <span class="filtertype">Visibility</span>
             <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
@@ -66,19 +88,121 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="kantan.xpath.laws.discipline.NodeDecoderLaws" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="NodeDecoderLaws[A]extendsAnyRef"></a>
-      <a id="NodeDecoderLaws[A]:NodeDecoderLaws[A]"></a>
+              <ol><li name="kantan.xpath.laws.discipline.ArbitraryArities" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="ArbitraryAritiesextendsAnyRef"></a>
+      <a id="ArbitraryArities:ArbitraryArities"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="NodeDecoderLaws.html"><span class="name">NodeDecoderLaws</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+        <a href="ArbitraryArities.html"><span class="name">ArbitraryArities</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#kantan.xpath.laws.discipline.package@NodeDecoderLaws[A]extendsAnyRef" title="Permalink" target="_top">
+      <a href="../../../../index.html#kantan.xpath.laws.discipline.package@ArbitraryAritiesextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.laws.discipline.ArbitraryInstances" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="ArbitraryInstancesextendsArbitraryInstanceswithArbitraryArities"></a>
+      <a id="ArbitraryInstances:ArbitraryInstances"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="ArbitraryInstances.html"><span class="name">ArbitraryInstances</span></a><span class="result"> extends <span class="extype" name="kantan.codecs.laws.discipline.ArbitraryInstances">codecs.laws.discipline.ArbitraryInstances</span> with <a href="ArbitraryArities.html" class="extype" name="kantan.xpath.laws.discipline.ArbitraryArities">ArbitraryArities</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#kantan.xpath.laws.discipline.package@ArbitraryInstancesextendsArbitraryInstanceswithArbitraryArities" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.laws.discipline.IllegalNode" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="IllegalNode[A]=kantan.codecs.laws.CodecValue.IllegalValue[kantan.xpath.Node,A]"></a>
+      <a id="IllegalNode[A]:IllegalNode[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">IllegalNode</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="kantan.codecs.laws.CodecValue.IllegalValue">IllegalValue</span>[<a href="../../package.html#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>, <span class="extype" name="kantan.xpath.laws.discipline.IllegalNode.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#kantan.xpath.laws.discipline.package@IllegalNode[A]=kantan.codecs.laws.CodecValue.IllegalValue[kantan.xpath.Node,A]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.laws.discipline.LegalNode" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LegalNode[A]=kantan.codecs.laws.CodecValue.LegalValue[kantan.xpath.Node,A]"></a>
+      <a id="LegalNode[A]:LegalNode[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">LegalNode</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="kantan.codecs.laws.CodecValue.LegalValue">LegalValue</span>[<a href="../../package.html#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>, <span class="extype" name="kantan.xpath.laws.discipline.LegalNode.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#kantan.xpath.laws.discipline.package@LegalNode[A]=kantan.codecs.laws.CodecValue.LegalValue[kantan.xpath.Node,A]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.laws.discipline.NodeDecoderLaws" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NodeDecoderLaws[A]=kantan.codecs.laws.DecoderLaws[kantan.xpath.Node,A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]"></a>
+      <a id="NodeDecoderLaws[A]:NodeDecoderLaws[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">NodeDecoderLaws</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="kantan.codecs.laws.DecoderLaws">DecoderLaws</span>[<a href="../../package.html#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>, <span class="extype" name="kantan.xpath.laws.discipline.NodeDecoderLaws.A">A</span>, <a href="../../DecodeError.html" class="extype" name="kantan.xpath.DecodeError">DecodeError</a>, <a href="../../codecs$.html" class="extype" name="kantan.xpath.codecs">codecs</a>.type]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#kantan.xpath.laws.discipline.package@NodeDecoderLaws[A]=kantan.codecs.laws.DecoderLaws[kantan.xpath.Node,A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.laws.discipline.NodeDecoderTests" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NodeDecoderTests[A]=kantan.codecs.laws.discipline.DecoderTests[kantan.xpath.Node,A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]"></a>
+      <a id="NodeDecoderTests[A]:NodeDecoderTests[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">NodeDecoderTests</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="kantan.codecs.laws.discipline.DecoderTests">DecoderTests</span>[<a href="../../package.html#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>, <span class="extype" name="kantan.xpath.laws.discipline.NodeDecoderTests.A">A</span>, <a href="../../DecodeError.html" class="extype" name="kantan.xpath.DecodeError">DecodeError</a>, <a href="../../codecs$.html" class="extype" name="kantan.xpath.codecs">codecs</a>.type]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#kantan.xpath.laws.discipline.package@NodeDecoderTests[A]=kantan.codecs.laws.discipline.DecoderTests[kantan.xpath.Node,A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]" title="Permalink" target="_top">
+        <img src="../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.laws.discipline.NodeValue" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NodeValue[A]=kantan.codecs.laws.CodecValue[kantan.xpath.Node,A]"></a>
+      <a id="NodeValue[A]:NodeValue[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">NodeValue</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <span class="extype" name="kantan.codecs.laws.CodecValue">CodecValue</span>[<a href="../../package.html#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>, <span class="extype" name="kantan.xpath.laws.discipline.NodeValue.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../index.html#kantan.xpath.laws.discipline.package@NodeValue[A]=kantan.codecs.laws.CodecValue[kantan.xpath.Node,A]" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -90,36 +214,36 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="kantan.xpath.laws.discipline.NodeDecoderLaws" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="NodeDecoderLaws"></a>
-      <a id="NodeDecoderLaws:NodeDecoderLaws"></a>
+              <ol><li name="kantan.xpath.laws.discipline.NodeDecoderTests" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NodeDecoderTests"></a>
+      <a id="NodeDecoderTests:NodeDecoderTests"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="NodeDecoderLaws$.html"><span class="name">NodeDecoderLaws</span></a>
+        <a href="NodeDecoderTests$.html"><span class="name">NodeDecoderTests</span></a>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#kantan.xpath.laws.discipline.package@NodeDecoderLaws" title="Permalink" target="_top">
+      <a href="../../../../index.html#kantan.xpath.laws.discipline.package@NodeDecoderTests" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       
-    </li><li name="kantan.xpath.laws.discipline.discipline" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="discipline"></a>
-      <a id="discipline:discipline"></a>
+    </li><li name="kantan.xpath.laws.discipline.arbitrary" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="arbitrary"></a>
+      <a id="arbitrary:arbitrary"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">package</span>
+        <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="discipline/package.html"><span class="name">discipline</span></a>
+        <a href="arbitrary$.html"><span class="name">arbitrary</span></a><span class="result"> extends <a href="ArbitraryInstances.html" class="extype" name="kantan.xpath.laws.discipline.ArbitraryInstances">ArbitraryInstances</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../../index.html#kantan.xpath.laws.discipline.package@discipline" title="Permalink" target="_top">
+      <a href="../../../../index.html#kantan.xpath.laws.discipline.package@arbitrary" title="Permalink" target="_top">
         <img src="../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -133,7 +257,11 @@
         </div>
 
         <div id="inheritedMembers">
-        
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
         
         </div>
 

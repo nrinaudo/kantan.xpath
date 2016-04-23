@@ -22,14 +22,14 @@ import kantan.xpath.nekohtml._ // HTML parsing.
 import java.net.URI
 
 // Parses an URI as an XML document, finds interesting nodes, extracts their values as ints and store them in a list. 
-URI("http://some.server.com").all[List, Int]("//h1/span[@class='num']".xpath)
+new URI("http://some.server.com").evalXPath[List[Int]]("//h1/span[@class='num']")
 
 // Similar, but parsing tuples rather than ints and storing the results in a set.
-implicit val decode = NodeDecoder.tuple2[String, Boolean]("./@name".xpath, "./@count".xpath")
-URI("http://some.other.server.com").all[Set, (String, Boolean)]("//name".xpath)
+implicit val decode: NodeDecoder[(String, Boolean)] = NodeDecoder.tuple[String, Boolean]("./@name", "./@count").get
+new URI("http://some.other.server.com").evalXPath[Set[(String, Boolean)]]("//name")
 
 // Same as above, but only looks for the first match.
-URI("http://some.other.server.com").first[(String, Boolean)]("//name".xpath)
+new URI("http://some.other.server.com").evalXPath[(String, Boolean)]("//name")
 ```
 
 kantan.xpath is distributed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0.html).

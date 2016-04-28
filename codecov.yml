@@ -1,0 +1,12 @@
+comment:
+  layout: header, changes, diff
+coverage:
+  notify:
+    gitter:
+      default:
+        branches:
+        - master
+        threshold: 0
+        url: https://webhooks.gitter.im/e/b5e93c281140e8e77990
+  status:
+    patch: false

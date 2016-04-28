@@ -205,3 +205,5 @@ lazy val docs = project
   .settings(noPublishSettings:_*)
   .dependsOn(core, nekohtml)
   .enablePlugins(AutomateHeaderPlugin)
+
+addCommandAlias("validate", "; clean; scalastyle; test:scalastyle; coverage; test; coverageReport; coverageAggregate; docs/makeSite")

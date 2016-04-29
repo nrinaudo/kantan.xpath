@@ -4,7 +4,7 @@ import UnidocKeys._
 import de.heikoseeberger.sbtheader.license.Apache2_0
 
 val kantanCodecsVersion  = "0.1.3"
-val catsVersion          = "0.4.1"
+val catsVersion          = "0.5.0"
 val macroParadiseVersion = "2.1.0"
 val nekoHtmlVersion      = "1.9.22"
 val scalatestVersion     = "3.0.0-M9"

@@ -1,7 +1,7 @@
 # kantan.xpath
 
 [![Build Status](https://travis-ci.org/nrinaudo/kantan.xpath.svg?branch=master)](https://travis-ci.org/nrinaudo/kantan.xpath)
-[![codecov.io](http://codecov.io/github/nrinaudo/kantan.xpath/coverage.svg?branch=master)](http://codecov.io/github/nrinaudo/kantan.xpath)
+[![codecov](https://codecov.io/gh/nrinaudo/kantan.xpath/branch/master/graph/badge.svg)](https://codecov.io/gh/nrinaudo/kantan.xpath)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.nrinaudo/kantan.xpath_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.nrinaudo/kantan.xpath_2.11)
 [![Join the chat at https://gitter.im/nrinaudo/kantan.xpath](https://img.shields.io/badge/gitter-join%20chat-52c435.svg)](https://gitter.im/nrinaudo/kantan.xpath)
 
@@ -21,7 +21,7 @@ import kantan.xpath.ops._      // Implicit operators.
 import kantan.xpath.nekohtml._ // HTML parsing.
 import java.net.URI
 
-// Parses an URI as an XML document, finds interesting nodes, extracts their values as ints and store them in a list. 
+// Parses an URI as an XML document, finds interesting nodes, extracts their values as ints and store them in a list.
 new URI("http://some.server.com").evalXPath[List[Int]]("//h1/span[@class='num']")
 
 // Similar, but parsing tuples rather than ints and storing the results in a set.

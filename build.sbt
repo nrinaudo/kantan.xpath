@@ -103,7 +103,7 @@ lazy val core = project
 
 lazy val jodaTime = Project(id = "joda-time", base = file("joda-time"))
   .settings(
-    moduleName := "kantan.xath-joda-time",
+    moduleName := "kantan.xpath-joda-time",
     name       := "joda-time"
   )
   .settings(libraryDependencies ++= Seq(

@@ -28,6 +28,9 @@ libraryDependencies += "com.nrinaudo" %% "kantan.xpath-cats" % "@VERSION@"
 
 // Provides "dirty" HTML parsing through NekoHTML.
 libraryDependencies += "com.nrinaudo" %% "kantan.xpath-nekohtml" % "@VERSION@"
+
+// Provides "dirty" HTML parsing through NekoHTML.
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-nekohtml" % "@VERSION@"
 ```
 
 ## Motivation

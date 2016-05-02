@@ -16,7 +16,9 @@
 
 package kantan.xpath
 
-import kantan.codecs.Decoder
+import kantan.codecs.{Decoder, Optional}
+import kantan.codecs.strings._
+import kantan.xpath.DecodeError.TypeError
 
 /** Provides instance creation and summoning methods. */
 object NodeDecoder extends GeneratedDecoders {
@@ -25,4 +27,21 @@ object NodeDecoder extends GeneratedDecoders {
 
   /** Creates a new [[NodeDecoder]] from the specified function. */
   def apply[A](f: Node ⇒ DecodeResult[A]): NodeDecoder[A] = Decoder(f)
+}
+
+/** Provides default [[NodeDecoder]] instances. */
+trait NodeDecoderInstances {
+  /** Decodes nodes as nodes. */
+    implicit val node: NodeDecoder[Node] = NodeDecoder(n ⇒ DecodeResult.success(n))
+    /** Decodes nodes as elements. */
+    implicit val element: NodeDecoder[Element] = NodeDecoder(n ⇒ DecodeResult(n.asInstanceOf[Element]))
+    /** Decodes nodes as attributes. */
+    implicit val attr: NodeDecoder[Attr] = NodeDecoder(n ⇒ DecodeResult(n.asInstanceOf[Attr]))
+
+    /** Turns any of the string decodes provided by kantan.codecs into node decoders. */
+    implicit def fromString[A](implicit da: StringDecoder[A]): NodeDecoder[A] =
+      da.tag[codecs.type].contramapEncoded((n: Node) ⇒ n.getTextContent).mapError(TypeError.apply)
+
+  implicit def eitherNodeDecoder[A: NodeDecoder, B: NodeDecoder]: NodeDecoder[Either[A, B]] =
+    Decoder.eitherDecoder
 }

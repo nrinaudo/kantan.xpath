@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package kantan.regex
+package kantan.xpath
 
-import kantan.xpath.{DecodeResult, NodeDecoder}
 import org.scalatest.FunSuite
 
 class RegressionTests extends FunSuite {

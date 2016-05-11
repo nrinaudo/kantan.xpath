@@ -3,7 +3,7 @@ layout: index
 ---
 
 [![Build Status](https://travis-ci.org/nrinaudo/kantan.xpath.svg)](https://travis-ci.org/nrinaudo/kantan.xpath)
-[![codecov.io](http://codecov.io/github/nrinaudo/kantan.xpath/coverage.svg)](http://codecov.io/github/nrinaudo/kantan.xpath)
+[![codecov](https://codecov.io/gh/nrinaudo/kantan.xpath/branch/master/graph/badge.svg)](https://codecov.io/gh/nrinaudo/kantan.xpath)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.nrinaudo/kantan.xpath_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.nrinaudo/kantan.xpath_2.11)
 [![Join the chat at https://gitter.im/nrinaudo/kantan.xpath](https://img.shields.io/badge/gitter-join%20chat-52c435.svg)](https://gitter.im/nrinaudo/kantan.xpath)
 
@@ -13,21 +13,24 @@ kantan.xpath is an XPath expression evaluation library for the [Scala programmin
 
 kantan.xpath is currently available both for Scala 2.10 and 2.11.
 
-The current version is `0.1.1`, which can be added to your project with one or more of the following line(s)
+The current version is `0.1.2`, which can be added to your project with one or more of the following line(s)
 in your SBT build file:
 
 ```scala
 // Core library, included automatically if any other module is imported.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath" % "0.1.1"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath" % "0.1.2"
 
 // Provides scalaz type class instances.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-scalaz" % "0.1.1"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-scalaz" % "0.1.2"
 
 // Provides cats type class instances.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-cats" % "0.1.1"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-cats" % "0.1.2"
 
 // Provides "dirty" HTML parsing through NekoHTML.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-nekohtml" % "0.1.1"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-nekohtml" % "0.1.2"
+
+// Provides joda-time decoders.
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-joda-time" % "0.1.2"
 ```
 
 ## Motivation

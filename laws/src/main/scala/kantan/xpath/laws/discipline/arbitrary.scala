@@ -69,10 +69,25 @@ trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstance
     Arbitrary(Gen.alphaStr.suchThat(_.asNode.isFailure).map(IllegalValue.apply))
 
 
-  implicit def arbLegalNode[A](implicit la: Arbitrary[LegalString[A]]): Arbitrary[LegalNode[A]] =
-    Arbitrary(la.arbitrary.map(_.mapEncoded(asCDataNode)))
-  implicit def arbIllegalNode[A](implicit ia: Arbitrary[IllegalString[A]]): Arbitrary[IllegalNode[A]] =
-    Arbitrary(ia.arbitrary.map(_.mapEncoded(asCDataNode)))
+  implicit def arbLegalFoundNode[A](implicit la: Arbitrary[LegalString[A]]): Arbitrary[LegalValue[Node, A]] =
+      Arbitrary(la.arbitrary.map(_.mapEncoded(asCDataNode)))
+  implicit def arbLegalNode[A](implicit la: Arbitrary[LegalValue[Node, A]]): Arbitrary[LegalNode[A]] =
+    Arbitrary(la.arbitrary.map(_.mapEncoded(Option.apply)))
+
+  implicit def arbIllegalFoundNode[A](implicit ia: Arbitrary[IllegalString[A]]): Arbitrary[IllegalValue[Node, A]] =
+      Arbitrary(ia.arbitrary.map(_.mapEncoded(asCDataNode)))
+  implicit def arbIllegalNode[A](implicit ia: Arbitrary[IllegalValue[Node, A]]): Arbitrary[IllegalNode[A]] =
+    Arbitrary(ia.arbitrary.map(_.mapEncoded(Option.apply)))
+
+  implicit def arbLegalNodeOpt[A](implicit la: Arbitrary[LegalString[A]]): Arbitrary[LegalNode[Option[A]]] =
+    Arbitrary(Gen.oneOf(
+      la.arbitrary.map(_.mapEncoded(e ⇒ Option(asCDataNode(e))).mapDecoded(Option.apply)),
+      Gen.const(CodecValue.LegalValue[Option[Node], Option[A]](Option.empty, Option.empty))
+    ))
+
+  implicit def arbIllegalNodeOpt[A](implicit la: Arbitrary[IllegalString[A]]): Arbitrary[IllegalNode[Option[A]]] =
+    Arbitrary(la.arbitrary.map(_.mapEncoded(e ⇒ Option(asCDataNode(e))).mapDecoded(Option.apply)))
+
 
 
   // - Misc. arbitraries -----------------------------------------------------------------------------------------------
@@ -80,8 +95,8 @@ trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstance
   def arbNode[A: Arbitrary](f: A ⇒ String): Arbitrary[Node] =
     Arbitrary(Arbitrary.arbitrary[A].map(a ⇒ s"<root>${f(a)}</root>".asUnsafeNode))
 
-  implicit def arbCellDecoder[A: Arbitrary]: Arbitrary[NodeDecoder[A]] =
-    Arbitrary(arb[Node ⇒ DecodeResult[A]].map(f ⇒ NodeDecoder(f)))
+  implicit def arbNodeDecoder[A: Arbitrary]: Arbitrary[NodeDecoder[A]] =
+    Arbitrary(arb[Option[Node] ⇒ DecodeResult[A]].map(f ⇒ NodeDecoder(f)))
 
   implicit def arbTuple1[A: Arbitrary]: Arbitrary[Tuple1[A]] =
     Arbitrary(arb[A].map(a ⇒ Tuple1(a)))

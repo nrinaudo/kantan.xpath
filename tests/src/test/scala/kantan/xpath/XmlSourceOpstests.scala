@@ -27,6 +27,8 @@ import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import scala.util.Try
 
 class XmlSourceOpsTests extends FunSuite with GeneratorDrivenPropertyChecks {
+  type Value[A] = CodecValue[Node, A]
+
   private def cmp[A, F, E](value: CodecValue[E, A], res: Result[F, A]): Boolean = (value, res) match {
     case (CodecValue.LegalValue(_, n1), Success(n2)) ⇒ n1 == n2
     case (CodecValue.IllegalValue(_), Failure(_))    ⇒ true
@@ -37,7 +39,7 @@ class XmlSourceOpsTests extends FunSuite with GeneratorDrivenPropertyChecks {
 
 
   test("XmlSource instances should have a working asNode method") {
-    forAll { value: NodeValue[Int] ⇒ assert(cmp(value, value.encoded.asNode.flatMap(_.evalXPath[Int]("/element")))) }
+    forAll { value: Value[Int] ⇒ assert(cmp(value, value.encoded.asNode.flatMap(_.evalXPath[Int]("/element")))) }
   }
 
   // This test is not as good as it could be - we're not comparing decoded XML. The reason for that is that, apparently,
@@ -53,18 +55,18 @@ class XmlSourceOpsTests extends FunSuite with GeneratorDrivenPropertyChecks {
   }
 
   test("XmlSource instances should have a working evalXPath(String) method") {
-    forAll { value: NodeValue[Int] ⇒ assert(cmp(value, value.encoded.evalXPath[Int]("/element"))) }
+    forAll { value: Value[Int] ⇒ assert(cmp(value, value.encoded.evalXPath[Int]("/element"))) }
   }
 
   test("XmlSource instances should have a working evalXPath(Expression) method") {
-    forAll { value: NodeValue[Int] ⇒ assert(cmp(value, value.encoded.evalXPath("/element".xpath[Int]))) }
+    forAll { value: Value[Int] ⇒ assert(cmp(value, value.encoded.evalXPath("/element".xpath[Int]))) }
   }
 
   test("XmlSource instances should have a working unsafeEvalXPath(String) method") {
-    forAll { value: NodeValue[Int] ⇒ assert(cmp(value, Try(value.encoded.unsafeEvalXPath[Int]("/element")))) }
+    forAll { value: Value[Int] ⇒ assert(cmp(value, Try(value.encoded.unsafeEvalXPath[Int]("/element")))) }
   }
 
   test("XmlSource instances should have a working unsafeEvalXPath(Expression) method") {
-    forAll { value: NodeValue[Int] ⇒ assert(cmp(value, Try(value.encoded.unsafeEvalXPath(("/element").xpath[Int])))) }
+    forAll { value: Value[Int] ⇒ assert(cmp(value, Try(value.encoded.unsafeEvalXPath(("/element").xpath[Int])))) }
   }
 }

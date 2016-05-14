@@ -18,7 +18,7 @@ trait ArbitraryArities {
       for {
         [#v1 <- Arbitrary.arbitrary[LegalString[A1]]#
         ]
-      } yield LegalValue(asTextAttributes([#v1.encoded#]), Tuple1([#v1.decoded#]))
+      } yield LegalValue(Option(asTextAttributes([#v1.encoded#])), Tuple1([#v1.decoded#]))
     }
 
   implicit def arbIllegalTuple1[[#A1#]](implicit [#a1: Arbitrary[IllegalString[A1]]#]): Arbitrary[IllegalNode[Tuple1[[#A1#]]]] =
@@ -26,7 +26,7 @@ trait ArbitraryArities {
       for {
         [#v1 <- Arbitrary.arbitrary[IllegalString[A1]]#
         ]
-      } yield IllegalValue(asTextAttributes([#v1.encoded#]))
+      } yield IllegalValue(Option(asTextAttributes([#v1.encoded#])))
     }#
   ]
 }

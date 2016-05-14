@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package kantan.xpath.laws.discipline
+package kantan.xpath
 
-import kantan.codecs.laws.discipline.DecoderTests
-import kantan.xpath._
 import kantan.xpath.laws.discipline.arbitrary._
-import org.scalacheck.Arbitrary
+import kantan.xpath.laws.discipline.NodeDecoderTests
+import org.scalatest.FunSuite
+import org.scalatest.prop.GeneratorDrivenPropertyChecks
+import org.typelevel.discipline.scalatest.Discipline
 
-object NodeDecoderTests {
-  def apply[A](implicit la: NodeDecoderLaws[A], al: Arbitrary[LegalNode[A]]): NodeDecoderTests[A] =
-    DecoderTests[Option[Node], A, DecodeError, codecs.type]
+class OptionDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
+  checkAll("NodeDecoder[Option[Int]]", NodeDecoderTests[Option[Int]].decoder[Int, Int])
 }

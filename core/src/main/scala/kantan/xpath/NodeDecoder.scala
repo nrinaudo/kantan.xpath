@@ -26,21 +26,26 @@ object NodeDecoder extends GeneratedDecoders {
   def apply[A](implicit da: NodeDecoder[A]): NodeDecoder[A] = da
 
   /** Creates a new [[NodeDecoder]] from the specified function. */
-  def apply[A](f: Node ⇒ DecodeResult[A]): NodeDecoder[A] = Decoder(f)
+  def apply[A](f: Option[Node] ⇒ DecodeResult[A]): NodeDecoder[A] = Decoder(f)
+
+  def fromFound[A](f: Node ⇒ DecodeResult[A]): NodeDecoder[A] = Decoder(_.map(f).getOrElse(DecodeResult.notFound))
 }
 
 /** Provides default [[NodeDecoder]] instances. */
 trait NodeDecoderInstances {
   /** Decodes nodes as nodes. */
-    implicit val node: NodeDecoder[Node] = NodeDecoder(n ⇒ DecodeResult.success(n))
+    implicit val node: NodeDecoder[Node] = NodeDecoder.fromFound(n ⇒ DecodeResult.success(n))
     /** Decodes nodes as elements. */
-    implicit val element: NodeDecoder[Element] = NodeDecoder(n ⇒ DecodeResult(n.asInstanceOf[Element]))
+    implicit val element: NodeDecoder[Element] = NodeDecoder.fromFound(n ⇒ DecodeResult(n.asInstanceOf[Element]))
     /** Decodes nodes as attributes. */
-    implicit val attr: NodeDecoder[Attr] = NodeDecoder(n ⇒ DecodeResult(n.asInstanceOf[Attr]))
+    implicit val attr: NodeDecoder[Attr] = NodeDecoder.fromFound(n ⇒ DecodeResult(n.asInstanceOf[Attr]))
 
-    /** Turns any of the string decodes provided by kantan.codecs into node decoders. */
-    implicit def fromString[A](implicit da: StringDecoder[A]): NodeDecoder[A] =
-      da.tag[codecs.type].contramapEncoded((n: Node) ⇒ n.getTextContent).mapError(TypeError.apply)
+  /** Turns any of the string decodes provided by kantan.codecs into node decoders. */
+  implicit def fromString[A](implicit da: StringDecoder[A]): NodeDecoder[A] =
+    NodeDecoder.fromFound(n ⇒ da.mapError(TypeError.apply).decode(n.getTextContent))
+
+  implicit def optionNodeDecoder[A: NodeDecoder]: NodeDecoder[Option[A]] =
+    Decoder.optionalDecoder
 
   implicit def eitherNodeDecoder[A: NodeDecoder, B: NodeDecoder]: NodeDecoder[Either[A, B]] =
     Decoder.eitherDecoder

@@ -40,11 +40,8 @@ object Compiler {
   implicit def xpath1[A](implicit xpath: XPathCompiler, da: NodeDecoder[A]): Compiler[Id[A]] = new Compiler[Id[A]] {
     override def compile(str: String) =
       xpath.compile(str).map(expr ⇒ new Query[DecodeResult[A]] {
-        override def apply(n: Node) = {
-          val res = expr.evaluate(n, XPathConstants.NODE).asInstanceOf[Node]
-          if(res == null) DecodeResult.NotFound
-          else            da.decode(res)
-        }
+        override def apply(n: Node) =
+          da.decode(Option(expr.evaluate(n, XPathConstants.NODE).asInstanceOf[Node]))
       })
   }
 
@@ -54,7 +51,7 @@ object Compiler {
     new Compiler[F[A]] {
       def fold(i: Int, nodes: NodeList, out: mutable.Builder[A, F[A]]): DecodeResult[F[A]] = {
         if(i < nodes.getLength) {
-          da.decode(nodes.item(i)) match {
+          da.decode(Option(nodes.item(i))) match {
             case Result.Success(a) ⇒
               out += a
               fold(i + 1, nodes, out)

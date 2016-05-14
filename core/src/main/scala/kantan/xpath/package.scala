@@ -22,7 +22,7 @@ package object xpath {
   // - Codec types -----------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
   /** Type class for types that can be decoded from an XML [[Node]]. */
-  type NodeDecoder[A] = Decoder[Node, A, DecodeError, codecs.type]
+  type NodeDecoder[A] = Decoder[Option[Node], A, DecodeError, codecs.type]
 
 
 

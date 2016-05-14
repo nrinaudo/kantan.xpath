@@ -66,6 +66,17 @@ sometimes a boolean, for example:
 "<root><either>123</either><either>true</either></root>".evalXPath[List[Either[Int, Boolean]]]("//either")
 ```
 
+### `Option`
+
+For any type `A` that has a [`NodeDecoder`], there exists a [`NodeDecoder[Option[A]]`][`NodeDecoder`].
+
+
+This is useful for XML where some nodes or attributes are optional. For example: 
+
+
+```tut
+"<root><opt value='123'/><opt/></root>".evalXPath[List[Option[Int]]]("//opt/@value")
+```
 
 ## `XmlSource`
 

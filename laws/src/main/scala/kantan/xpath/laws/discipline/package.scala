@@ -22,10 +22,10 @@ import kantan.codecs.laws.discipline.DecoderTests
 import kantan.xpath._
 
 package object discipline {
-  type LegalNode[A] = LegalValue[Node, A]
-  type IllegalNode[A] = IllegalValue[Node, A]
-  type NodeValue[A] = CodecValue[Node, A]
+  type LegalNode[A] = LegalValue[Option[Node], A]
+  type IllegalNode[A] = IllegalValue[Option[Node], A]
+  type NodeValue[A] = CodecValue[Option[Node], A]
 
-  type NodeDecoderLaws[A] = DecoderLaws[Node, A, DecodeError, codecs.type]
-  type NodeDecoderTests[A] = DecoderTests[Node, A, DecodeError, codecs.type]
+  type NodeDecoderLaws[A] = DecoderLaws[Option[Node], A, DecodeError, codecs.type]
+  type NodeDecoderTests[A] = DecoderTests[Option[Node], A, DecodeError, codecs.type]
 }

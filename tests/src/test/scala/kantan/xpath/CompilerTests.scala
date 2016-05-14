@@ -44,7 +44,7 @@ class CompilerTests extends FunSuite with GeneratorDrivenPropertyChecks {
 
   test("'first' expressions should fail on illegal values and succeed on legal ones") {
     forAll { value: Value[Int] ⇒
-      assert(value.encoded.evalXPath[Int]("//element") == NodeDecoder[Int].decode(value.encoded))
+      assert(value.encoded.evalXPath[Int]("//element") == NodeDecoder[Int].decode(Option(value.encoded)))
     }
   }
 
@@ -57,7 +57,7 @@ class CompilerTests extends FunSuite with GeneratorDrivenPropertyChecks {
   test("'all' expressions should fail on lists containing at least one illegal value and succeed on others") {
     forAll { values: List[Value[Int]] ⇒
       assert(encodeAll(values).evalXPath[List[Int]]("//element") ==
-             values.map(v ⇒ NodeDecoder[Int].decode(v.encoded)).sequenceU)
+             values.map(v ⇒ NodeDecoder[Int].decode(Option(v.encoded))).sequenceU)
     }
   }
 

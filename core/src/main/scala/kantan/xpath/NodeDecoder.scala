@@ -16,7 +16,7 @@
 
 package kantan.xpath
 
-import kantan.codecs.{Decoder, Optional}
+import kantan.codecs.Decoder
 import kantan.codecs.strings._
 import kantan.xpath.DecodeError.TypeError
 

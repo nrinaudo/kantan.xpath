@@ -3,7 +3,7 @@ import com.typesafe.sbt.SbtSite.SiteKeys._
 import UnidocKeys._
 import de.heikoseeberger.sbtheader.license.Apache2_0
 
-val kantanCodecsVersion  = "0.1.4"
+val kantanCodecsVersion  = "0.1.5-SNAPSHOT"
 val catsVersion          = "0.5.0"
 val macroParadiseVersion = "2.1.0"
 val nekoHtmlVersion      = "1.9.22"

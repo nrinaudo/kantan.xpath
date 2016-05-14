@@ -17,6 +17,7 @@
 package kantan.xpath
 
 import _root_.scalaz._
+import kantan.codecs.Decoder
 import kantan.codecs.scalaz.ScalazInstances
 
 package object scalaz extends ScalazInstances {

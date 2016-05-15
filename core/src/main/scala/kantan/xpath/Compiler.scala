@@ -40,7 +40,7 @@ object Compiler {
   implicit def xpath1[A](implicit xpath: XPathCompiler, da: NodeDecoder[A]): Compiler[Id[A]] = new Compiler[Id[A]] {
     override def compile(str: String) =
       xpath.compile(str).map(expr ⇒ new Query[DecodeResult[A]] {
-        override def apply(n: Node) =
+        override def eval(n: Node) =
           da.decode(Option(expr.evaluate(n, XPathConstants.NODE).asInstanceOf[Node]))
       })
   }
@@ -64,7 +64,7 @@ object Compiler {
 
       override def compile(str: String) =
         xpath.compile(str).map(expr ⇒ new Query[DecodeResult[F[A]]] {
-          override def apply(n: Node) = fold(0, expr.evaluate(n, XPathConstants.NODESET).asInstanceOf[NodeList], cbf())
+          override def eval(n: Node) = fold(0, expr.evaluate(n, XPathConstants.NODESET).asInstanceOf[NodeList], cbf())
         })
     }
 }

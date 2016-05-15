@@ -50,12 +50,6 @@ rawData.evalXPath(query)
 Note that since compiled queries carry the information of the type they return, you don't need to specify type
 parameters to [`evalXPath`].
 
-[`Query`] also acts as a `Node ⇒ A`, which means you can apply them directly on an XML document:
-
-```tut
-rawData.asNode.flatMap(query)
-```
-
 [`Query`]:{{ site.baseUrl }}/api/#kantan.xpath.Query
 [`compile`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.Query$@compile[A](str:String)(implicitcmp:kantan.xpath.Compiler[A]):kantan.xpath.XPathResult[kantan.xpath.Query[kantan.xpath.DecodeResult[A]]]
 [`get`]:https://nrinaudo.github.io/kantan.codecs/api/index.html#kantan.codecs.Result@get:S

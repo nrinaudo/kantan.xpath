@@ -100,4 +100,7 @@ trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstance
 
   implicit def arbTuple1[A: Arbitrary]: Arbitrary[Tuple1[A]] =
     Arbitrary(arb[A].map(a ⇒ Tuple1(a)))
+
+  implicit def arbQuery[A: Arbitrary]: Arbitrary[Query[A]] =
+    Arbitrary(implicitly[Arbitrary[Node ⇒ A]].arbitrary.map(f ⇒ Query(f)))
 }

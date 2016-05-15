@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-package kantan.xpath.scalaz
+package kantan.xpath.cats
 
-import _root_.scalaz.std.anyVal._
 import arbitrary._
+import cats.laws.discipline.MonadTests
+import cats.std.all._
 import equality._
-import kantan.xpath.{DecodeError, ParseError, Query, ReadError}
-import scalaz.Equal
-import scalaz.scalacheck.ScalazProperties.{equal, monad}
+import kantan.xpath.Query
+import org.scalatest.FunSuite
+import org.scalatest.prop.GeneratorDrivenPropertyChecks
+import org.typelevel.discipline.scalatest.Discipline
 
-class InstancesTests extends ScalazSuite {
-  checkAll("ReadError", equal.laws[ReadError])
-  checkAll("DecodeError", equal.laws[DecodeError])
-  checkAll("ParseError", equal.laws[ParseError])
-  checkAll("Query", monad.laws[Query])
+class InstancesTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
+  checkAll("Query", MonadTests[Query].monad[Int, Int, Int])
 }

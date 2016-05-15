@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-package kantan.xpath.scalaz
+package kantan.xpath.cats
 
-import _root_.scalaz.std.anyVal._
-import arbitrary._
-import equality._
-import kantan.xpath.{DecodeError, ParseError, Query, ReadError}
-import scalaz.Equal
-import scalaz.scalacheck.ScalazProperties.{equal, monad}
+import _root_.cats.syntax.eq._
+import _root_.cats.Eq
+import kantan.xpath.Query
+import kantan.xpath.laws.discipline.arbitrary._
+import org.scalacheck.Arbitrary
 
-class InstancesTests extends ScalazSuite {
-  checkAll("ReadError", equal.laws[ReadError])
-  checkAll("DecodeError", equal.laws[DecodeError])
-  checkAll("ParseError", equal.laws[ParseError])
-  checkAll("Query", monad.laws[Query])
+object equality {
+  implicit def queryEq[A: Eq: Arbitrary]: Eq[Query[A]]= new Eq[Query[A]] {
+    implicit val arb = arbNode((a: A) ⇒ a.toString)
+    override def eqv(a1: Query[A], a2: Query[A]) =
+      kantan.codecs.laws.discipline.equality.eq(a1.eval, a2.eval) { (d1, d2) ⇒
+        d1 === d2
+      }
+  }
 }

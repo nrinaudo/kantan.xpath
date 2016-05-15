@@ -16,16 +16,18 @@
 
 package kantan.xpath.scalaz
 
-import _root_.scalaz.std.anyVal._
-import arbitrary._
-import equality._
-import kantan.xpath.{DecodeError, ParseError, Query, ReadError}
+import kantan.xpath.Query
+import kantan.xpath.laws.discipline.arbitrary._
+import org.scalacheck.Arbitrary
 import scalaz.Equal
-import scalaz.scalacheck.ScalazProperties.{equal, monad}
+import scalaz.syntax.equal._
 
-class InstancesTests extends ScalazSuite {
-  checkAll("ReadError", equal.laws[ReadError])
-  checkAll("DecodeError", equal.laws[DecodeError])
-  checkAll("ParseError", equal.laws[ParseError])
-  checkAll("Query", monad.laws[Query])
+object equality {
+  implicit def queryEqual[A: Equal: Arbitrary]: Equal[Query[A]]= new Equal[Query[A]] {
+    implicit val arb = arbNode((a: A) ⇒ a.toString)
+    override def equal(a1: Query[A], a2: Query[A]) =
+      kantan.codecs.laws.discipline.equality.eq(a1.eval, a2.eval) { (d1, d2) ⇒
+        d1 === d2
+      }
+  }
 }

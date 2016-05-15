@@ -58,7 +58,7 @@ trait XmlSource[-A] extends Serializable { self ⇒
   /** Evaluates the specified XPath expression against specified value. */
   def eval[B](a: A, expr: Query[DecodeResult[B]]): ReadResult[B] = for {
     node ← asNode(a)
-    b    ← expr(node)
+    b    ← expr.eval(node)
   } yield b
 
   /** Turns an `XmlSource[A]` into an `XmlSource[B]`.

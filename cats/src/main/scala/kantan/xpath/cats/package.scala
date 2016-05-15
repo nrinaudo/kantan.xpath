@@ -18,6 +18,7 @@ package kantan.xpath
 
 import _root_.cats.Eq
 import _root_.cats.functor.Contravariant
+import _root_.cats.Monad
 import kantan.codecs.cats.CatsInstances
 
 package object cats extends CatsInstances {
@@ -35,5 +36,11 @@ package object cats extends CatsInstances {
   /** `Contravariant` instance for `XmlSource`. */
   implicit val xmlSource = new Contravariant[XmlSource] {
     override def contramap[A, B](fa: XmlSource[A])(f: B ⇒ A) = fa.contramap(f)
+  }
+
+  implicit val queryMonad: Monad[Query] = new Monad[Query] {
+    override def flatMap[A, B](fa: Query[A])(f: A => Query[B]) = fa.flatMap(f)
+    override def map[A, B](fa: Query[A])(f: A => B) = fa.map(f)
+    override def pure[A](x: A) = Query(_ ⇒ x)
   }
 }

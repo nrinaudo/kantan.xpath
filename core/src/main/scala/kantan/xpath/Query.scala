@@ -20,11 +20,12 @@ package kantan.xpath
   *
   * Instance creation is achieved through the [[Query$ companion object]].
   */
-trait Query[A] extends (Node ⇒ A) { self ⇒
-  /** Turns this instance into a `Query[B]`. */
-  def map[B](f: A ⇒ B): Query[B] = new Query[B] {
-    override def apply(n: Node) = f(self(n))
-  }
+trait Query[A]  { self ⇒
+  def eval(n: Node): A
+
+  def map[B](f: A ⇒ B): Query[B] = Query(n ⇒ f(self.eval(n)))
+
+  def flatMap[B](f: A ⇒ Query[B]): Query[B] = Query(n ⇒ f(self.eval(n)).eval(n))
 }
 
 /** Provides convenient methods for XPath expression compilation.
@@ -33,8 +34,12 @@ trait Query[A] extends (Node ⇒ A) { self ⇒
   * implicit value.
   */
 object Query {
+  def apply[A](f: Node ⇒ A): Query[A] = new Query[A] {
+    override def eval(n: Node): A = f(n)
+  }
+
   /** Compiles the specified XPath expression. */
-  def compile[A](str: String)(implicit cmp: Compiler[A]): XPathResult[Query[DecodeResult[A]]] = cmp.compile(str)
+  def compile[A](str: String)(implicit cmp: Compiler[A]): CompileResult[Query[DecodeResult[A]]] = cmp.compile(str)
 
   /** Compiles the specified XPath expression.
     *

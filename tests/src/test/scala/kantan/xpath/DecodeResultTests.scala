@@ -32,4 +32,12 @@ class DecodeResultTests extends FunSuite with GeneratorDrivenPropertyChecks {
   test("DecodeResult.apply should return a failure on 'bad' values") {
     forAll { e: Exception ⇒ assert(DecodeResult(throw e) == Result.Failure(DecodeError.TypeError(e)))}
   }
+
+  test("DecodeResult.typeError(Exception) should return a type error") {
+    forAll { e: Exception ⇒ assert(DecodeResult.typeError(e) == Result.Failure(DecodeError.TypeError(e)))}
+  }
+
+  test("DecodeResult.typeError(String) should return a type error") {
+    forAll { s: String ⇒ assert(DecodeResult.typeError(s) == Result.Failure(DecodeError.TypeError(new Exception(s))))}
+  }
 }

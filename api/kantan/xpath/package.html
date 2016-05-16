@@ -280,7 +280,7 @@
     </span>
       
     </li><li name="kantan.xpath.NodeDecoder" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="NodeDecoder[A]=kantan.codecs.Decoder[kantan.xpath.package.Node,A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]"></a>
+      <a id="NodeDecoder[A]=kantan.codecs.Decoder[Option[kantan.xpath.package.Node],A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]"></a>
       <a id="NodeDecoder[A]:NodeDecoder[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -288,10 +288,10 @@
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">NodeDecoder</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <a href="https://nrinaudo.github.io/kantan.codecs/api/index.html#kantan.codecs.Decoder" class="extype" target="_top">Decoder</a>[<a href="#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>, <span class="extype" name="kantan.xpath.NodeDecoder.A">A</span>, <a href="DecodeError.html" class="extype" name="kantan.xpath.DecodeError">DecodeError</a>, <a href="codecs$.html" class="extype" name="kantan.xpath.codecs">codecs</a>.type]</span>
+        <span class="name">NodeDecoder</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> = <a href="https://nrinaudo.github.io/kantan.codecs/api/index.html#kantan.codecs.Decoder" class="extype" target="_top">Decoder</a>[<a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>], <span class="extype" name="kantan.xpath.NodeDecoder.A">A</span>, <a href="DecodeError.html" class="extype" name="kantan.xpath.DecodeError">DecodeError</a>, <a href="codecs$.html" class="extype" name="kantan.xpath.codecs">codecs</a>.type]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#kantan.xpath.package@NodeDecoder[A]=kantan.codecs.Decoder[kantan.xpath.package.Node,A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]" title="Permalink" target="_top">
+      <a href="../../index.html#kantan.xpath.package@NodeDecoder[A]=kantan.codecs.Decoder[Option[kantan.xpath.package.Node],A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -312,7 +312,7 @@
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Provides default <a href="#NodeDecoder[A]=kantan.codecs.Decoder[kantan.xpath.package.Node,A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]" class="extmbr" name="kantan.xpath.NodeDecoder">NodeDecoder</a> instances.</p>
+      <p class="shortcomment cmt">Provides default <a href="#NodeDecoder[A]=kantan.codecs.Decoder[Option[kantan.xpath.package.Node],A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]" class="extmbr" name="kantan.xpath.NodeDecoder">NodeDecoder</a> instances.</p>
     </li><li name="kantan.xpath.NodeList" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="NodeList=org.w3c.dom.NodeList"></a>
       <a id="NodeList:NodeList"></a>
@@ -366,7 +366,7 @@
       <p class="shortcomment cmt">Represents the result of taking some raw data and turning it into a usable type.</p><div class="fullcomment"><div class="comment cmt"><p>Represents the result of taking some raw data and turning it into a usable type.</p><p>Creation methods can be found in the <a href="ParseResult$.html" class="extype" name="kantan.xpath.ParseResult">companion object</a>.
 </p></div><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p>kantan.codecs.Result</p></span></dd></dl></div>
     </li><li name="kantan.xpath.Query" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="Query[A]extendskantan.xpath.Node=&gt;A"></a>
+      <a id="Query[A]extendsAnyRef"></a>
       <a id="Query[A]:Query[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -374,10 +374,10 @@
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="Query.html"><span class="name">Query</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends (<a href="#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>) ⇒ <span class="extype" name="kantan.xpath.Query.A">A</span></span>
+        <a href="Query.html"><span class="name">Query</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#kantan.xpath.package@Query[A]extendskantan.xpath.Node=&gt;A" title="Permalink" target="_top">
+      <a href="../../index.html#kantan.xpath.package@Query[A]extendsAnyRef" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -530,7 +530,7 @@ process to tidy up messy HTML documents.
       </a>
     </span>
       <p class="shortcomment cmt">Type class for turning instances of <code>A</code> into valid instances of <a href="#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Type class for turning instances of <code>A</code> into valid instances of <a href="#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>.</p><p>While it's certainly possible, instances of <a href="XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a> are rarely used directly. The preferred, idiomatic way
-is to use the implicit syntax provided by <a href="ops$$XmlSourceOps.html" class="extype" name="kantan.xpath.ops.XmlSourceOps">XmlSourceOps</a>, brought in scope by
+is to use the implicit syntax provided by <a href="ops/XmlSourceOps.html" class="extype" name="kantan.xpath.ops.XmlSourceOps">XmlSourceOps</a>, brought in scope by
 importing <code>kantan.xpath.ops._</code>.</p><p>See the <a href="XmlSource$.html" class="extype" name="kantan.xpath.XmlSource">companion object</a> for construction methods and default instances.
 </p></div></div>
     </li></ol>
@@ -773,10 +773,10 @@ implementation.
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">object</span>
+        <span class="kind">package</span>
       </span>
       <span class="symbol">
-        <a href="ops$.html"><span class="name">ops</span></a>
+        <a href="ops/package.html"><span class="name">ops</span></a>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#kantan.xpath.package@ops" title="Permalink" target="_top">

@@ -58,13 +58,6 @@ res2: kantan.xpath.ReadResult[List[Int]] = Success(List(1, 2, 3, 4))
 Note that since compiled queries carry the information of the type they return, you don't need to specify type
 parameters to [`evalXPath`].
 
-[`Query`] also acts as a `Node ⇒ A`, which means you can apply them directly on an XML document:
-
-```scala
-scala> rawData.asNode.flatMap(query)
-res3: kantan.codecs.Result[kantan.xpath.ReadError,List[Int]] = Success(List(1, 2, 3, 4))
-```
-
 [`Query`]:{{ site.baseUrl }}/api/#kantan.xpath.Query
 [`compile`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.Query$@compile[A](str:String)(implicitcmp:kantan.xpath.Compiler[A]):kantan.xpath.XPathResult[kantan.xpath.Query[kantan.xpath.DecodeResult[A]]]
 [`get`]:https://nrinaudo.github.io/kantan.codecs/api/index.html#kantan.codecs.Result@get:S

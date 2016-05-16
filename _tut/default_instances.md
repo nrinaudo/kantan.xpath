@@ -68,6 +68,18 @@ scala> "<root><either>123</either><either>true</either></root>".evalXPath[List[E
 res2: kantan.xpath.XPathResult[List[Either[Int,Boolean]]] = Success(List(Left(123), Right(true)))
 ```
 
+### `Option`
+
+For any type `A` that has a [`NodeDecoder`], there exists a [`NodeDecoder[Option[A]]`][`NodeDecoder`].
+
+
+This is useful for XML where some nodes or attributes are optional. For example: 
+
+
+```scala
+scala> "<root><opt value='123'/><opt/></root>".evalXPath[List[Option[Int]]]("//opt/@value")
+res3: kantan.xpath.XPathResult[List[Option[Int]]] = Success(List(Some(123)))
+```
 
 ## `XmlSource`
 

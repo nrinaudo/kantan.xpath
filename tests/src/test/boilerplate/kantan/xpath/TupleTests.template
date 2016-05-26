@@ -1,6 +1,5 @@
 package kantan.xpath
 
-import kantan.codecs.laws._
 import kantan.xpath.laws.discipline.NodeDecoderTests
 import kantan.xpath.laws.discipline.arbitrary._
 import kantan.xpath.ops._

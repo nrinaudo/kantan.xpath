@@ -16,12 +16,11 @@
 
 package kantan.xpath.scalaz
 
+import _root_.scalaz.scalacheck.ScalazProperties.{equal, monad}
 import _root_.scalaz.std.anyVal._
-import arbitrary._
-import equality._
-import kantan.xpath.{DecodeError, ParseError, Query, ReadError}
-import scalaz.Equal
-import scalaz.scalacheck.ScalazProperties.{equal, monad}
+import kantan.xpath._
+import kantan.xpath.scalaz.arbitrary._
+import kantan.xpath.scalaz.equality._
 
 class InstancesTests extends ScalazSuite {
   checkAll("ReadError", equal.laws[ReadError])

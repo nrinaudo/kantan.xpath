@@ -19,7 +19,6 @@ package kantan.xpath
 import kantan.codecs.Result
 import kantan.codecs.Result.{Failure, Success}
 import kantan.codecs.laws.CodecValue
-import kantan.xpath.laws.discipline.NodeValue
 import kantan.xpath.laws.discipline.arbitrary._
 import kantan.xpath.ops._
 import org.scalacheck.Arbitrary

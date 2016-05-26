@@ -17,6 +17,7 @@
 package kantan.xpath.cats
 
 import _root_.cats.data.Xor
+import kantan.xpath.Node
 import kantan.xpath.cats.arbitrary._
 import kantan.xpath.laws.discipline.NodeDecoderTests
 import org.scalatest.FunSuite
@@ -24,5 +25,8 @@ import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline
 
 class XorDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
+  implicit val legalNode = arbLegalXor[Option[Node], Int, Boolean]
+  implicit val illegalNode = arbIllegalXor[Option[Node], Int, Boolean]
+
   checkAll("NodeDecoder[Int Xor Boolean]", NodeDecoderTests[Int Xor Boolean].decoder[Int, Int])
 }

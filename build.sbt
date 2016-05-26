@@ -41,7 +41,7 @@ lazy val baseSettings = Seq(
     Resolver.sonatypeRepo("releases"),
     Resolver.sonatypeRepo("snapshots")
   ),
-  coverageExcludedPackages := "kantan\\.xpath\\.laws\\..*",
+  ScoverageSbtPlugin.ScoverageKeys.coverageExcludedPackages := "kantan\\.xpath\\.laws\\..*",
   incOptions     := incOptions.value.withNameHashing(true)
 )
 

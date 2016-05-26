@@ -16,13 +16,17 @@
 
 package kantan.xpath.scalaz
 
+import _root_.scalaz.\/
+import kantan.xpath._
 import kantan.xpath.laws.discipline.NodeDecoderTests
 import kantan.xpath.scalaz.arbitrary._
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline
-import scalaz.\/
 
 class DisjunctionDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
+  implicit val legalNode = arbLegalDisjunction[Option[Node], Int, Boolean]
+  implicit val illegalNode = arbIllegalDisjunction[Option[Node], Int, Boolean]
+
   checkAll("NodeDecoder[Int \\/ Boolean]", NodeDecoderTests[Int \/ Boolean].decoder[Int, Int])
 }

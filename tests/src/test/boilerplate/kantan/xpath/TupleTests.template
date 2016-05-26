@@ -1,19 +1,26 @@
 package kantan.xpath
 
+import kantan.codecs.laws._
 import kantan.xpath.laws.discipline.NodeDecoderTests
 import kantan.xpath.laws.discipline.arbitrary._
-import org.scalatest.FunSuite
 import kantan.xpath.ops._
+import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline
 
 class TupleTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
-  [#implicit val intDecoder1: NodeDecoder[Tuple1[[#Int#]]] = NodeDecoder.tuple([#"@field1".xpath[Int]#])
+  [#// This is necessary for scala 2.10
+  implicit val legalInt1 = arbLegalTuple1[[#Int#]]
+  implicit val illegalInt1 = arbIllegalTuple1[[#Int#]]
+  implicit val intDecoder1: NodeDecoder[Tuple1[[#Int#]]] = NodeDecoder.tuple([#"@field1".xpath[Int]#])
   checkAll("NodeDecoder[Tuple1[[#Int#]]]", NodeDecoderTests[Tuple1[[#Int#]]].decoder[Int, Int])#
 
   ]
 
-  [#implicit val floatDecoder1: NodeDecoder[Tuple1[[#Float#]]] = NodeDecoder.tuple[[#Float#]]([#"@field1"#]).get
+  [#// This is necessary for scala 2.10
+  implicit val legalFloat1 = arbLegalTuple1[[#Float#]]
+  implicit val illegalFloat1 = arbIllegalTuple1[[#Float#]]
+  implicit val floatDecoder1: NodeDecoder[Tuple1[[#Float#]]] = NodeDecoder.tuple[[#Float#]]([#"@field1"#]).get
   checkAll("NodeDecoder[Tuple1[[#Float#]]]", NodeDecoderTests[Tuple1[[#Float#]]].decoder[Int, Int])#
 
   ]

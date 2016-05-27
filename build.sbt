@@ -4,13 +4,10 @@ import UnidocKeys._
 import de.heikoseeberger.sbtheader.license.Apache2_0
 
 val kantanCodecsVersion  = "0.1.6-SNAPSHOT"
-val catsVersion          = "0.5.0"
 val macroParadiseVersion = "2.1.0"
 val nekoHtmlVersion      = "1.9.22"
 val scalatestVersion     = "3.0.0-M9"
-val scalaCheckVersion    = "1.12.5"
 val scalazVersion        = "7.2.2"
-val disciplineVersion    = "0.4"
 
 lazy val buildSettings = Seq(
   organization       := "com.nrinaudo",
@@ -52,6 +49,7 @@ lazy val baseSettings = Seq(
     Resolver.sonatypeRepo("releases"),
     Resolver.sonatypeRepo("snapshots")
   ),
+  libraryDependencies ++= macroDependencies(scalaVersion.value),
   ScoverageSbtPlugin.ScoverageKeys.coverageExcludedPackages := "kantan\\.xpath\\.laws\\..*",
   incOptions     := incOptions.value.withNameHashing(true)
 )
@@ -173,9 +171,7 @@ lazy val laws = project
     name       := "laws"
   )
   .settings(libraryDependencies ++= Seq(
-    "com.nrinaudo"   %% "kantan.codecs-laws" % kantanCodecsVersion,
-    "org.scalacheck" %% "scalacheck" % scalaCheckVersion,
-    "org.typelevel"  %% "discipline" % disciplineVersion
+    "com.nrinaudo" %% "kantan.codecs-laws" % kantanCodecsVersion
   ))
   .enablePlugins(spray.boilerplate.BoilerplatePlugin)
   .settings(allSettings: _*)
@@ -217,5 +213,12 @@ lazy val docs = project
   .settings(noPublishSettings:_*)
   .dependsOn(core, nekohtml)
   .enablePlugins(AutomateHeaderPlugin)
+
+
+def macroDependencies(v: String): List[ModuleID] =
+  ("org.scala-lang" % "scala-reflect" % v % "provided") :: {
+    if(v.startsWith("2.10")) List(compilerPlugin("org.scalamacros" % "paradise" % macroParadiseVersion cross CrossVersion.full))
+    else Nil
+  }
 
 addCommandAlias("validate", "; clean; scalastyle; test:scalastyle; coverage; test; coverageReport; coverageAggregate; docs/makeSite")

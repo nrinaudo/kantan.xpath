@@ -21,7 +21,7 @@ import kantan.codecs.Result
 
 /** Compiles XPath expressions.
   *
-  * There's always a [[XPathCompiler$.builtInt default instance]] in scope, which should be perfectly suitable for
+  * There's always a [[XPathCompiler$.builtIn default instance]] in scope, which should be perfectly suitable for
   * most circumstances. Still, if some non-standard options are required, one can always declare a local implicit
   * instance.
   */

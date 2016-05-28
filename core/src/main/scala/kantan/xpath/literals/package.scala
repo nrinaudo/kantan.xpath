@@ -25,22 +25,18 @@ package object literals extends ToXPathLiteral {
   def xpImpl(c: Context)(args: c.Expr[Any]*): c.Expr[XPathExpression] = {
     import c.universe._
 
-    c.inferImplicitValue(c.typeOf[XPathCompiler], silent = true) match {
-      case EmptyTree ⇒ c.abort(c.enclosingPosition, "No implicit xpath compiler in scope")
-      case t ⇒
-        c.prefix.tree match {
-          case Apply(_, List(Apply(_, List(lit@Literal(Constant(xpath: String)))))) ⇒
-            try {
-              compiler.compile(xpath)
-              c.Expr(q"($t: kantan.xpath.XPathCompiler).compile($lit).get")
-            }
-            catch {
-              case e: Exception ⇒ c.abort(c.enclosingPosition, s"Illegal xpath expression: $xpath")
-            }
-
-          case _ ⇒
-            c.abort(c.enclosingPosition, s"xp can only be used on string literals")
+    c.prefix.tree match {
+      case Apply(_, List(Apply(_, List(lit@Literal(Constant(xpath: String)))))) ⇒
+        try {
+          compiler.compile(xpath)
+          reify(implicitly[XPathCompiler].compile(c.Expr[String](lit).splice).get)
         }
+        catch {
+          case e: Exception ⇒ c.abort(c.enclosingPosition, s"Illegal xpath expression: $xpath")
+        }
+
+      case _ ⇒
+        c.abort(c.enclosingPosition, "xp can only be used on string literals")
     }
   }
 }

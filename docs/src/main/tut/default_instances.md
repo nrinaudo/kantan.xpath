@@ -39,7 +39,7 @@ an implicit [`DateFormat`] instance in scope, and will decode using that format.
 We could for example declare a formatter for something ISO 8601-like:
 
 ```tut:silent
-import kantan.xpath.ops._
+import kantan.xpath.implicits._
 import java.util.{Locale, Date}
 
 implicit val formatter = new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH)
@@ -48,7 +48,7 @@ implicit val formatter = new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S
 And we're now capable of decoding XML content as dates:
 
 ```tut
-"<date>2000-01-00T00:00:00.000</date>".evalXPath[Date]("/date")
+"<date>2000-01-00T00:00:00.000</date>".evalXPath[Date](xp"/date")
 ```
 
 Note that kantan.xpath has a joda-time module, a very well thought out alternative to `java.util.Date`. 
@@ -63,7 +63,7 @@ This is useful for dodgy XML data where the type of a value is not well defined 
 sometimes a boolean, for example:
 
 ```tut
-"<root><either>123</either><either>true</either></root>".evalXPath[List[Either[Int, Boolean]]]("//either")
+"<root><either>123</either><either>true</either></root>".evalXPath[List[Either[Int, Boolean]]](xp"//either")
 ```
 
 ### `Option`
@@ -75,7 +75,7 @@ This is useful for XML where some nodes or attributes are optional. For example:
 
 
 ```tut
-"<root><opt value='123'/><opt/></root>".evalXPath[List[Option[Int]]]("//opt/@value")
+"<root><opt value='123'/><opt/></root>".evalXPath[List[Option[Int]]](xp"//opt/@value")
 ```
 
 ## `XmlSource`

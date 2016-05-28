@@ -29,19 +29,16 @@ one XPath expression per field to extract:
 
 ```tut:silent
 import kantan.xpath._
-import kantan.xpath.ops._
+import kantan.xpath.implicits._
 
-implicit val elementDecoder = NodeDecoder.tuple[Int, Boolean]("./@id", "./@enabled").get
+implicit val elementDecoder = NodeDecoder.tuple[Int, Boolean](xp"./@id", xp"./@enabled")
 ```
-
-It's worth pointing out that we had to call [`get`] on the result of that call: [`tuple`] might fail if one of the
-specified XPath expressions is not legal, and its result is wrapped in a [`CompileResult`].
 
 Now that we have told kantan.xpath how to decode an XML node to an instance of `(Int, Boolean)`, we can simply call
 [`evalXPath`] with the right type parameters:
 
 ```tut
-rawData.evalXPath[List[(Int, Boolean)]]("//element")
+rawData.evalXPath[List[(Int, Boolean)]](xp"//element")
 ```
 
 [`NodeDecoder`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.package@NodeDecoder[A]=kantan.codecs.Decoder[kantan.xpath.package.Node,A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]

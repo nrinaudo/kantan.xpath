@@ -28,7 +28,7 @@ import scala.collection.mutable
   */
 trait Compiler[A] {
   /** Turns the specified XPath expression into a valid [[Query]]. */
-  def compile(str: String): CompileResult[Query[DecodeResult[A]]]
+  def compile(expr: XPathExpression): Query[DecodeResult[A]]
 }
 
 /** Provides implicit methods to summon [[Compiler]] instances. */
@@ -37,15 +37,15 @@ object Compiler {
   type Id[A] = A
 
   /** Compiles XPath expressions into [[Query]] instances that will only retrieve the first match. */
-  implicit def xpath1[A](implicit xpath: XPathCompiler, da: NodeDecoder[A]): Compiler[Id[A]] = new Compiler[Id[A]] {
-    override def compile(str: String) = xpath.compile(str).map(expr ⇒ Query { n ⇒
+  implicit def xpath1[A](implicit da: NodeDecoder[A]): Compiler[Id[A]] = new Compiler[Id[A]] {
+    override def compile(expr: XPathExpression) = Query { n ⇒
       da.decode(Option(expr.evaluate(n, XPathConstants.NODE).asInstanceOf[Node]))
-    })
+    }
   }
 
   /** Compiles XPath expressions into [[Query]] instances that retrieve very match. */
   implicit def xpathN[F[_], A]
-  (implicit xpath: XPathCompiler, da: NodeDecoder[A], cbf: CanBuildFrom[Nothing, A, F[A]]): Compiler[F[A]] =
+  (implicit da: NodeDecoder[A], cbf: CanBuildFrom[Nothing, A, F[A]]): Compiler[F[A]] =
     new Compiler[F[A]] {
       def fold(i: Int, nodes: NodeList, out: mutable.Builder[A, F[A]]): DecodeResult[F[A]] = {
         if(i < nodes.getLength) {
@@ -60,9 +60,8 @@ object Compiler {
 
       }
 
-      override def compile(str: String) =
-        xpath.compile(str).map(expr ⇒ Query { n ⇒
-          fold(0, expr.evaluate(n, XPathConstants.NODESET).asInstanceOf[NodeList], cbf())
-        })
+      override def compile(expr: XPathExpression) = Query { n ⇒
+        fold(0, expr.evaluate(n, XPathConstants.NODESET).asInstanceOf[NodeList], cbf())
+      }
     }
 }

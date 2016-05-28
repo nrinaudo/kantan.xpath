@@ -19,8 +19,8 @@ package kantan.xpath
 import kantan.codecs.Result
 import kantan.codecs.Result.{Failure, Success}
 import kantan.codecs.laws.CodecValue
+import kantan.xpath.implicits._
 import kantan.xpath.laws.discipline.arbitrary._
-import kantan.xpath.ops._
 import org.scalacheck.Arbitrary
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
@@ -43,7 +43,7 @@ class XmlSourceOpsTests extends FunSuite with GeneratorDrivenPropertyChecks {
 
 
   test("XmlSource instances should have a working asNode method") {
-    forAll { value: Value[Int] ⇒ assert(cmp(value, value.encoded.asNode.flatMap(_.evalXPath[Int]("/element")))) }
+    forAll { value: Value[Int] ⇒ assert(cmp(value, value.encoded.asNode.flatMap(_.evalXPath[Int](xp"/element")))) }
   }
 
   // This test is not as good as it could be - we're not comparing decoded XML. The reason for that is that, apparently,
@@ -59,7 +59,7 @@ class XmlSourceOpsTests extends FunSuite with GeneratorDrivenPropertyChecks {
   }
 
   test("XmlSource instances should have a working evalXPath(String) method") {
-    forAll { value: Value[Int] ⇒ assert(cmp(value, value.encoded.evalXPath[Int]("/element"))) }
+    forAll { value: Value[Int] ⇒ assert(cmp(value, value.encoded.evalXPath[Int](xp"/element"))) }
   }
 
   test("XmlSource instances should have a working evalXPath(Expression) method") {
@@ -67,7 +67,7 @@ class XmlSourceOpsTests extends FunSuite with GeneratorDrivenPropertyChecks {
   }
 
   test("XmlSource instances should have a working unsafeEvalXPath(String) method") {
-    forAll { value: Value[Int] ⇒ assert(cmp(value, Try(value.encoded.unsafeEvalXPath[Int]("/element")))) }
+    forAll { value: Value[Int] ⇒ assert(cmp(value, Try(value.encoded.unsafeEvalXPath[Int](xp"/element")))) }
   }
 
   test("XmlSource instances should have a working unsafeEvalXPath(Expression) method") {

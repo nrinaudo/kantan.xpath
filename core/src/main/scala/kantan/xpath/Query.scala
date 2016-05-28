@@ -39,13 +39,14 @@ object Query {
   }
 
   /** Compiles the specified XPath expression. */
-  def compile[A](str: String)(implicit cmp: Compiler[A]): CompileResult[Query[DecodeResult[A]]] = cmp.compile(str)
+  def compile[A](str: String)(implicit cmp: Compiler[A], xpath: XPathCompiler): CompileResult[Query[DecodeResult[A]]] =
+    xpath.compile(str).map(cmp.compile)
 
   /** Compiles the specified XPath expression.
     *
     * Note that this method is unsafe - if the specified XPath expression is not valid, an exception will be thrown.
     * [[compile]] should almost always be preferred.
     */
-  def unsafeCompile[A](str: String)(implicit cmp: Compiler[A]): Query[DecodeResult[A]] =
+  def unsafeCompile[A](str: String)(implicit cmp: Compiler[A], xpath: XPathCompiler): Query[DecodeResult[A]] =
     Query.compile(str).getOrElse(sys.error(s"Not a valid XPath expression: '$str'."))
 }

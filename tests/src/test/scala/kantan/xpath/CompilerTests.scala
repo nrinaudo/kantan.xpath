@@ -21,8 +21,8 @@ import _root_.cats.std.list._
 import cats._
 import kantan.codecs.Result
 import kantan.codecs.laws.CodecValue
+import kantan.xpath.implicits._
 import kantan.xpath.laws.discipline.arbitrary._
-import kantan.xpath.ops._
 import org.scalacheck.Arbitrary
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
@@ -48,19 +48,19 @@ class CompilerTests extends FunSuite with GeneratorDrivenPropertyChecks {
 
   test("'first' expressions should fail on illegal values and succeed on legal ones") {
     forAll { value: Value[Int] ⇒
-      assert(value.encoded.evalXPath[Int]("//element") == NodeDecoder[Int].decode(Option(value.encoded)))
+      assert(value.encoded.evalXPath[Int](xp"//element") == NodeDecoder[Int].decode(Option(value.encoded)))
     }
   }
 
   test("'first' expressions should fail on empty results") {
-      forAll { value: Value[Int] ⇒
-        assert(value.encoded.evalXPath[Int]("//element2") == Result.Failure(DecodeError.NotFound))
-      }
+    forAll { value: Value[Int] ⇒
+      assert(value.encoded.evalXPath[Int](xp"//element2") == Result.Failure(DecodeError.NotFound))
     }
+  }
 
   test("'all' expressions should fail on lists containing at least one illegal value and succeed on others") {
     forAll { values: List[Value[Int]] ⇒
-      assert(encodeAll(values).evalXPath[List[Int]]("//element") ==
+      assert(encodeAll(values).evalXPath[List[Int]](xp"//element") ==
              values.map(v ⇒ NodeDecoder[Int].decode(Option(v.encoded))).sequenceU)
     }
   }

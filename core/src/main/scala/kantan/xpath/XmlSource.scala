@@ -45,12 +45,12 @@ trait XmlSource[-A] extends Serializable { self ⇒
   def asUnsafeNode(a: A): Node = asNode(a).get
 
   /** Compiles the specified XPath expression and evaluates it against specified value. */
-  def unsafeEval[B](a: A, expr: String)(implicit cmp: Compiler[B]): B =
+  def unsafeEval[B](a: A, expr: XPathExpression)(implicit cmp: Compiler[B]): B =
     eval(a, expr).get
 
   /** Compiles the specified XPath expression and evaluates it against the specified value. */
-  def eval[B](a: A, expr: String)(implicit cmp: Compiler[B]): XPathResult[B] =
-    cmp.compile(expr).flatMap(e ⇒ eval(a, e))
+  def eval[B](a: A, expr: XPathExpression)(implicit cmp: Compiler[B]): XPathResult[B] =
+    eval(a, cmp.compile(expr))
 
   /** Evaluates the specified XPath expression against specified value. */
   def unsafeEval[B](a: A, expr: Query[DecodeResult[B]]): B = eval(a, expr).get

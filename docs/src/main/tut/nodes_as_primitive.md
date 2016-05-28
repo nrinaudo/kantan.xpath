@@ -22,14 +22,14 @@ We'll then need to import kantan.xpath's syntax, which will let us evaluate XPat
 that can be turned into an XML document:
 
 ```tut:silent
-import kantan.xpath.ops._
+import kantan.xpath.implicits._
 ```
 
 This allows us to write the following code, which will attempt to extract the `id` field of any `element` node as an
 `Int`:
 
 ```tut
-rawData.evalXPath[Int]("//element/@id")
+rawData.evalXPath[Int](xp"//element/@id")
 ```
 
 
@@ -41,14 +41,14 @@ of your code. For example:
 
 ```tut
 // Note that we're trying to parse ints as URLs.
-rawData.evalXPath[java.net.URL]("//element/@id")
+rawData.evalXPath[java.net.URL](xp"//element/@id")
 ```
 
 In some cases, however, we don't really care for runtime safety and are fine with our program crashing at the first
 error. This is what the [`unsafeEvalXPath`] method was designed for:  
 
 ```tut
-rawData.unsafeEvalXPath[Int]("//element/@id")
+rawData.unsafeEvalXPath[Int](xp"//element/@id")
 ```
 
 
@@ -59,14 +59,14 @@ type, we told kantan.xpath that we only wanted the first result. We could get th
 
 
 ```tut
-rawData.evalXPath[List[Int]]("//element/@id")
+rawData.evalXPath[List[Int]](xp"//element/@id")
 ```
 
 Any type constructor that has a [`CanBuildFrom`] instance could have been used instead of [`List`] - that's essentially
 all collections. By the same token, any primitive time could have been used instead of `Int`. For example:
 
 ```tut
-rawData.evalXPath[Vector[Boolean]]("//element/@enabled")
+rawData.evalXPath[Vector[Boolean]](xp"//element/@enabled")
 ```
 
 [`evalXPath`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.ops$$XmlSourceOps@evalXPath[B](expr:String)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]

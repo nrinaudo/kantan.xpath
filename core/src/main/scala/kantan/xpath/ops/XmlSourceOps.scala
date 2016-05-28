@@ -16,7 +16,7 @@
 
 package kantan.xpath.ops
 
-import kantan.xpath.{Compiler, Query, _}
+import kantan.xpath._
 
 /** Provides syntax for all types that have an implicit instance of [[XmlSource]] in scope.
   *
@@ -33,11 +33,9 @@ final class XmlSourceOps[A](val a: A) extends AnyVal {
   /** Shorthand for [[XmlSource.asUnsafeNode]]. */
   def asUnsafeNode(implicit source: XmlSource[A]): Node = source.asUnsafeNode(a)
 
-  /** Shorthand for [[XmlSource.unsafeEval[B](a:A,expr:String)*]]. */
-  def unsafeEvalXPath[B: Compiler](expr: String)(implicit source: XmlSource[A]): B = source.unsafeEval(a, expr)
+  def unsafeEvalXPath[B: Compiler](expr: XPathExpression)(implicit source: XmlSource[A]): B = source.unsafeEval(a, expr)
 
-  /** Shorthand for [[XmlSource.eval[B](a:A,expr:String)*]]. */
-  def evalXPath[B: Compiler](expr: String)(implicit source: XmlSource[A]): XPathResult[B] =
+  def evalXPath[B: Compiler](expr: XPathExpression)(implicit source: XmlSource[A]): XPathResult[B] =
     source.eval(a, expr)
 
   def unsafeEvalXPath[B](expr: Query[DecodeResult[B]])(implicit source: XmlSource[A]): B =

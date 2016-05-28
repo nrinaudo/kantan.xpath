@@ -35,21 +35,18 @@ instance creation function to provide as a parameter and will need to write it o
 
 ```tut:silent
 import kantan.xpath._
-import kantan.xpath.ops._
+import kantan.xpath.implicits._
 
-implicit val elDecoder = NodeDecoder.decoder("./@id", "./@enabled") { (id: Int, enabled: Boolean) ⇒
+implicit val elDecoder = NodeDecoder.decoder(xp"./@id", xp"./@enabled") { (id: Int, enabled: Boolean) ⇒
   new El(id, enabled)
-}.get
+}
 ```
-
-It's worth pointing out that we had to call [`get`] on the result of that call: [`decoder`] might fail if one of the
-specified XPath expressions is not legal, and its result is wrapped in a [`CompileResult`].
 
 Now that we have told kantan.xpath how to decode an XML node to an instance of `El`, we can simply call
 [`evalXPath`] with the right type parameters:
 
 ```tut
-rawData.evalXPath[List[El]]("//element")
+rawData.evalXPath[List[El]](xp"//element")
 ```
 
 [`NodeDecoder`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.package@NodeDecoder[A]=kantan.codecs.Decoder[kantan.xpath.package.Node,A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]

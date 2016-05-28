@@ -16,7 +16,7 @@
 
 package kantan.xpath
 
-import javax.xml.xpath.{XPathExpression, XPathFactory}
+import javax.xml.xpath.XPathFactory
 import kantan.codecs.Result
 
 /** Compiles XPath expressions.
@@ -36,7 +36,7 @@ object XPathCompiler {
   }
 
   /** Default compiler, always in scope. */
-  implicit val builtInt: XPathCompiler = {
+  implicit val builtIn: XPathCompiler = {
     val xpath = XPathFactory.newInstance().newXPath()
     XPathCompiler(str ⇒ Result.nonFatal(xpath.compile(str)).leftMap(CompileError.apply))
   }

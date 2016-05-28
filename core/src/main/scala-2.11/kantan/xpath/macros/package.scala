@@ -16,4 +16,6 @@
 
 package kantan.xpath
 
-package object ops extends AllOps
+package object macros {
+  type Context = scala.reflect.macros.blackbox.Context
+}

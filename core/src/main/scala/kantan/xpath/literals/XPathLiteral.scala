@@ -14,6 +14,14 @@
  * limitations under the License.
  */
 
-package kantan.xpath
+package kantan.xpath.literals
 
-package object ops extends AllOps
+import kantan.xpath.XPathExpression
+
+class XPathLiteral(val sc: StringContext) extends AnyVal {
+  def xp(args: Any*): XPathExpression = macro xpImpl
+}
+
+trait ToXPathLiteral {
+  implicit def toXPathLiteral(sc: StringContext): XPathLiteral = new XPathLiteral(sc)
+}

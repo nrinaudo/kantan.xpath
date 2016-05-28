@@ -16,4 +16,7 @@
 
 package kantan.xpath
 
-package object ops extends AllOps
+import kantan.xpath.literals.ToXPathLiteral
+import kantan.xpath.ops.AllOps
+
+object implicits extends ToXPathLiteral with AllOps

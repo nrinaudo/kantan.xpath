@@ -76,4 +76,5 @@ package object xpath {
   type Attr = org.w3c.dom.Attr
   type NodeList = org.w3c.dom.NodeList
   type InputSource = org.xml.sax.InputSource
+  type XPathExpression = javax.xml.xpath.XPathExpression
 }

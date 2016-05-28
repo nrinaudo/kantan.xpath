@@ -64,10 +64,4 @@ class CompilerTests extends FunSuite with GeneratorDrivenPropertyChecks {
              values.map(v ⇒ NodeDecoder[Int].decode(Option(v.encoded))).sequenceU)
     }
   }
-
-  test("Illegal expressions should fail to compile") {
-    assert(Query.compile[Int]("/@!@#-").isFailure)
-    intercept[Exception] {"/@!@#-".xpath[Int]}
-    ()
-  }
 }

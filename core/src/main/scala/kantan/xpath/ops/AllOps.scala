@@ -16,4 +16,4 @@
 
 package kantan.xpath.ops
 
-trait AllOps extends ToExpressionOps with ToStringOps with ToXmlSourceOps
+trait AllOps extends ToExpressionOps with ToXmlSourceOps

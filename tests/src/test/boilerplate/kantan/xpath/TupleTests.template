@@ -9,14 +9,6 @@ import org.typelevel.discipline.scalatest.Discipline
 
 class TupleTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
   [#// This is necessary for scala 2.10
-  implicit val legalInt1 = arbLegalTuple1[[#Int#]]
-  implicit val illegalInt1 = arbIllegalTuple1[[#Int#]]
-  implicit val intDecoder1: NodeDecoder[Tuple1[[#Int#]]] = NodeDecoder.tuple([#"@field1".xpath[Int]#])
-  checkAll("NodeDecoder[Tuple1[[#Int#]]]", NodeDecoderTests[Tuple1[[#Int#]]].decoder[Int, Int])#
-
-  ]
-
-  [#// This is necessary for scala 2.10
   implicit val legalFloat1 = arbLegalTuple1[[#Float#]]
   implicit val illegalFloat1 = arbIllegalTuple1[[#Float#]]
   implicit val floatDecoder1: NodeDecoder[Tuple1[[#Float#]]] = NodeDecoder.tuple[[#Float#]]([#xp"@field1"#])

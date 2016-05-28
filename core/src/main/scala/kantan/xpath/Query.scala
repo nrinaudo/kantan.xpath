@@ -38,15 +38,14 @@ object Query {
     override def eval(n: Node): A = f(n)
   }
 
+  def compile[A](expr: XPathExpression)(implicit cmp: Compiler[A]): Query[DecodeResult[A]] =
+    cmp.compile(expr)
+
   /** Compiles the specified XPath expression. */
   def compile[A](str: String)(implicit cmp: Compiler[A], xpath: XPathCompiler): CompileResult[Query[DecodeResult[A]]] =
     xpath.compile(str).map(cmp.compile)
 
-  /** Compiles the specified XPath expression.
-    *
-    * Note that this method is unsafe - if the specified XPath expression is not valid, an exception will be thrown.
-    * [[compile]] should almost always be preferred.
-    */
+  /** Compiles the specified XPath expression. */
   def unsafeCompile[A](str: String)(implicit cmp: Compiler[A], xpath: XPathCompiler): Query[DecodeResult[A]] =
     Query.compile(str).getOrElse(sys.error(s"Not a valid XPath expression: '$str'."))
 }

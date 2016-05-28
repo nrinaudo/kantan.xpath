@@ -27,19 +27,11 @@ expression is done through [`compile`]:
 
 ```tut:silent
 import kantan.xpath._
-import kantan.xpath.ops._
+import kantan.xpath.implicits._
 
-val query = Query.compile[List[Int]]("//element/@id").get
+val query = Query.compile[List[Int]](xp"//element/@id")
 ```
 
-Note that we called [`get`] on the return value: compiling an XPath expression might fail if the expression is invalid,
-and [`compile`] wraps its return value in a [`CompileResult`]. It's usually better to deal with errors rather than
-let them turn into runtime exceptions, but if you don't mind them, you can also use the [`xpath`] method that enriches
-strings:
-
-```tut:silent
-val query = "//element/@id".xpath[List[Int]]
-```
 
 You can now use the compiled query where you used to specify strings, such as in [`evalXPath`]:
 

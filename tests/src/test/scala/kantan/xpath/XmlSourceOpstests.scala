@@ -62,15 +62,7 @@ class XmlSourceOpsTests extends FunSuite with GeneratorDrivenPropertyChecks {
     forAll { value: Value[Int] ⇒ assert(cmp(value, value.encoded.evalXPath[Int](xp"/element"))) }
   }
 
-  test("XmlSource instances should have a working evalXPath(Expression) method") {
-    forAll { value: Value[Int] ⇒ assert(cmp(value, value.encoded.evalXPath("/element".xpath[Int]))) }
-  }
-
   test("XmlSource instances should have a working unsafeEvalXPath(String) method") {
     forAll { value: Value[Int] ⇒ assert(cmp(value, Try(value.encoded.unsafeEvalXPath[Int](xp"/element")))) }
-  }
-
-  test("XmlSource instances should have a working unsafeEvalXPath(Expression) method") {
-    forAll { value: Value[Int] ⇒ assert(cmp(value, Try(value.encoded.unsafeEvalXPath(("/element").xpath[Int])))) }
   }
 }

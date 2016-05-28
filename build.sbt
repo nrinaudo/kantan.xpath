@@ -217,11 +217,8 @@ lazy val docs = project
 
 def macroDependencies(v: String): List[ModuleID] =
   ("org.scala-lang" % "scala-reflect" % v % "provided") :: {
-    if(v.startsWith("2.10")) List(
-      "org.scalamacros" %% "quasiquotes" % macroParadiseVersion cross CrossVersion.binary,
-      compilerPlugin("org.scalamacros" % "paradise" % macroParadiseVersion cross CrossVersion.full)
-  )
-    else Nil
+    if(v.startsWith("2.10")) List(compilerPlugin("org.scalamacros" % "paradise" % macroParadiseVersion cross CrossVersion.full))
+    else                     Nil
   }
 
 addCommandAlias("validate", "; clean; scalastyle; test:scalastyle; coverage; test; coverageReport; coverageAggregate; docs/makeSite")

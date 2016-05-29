@@ -16,27 +16,4 @@
 
 package kantan.xpath
 
-import javax.xml.xpath.XPathFactory
-import kantan.xpath.macros._
-
-package object literals extends ToXPathLiteral {
-  private val compiler = XPathFactory.newInstance().newXPath()
-
-  def xpImpl(c: Context)(args: c.Expr[Any]*): c.Expr[XPathExpression] = {
-    import c.universe._
-
-    c.prefix.tree match {
-      case Apply(_, List(Apply(_, List(lit@Literal(Constant(xpath: String)))))) ⇒
-        try {
-          compiler.compile(xpath)
-          reify(implicitly[XPathCompiler].compile(c.Expr[String](lit).splice).get)
-        }
-        catch {
-          case e: Exception ⇒ c.abort(c.enclosingPosition, s"Illegal xpath expression: $xpath")
-        }
-
-      case _ ⇒
-        c.abort(c.enclosingPosition, "xp can only be used on string literals")
-    }
-  }
-}
+package object literals extends ToXPathLiteral

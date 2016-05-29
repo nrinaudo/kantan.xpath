@@ -18,8 +18,8 @@ package kantan.xpath.literals
 
 import kantan.xpath.XPathExpression
 
-class XPathLiteral(val sc: StringContext) extends AnyVal {
-  def xp(args: Any*): XPathExpression = macro xpImpl
+final class XPathLiteral(val sc: StringContext) extends AnyVal {
+  def xp(args: Any*): XPathExpression = macro LiteralMacros.xpImpl
 }
 
 trait ToXPathLiteral {

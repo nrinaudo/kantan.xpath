@@ -16,20 +16,20 @@ Documentation and tutorials are available on the [companion site](https://nrinau
 those looking for a few quick examples:
 
 ```scala
-import kantan.xpath._          // Basic kantan.xpath types.
-import kantan.xpath.ops._      // Implicit operators.
-import kantan.xpath.nekohtml._ // HTML parsing.
+import kantan.xpath._           // Basic kantan.xpath types.
+import kantan.xpath.implicits._ // Implicit operators and literals.
+import kantan.xpath.nekohtml._  // HTML parsing.
 import java.net.URI
 
 // Parses an URI as an XML document, finds interesting nodes, extracts their values as ints and store them in a list.
-new URI("http://some.server.com").evalXPath[List[Int]]("//h1/span[@class='num']")
+new URI("http://some.server.com").evalXPath[List[Int]](xp"//h1/span[@class='num']")
 
 // Similar, but parsing tuples rather than ints and storing the results in a set.
-implicit val decode: NodeDecoder[(String, Boolean)] = NodeDecoder.tuple[String, Boolean]("./@name", "./@count").get
-new URI("http://some.other.server.com").evalXPath[Set[(String, Boolean)]]("//name")
+implicit val decode: NodeDecoder[(String, Boolean)] = NodeDecoder.tuple[String, Boolean](xp"./@name", xp"./@count")
+new URI("http://some.other.server.com").evalXPath[Set[(String, Boolean)]](xp"//name")
 
 // Same as above, but only looks for the first match.
-new URI("http://some.other.server.com").evalXPath[(String, Boolean)]("//name")
+new URI("http://some.other.server.com").evalXPath[(String, Boolean)](xp"//name")
 ```
 
 kantan.xpath is distributed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0.html).

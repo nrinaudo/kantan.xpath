@@ -92,7 +92,7 @@ lazy val root = Project(id = "kantan-xpath", base = file("."))
     initialCommands in console :=
     """
       |import kantan.xpath._
-      |import kantan.xpath.ops._
+      |import kantan.xpath.implicits._
       |import kantan.xpath.nekohtml._
       |import kantan.xpath.joda.time._
     """.stripMargin

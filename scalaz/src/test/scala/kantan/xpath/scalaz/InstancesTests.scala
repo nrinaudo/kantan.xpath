@@ -18,6 +18,7 @@ package kantan.xpath.scalaz
 
 import _root_.scalaz.scalacheck.ScalazProperties.{equal, monad}
 import _root_.scalaz.std.anyVal._
+import kantan.codecs.scalaz.laws.discipline.scalatest.ScalazSuite
 import kantan.xpath._
 import kantan.xpath.scalaz.arbitrary._
 import kantan.xpath.scalaz.equality._

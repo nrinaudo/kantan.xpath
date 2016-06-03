@@ -211,7 +211,7 @@ lazy val docs = project
                                  "*.eot" | "*.svg" | "*.ttf" | "*.woff" | "*.woff2" | "*.otf"
   )
   .settings(noPublishSettings:_*)
-  .dependsOn(core, nekohtml)
+  .dependsOn(core, nekohtml, cats, scalaz, jodaTime)
   .enablePlugins(AutomateHeaderPlugin)
 
 

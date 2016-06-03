@@ -40,7 +40,6 @@ a success otherwise. This mechanism ensures that [`evalXPath`] is safe: no excep
 of your code. For example:
 
 ```tut
-// Note that we're trying to parse ints as URLs.
 rawData.evalXPath[java.net.URL](xp"//element/@id")
 ```
 

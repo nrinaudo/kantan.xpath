@@ -73,9 +73,8 @@ For any type `A` that has a [`NodeDecoder`], there exists a [`NodeDecoder[Option
 
 This is useful for XML where some nodes or attributes are optional. For example: 
 
-
 ```tut
-"<root><opt value='123'/><opt/></root>".evalXPath[List[Option[Int]]](xp"//opt/@value")
+"<root><opt/></root>".evalXPath[Option[Int]](xp"//opt/@value")
 ```
 
 ## `XmlSource`

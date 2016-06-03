@@ -2,7 +2,7 @@
 layout: tutorial
 title: "Cats module"
 section: tutorial
-sort: 10
+sort: 11
 ---
 kantan.xpath has a [cats](https://github.com/typelevel/cats) module that is, in its current incarnation, fairly bare
 bones: it provides decoders for [`Xor`] as well as a few useful type class instances.

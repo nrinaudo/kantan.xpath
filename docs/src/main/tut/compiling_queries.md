@@ -4,8 +4,8 @@ title: "Compiling queries for reuse"
 section: tutorial
 sort: 6
 ---
-In the examples we've seen so far, XPath expressions were passed around as strings. This can be inefficient, since they
-must be recompiled each time they're evaluated against a document.
+In the examples we've seen so far, XPath expressions were passed around as [`XPathExpression`]s. This can be 
+inefficient as kantan.xpath needs to bake in the decoding code each time they're evaluated against a node.
 
 When working with expressions that will need to be applied over and over, it's more efficient to compile them as
 instances of [`Query`].
@@ -22,16 +22,19 @@ This is what we're working with:
 scala.io.Source.fromURL(rawData).mkString
 ```
 
-We'll be trying to extract the `id` attribute of each `element` node as an `int`. Compiling the corresponding XPath
-expression is done through [`compile`]:
+We'll be trying to extract the `id` attribute of each `element` node as an `int`.
+
+
+## Compiling XPath literals
+
+Compiling XPath literals is done through [`Query.apply`]:
 
 ```tut:silent
 import kantan.xpath._
 import kantan.xpath.implicits._
 
-val query = Query.compile[List[Int]](xp"//element/@id")
+val query = Query[List[Int]](xp"//element/@id")
 ```
-
 
 You can now use the compiled query where you used to specify strings, such as in [`evalXPath`]:
 
@@ -42,9 +45,26 @@ rawData.evalXPath(query)
 Note that since compiled queries carry the information of the type they return, you don't need to specify type
 parameters to [`evalXPath`].
 
+
+## Compiling strings
+
+You cannot always express your XPath expressions as literals - some expressions are built dynamically, for instance.
+You can use [`compile`] to compile raw strings:
+
+```tut
+val query = Query.compile[List[Int]]("//element/@id")
+```
+
+The returned value is not directly a [`Query`], though, but rather a [`CompileResult`] containing an instance of
+[`Query`]: there is no way to guarantee at compile time that the specified XPath expression is valid, and we must have
+some error handling in place.
+
+
 [`Query`]:{{ site.baseUrl }}/api/#kantan.xpath.Query
 [`compile`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.Query$@compile[A](str:String)(implicitcmp:kantan.xpath.Compiler[A]):kantan.xpath.XPathResult[kantan.xpath.Query[kantan.xpath.DecodeResult[A]]]
 [`get`]:https://nrinaudo.github.io/kantan.codecs/api/index.html#kantan.codecs.Result@get:S
 [`CompileResult`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.package@CompileResult[A]=kantan.codecs.Result[kantan.xpath.CompileError,A]
 [`xpath`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.ops$$StringOps@xpath[A](implicitcomp:kantan.xpath.Compiler[A]):kantan.xpath.Query[kantan.xpath.DecodeResult[A]]
 [`evalXPath`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.ops$$XmlSourceOps@evalXPath[B](expr:kantan.xpath.Query[kantan.xpath.DecodeResult[B]])(implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.ReadResult[B]
+[`Query.apply`]:{{ site.baseUri }}/api/index.html#kantan.xpath.Query$@apply[A](expr:kantan.xpath.XPathExpression)(implicitcmp:kantan.xpath.Compiler[A]):kantan.xpath.Query[kantan.xpath.DecodeResult[A]]
+[`XPathExpression`]:{{ site.baseUri }}/api/index.html#kantan.xpath.package@XPathExpression=javax.xml.xpath.XPathExpression

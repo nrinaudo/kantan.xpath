@@ -38,7 +38,7 @@ object Query {
     override def eval(n: Node): A = f(n)
   }
 
-  def compile[A](expr: XPathExpression)(implicit cmp: Compiler[A]): Query[DecodeResult[A]] =
+  def apply[A](expr: XPathExpression)(implicit cmp: Compiler[A]): Query[DecodeResult[A]] =
     cmp.compile(expr)
 
   /** Compiles the specified XPath expression. */

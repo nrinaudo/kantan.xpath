@@ -49,7 +49,7 @@
       
           <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/nrinaudo/kantan.xpath/tree/master/core/src/main/scala/kantan/xpath/ops/package.scala" target="_blank">package.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="ToXmlSourceOps.html" class="extype" name="kantan.xpath.ops.ToXmlSourceOps">ToXmlSourceOps</a>, <a href="ToStringOps.html" class="extype" name="kantan.xpath.ops.ToStringOps">ToStringOps</a>, <a href="ToExpressionOps.html" class="extype" name="kantan.xpath.ops.ToExpressionOps">ToExpressionOps</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><a href="AllOps.html" class="extype" name="kantan.xpath.ops.AllOps">AllOps</a>, <a href="ToXmlSourceOps.html" class="extype" name="kantan.xpath.ops.ToXmlSourceOps">ToXmlSourceOps</a>, <a href="ToExpressionOps.html" class="extype" name="kantan.xpath.ops.ToExpressionOps">ToExpressionOps</a>, <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
         
 
@@ -67,7 +67,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="kantan.xpath.ops"><span>ops</span></li><li class="in" name="kantan.xpath.ops.ToXmlSourceOps"><span>ToXmlSourceOps</span></li><li class="in" name="kantan.xpath.ops.ToStringOps"><span>ToStringOps</span></li><li class="in" name="kantan.xpath.ops.ToExpressionOps"><span>ToExpressionOps</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="kantan.xpath.ops"><span>ops</span></li><li class="in" name="kantan.xpath.ops.AllOps"><span>AllOps</span></li><li class="in" name="kantan.xpath.ops.ToXmlSourceOps"><span>ToXmlSourceOps</span></li><li class="in" name="kantan.xpath.ops.ToExpressionOps"><span>ToExpressionOps</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -88,7 +88,24 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="kantan.xpath.ops.ExpressionOps" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="kantan.xpath.ops.AllOps" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="AllOpsextendsToExpressionOpswithToXmlSourceOps"></a>
+      <a id="AllOps:AllOps"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="AllOps.html"><span class="name">AllOps</span></a><span class="result"> extends <a href="ToExpressionOps.html" class="extype" name="kantan.xpath.ops.ToExpressionOps">ToExpressionOps</a> with <a href="ToXmlSourceOps.html" class="extype" name="kantan.xpath.ops.ToXmlSourceOps">ToXmlSourceOps</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kantan.xpath.ops.package@AllOpsextendsToExpressionOpswithToXmlSourceOps" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.ops.ExpressionOps" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ExpressionOps[A]extendsAnyVal"></a>
       <a id="ExpressionOps[A]:ExpressionOps[A]"></a>
       <h4 class="signature">
@@ -97,7 +114,7 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="ExpressionOps.html"><span class="name">ExpressionOps</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span></span>
+        <a href="ExpressionOps.html"><span class="name">ExpressionOps</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyVal" class="extype" target="_top">AnyVal</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#kantan.xpath.ops.package@ExpressionOps[A]extendsAnyVal" title="Permalink" target="_top">
@@ -105,23 +122,6 @@
       </a>
     </span>
       
-    </li><li name="kantan.xpath.ops.StringOps" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="StringOpsextendsAnyVal"></a>
-      <a id="StringOps:StringOps"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="StringOps.html"><span class="name">StringOps</span></a><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#kantan.xpath.ops.package@StringOpsextendsAnyVal" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Enriches strings with an <a href="StringOps.html#xpath[A](implicitcomp:kantan.xpath.Compiler[A]):kantan.xpath.Query[kantan.xpath.DecodeResult[A]]" class="extmbr" name="kantan.xpath.ops.StringOps#xpath">xpath</a> method that attempts to compile them as an XPath expression.</p>
     </li><li name="kantan.xpath.ops.ToExpressionOps" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="ToExpressionOpsextendsAnyRef"></a>
       <a id="ToExpressionOps:ToExpressionOps"></a>
@@ -131,27 +131,10 @@
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="ToExpressionOps.html"><span class="name">ToExpressionOps</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="ToExpressionOps.html"><span class="name">ToExpressionOps</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#kantan.xpath.ops.package@ToExpressionOpsextendsAnyRef" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="kantan.xpath.ops.ToStringOps" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="ToStringOpsextendsAnyRef"></a>
-      <a id="ToStringOps:ToStringOps"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="ToStringOps.html"><span class="name">ToStringOps</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#kantan.xpath.ops.package@ToStringOpsextendsAnyRef" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -165,7 +148,7 @@
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="ToXmlSourceOps.html"><span class="name">ToXmlSourceOps</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="ToXmlSourceOps.html"><span class="name">ToXmlSourceOps</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#kantan.xpath.ops.package@ToXmlSourceOpsextendsAnyRef" title="Permalink" target="_top">
@@ -182,7 +165,7 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="XmlSourceOps.html"><span class="name">XmlSourceOps</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span></span>
+        <a href="XmlSourceOps.html"><span class="name">XmlSourceOps</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyVal" class="extype" target="_top">AnyVal</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#kantan.xpath.ops.package@XmlSourceOps[A]extendsAnyVal" title="Permalink" target="_top">
@@ -215,23 +198,6 @@ f.evalXPath[<span class="std">List</span>[java.net.URI]](<span class="lit">"//a/
       </a>
     </span>
       
-    </li><li name="kantan.xpath.ops.string" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="string"></a>
-      <a id="string:string"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="string$.html"><span class="name">string</span></a><span class="result"> extends <a href="ToStringOps.html" class="extype" name="kantan.xpath.ops.ToStringOps">ToStringOps</a></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#kantan.xpath.ops.package@string" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
     </li><li name="kantan.xpath.ops.ToExpressionOps#toXPathExpressionOps" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toXPathExpressionOps[A](expr:kantan.xpath.Query[kantan.xpath.DecodeResult[A]]):kantan.xpath.ops.ExpressionOps[A]"></a>
       <a id="toXPathExpressionOps[A](Query[DecodeResult[A]]):ExpressionOps[A]"></a>
@@ -249,23 +215,6 @@ f.evalXPath[<span class="std">List</span>[java.net.URI]](<span class="lit">"//a/
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ToExpressionOps.html" class="extype" name="kantan.xpath.ops.ToExpressionOps">ToExpressionOps</a></dd></dl></div>
-    </li><li name="kantan.xpath.ops.ToStringOps#toXPathStringOps" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="toXPathStringOps(str:String):kantan.xpath.ops.StringOps"></a>
-      <a id="toXPathStringOps(String):StringOps"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">implicit </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">toXPathStringOps</span><span class="params">(<span name="str">str: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="StringOps.html" class="extype" name="kantan.xpath.ops.StringOps">StringOps</a></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#kantan.xpath.ops.package@toXPathStringOps(str:String):kantan.xpath.ops.StringOps" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ToStringOps.html" class="extype" name="kantan.xpath.ops.ToStringOps">ToStringOps</a></dd></dl></div>
     </li><li name="kantan.xpath.ops.ToXmlSourceOps#toXmlSourceOps" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toXmlSourceOps[A](a:A):kantan.xpath.ops.XmlSourceOps[A]"></a>
       <a id="toXmlSourceOps[A](A):XmlSourceOps[A]"></a>
@@ -309,16 +258,16 @@ f.evalXPath[<span class="std">List</span>[java.net.URI]](<span class="lit">"//a/
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="kantan.xpath.ops.ToXmlSourceOps">
+        <div class="parent" name="kantan.xpath.ops.AllOps">
+              <h3>Inherited from <a href="AllOps.html" class="extype" name="kantan.xpath.ops.AllOps">AllOps</a></h3>
+            </div><div class="parent" name="kantan.xpath.ops.ToXmlSourceOps">
               <h3>Inherited from <a href="ToXmlSourceOps.html" class="extype" name="kantan.xpath.ops.ToXmlSourceOps">ToXmlSourceOps</a></h3>
-            </div><div class="parent" name="kantan.xpath.ops.ToStringOps">
-              <h3>Inherited from <a href="ToStringOps.html" class="extype" name="kantan.xpath.ops.ToStringOps">ToStringOps</a></h3>
             </div><div class="parent" name="kantan.xpath.ops.ToExpressionOps">
               <h3>Inherited from <a href="ToExpressionOps.html" class="extype" name="kantan.xpath.ops.ToExpressionOps">ToExpressionOps</a></h3>
             </div><div class="parent" name="scala.AnyRef">
-              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></h3>
             </div><div class="parent" name="scala.Any">
-              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Any" class="extype" target="_top">Any</a></h3>
             </div>
         
         </div>

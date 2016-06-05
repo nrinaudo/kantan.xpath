@@ -38,20 +38,17 @@ In the same way that we had to declare a [`NodeCoder[(Int, Boolean)]`][`NodeDeco
 
 ```scala
 import kantan.xpath._
-import kantan.xpath.ops._
+import kantan.xpath.implicits._
 
 // There is no need to specify type parameters here, the Scala compiler works them out from El.apply.
-implicit val elDecoder = NodeDecoder.decoder("./@id", "./@enabled")(El.apply).get
+implicit val elDecoder = NodeDecoder.decoder(xp"./@id", xp"./@enabled")(El.apply)
 ```
-
-It's worth pointing out that we had to call [`get`] on the result of that call: [`decoder`] might fail if one of the
-specified XPath expressions is not legal, and its result is wrapped in a [`CompileResult`].
 
 Now that we have told kantan.xpath how to decode an XML node to an instance of `El`, we can simply call
 [`evalXPath`] with the right type parameters:
 
 ```scala
-scala> rawData.evalXPath[List[El]]("//element")
+scala> rawData.evalXPath[List[El]](xp"//element")
 res3: kantan.xpath.XPathResult[List[El]] = Success(List(El(1,true), El(2,false), El(3,true), El(4,false)))
 ```
 

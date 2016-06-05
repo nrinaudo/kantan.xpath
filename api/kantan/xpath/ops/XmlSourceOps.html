@@ -45,14 +45,14 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">XmlSourceOps</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyVal">AnyVal</span></span>
+        <span class="name">XmlSourceOps</span><span class="tparams">[<span name="A">A</span>]</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyVal" class="extype" target="_top">AnyVal</a></span>
       </span>
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Provides syntax for all types that have an implicit instance of <a href="../XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a> in scope.</p><p>The most common use case is to evaluate an XPath expression directly on a value:</p><pre><span class="kw">val</span> f: java.io.File = ???
 f.evalXPath[<span class="std">List</span>[java.net.URI]](<span class="lit">"//a/@href"</span>)</pre></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/nrinaudo/kantan.xpath/tree/master/core/src/main/scala/kantan/xpath/ops/XmlSourceOps.scala" target="_blank">XmlSourceOps.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyVal">AnyVal</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyVal" class="extype" target="_top">AnyVal</a>, <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
         
 
@@ -124,7 +124,7 @@ f.evalXPath[<span class="std">List</span>[java.net.URI]](<span class="lit">"//a/
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#kantan.xpath.ops.XmlSourceOps@!=(x$1:Any):Boolean" title="Permalink" target="_top">
@@ -158,7 +158,7 @@ f.evalXPath[<span class="std">List</span>[java.net.URI]](<span class="lit">"//a/
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#kantan.xpath.ops.XmlSourceOps@==(x$1:Any):Boolean" title="Permalink" target="_top">
@@ -252,22 +252,22 @@ f.evalXPath[<span class="std">List</span>[java.net.URI]](<span class="lit">"//a/
     </span>
       
     </li><li name="kantan.xpath.ops.XmlSourceOps#evalXPath" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="evalXPath[B](expr:String)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]"></a>
-      <a id="evalXPath[B](String)(Compiler[B],XmlSource[A]):XPathResult[B]"></a>
+      <a id="evalXPath[B](expr:kantan.xpath.XPathExpression)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]"></a>
+      <a id="evalXPath[B](XPathExpression)(Compiler[B],XmlSource[A]):XPathResult[B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">evalXPath</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="expr">expr: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="../Compiler.html" class="extype" name="kantan.xpath.Compiler">Compiler</a>[<span class="extype" name="kantan.xpath.ops.XmlSourceOps.evalXPath.B">B</span>]</span>, <span name="source">source: <a href="../XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a>[<span class="extype" name="kantan.xpath.ops.XmlSourceOps.A">A</span>]</span>)</span><span class="result">: <a href="../package.html#XPathResult[A]=kantan.codecs.Result[kantan.xpath.XPathError,A]" class="extmbr" name="kantan.xpath.XPathResult">XPathResult</a>[<span class="extype" name="kantan.xpath.ops.XmlSourceOps.evalXPath.B">B</span>]</span>
+        <span class="name">evalXPath</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="expr">expr: <a href="../package.html#XPathExpression=javax.xml.xpath.XPathExpression" class="extmbr" name="kantan.xpath.XPathExpression">XPathExpression</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="../Compiler.html" class="extype" name="kantan.xpath.Compiler">Compiler</a>[<span class="extype" name="kantan.xpath.ops.XmlSourceOps.evalXPath.B">B</span>]</span>, <span name="source">source: <a href="../XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a>[<span class="extype" name="kantan.xpath.ops.XmlSourceOps.A">A</span>]</span>)</span><span class="result">: <a href="../package.html#XPathResult[A]=kantan.codecs.Result[kantan.xpath.XPathError,A]" class="extmbr" name="kantan.xpath.XPathResult">XPathResult</a>[<span class="extype" name="kantan.xpath.ops.XmlSourceOps.evalXPath.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#kantan.xpath.ops.XmlSourceOps@evalXPath[B](expr:String)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]" title="Permalink" target="_top">
+      <a href="../../../index.html#kantan.xpath.ops.XmlSourceOps@evalXPath[B](expr:kantan.xpath.XPathExpression)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Shorthand for <a href="../XmlSource.html#eval[B](a:A,expr:String)(implicitcmp:kantan.xpath.Compiler[B]):kantan.xpath.XPathResult[B]" class="extmbr" name="kantan.xpath.XmlSource#eval">XmlSource.eval[B](a:A,expr:String)*</a>.</p>
+      
     </li><li name="scala.AnyVal#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_&lt;:AnyVal]"></a>
       <a id="getClass():Class[_&lt;:AnyVal]"></a>
@@ -277,7 +277,7 @@ f.evalXPath[<span class="std">List</span>[java.net.URI]](<span class="lit">"//a/
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Predef.Class">Class</span>[_ &lt;: <span class="extype" name="scala.AnyVal">AnyVal</span>]</span>
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Predef.Class">Class</span>[_ &lt;: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyVal" class="extype" target="_top">AnyVal</a>]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#kantan.xpath.ops.XmlSourceOps@getClass():Class[_&lt;:AnyVal]" title="Permalink" target="_top">
@@ -337,22 +337,22 @@ f.evalXPath[<span class="std">List</span>[java.net.URI]](<span class="lit">"//a/
     </span>
       
     </li><li name="kantan.xpath.ops.XmlSourceOps#unsafeEvalXPath" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="unsafeEvalXPath[B](expr:String)(implicitevidence$1:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):B"></a>
-      <a id="unsafeEvalXPath[B](String)(Compiler[B],XmlSource[A]):B"></a>
+      <a id="unsafeEvalXPath[B](expr:kantan.xpath.XPathExpression)(implicitevidence$1:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):B"></a>
+      <a id="unsafeEvalXPath[B](XPathExpression)(Compiler[B],XmlSource[A]):B"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">unsafeEvalXPath</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="expr">expr: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="../Compiler.html" class="extype" name="kantan.xpath.Compiler">Compiler</a>[<span class="extype" name="kantan.xpath.ops.XmlSourceOps.unsafeEvalXPath.B">B</span>]</span>, <span name="source">source: <a href="../XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a>[<span class="extype" name="kantan.xpath.ops.XmlSourceOps.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="kantan.xpath.ops.XmlSourceOps.unsafeEvalXPath.B">B</span></span>
+        <span class="name">unsafeEvalXPath</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="expr">expr: <a href="../package.html#XPathExpression=javax.xml.xpath.XPathExpression" class="extmbr" name="kantan.xpath.XPathExpression">XPathExpression</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="../Compiler.html" class="extype" name="kantan.xpath.Compiler">Compiler</a>[<span class="extype" name="kantan.xpath.ops.XmlSourceOps.unsafeEvalXPath.B">B</span>]</span>, <span name="source">source: <a href="../XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a>[<span class="extype" name="kantan.xpath.ops.XmlSourceOps.A">A</span>]</span>)</span><span class="result">: <span class="extype" name="kantan.xpath.ops.XmlSourceOps.unsafeEvalXPath.B">B</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#kantan.xpath.ops.XmlSourceOps@unsafeEvalXPath[B](expr:String)(implicitevidence$1:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):B" title="Permalink" target="_top">
+      <a href="../../../index.html#kantan.xpath.ops.XmlSourceOps@unsafeEvalXPath[B](expr:kantan.xpath.XPathExpression)(implicitevidence$1:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):B" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Shorthand for <a href="../XmlSource.html#unsafeEval[B](a:A,expr:String)(implicitcmp:kantan.xpath.Compiler[B]):B" class="extmbr" name="kantan.xpath.XmlSource#unsafeEval">XmlSource.unsafeEval[B](a:A,expr:String)*</a>.</p>
+      
     </li></ol>
             </div>
 
@@ -363,9 +363,9 @@ f.evalXPath[<span class="std">List</span>[java.net.URI]](<span class="lit">"//a/
 
         <div id="inheritedMembers">
         <div class="parent" name="scala.AnyVal">
-              <h3>Inherited from <span class="extype" name="scala.AnyVal">AnyVal</span></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyVal" class="extype" target="_top">AnyVal</a></h3>
             </div><div class="parent" name="scala.Any">
-              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Any" class="extype" target="_top">Any</a></h3>
             </div>
         
         </div>

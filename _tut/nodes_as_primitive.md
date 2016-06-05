@@ -29,14 +29,14 @@ We'll then need to import kantan.xpath's syntax, which will let us evaluate XPat
 that can be turned into an XML document:
 
 ```scala
-import kantan.xpath.ops._
+import kantan.xpath.implicits._
 ```
 
 This allows us to write the following code, which will attempt to extract the `id` field of any `element` node as an
 `Int`:
 
 ```scala
-scala> rawData.evalXPath[Int]("//element/@id")
+scala> rawData.evalXPath[Int](xp"//element/@id")
 res1: kantan.xpath.XPathResult[Int] = Success(1)
 ```
 
@@ -48,17 +48,16 @@ a success otherwise. This mechanism ensures that [`evalXPath`] is safe: no excep
 of your code. For example:
 
 ```scala
-scala> // Note that we're trying to parse ints as URLs.
-     | rawData.evalXPath[java.net.URL]("//element/@id")
-res3: kantan.xpath.XPathResult[java.net.URL] = Failure(TypeError(no protocol: 1))
+scala> rawData.evalXPath[java.net.URL](xp"//element/@id")
+res2: kantan.xpath.XPathResult[java.net.URL] = Failure(TypeError(no protocol: 1))
 ```
 
 In some cases, however, we don't really care for runtime safety and are fine with our program crashing at the first
 error. This is what the [`unsafeEvalXPath`] method was designed for:  
 
 ```scala
-scala> rawData.unsafeEvalXPath[Int]("//element/@id")
-res4: Int = 1
+scala> rawData.unsafeEvalXPath[Int](xp"//element/@id")
+res3: Int = 1
 ```
 
 
@@ -69,16 +68,16 @@ type, we told kantan.xpath that we only wanted the first result. We could get th
 
 
 ```scala
-scala> rawData.evalXPath[List[Int]]("//element/@id")
-res5: kantan.xpath.XPathResult[List[Int]] = Success(List(1, 2, 3, 4))
+scala> rawData.evalXPath[List[Int]](xp"//element/@id")
+res4: kantan.xpath.XPathResult[List[Int]] = Success(List(1, 2, 3, 4))
 ```
 
 Any type constructor that has a [`CanBuildFrom`] instance could have been used instead of [`List`] - that's essentially
 all collections. By the same token, any primitive time could have been used instead of `Int`. For example:
 
 ```scala
-scala> rawData.evalXPath[Vector[Boolean]]("//element/@enabled")
-res6: kantan.xpath.XPathResult[Vector[Boolean]] = Success(Vector(true, false, true, false))
+scala> rawData.evalXPath[Vector[Boolean]](xp"//element/@enabled")
+res5: kantan.xpath.XPathResult[Vector[Boolean]] = Success(Vector(true, false, true, false))
 ```
 
 [`evalXPath`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.ops$$XmlSourceOps@evalXPath[B](expr:String)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]

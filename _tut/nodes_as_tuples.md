@@ -36,19 +36,16 @@ one XPath expression per field to extract:
 
 ```scala
 import kantan.xpath._
-import kantan.xpath.ops._
+import kantan.xpath.implicits._
 
-implicit val elementDecoder = NodeDecoder.tuple[Int, Boolean]("./@id", "./@enabled").get
+implicit val elementDecoder = NodeDecoder.tuple[Int, Boolean](xp"./@id", xp"./@enabled")
 ```
-
-It's worth pointing out that we had to call [`get`] on the result of that call: [`tuple`] might fail if one of the
-specified XPath expressions is not legal, and its result is wrapped in a [`CompileResult`].
 
 Now that we have told kantan.xpath how to decode an XML node to an instance of `(Int, Boolean)`, we can simply call
 [`evalXPath`] with the right type parameters:
 
 ```scala
-scala> rawData.evalXPath[List[(Int, Boolean)]]("//element")
+scala> rawData.evalXPath[List[(Int, Boolean)]](xp"//element")
 res2: kantan.xpath.XPathResult[List[(Int, Boolean)]] = Success(List((1,true), (2,false), (3,true), (4,false)))
 ```
 

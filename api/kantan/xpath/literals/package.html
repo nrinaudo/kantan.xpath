@@ -1,9 +1,9 @@
 <!DOCTYPE html >
 <html>
         <head>
-          <title>nekohtml - kantan.xpath.nekohtml</title>
-          <meta name="description" content="nekohtml - kantan.xpath.nekohtml" />
-          <meta name="keywords" content="nekohtml kantan.xpath.nekohtml" />
+          <title>literals - kantan.xpath.literals</title>
+          <meta name="description" content="literals - kantan.xpath.literals" />
+          <meta name="keywords" content="literals kantan.xpath.literals" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -16,7 +16,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../index.html';
-            var hash = 'kantan.xpath.nekohtml.package';
+            var hash = 'kantan.xpath.literals.package';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -30,8 +30,8 @@
       <div id="definition">
         <img alt="Package" src="../../../lib/package_big.png" />
         <p id="owner"><a href="../../package.html" class="extype" name="kantan">kantan</a>.<a href="../package.html" class="extype" name="kantan.xpath">xpath</a></p>
-        <h1>nekohtml</h1><span class="permalink">
-      <a href="../../../index.html#kantan.xpath.nekohtml.package" title="Permalink" target="_top">
+        <h1>literals</h1><span class="permalink">
+      <a href="../../../index.html#kantan.xpath.literals.package" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -43,13 +43,13 @@
         <span class="kind">package</span>
       </span>
       <span class="symbol">
-        <span class="name">nekohtml</span>
+        <span class="name">literals</span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/nrinaudo/kantan.xpath/tree/master/nekohtml/src/main/scala/kantan/xpath/nekohtml/package.scala" target="_blank">package.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/nrinaudo/kantan.xpath/tree/master/core/src/main/scala/kantan/xpath/literals/package.scala" target="_blank">package.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Any" class="extype" target="_top">Any</a></div>
+          <div class="superTypes hiddenContent"><a href="ToXPathLiteral.html" class="extype" name="kantan.xpath.literals.ToXPathLiteral">ToXPathLiteral</a>, <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
         
 
@@ -67,7 +67,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="kantan.xpath.nekohtml"><span>nekohtml</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="kantan.xpath.literals"><span>literals</span></li><li class="in" name="kantan.xpath.literals.ToXPathLiteral"><span>ToXPathLiteral</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -88,19 +88,36 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="kantan.xpath.nekohtml.NekoParser" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="NekoParserextendsXmlParser"></a>
-      <a id="NekoParser:NekoParser"></a>
+              <ol><li name="kantan.xpath.literals.ToXPathLiteral" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="ToXPathLiteralextendsAnyRef"></a>
+      <a id="ToXPathLiteral:ToXPathLiteral"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="ToXPathLiteral.html"><span class="name">ToXPathLiteral</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#kantan.xpath.literals.package@ToXPathLiteralextendsAnyRef" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.literals.XPathLiteral" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="XPathLiteralextendsAnyVal"></a>
+      <a id="XPathLiteral:XPathLiteral"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="NekoParser.html"><span class="name">NekoParser</span></a><span class="result"> extends <a href="../XmlParser.html" class="extype" name="kantan.xpath.XmlParser">XmlParser</a></span>
+        <a href="XPathLiteral.html"><span class="name">XPathLiteral</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyVal" class="extype" target="_top">AnyVal</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#kantan.xpath.nekohtml.package@NekoParserextendsXmlParser" title="Permalink" target="_top">
+      <a href="../../../index.html#kantan.xpath.literals.package@XPathLiteralextendsAnyVal" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -112,40 +129,40 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="kantan.xpath.nekohtml#defaultConfiguration" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="defaultConfiguration:org.cyberneko.html.HTMLConfiguration"></a>
-      <a id="defaultConfiguration:HTMLConfiguration"></a>
+              <ol><li name="kantan.xpath.literals.LiteralMacros" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LiteralMacros"></a>
+      <a id="LiteralMacros:LiteralMacros"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">def</span>
+        <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">defaultConfiguration</span><span class="result">: <span class="extype" name="org.cyberneko.html.HTMLConfiguration">HTMLConfiguration</span></span>
+        <a href="LiteralMacros$.html"><span class="name">LiteralMacros</span></a>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#kantan.xpath.nekohtml.package@defaultConfiguration:org.cyberneko.html.HTMLConfiguration" title="Permalink" target="_top">
+      <a href="../../../index.html#kantan.xpath.literals.package@LiteralMacros" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       
-    </li><li name="kantan.xpath.nekohtml#defaultParser" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="defaultParser:kantan.xpath.XmlParser"></a>
-      <a id="defaultParser:XmlParser"></a>
+    </li><li name="kantan.xpath.literals.ToXPathLiteral#toXPathLiteral" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toXPathLiteral(sc:StringContext):kantan.xpath.literals.XPathLiteral"></a>
+      <a id="toXPathLiteral(StringContext):XPathLiteral"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">implicit </span>
-        <span class="kind">val</span>
+        <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">defaultParser</span><span class="result">: <a href="../XmlParser.html" class="extype" name="kantan.xpath.XmlParser">XmlParser</a></span>
+        <span class="name">toXPathLiteral</span><span class="params">(<span name="sc">sc: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.StringContext" class="extype" target="_top">StringContext</a></span>)</span><span class="result">: <a href="XPathLiteral.html" class="extype" name="kantan.xpath.literals.XPathLiteral">XPathLiteral</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#kantan.xpath.nekohtml.package@defaultParser:kantan.xpath.XmlParser" title="Permalink" target="_top">
+      <a href="../../../index.html#kantan.xpath.literals.package@toXPathLiteral(sc:StringContext):kantan.xpath.literals.XPathLiteral" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ToXPathLiteral.html" class="extype" name="kantan.xpath.literals.ToXPathLiteral">ToXPathLiteral</a></dd></dl></div>
     </li></ol>
             </div>
 
@@ -155,7 +172,9 @@
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.AnyRef">
+        <div class="parent" name="kantan.xpath.literals.ToXPathLiteral">
+              <h3>Inherited from <a href="ToXPathLiteral.html" class="extype" name="kantan.xpath.literals.ToXPathLiteral">ToXPathLiteral</a></h3>
+            </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Any" class="extype" target="_top">Any</a></h3>

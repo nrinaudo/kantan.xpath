@@ -39,7 +39,7 @@ an implicit [`DateFormat`] instance in scope, and will decode using that format.
 We could for example declare a formatter for something ISO 8601-like:
 
 ```scala
-import kantan.xpath.ops._
+import kantan.xpath.implicits._
 import java.util.{Locale, Date}
 
 implicit val formatter = new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH)
@@ -48,7 +48,7 @@ implicit val formatter = new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S
 And we're now capable of decoding XML content as dates:
 
 ```scala
-scala> "<date>2000-01-00T00:00:00.000</date>".evalXPath[Date]("/date")
+scala> "<date>2000-01-00T00:00:00.000</date>".evalXPath[Date](xp"/date")
 res1: kantan.xpath.XPathResult[java.util.Date] = Success(Fri Dec 31 00:00:00 CET 1999)
 ```
 
@@ -64,7 +64,7 @@ This is useful for dodgy XML data where the type of a value is not well defined 
 sometimes a boolean, for example:
 
 ```scala
-scala> "<root><either>123</either><either>true</either></root>".evalXPath[List[Either[Int, Boolean]]]("//either")
+scala> "<root><either>123</either><either>true</either></root>".evalXPath[List[Either[Int, Boolean]]](xp"//either")
 res2: kantan.xpath.XPathResult[List[Either[Int,Boolean]]] = Success(List(Left(123), Right(true)))
 ```
 
@@ -75,10 +75,9 @@ For any type `A` that has a [`NodeDecoder`], there exists a [`NodeDecoder[Option
 
 This is useful for XML where some nodes or attributes are optional. For example: 
 
-
 ```scala
-scala> "<root><opt value='123'/><opt/></root>".evalXPath[List[Option[Int]]]("//opt/@value")
-res3: kantan.xpath.XPathResult[List[Option[Int]]] = Success(List(Some(123)))
+scala> "<root><opt/></root>".evalXPath[Option[Int]](xp"//opt/@value")
+res3: kantan.xpath.XPathResult[Option[Int]] = Success(None)
 ```
 
 ## `XmlSource`

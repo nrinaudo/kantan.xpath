@@ -55,7 +55,7 @@
 implicit value.
 </p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/nrinaudo/kantan.xpath/tree/master/core/src/main/scala/kantan/xpath/Query.scala" target="_blank">Query.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
         
 
@@ -107,7 +107,7 @@ implicit value.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#kantan.xpath.Query$@!=(x$1:Any):Boolean" title="Permalink" target="_top">
@@ -141,7 +141,7 @@ implicit value.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#kantan.xpath.Query$@==(x$1:Any):Boolean" title="Permalink" target="_top">
@@ -149,6 +149,23 @@ implicit value.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="kantan.xpath.Query#apply" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="apply[A](expr:kantan.xpath.XPathExpression)(implicitcmp:kantan.xpath.Compiler[A]):kantan.xpath.Query[kantan.xpath.DecodeResult[A]]"></a>
+      <a id="apply[A](XPathExpression)(Compiler[A]):Query[DecodeResult[A]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">apply</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="expr">expr: <a href="package.html#XPathExpression=javax.xml.xpath.XPathExpression" class="extmbr" name="kantan.xpath.XPathExpression">XPathExpression</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="cmp">cmp: <a href="Compiler.html" class="extype" name="kantan.xpath.Compiler">Compiler</a>[<span class="extype" name="kantan.xpath.Query.apply.A">A</span>]</span>)</span><span class="result">: <a href="Query.html" class="extype" name="kantan.xpath.Query">Query</a>[<a href="package.html#DecodeResult[A]=kantan.codecs.Result[kantan.xpath.DecodeError,A]" class="extmbr" name="kantan.xpath.DecodeResult">DecodeResult</a>[<span class="extype" name="kantan.xpath.Query.apply.A">A</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.Query$@apply[A](expr:kantan.xpath.XPathExpression)(implicitcmp:kantan.xpath.Compiler[A]):kantan.xpath.Query[kantan.xpath.DecodeResult[A]]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="kantan.xpath.Query#apply" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="apply[A](f:kantan.xpath.Node=&gt;A):kantan.xpath.Query[A]"></a>
       <a id="apply[A]((Node)⇒A):Query[A]"></a>
@@ -192,7 +209,7 @@ implicit value.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <span class="name">clone</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#kantan.xpath.Query$@clone():Object" title="Permalink" target="_top">
@@ -207,18 +224,18 @@ implicit value.
               
         </dd></dl></div>
     </li><li name="kantan.xpath.Query#compile" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="compile[A](str:String)(implicitcmp:kantan.xpath.Compiler[A]):kantan.xpath.CompileResult[kantan.xpath.Query[kantan.xpath.DecodeResult[A]]]"></a>
-      <a id="compile[A](String)(Compiler[A]):CompileResult[Query[DecodeResult[A]]]"></a>
+      <a id="compile[A](str:String)(implicitcmp:kantan.xpath.Compiler[A],implicitxpath:kantan.xpath.XPathCompiler):kantan.xpath.CompileResult[kantan.xpath.Query[kantan.xpath.DecodeResult[A]]]"></a>
+      <a id="compile[A](String)(Compiler[A],XPathCompiler):CompileResult[Query[DecodeResult[A]]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">compile</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="str">str: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="cmp">cmp: <a href="Compiler.html" class="extype" name="kantan.xpath.Compiler">Compiler</a>[<span class="extype" name="kantan.xpath.Query.compile.A">A</span>]</span>)</span><span class="result">: <a href="package.html#CompileResult[A]=kantan.codecs.Result[kantan.xpath.CompileError,A]" class="extmbr" name="kantan.xpath.CompileResult">CompileResult</a>[<a href="Query.html" class="extype" name="kantan.xpath.Query">Query</a>[<a href="package.html#DecodeResult[A]=kantan.codecs.Result[kantan.xpath.DecodeError,A]" class="extmbr" name="kantan.xpath.DecodeResult">DecodeResult</a>[<span class="extype" name="kantan.xpath.Query.compile.A">A</span>]]]</span>
+        <span class="name">compile</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="str">str: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="cmp">cmp: <a href="Compiler.html" class="extype" name="kantan.xpath.Compiler">Compiler</a>[<span class="extype" name="kantan.xpath.Query.compile.A">A</span>]</span>, <span name="xpath">xpath: <a href="XPathCompiler.html" class="extype" name="kantan.xpath.XPathCompiler">XPathCompiler</a></span>)</span><span class="result">: <a href="package.html#CompileResult[A]=kantan.codecs.Result[kantan.xpath.CompileError,A]" class="extmbr" name="kantan.xpath.CompileResult">CompileResult</a>[<a href="Query.html" class="extype" name="kantan.xpath.Query">Query</a>[<a href="package.html#DecodeResult[A]=kantan.codecs.Result[kantan.xpath.DecodeError,A]" class="extmbr" name="kantan.xpath.DecodeResult">DecodeResult</a>[<span class="extype" name="kantan.xpath.Query.compile.A">A</span>]]]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#kantan.xpath.Query$@compile[A](str:String)(implicitcmp:kantan.xpath.Compiler[A]):kantan.xpath.CompileResult[kantan.xpath.Query[kantan.xpath.DecodeResult[A]]]" title="Permalink" target="_top">
+      <a href="../../index.html#kantan.xpath.Query$@compile[A](str:String)(implicitcmp:kantan.xpath.Compiler[A],implicitxpath:kantan.xpath.XPathCompiler):kantan.xpath.CompileResult[kantan.xpath.Query[kantan.xpath.DecodeResult[A]]]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -232,7 +249,7 @@ implicit value.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#kantan.xpath.Query$@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
@@ -249,7 +266,7 @@ implicit value.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#kantan.xpath.Query$@equals(x$1:Any):Boolean" title="Permalink" target="_top">
@@ -340,7 +357,7 @@ implicit value.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#kantan.xpath.Query$@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
@@ -416,25 +433,23 @@ implicit value.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="kantan.xpath.Query#unsafeCompile" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="unsafeCompile[A](str:String)(implicitcmp:kantan.xpath.Compiler[A]):kantan.xpath.Query[kantan.xpath.DecodeResult[A]]"></a>
-      <a id="unsafeCompile[A](String)(Compiler[A]):Query[DecodeResult[A]]"></a>
+    </li><li name="kantan.xpath.Query#unsafeCompile" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="unsafeCompile[A](str:String)(implicitcmp:kantan.xpath.Compiler[A],implicitxpath:kantan.xpath.XPathCompiler):kantan.xpath.Query[kantan.xpath.DecodeResult[A]]"></a>
+      <a id="unsafeCompile[A](String)(Compiler[A],XPathCompiler):Query[DecodeResult[A]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">unsafeCompile</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="str">str: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="cmp">cmp: <a href="Compiler.html" class="extype" name="kantan.xpath.Compiler">Compiler</a>[<span class="extype" name="kantan.xpath.Query.unsafeCompile.A">A</span>]</span>)</span><span class="result">: <a href="Query.html" class="extype" name="kantan.xpath.Query">Query</a>[<a href="package.html#DecodeResult[A]=kantan.codecs.Result[kantan.xpath.DecodeError,A]" class="extmbr" name="kantan.xpath.DecodeResult">DecodeResult</a>[<span class="extype" name="kantan.xpath.Query.unsafeCompile.A">A</span>]]</span>
+        <span class="name">unsafeCompile</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="str">str: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="cmp">cmp: <a href="Compiler.html" class="extype" name="kantan.xpath.Compiler">Compiler</a>[<span class="extype" name="kantan.xpath.Query.unsafeCompile.A">A</span>]</span>, <span name="xpath">xpath: <a href="XPathCompiler.html" class="extype" name="kantan.xpath.XPathCompiler">XPathCompiler</a></span>)</span><span class="result">: <a href="Query.html" class="extype" name="kantan.xpath.Query">Query</a>[<a href="package.html#DecodeResult[A]=kantan.codecs.Result[kantan.xpath.DecodeError,A]" class="extmbr" name="kantan.xpath.DecodeResult">DecodeResult</a>[<span class="extype" name="kantan.xpath.Query.unsafeCompile.A">A</span>]]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#kantan.xpath.Query$@unsafeCompile[A](str:String)(implicitcmp:kantan.xpath.Compiler[A]):kantan.xpath.Query[kantan.xpath.DecodeResult[A]]" title="Permalink" target="_top">
+      <a href="../../index.html#kantan.xpath.Query$@unsafeCompile[A](str:String)(implicitcmp:kantan.xpath.Compiler[A],implicitxpath:kantan.xpath.XPathCompiler):kantan.xpath.Query[kantan.xpath.DecodeResult[A]]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Compiles the specified XPath expression.</p><div class="fullcomment"><div class="comment cmt"><p>Compiles the specified XPath expression.</p><p>Note that this method is unsafe - if the specified XPath expression is not valid, an exception will be thrown.
-<a href="#compile[A](str:String)(implicitcmp:kantan.xpath.Compiler[A]):kantan.xpath.CompileResult[kantan.xpath.Query[kantan.xpath.DecodeResult[A]]]" class="extmbr" name="kantan.xpath.Query#compile">compile</a> should almost always be preferred.
-</p></div></div>
+      <p class="shortcomment cmt">Compiles the specified XPath expression.</p>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -514,9 +529,9 @@ implicit value.
 
         <div id="inheritedMembers">
         <div class="parent" name="scala.AnyRef">
-              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></h3>
             </div><div class="parent" name="scala.Any">
-              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Any" class="extype" target="_top">Any</a></h3>
             </div>
         
         </div>

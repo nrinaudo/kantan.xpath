@@ -2,7 +2,7 @@
 layout: tutorial
 title: "Basics"
 section: tutorial
-sort: 0
+sort_order: 0
 ---
 There are a few concepts to get familiar with before getting to grips with kantan.xpath proper.
 
@@ -23,14 +23,14 @@ This will also bring kantan.xpath syntax in scope though, so if you only want th
 [`kantan.xpath.literals._`].
 
 This lets you create new regular expression by prefixing string literals with [`xp`]:
- 
+
 ```scala
 scala> xp"//a[@href]"
-res0: kantan.xpath.XPathExpression = com.sun.org.apache.xpath.internal.jaxp.XPathExpressionImpl@272d057c
+res0: kantan.xpath.XPathExpression = com.sun.org.apache.xpath.internal.jaxp.XPathExpressionImpl@468f73ca
 ```
 
 And, as promised, this fails *at compile time* if the xpath expression is not valid:
- 
+
 ```scala
 scala> xp"!@#"
 <console>:16: error: Illegal xpath expression: !@#
@@ -42,19 +42,19 @@ scala> xp"!@#"
 
 Subsequent pages will get into more details, but the simplest, most idiomatic way of extracting well typed data from
 strings using kantan.xpath is through the [`evalXPath`] method that enriches strings (since we've imported
-[`kantan.xpath.implicits._`]). 
+[`kantan.xpath.implicits._`]).
 
 For example, retrieving only the first match:
 
 ```scala
-scala> "<users><user id='1'/><user id='2'/></users>".evalXPath[Int](xp"//user/@id") 
+scala> "<users><user id='1'/><user id='2'/></users>".evalXPath[Int](xp"//user/@id")
 res2: kantan.xpath.XPathResult[Int] = Success(1)
 ```
 
 And retrieving all matches:
 
 ```scala
-scala> "<users><user id='1'/><user id='2'/></users>".evalXPath[List[Int]](xp"//user/@id") 
+scala> "<users><user id='1'/><user id='2'/></users>".evalXPath[List[Int]](xp"//user/@id")
 res3: kantan.xpath.XPathResult[List[Int]] = Success(List(1, 2))
 ```
 

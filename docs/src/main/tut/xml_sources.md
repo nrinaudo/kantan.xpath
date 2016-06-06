@@ -2,7 +2,7 @@
 layout: tutorial
 title: "What can be parsed as XML data?"
 section: tutorial
-sort: 7
+sort_order: 7
 ---
 Before we can even think about applying XPath expressions to an XML document, we need to get our hands on that document
 somehow. kantan.xpath extends most things that "can be turned into XML" with useful methods, such as the oft-used
@@ -14,14 +14,14 @@ somehow. kantan.xpath extends most things that "can be turned into XML" with use
 * [`String`]
 
 This is done through the [`XmlSource`] type class: any type `A` such that there exists a value of type
-[`XmlSource[A]`][`XmlSource`] in the implicit scope will be enriched with 
+[`XmlSource[A]`][`XmlSource`] in the implicit scope will be enriched with
 [useful methods]({{ site.baseUrl }}/api/#kantan.xpath.ops$$XmlSourceOps).
- 
+
 Implementing our own [`XmlSource`] for types that aren't supported by default is fairly simple.
 
 ## Implementation from scratch
 
-Reduced to its simplest expression, an [`XmlSource[A]`][`XmlSource`] is essentially an `A ⇒ ParseResult[Node]` - that 
+Reduced to its simplest expression, an [`XmlSource[A]`][`XmlSource`] is essentially an `A ⇒ ParseResult[Node]` - that
 is, a function that takes an `A` and turns it into a [`Node`], with the possibility of safe failure encoded in
 [`ParseResult`].
 

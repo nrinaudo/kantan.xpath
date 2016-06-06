@@ -2,7 +2,7 @@
 layout: tutorial
 title: "Decoding nodes as case classes"
 section: tutorial
-sort: 3
+sort_order: 3
 ---
 We've seen in a [previous tutorial](nodes_as_tuples.html) how to extract tuples from XML documents. The next step up
 from tuples is case classes, which work in a very similar fashion.

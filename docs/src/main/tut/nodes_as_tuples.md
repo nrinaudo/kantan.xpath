@@ -2,7 +2,7 @@
 layout: tutorial
 title: "Decoding nodes as tuples"
 section: tutorial
-sort: 2
+sort_order: 2
 ---
 We've seen in a [previous tutorial](nodes_as_primitive.html) how to extract primitive types from XML documents. Often,
 however, these primitive values need to be assembled in more complex types, such as tuples. kantan.xpath provides a
@@ -20,8 +20,8 @@ This is what we're working with:
 scala.io.Source.fromURL(rawData).mkString
 ```
 
-We'll be trying to turn each `element` node into an `(Int, Boolean)` tuple. In order to do that, we need to declare an 
-implicit [`NodeDecoder[(Int, Boolean)]`][`NodeDecoder`] value: this will be automatically picked up by kantan.xpath and 
+We'll be trying to turn each `element` node into an `(Int, Boolean)` tuple. In order to do that, we need to declare an
+implicit [`NodeDecoder[(Int, Boolean)]`][`NodeDecoder`] value: this will be automatically picked up by kantan.xpath and
 used when we request XML nodes to be interpreted as `(Int, Boolean)` values.
 
 The easier way to declare a [`NodeDecoder`] instance for tuples is to use the dedicated [`tuple`] method, which takes

@@ -2,9 +2,9 @@
 layout: tutorial
 title: "Compiling queries for reuse"
 section: tutorial
-sort: 6
+sort_order: 6
 ---
-In the examples we've seen so far, XPath expressions were passed around as [`XPathExpression`]s. This can be 
+In the examples we've seen so far, XPath expressions were passed around as [`XPathExpression`]s. This can be
 inefficient as kantan.xpath needs to bake in the decoding code each time they're evaluated against a node.
 
 When working with expressions that will need to be applied over and over, it's more efficient to compile them as

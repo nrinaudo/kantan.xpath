@@ -2,19 +2,19 @@
 layout: tutorial
 title: "Scalaz module"
 section: tutorial
-sort: 12
+sort_order: 12
 ---
 kantan.xpath has a [scalaz](https://github.com/scalaz/scalaz) module that is, in its current incarnation, fairly bare
 bones: it provides decoders for [`Maybe`] and [`\/`] as well as a few useful type class instances.
- 
+
 The `scalaz` module can be used by adding the following dependency to your `build.sbt`:
- 
+
 ```scala
 libraryDependencies += "com.nrinaudo" %% "kantan.xpath-scalaz" % "0.1.4"
 ```
- 
+
 You then need to import the corresponding package:
- 
+
 ```tut:silent
 import kantan.xpath.scalaz._
 ```

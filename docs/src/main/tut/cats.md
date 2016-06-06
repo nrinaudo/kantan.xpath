@@ -2,19 +2,19 @@
 layout: tutorial
 title: "Cats module"
 section: tutorial
-sort: 11
+sort_order: 11
 ---
 kantan.xpath has a [cats](https://github.com/typelevel/cats) module that is, in its current incarnation, fairly bare
 bones: it provides decoders for [`Xor`] as well as a few useful type class instances.
- 
+
 The `cats` module can be used by adding the following dependency to your `build.sbt`:
- 
+
 ```scala
 libraryDependencies += "com.nrinaudo" %% "kantan.xpath-cats" % "0.1.4"
 ```
- 
+
 You then need to import the corresponding package:
- 
+
 ```tut:silent
 import kantan.xpath.cats._
 ```

@@ -2,7 +2,7 @@
 layout: tutorial
 title: "Decoding nodes as primitive types"
 section: tutorial
-sort: 1
+sort_order: 1
 ---
 The simplest possible use of kantan.xpath is to extract primitive types from XML documents.
 
@@ -34,9 +34,9 @@ rawData.evalXPath[Int](xp"//element/@id")
 
 
 There are a few things worth pointing out here. First, the return type: you might expect an `Int`, since this is what
-you requested from [`evalXPath`], but we got an [`XPathResult[Int]`][`XPathResult`] instead. An [`XPathResult`] is 
+you requested from [`evalXPath`], but we got an [`XPathResult[Int]`][`XPathResult`] instead. An [`XPathResult`] is
 either a failure if something went wrong (the XPath expression is not valid, the `id` field is not a valid `Int`....) or
-a success otherwise. This mechanism ensures that [`evalXPath`] is safe: no exception will be thrown and break the flow 
+a success otherwise. This mechanism ensures that [`evalXPath`] is safe: no exception will be thrown and break the flow
 of your code. For example:
 
 ```tut
@@ -44,7 +44,7 @@ rawData.evalXPath[java.net.URL](xp"//element/@id")
 ```
 
 In some cases, however, we don't really care for runtime safety and are fine with our program crashing at the first
-error. This is what the [`unsafeEvalXPath`] method was designed for:  
+error. This is what the [`unsafeEvalXPath`] method was designed for:
 
 ```tut
 rawData.unsafeEvalXPath[Int](xp"//element/@id")
@@ -53,7 +53,7 @@ rawData.unsafeEvalXPath[Int](xp"//element/@id")
 
 Another point of interest is that the sample XML file contained multiple `element` nodes, but we only got the `id`
 attribute of the first one. This is due to the type parameter we passed to [`evalXPath`]: by requesting a non-collection
-type, we told kantan.xpath that we only wanted the first result. We could get them all by requesting a 
+type, we told kantan.xpath that we only wanted the first result. We could get them all by requesting a
 [`List[Int]`][`List`], for example:
 
 

@@ -23,24 +23,30 @@ import java.net.{URL, URLConnection}
   * The main purpose here is to allow application developers to set their own HTTP headers: when scrapping websites,
   * it's typically necessary to change the default user agent to something a bit more browser-like.
   */
-case class RemoteXmlSource[A](toURL: A ⇒ ParseResult[URL], headers: Map[String, String] = Map.empty)
-                             (implicit parser: XmlParser) extends XmlSource[A] {
+case class RemoteXmlSource[A](toURL: A ⇒ ParseResult[URL], retry: RetryStrategy = RetryStrategy.None,
+                              headers: Map[String, String] = Map.empty)
+(implicit parser: XmlParser) extends XmlSource[A] {
   private def open(url: URL): URLConnection = {
     val con = url.openConnection()
     headers.foreach { case (n, v) ⇒ con.setRequestProperty(n, v) }
     con
   }
 
-  override def asNode(a: A): ParseResult[Node] = {
-    for {
-      url ← toURL(a)
+  private def download(url: URL, count: Int): ParseResult[Node] =
+    (for {
       con ← ParseResult(open(url))
       res ← ParseResult.open {
         con.connect()
         new InputSource(con.getInputStream)
       }(parser.parse)
-    } yield res
-  }
+    } yield res).recoverWith {
+      case ParseError.IOError(_) if retry.max > count ⇒
+        Thread.sleep(retry.delayFor(count))
+        download(url, count + 1)
+    }
+
+  override def asNode(a: A): ParseResult[Node] =
+    toURL(a).flatMap(url ⇒ download(url, 0))
 
   override def contramap[B](f: B ⇒ A): RemoteXmlSource[B] = copy(toURL = f andThen toURL)
 
@@ -53,4 +59,6 @@ case class RemoteXmlSource[A](toURL: A ⇒ ParseResult[URL], headers: Map[String
 
   /** Sets the user-agent to use whenever connecting to a URL. */
   def withUserAgent(value: String): RemoteXmlSource[A] = withHeader("User-Agent", value)
+
+  def withRetry(strategy: RetryStrategy): RemoteXmlSource[A] = copy(retry = strategy)
 }

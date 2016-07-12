@@ -52,6 +52,6 @@ And retrieving all matches:
 "<users><user id='1'/><user id='2'/></users>".evalXPath[List[Int]](xp"//user/@id")
 ```
 
-[`kantan.xpath.implicits._`]:{{ site.baseUri }}/api/#kantan.xpath.implicits$
-[`kantan.xpath.literals._`]:{{ site.baseUri }}/api/#kantan.xpath.literals.package
-[`evalXPath`]:{{ site.baseUri }}/api/index.html#kantan.xpath.ops.XmlSourceOps@evalXPath[B](expr:kantan.xpath.XPathExpression)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]
+[`kantan.xpath.implicits._`]:{{ site.baseurl }}/api/#kantan.xpath.implicits$
+[`kantan.xpath.literals._`]:{{ site.baseurl }}/api/#kantan.xpath.literals.package
+[`evalXPath`]:{{ site.baseurl }}/api/index.html#kantan.xpath.ops.XmlSourceOps@evalXPath[B](expr:kantan.xpath.XPathExpression)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]

@@ -27,19 +27,20 @@ import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import scala.util.Try
 
 class XmlSourceOpsTests extends FunSuite with GeneratorDrivenPropertyChecks {
-  type Value[A] = CodecValue[Node, A]
+  type Value[A] = CodecValue[Node, A, codecs.type]
 
   // This is needed to get tests to compile under 2.10
-  implicit val arbIntValue: Arbitrary[Value[Int]] = CodecValue.arbValue[Node, Int]
-  implicit val arbStringValue: Arbitrary[CodecValue[String, Node]] = CodecValue.arbValue[String, Node]
+  implicit val arbIntValue: Arbitrary[Value[Int]] = CodecValue.arbValue[Node, Int, codecs.type]
+  implicit val arbStringValue: Arbitrary[CodecValue[String, Node, codecs.type]] =
+    CodecValue.arbValue[String, Node, codecs.type]
 
-  private def cmp[A, F, E](value: CodecValue[E, A], res: Result[F, A]): Boolean = (value, res) match {
+  private def cmp[A, F, E, T](value: CodecValue[E, A, T], res: Result[F, A]): Boolean = (value, res) match {
     case (CodecValue.LegalValue(_, n1), Success(n2)) ⇒ n1 == n2
     case (CodecValue.IllegalValue(_), Failure(_))    ⇒ true
     case _                                           ⇒ false
   }
 
-  private def cmp[A, F, E](value: CodecValue[E, A], res: Try[A]): Boolean = cmp(value, Result.fromTry(res))
+  private def cmp[A, F, E, T](value: CodecValue[E, A, T], res: Try[A]): Boolean = cmp(value, Result.fromTry(res))
 
 
   test("XmlSource instances should have a working asNode method") {
@@ -49,7 +50,7 @@ class XmlSourceOpsTests extends FunSuite with GeneratorDrivenPropertyChecks {
   // This test is not as good as it could be - we're not comparing decoded XML. The reason for that is that, apparently,
   // Node equality is not something the JDK deals with.
   test("XmlSource instances should have a working asUnsafeNode method") {
-    forAll { value: CodecValue[String, Node] ⇒
+    forAll { value: CodecValue[String, Node, codecs.type] ⇒
       assert((value, Result.fromTry(Try(value.encoded.asUnsafeNode))) match {
         case (CodecValue.LegalValue(_, _), Success(_)) ⇒ true
         case (CodecValue.IllegalValue(_), Failure(_))  ⇒ true

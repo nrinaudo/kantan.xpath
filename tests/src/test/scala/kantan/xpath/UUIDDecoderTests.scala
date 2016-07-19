@@ -17,6 +17,7 @@
 package kantan.xpath
 
 import java.util.UUID
+import kantan.codecs.laws.discipline.arbitrary._
 import kantan.xpath.laws.discipline.NodeDecoderTests
 import kantan.xpath.laws.discipline.arbitrary._
 import org.scalacheck.{Arbitrary, Gen}

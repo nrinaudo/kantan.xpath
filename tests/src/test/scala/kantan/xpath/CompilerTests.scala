@@ -31,10 +31,10 @@ import org.scalatest.prop.GeneratorDrivenPropertyChecks
 // TODO: Arbitrary[List[CodecValue[Node, A]]] never ends up generating lists of legal values only, which sorts of
 //       defeats the purpose.
 class CompilerTests extends FunSuite with GeneratorDrivenPropertyChecks {
-  type Value[A] = CodecValue[Node, A]
+  type Value[A] = CodecValue[Node, A, codecs.type]
 
   // This is needed to get tests to compile under 2.10
-  implicit val arbValue: Arbitrary[Value[Int]] = CodecValue.arbValue[Node, Int]
+  implicit val arbValue: Arbitrary[Value[Int]] = CodecValue.arbValue[Node, Int, codecs.type]
 
   def encodeAll[A](bs: List[Value[A]]): Element = {
     val n = bs.foldLeft("<root></root>".asNode.get.asInstanceOf[Document]) { (doc, b) ⇒

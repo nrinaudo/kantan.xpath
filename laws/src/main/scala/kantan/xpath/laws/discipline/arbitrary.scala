@@ -57,7 +57,7 @@ trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstance
     n
   }
 
-  implicit val arbLegalXml: Arbitrary[LegalValue[String, Node]] = Arbitrary(for {
+  implicit val arbLegalXml: Arbitrary[LegalValue[String, Node, codecs.type]] = Arbitrary(for {
     element ← Gen.identifier
     content ← Gen.identifier
   } yield {
@@ -65,28 +65,33 @@ trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstance
     LegalValue(n, n.asUnsafeNode)
   })
 
-  implicit val arbIllegalXml: Arbitrary[IllegalValue[String, Node]] =
+  implicit val arbIllegalXml: Arbitrary[IllegalValue[String, Node, codecs.type]] =
     Arbitrary(Gen.alphaStr.suchThat(_.asNode.isFailure).map(IllegalValue.apply))
 
 
-  implicit def arbLegalFoundNode[A](implicit la: Arbitrary[LegalString[A]]): Arbitrary[LegalValue[Node, A]] =
-      Arbitrary(la.arbitrary.map(_.mapEncoded(asCDataNode)))
-  implicit def arbLegalNode[A](implicit la: Arbitrary[LegalValue[Node, A]]): Arbitrary[LegalNode[A]] =
+  implicit def arbLegalFoundNode[A](implicit la: Arbitrary[LegalString[A]])
+  : Arbitrary[LegalValue[Node, A, codecs.type]] =
+      Arbitrary(la.arbitrary.map(_.mapEncoded(asCDataNode).tag[codecs.type]))
+
+  implicit def arbLegalNode[A](implicit la: Arbitrary[LegalValue[Node, A, codecs.type]]): Arbitrary[LegalNode[A]] =
     Arbitrary(la.arbitrary.map(_.mapEncoded(Option.apply)))
 
-  implicit def arbIllegalFoundNode[A](implicit ia: Arbitrary[IllegalString[A]]): Arbitrary[IllegalValue[Node, A]] =
-      Arbitrary(ia.arbitrary.map(_.mapEncoded(asCDataNode)))
-  implicit def arbIllegalNode[A](implicit ia: Arbitrary[IllegalValue[Node, A]]): Arbitrary[IllegalNode[A]] =
-    Arbitrary(ia.arbitrary.map(_.mapEncoded(Option.apply)))
+  implicit def arbIllegalFoundNode[A](implicit ia: Arbitrary[IllegalString[A]])
+  : Arbitrary[IllegalValue[Node, A, codecs.type]] =
+      Arbitrary(ia.arbitrary.map(_.mapEncoded(asCDataNode).tag[codecs.type]))
+
+  implicit def arbIllegalNode[A](implicit ia: Arbitrary[IllegalValue[Node, A, codecs.type]])
+  : Arbitrary[IllegalNode[A]] =
+    Arbitrary(ia.arbitrary.map(_.mapEncoded(Option.apply).tag[codecs.type]))
 
   implicit def arbLegalNodeOpt[A](implicit la: Arbitrary[LegalString[A]]): Arbitrary[LegalNode[Option[A]]] =
     Arbitrary(Gen.oneOf(
-      la.arbitrary.map(_.mapEncoded(e ⇒ Option(asCDataNode(e))).mapDecoded(Option.apply)),
-      Gen.const(CodecValue.LegalValue[Option[Node], Option[A]](Option.empty, Option.empty))
+      la.arbitrary.map(_.mapEncoded(e ⇒ Option(asCDataNode(e))).mapDecoded(Option.apply).tag[codecs.type]),
+      Gen.const(CodecValue.LegalValue[Option[Node], Option[A], codecs.type](Option.empty, Option.empty))
     ))
 
   implicit def arbIllegalNodeOpt[A](implicit la: Arbitrary[IllegalString[A]]): Arbitrary[IllegalNode[Option[A]]] =
-    Arbitrary(la.arbitrary.map(_.mapEncoded(e ⇒ Option(asCDataNode(e))).mapDecoded(Option.apply)))
+    Arbitrary(la.arbitrary.map(_.mapEncoded(e ⇒ Option(asCDataNode(e))).mapDecoded(Option.apply).tag[codecs.type]))
 
 
 

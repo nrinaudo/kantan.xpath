@@ -16,7 +16,6 @@
 
 package kantan.xpath.scalaz
 
-import kantan.xpath.{codecs, Node}
 import kantan.xpath.laws.discipline.NodeDecoderTests
 import kantan.xpath.scalaz.arbitrary._
 import org.scalatest.FunSuite
@@ -25,9 +24,5 @@ import org.typelevel.discipline.scalatest.Discipline
 import scalaz.Maybe
 
 class MaybeDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
-  implicit val legalMaybeNode = arbLegalMaybe[Option[Node], Int, codecs.type]
-  implicit val illegalMaybeNode = arbIllegalMaybe[Option[Node], Int, codecs.type]
-
-
   checkAll("NodeDecoder[Maybe[Int]]", NodeDecoderTests[Maybe[Int]].decoder[Int, Int])
 }

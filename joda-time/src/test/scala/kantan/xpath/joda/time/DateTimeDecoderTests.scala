@@ -16,9 +16,8 @@
 
 package kantan.xpath.joda.time
 
-import kantan.codecs.strings.joda.time.laws.discipline.arbitrary._
+import arbitrary._
 import kantan.xpath.laws.discipline.NodeDecoderTests
-import kantan.xpath.laws.discipline.arbitrary._
 import org.joda.time.DateTime
 import org.joda.time.format.ISODateTimeFormat
 import org.scalatest.FunSuite

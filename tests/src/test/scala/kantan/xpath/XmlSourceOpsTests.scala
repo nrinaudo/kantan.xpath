@@ -21,18 +21,12 @@ import kantan.codecs.Result.{Failure, Success}
 import kantan.codecs.laws.CodecValue
 import kantan.xpath.implicits._
 import kantan.xpath.laws.discipline.arbitrary._
-import org.scalacheck.Arbitrary
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import scala.util.Try
 
 class XmlSourceOpsTests extends FunSuite with GeneratorDrivenPropertyChecks {
   type Value[A] = CodecValue[Node, A, codecs.type]
-
-  // This is needed to get tests to compile under 2.10
-  implicit val arbIntValue: Arbitrary[Value[Int]] = CodecValue.arbValue[Node, Int, codecs.type]
-  implicit val arbStringValue: Arbitrary[CodecValue[String, Node, codecs.type]] =
-    CodecValue.arbValue[String, Node, codecs.type]
 
   private def cmp[A, F, E, T](value: CodecValue[E, A, T], res: Result[F, A]): Boolean = (value, res) match {
     case (CodecValue.LegalValue(_, n1), Success(n2)) ⇒ n1 == n2

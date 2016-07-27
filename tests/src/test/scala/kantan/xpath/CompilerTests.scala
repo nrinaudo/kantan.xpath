@@ -23,7 +23,6 @@ import kantan.codecs.Result
 import kantan.codecs.laws.CodecValue
 import kantan.xpath.implicits._
 import kantan.xpath.laws.discipline.arbitrary._
-import org.scalacheck.Arbitrary
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 
@@ -32,9 +31,6 @@ import org.scalatest.prop.GeneratorDrivenPropertyChecks
 //       defeats the purpose.
 class CompilerTests extends FunSuite with GeneratorDrivenPropertyChecks {
   type Value[A] = CodecValue[Node, A, codecs.type]
-
-  // This is needed to get tests to compile under 2.10
-  implicit val arbValue: Arbitrary[Value[Int]] = CodecValue.arbValue[Node, Int, codecs.type]
 
   def encodeAll[A](bs: List[Value[A]]): Element = {
     val n = bs.foldLeft("<root></root>".asNode.get.asInstanceOf[Document]) { (doc, b) ⇒

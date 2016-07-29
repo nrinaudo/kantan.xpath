@@ -20,6 +20,8 @@ import kantan.codecs.Result
 import kantan.codecs.laws._
 import kantan.codecs.laws.CodecValue.{IllegalValue, LegalValue}
 import kantan.xpath._
+import kantan.xpath.DecodeError.TypeError
+import kantan.xpath.ParseError.{IOError, SyntaxError}
 import kantan.xpath.ops._
 import org.scalacheck._
 import org.scalacheck.Arbitrary.{arbitrary => arb}
@@ -31,12 +33,18 @@ trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstance
                                  with kantan.xpath.laws.discipline.ArbitraryArities {
   // - Arbitrary errors ------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
+  implicit val arbCompileError: Arbitrary[CompileError] = Arbitrary(genException.map(CompileError.apply))
+  implicit val arbTypeError: Arbitrary[TypeError] = Arbitrary(genException.map(TypeError.apply))
   implicit val arbDecodeError: Arbitrary[DecodeError] =
-    Arbitrary(oneOf(const(DecodeError.NotFound), const(DecodeError.TypeError(new Exception))))
+    Arbitrary(oneOf(const(DecodeError.NotFound), arbTypeError.arbitrary))
+  implicit val arbSyntaxError: Arbitrary[SyntaxError] = Arbitrary(genException.map(SyntaxError.apply))
+  implicit val arbIOError: Arbitrary[IOError] = Arbitrary(genIoException.map(IOError.apply))
   implicit val arbParseError: Arbitrary[ParseError] =
-    Arbitrary(oneOf(const(ParseError.SyntaxError(new Exception())), const(ParseError.IOError(new Exception()))))
-  implicit val arbXPathError: Arbitrary[ReadError] =
-    Arbitrary(oneOf(arb[DecodeError], arb[ParseError]))
+    Arbitrary(oneOf(arbSyntaxError.arbitrary, arbIOError.arbitrary))
+  implicit val arbReadError: Arbitrary[ReadError] =
+      Arbitrary(oneOf(arb[DecodeError], arb[ParseError]))
+  implicit val arbXPathError: Arbitrary[XPathError] =
+    Arbitrary(oneOf(arb[ReadError], arb[CompileError]))
 
 
 

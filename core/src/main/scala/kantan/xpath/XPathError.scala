@@ -28,7 +28,7 @@ final case class CompileError(cause: Throwable) extends XPathError {
     case _                    ⇒ false
   }
 
-  override def hashCode(): Int = cause.hashCode()
+  override def hashCode(): Int = CompileError.hashCode() * 31 + cause.getClass.hashCode()
 }
 
 /** Describes an error that occurred while parsing and / or decoding XML content. */
@@ -50,7 +50,7 @@ object DecodeError {
       case _                 ⇒ false
     }
 
-    override def hashCode(): Int = cause.hashCode()
+    override def hashCode(): Int = TypeError.hashCode() * 31 + cause.getClass.hashCode()
   }
 
   object TypeError {
@@ -71,7 +71,7 @@ object ParseError {
       case _                   ⇒ false
     }
 
-    override def hashCode(): Int = cause.hashCode()
+    override def hashCode(): Int = SyntaxError.hashCode() * 31 + cause.getClass.hashCode()
   }
 
   /** Error that occurs when something IO related went bad. */
@@ -83,6 +83,6 @@ object ParseError {
       case _               ⇒ false
     }
 
-    override def hashCode(): Int = cause.hashCode()
+    override def hashCode(): Int = IOError.hashCode() * 31 + cause.getClass.hashCode()
   }
 }

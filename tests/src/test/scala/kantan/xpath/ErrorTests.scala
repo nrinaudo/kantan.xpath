@@ -16,37 +16,82 @@
 
 package kantan.xpath
 
+import kantan.xpath.laws.discipline.arbitrary._
 import kantan.xpath.DecodeError.TypeError
 import kantan.xpath.ParseError.{IOError, SyntaxError}
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 
 class ErrorTests extends FunSuite with GeneratorDrivenPropertyChecks {
-  test("CompileError") {
-    forAll { (t1: Throwable, t2: Throwable) ⇒
-      assert((CompileError(t1) == CompileError(t2)) == (t1.getClass == t2.getClass))
-      assert((CompileError(t1).hashCode() == CompileError(t2).hashCode()) == (t1.getClass == t2.getClass))
+  test("CompileErrors should be equal if the underlying exceptions have the same class") {
+    forAll { (e1: CompileError, e2: XPathError) ⇒
+      assert((e1 == e2) == ((e1, e2) match {
+        case (CompileError(t1), CompileError(t2)) ⇒ t1.getClass == t2.getClass
+        case _                                    ⇒ false
+      }))
     }
   }
 
-  test("TypeError") {
-    forAll { (t1: Throwable, t2: Throwable) ⇒
-      assert((TypeError(t1) == TypeError(t2)) == (t1.getClass == t2.getClass))
-      assert((TypeError(t1).hashCode() == TypeError(t2).hashCode()) == (t1.getClass == t2.getClass))
+  test("CompileErrors should have identical hashCodes if the underlying exceptions have the same class") {
+    forAll { (e1: CompileError, e2: XPathError) ⇒
+      assert((e1.hashCode() == e2.hashCode()) == ((e1, e2) match {
+        case (CompileError(t1), CompileError(t2)) ⇒ t1.getClass == t2.getClass
+        case _                                    ⇒ false
+      }))
     }
   }
 
-  test("SyntaxError") {
-    forAll { (t1: Throwable, t2: Throwable) ⇒
-      assert((SyntaxError(t1) == SyntaxError(t2)) == (t1.getClass == t2.getClass))
-      assert((SyntaxError(t1).hashCode() == SyntaxError(t2).hashCode()) == (t1.getClass == t2.getClass))
+  test("TypeErrors should be equal if the underlying exceptions have the same class") {
+    forAll { (e1: TypeError, e2: XPathError) ⇒
+      assert((e1 == e2) == ((e1, e2) match {
+        case (TypeError(t1), TypeError(t2)) ⇒ t1.getClass == t2.getClass
+        case _                              ⇒ false
+      }))
     }
   }
 
-  test("IOError") {
-    forAll { (t1: Throwable, t2: Throwable) ⇒
-      assert((IOError(t1) == IOError(t2)) == (t1.getClass == t2.getClass))
-      assert((IOError(t1).hashCode() == IOError(t2).hashCode()) == (t1.getClass == t2.getClass))
+  test("TypeErrors should have identical hashCodes if the underlying exceptions have the same class") {
+    forAll { (e1: TypeError, e2: XPathError) ⇒
+      assert((e1.hashCode() == e2.hashCode()) == ((e1, e2) match {
+        case (TypeError(t1), TypeError(t2)) ⇒ t1.getClass == t2.getClass
+        case _                              ⇒ false
+      }))
+    }
+  }
+
+  test("SyntaxErrors should be equal if the underlying exceptions have the same class") {
+    forAll { (e1: SyntaxError, e2: XPathError) ⇒
+      assert((e1 == e2) == ((e1, e2) match {
+        case (SyntaxError(t1), SyntaxError(t2)) ⇒ t1.getClass == t2.getClass
+        case _                                  ⇒ false
+      }))
+    }
+  }
+
+  test("SyntaxErrors should have identical hashCodes if the underlying exceptions have the same class") {
+    forAll { (e1: SyntaxError, e2: XPathError) ⇒
+      assert((e1.hashCode() == e2.hashCode()) == ((e1, e2) match {
+        case (SyntaxError(t1), SyntaxError(t2)) ⇒ t1.getClass == t2.getClass
+        case _                                  ⇒ false
+      }))
+    }
+  }
+
+  test("IOErrors should be equal if the underlying exceptions have the same class") {
+    forAll { (e1: IOError, e2: XPathError) ⇒
+      assert((e1 == e2) == ((e1, e2) match {
+        case (IOError(t1), IOError(t2)) ⇒ t1.getClass == t2.getClass
+        case _                          ⇒ false
+      }))
+    }
+  }
+
+  test("IOErrors should have identical hashCodes if the underlying exceptions have the same class") {
+    forAll { (e1: IOError, e2: XPathError) ⇒
+      assert((e1.hashCode() == e2.hashCode()) == ((e1, e2) match {
+        case (IOError(t1), IOError(t2)) ⇒ t1.getClass == t2.getClass
+        case _                          ⇒ false
+      }))
     }
   }
 }

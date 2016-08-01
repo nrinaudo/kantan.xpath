@@ -33,5 +33,5 @@ object ParseResult {
     * along the way in a failure.
     */
   def open[A, B](a: ⇒ A)(parse: A ⇒ ParseResult[B]): ParseResult[B] =
-    Result.nonFatal(a).leftMap(ParseError.IOError).flatMap(parse)
+    Result.nonFatal(a).leftMap(ParseError.IOError.apply).flatMap(parse)
 }

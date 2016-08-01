@@ -21,7 +21,7 @@ import kantan.codecs.Result
 /** Provides instance creation methods for [[DecodeResult]]. */
 object DecodeResult {
   /** Failure with an error of [[DecodeError.NotFound]]. */
-  val notFound: DecodeResult[Nothing] = Result.failure(DecodeError.NotFound)
+  val notFound: DecodeResult[Nothing] = Result.failure(DecodeError.NotFound())
 
   /** Creates a success with the specified value. */
   def success[A](a: A): DecodeResult[A] = Result.success(a)

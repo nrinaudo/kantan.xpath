@@ -42,7 +42,7 @@ trait NodeDecoderInstances {
 
   /** Turns any of the string decodes provided by kantan.codecs into node decoders. */
   implicit def fromString[A](implicit da: StringDecoder[A]): NodeDecoder[A] =
-    NodeDecoder.fromFound(n ⇒ da.mapError(TypeError.apply).decode(n.getTextContent))
+    NodeDecoder.fromFound(n ⇒ da.mapError(t ⇒ TypeError(t.getMessage, t.getCause)).decode(n.getTextContent))
 
   implicit def optionNodeDecoder[A: NodeDecoder]: NodeDecoder[Option[A]] =
     Decoder.optionalDecoder

@@ -36,7 +36,7 @@ trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstance
   implicit val arbCompileError: Arbitrary[CompileError] = Arbitrary(genException.map(CompileError.apply))
   implicit val arbTypeError: Arbitrary[TypeError] = Arbitrary(genException.map(TypeError.apply))
   implicit val arbDecodeError: Arbitrary[DecodeError] =
-    Arbitrary(oneOf(const(DecodeError.NotFound), arbTypeError.arbitrary))
+    Arbitrary(oneOf(const(DecodeError.NotFound()), arbTypeError.arbitrary))
   implicit val arbSyntaxError: Arbitrary[SyntaxError] = Arbitrary(genException.map(SyntaxError.apply))
   implicit val arbIOError: Arbitrary[IOError] = Arbitrary(genIoException.map(IOError.apply))
   implicit val arbParseError: Arbitrary[ParseError] =

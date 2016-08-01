@@ -50,7 +50,7 @@ class CompilerTests extends FunSuite with GeneratorDrivenPropertyChecks {
 
   test("'first' expressions should fail on empty results") {
     forAll { value: Value[Int] ⇒
-      assert(value.encoded.evalXPath[Int](xp"//element2") == Result.Failure(DecodeError.NotFound))
+      assert(value.encoded.evalXPath[Int](xp"//element2") == Result.Failure(DecodeError.NotFound()))
     }
   }
 

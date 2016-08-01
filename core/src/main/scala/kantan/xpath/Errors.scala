@@ -21,12 +21,12 @@ sealed abstract class XPathError extends Exception with Product with Serializabl
 
 /** Describes a XPath expression compilation error. */
 sealed case class CompileError(message: String) extends XPathError {
-  override final def getMessage = message
+  override final val getMessage = message
 }
 
 object CompileError {
   def apply(msg: String, t: Throwable): CompileError = new CompileError(msg) {
-    override def getCause = t
+    override val getCause = t
   }
 
   def apply(t: Throwable): CompileError = CompileError(Option(t.getMessage).getOrElse("Compile error"), t)
@@ -44,12 +44,12 @@ object DecodeError {
 
   /** Error that occurs when a node was attempted to be decoded as a type its value is not compatible with. */
   sealed case class TypeError(message: String) extends DecodeError {
-    override final def getMessage = message
+    override final val getMessage = message
   }
 
   object TypeError {
     def apply(msg: String, t: Throwable): TypeError = new TypeError(msg) {
-      override def getCause = t
+      override val getCause = t
     }
 
     def apply(t: Throwable): TypeError = TypeError(Option(t.getMessage).getOrElse("Type error"), t)
@@ -62,12 +62,12 @@ sealed abstract class ParseError extends ReadError
 object ParseError {
   /** Error that occurs when an XML document is not valid. */
   sealed case class SyntaxError(message: String) extends ParseError {
-    override final def getMessage = message
+    override final val getMessage = message
   }
 
   object SyntaxError {
     def apply(msg: String, t: Throwable): SyntaxError = new SyntaxError(msg) {
-      override def getCause = t
+      override val getCause = t
     }
 
     def apply(t: Throwable): SyntaxError = SyntaxError(Option(t.getMessage).getOrElse("Syntax error"), t)
@@ -75,12 +75,12 @@ object ParseError {
 
   /** Error that occurs when something IO related went bad. */
   sealed case class IOError(message: String) extends ParseError {
-    override def getMessage = message
+    override val getMessage = message
   }
 
   object IOError {
     def apply(msg: String, t: Throwable): IOError = new IOError(msg) {
-      override def getCause = t
+      override val getCause = t
     }
 
     def apply(t: Throwable): IOError = IOError(Option(t.getMessage).getOrElse("IO error"), t)

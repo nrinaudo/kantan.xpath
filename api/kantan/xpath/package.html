@@ -110,11 +110,11 @@
       <a id="CompileError:CompileError"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">final </span>
+        <span class="modifier">sealed </span>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="CompileError.html"><span class="name">CompileError</span></a><span class="params">(<span name="cause">cause: <span class="extype" name="scala.Throwable">Throwable</span></span>)</span><span class="result"> extends <a href="XPathError.html" class="extype" name="kantan.xpath.XPathError">XPathError</a> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="CompileError.html"><span class="name">CompileError</span></a><span class="params">(<span name="message">message: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="XPathError.html" class="extype" name="kantan.xpath.XPathError">XPathError</a> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#kantan.xpath.package@CompileErrorextendsXPathErrorwithProductwithSerializable" title="Permalink" target="_top">
@@ -427,7 +427,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="RemoteXmlSource.html"><span class="name">RemoteXmlSource</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="toURL">toURL: (<span class="extype" name="kantan.xpath.RemoteXmlSource.A">A</span>) ⇒ <a href="#ParseResult[A]=kantan.codecs.Result[kantan.xpath.ParseError,A]" class="extmbr" name="kantan.xpath.ParseResult">ParseResult</a>[<span class="extype" name="java.net.URL">URL</span>]</span>, <span name="headers">headers: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">Map.empty</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="parser">parser: <a href="XmlParser.html" class="extype" name="kantan.xpath.XmlParser">XmlParser</a></span>)</span><span class="result"> extends <a href="XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a>[<span class="extype" name="kantan.xpath.RemoteXmlSource.A">A</span>] with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="RemoteXmlSource.html"><span class="name">RemoteXmlSource</span></a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="toURL">toURL: (<span class="extype" name="kantan.xpath.RemoteXmlSource.A">A</span>) ⇒ <a href="#ParseResult[A]=kantan.codecs.Result[kantan.xpath.ParseError,A]" class="extmbr" name="kantan.xpath.ParseResult">ParseResult</a>[<span class="extype" name="java.net.URL">URL</span>]</span>, <span name="retry">retry: <a href="RetryStrategy.html" class="extype" name="kantan.xpath.RetryStrategy">RetryStrategy</a> = <span class="symbol"><span class="name"><a href="RetryStrategy$.html">RetryStrategy.None</a></span></span></span>, <span name="headers">headers: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">Map.empty</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="parser">parser: <a href="XmlParser.html" class="extype" name="kantan.xpath.XmlParser">XmlParser</a></span>)</span><span class="result"> extends <a href="XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a>[<span class="extype" name="kantan.xpath.RemoteXmlSource.A">A</span>] with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#kantan.xpath.package@RemoteXmlSource[A]extendsXmlSource[A]withProductwithSerializable" title="Permalink" target="_top">
@@ -437,6 +437,26 @@
       <p class="shortcomment cmt"><a href="XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a> implementation anything that can be turned into a <code>java.io.URL</code>.</p><div class="fullcomment"><div class="comment cmt"><p><a href="XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a> implementation anything that can be turned into a <code>java.io.URL</code>.</p><p>The main purpose here is to allow application developers to set their own HTTP headers: when scrapping websites,
 it's typically necessary to change the default user agent to something a bit more browser-like.
 </p></div></div>
+    </li><li name="kantan.xpath.RetryStrategy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="RetryStrategyextendsProductwithSerializable"></a>
+      <a id="RetryStrategy:RetryStrategy"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="RetryStrategy.html"><span class="name">RetryStrategy</span></a><span class="params">(<span name="max">max: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Int" class="extype" target="_top">Int</a></span>, <span name="delay">delay: <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="factor">factor: (<a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Int" class="extype" target="_top">Int</a>) ⇒ <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@RetryStrategyextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Describes how to retry failed request for <a href="RemoteXmlSource.html" class="extype" name="kantan.xpath.RemoteXmlSource">RemoteXmlSource</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Describes how to retry failed request for <a href="RemoteXmlSource.html" class="extype" name="kantan.xpath.RemoteXmlSource">RemoteXmlSource</a>.</p><p>Constructors for commonly used patterns can be found in the <a href="RetryStrategy$.html" class="extype" name="kantan.xpath.RetryStrategy">RetryStrategy$</a> companion object.
+</p></div><dl class="paramcmts block"><dt class="param">max</dt><dd class="cmt"><p>maximum number of attempts that can be made for a given request.</p></dd><dt class="param">delay</dt><dd class="cmt"><p>delay, in milliseconds, between each attempt.</p></dd><dt class="param">factor</dt><dd class="cmt"><p>function that calculates the delay factor based on the number of requests already attempted.
+              In order to double waiting times between each attempt, for example, one would pass
+              <code>i ⇒ 2 ^ i<code>.</code></code></p></dd></dl></div>
     </li><li name="kantan.xpath.XPathCompiler" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="XPathCompilerextendsAnyRef"></a>
       <a id="XPathCompiler:XPathCompiler"></a>
@@ -458,7 +478,7 @@ most circumstances. Still, if some non-standard options are required, one can al
 instance.
 </p></div></div>
     </li><li name="kantan.xpath.XPathError" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="XPathErrorextendsProductwithSerializable"></a>
+      <a id="XPathErrorextendsExceptionwithProductwithSerializable"></a>
       <a id="XPathError:XPathError"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -466,10 +486,10 @@ instance.
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="XPathError.html"><span class="name">XPathError</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="XPathError.html"><span class="name">XPathError</span></a><span class="result"> extends <span class="extype" name="scala.Exception">Exception</span> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#kantan.xpath.package@XPathErrorextendsProductwithSerializable" title="Permalink" target="_top">
+      <a href="../../index.html#kantan.xpath.package@XPathErrorextendsExceptionwithProductwithSerializable" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -557,7 +577,24 @@ importing <code>kantan.xpath.ops._</code>.</p><p>See the <a href="XmlSource$.htm
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="kantan.xpath.Compiler" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="kantan.xpath.CompileError" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CompileError"></a>
+      <a id="CompileError:CompileError"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="CompileError$.html"><span class="name">CompileError</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@CompileError" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="kantan.xpath.Compiler" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Compiler"></a>
       <a id="Compiler:Compiler"></a>
       <h4 class="signature">
@@ -678,6 +715,23 @@ importing <code>kantan.xpath.ops._</code>.</p><p>See the <a href="XmlSource$.htm
       <p class="shortcomment cmt">Provides convenient methods for XPath expression compilation.</p><div class="fullcomment"><div class="comment cmt"><p>Provides convenient methods for XPath expression compilation.</p><p>Actual compilation is done through instances of <a href="Compiler.html" class="extype" name="kantan.xpath.Compiler">Compiler</a>. Methods declared here will simply summon the right
 implicit value.
 </p></div></div>
+    </li><li name="kantan.xpath.RetryStrategy" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RetryStrategy"></a>
+      <a id="RetryStrategy:RetryStrategy"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="RetryStrategy$.html"><span class="name">RetryStrategy</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.package@RetryStrategy" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="kantan.xpath.XPathCompiler" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="XPathCompiler"></a>
       <a id="XPathCompiler:XPathCompiler"></a>

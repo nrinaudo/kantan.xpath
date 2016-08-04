@@ -45,7 +45,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">RemoteXmlSource</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="toURL">toURL: (<span class="extype" name="kantan.xpath.RemoteXmlSource.A">A</span>) ⇒ <a href="package.html#ParseResult[A]=kantan.codecs.Result[kantan.xpath.ParseError,A]" class="extmbr" name="kantan.xpath.ParseResult">ParseResult</a>[<span class="extype" name="java.net.URL">URL</span>]</span>, <span name="headers">headers: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">Map.empty</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="parser">parser: <a href="XmlParser.html" class="extype" name="kantan.xpath.XmlParser">XmlParser</a></span>)</span><span class="result"> extends <a href="XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a>[<span class="extype" name="kantan.xpath.RemoteXmlSource.A">A</span>] with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <span class="name">RemoteXmlSource</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="toURL">toURL: (<span class="extype" name="kantan.xpath.RemoteXmlSource.A">A</span>) ⇒ <a href="package.html#ParseResult[A]=kantan.codecs.Result[kantan.xpath.ParseError,A]" class="extmbr" name="kantan.xpath.ParseResult">ParseResult</a>[<span class="extype" name="java.net.URL">URL</span>]</span>, <span name="retry">retry: <a href="RetryStrategy.html" class="extype" name="kantan.xpath.RetryStrategy">RetryStrategy</a> = <span class="symbol"><span class="name"><a href="RetryStrategy$.html">RetryStrategy.None</a></span></span></span>, <span name="headers">headers: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">Map.empty</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="parser">parser: <a href="XmlParser.html" class="extype" name="kantan.xpath.XmlParser">XmlParser</a></span>)</span><span class="result"> extends <a href="XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a>[<span class="extype" name="kantan.xpath.RemoteXmlSource.A">A</span>] with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4>
       
@@ -91,7 +91,7 @@ it's typically necessary to change the default user agent to something a bit mor
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="kantan.xpath.RemoteXmlSource#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(toURL:A=&gt;kantan.xpath.ParseResult[java.net.URL],headers:Map[String,String])(implicitparser:kantan.xpath.XmlParser):kantan.xpath.RemoteXmlSource[A]"></a>
+      <a id="&lt;init&gt;(toURL:A=&gt;kantan.xpath.ParseResult[java.net.URL],retry:kantan.xpath.RetryStrategy,headers:Map[String,String])(implicitparser:kantan.xpath.XmlParser):kantan.xpath.RemoteXmlSource[A]"></a>
       <a id="&lt;init&gt;:RemoteXmlSource[A]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -99,10 +99,10 @@ it's typically necessary to change the default user agent to something a bit mor
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">RemoteXmlSource</span><span class="params">(<span name="toURL">toURL: (<span class="extype" name="kantan.xpath.RemoteXmlSource.A">A</span>) ⇒ <a href="package.html#ParseResult[A]=kantan.codecs.Result[kantan.xpath.ParseError,A]" class="extmbr" name="kantan.xpath.ParseResult">ParseResult</a>[<span class="extype" name="java.net.URL">URL</span>]</span>, <span name="headers">headers: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">Map.empty</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="parser">parser: <a href="XmlParser.html" class="extype" name="kantan.xpath.XmlParser">XmlParser</a></span>)</span>
+        <span class="name">RemoteXmlSource</span><span class="params">(<span name="toURL">toURL: (<span class="extype" name="kantan.xpath.RemoteXmlSource.A">A</span>) ⇒ <a href="package.html#ParseResult[A]=kantan.codecs.Result[kantan.xpath.ParseError,A]" class="extmbr" name="kantan.xpath.ParseResult">ParseResult</a>[<span class="extype" name="java.net.URL">URL</span>]</span>, <span name="retry">retry: <a href="RetryStrategy.html" class="extype" name="kantan.xpath.RetryStrategy">RetryStrategy</a> = <span class="symbol"><span class="name"><a href="RetryStrategy$.html">RetryStrategy.None</a></span></span></span>, <span name="headers">headers: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">Map.empty</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="parser">parser: <a href="XmlParser.html" class="extype" name="kantan.xpath.XmlParser">XmlParser</a></span>)</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../index.html#kantan.xpath.RemoteXmlSource@&lt;init&gt;(toURL:A=&gt;kantan.xpath.ParseResult[java.net.URL],headers:Map[String,String])(implicitparser:kantan.xpath.XmlParser):kantan.xpath.RemoteXmlSource[A]" title="Permalink" target="_top">
+      <a href="../../index.html#kantan.xpath.RemoteXmlSource@&lt;init&gt;(toURL:A=&gt;kantan.xpath.ParseResult[java.net.URL],retry:kantan.xpath.RetryStrategy,headers:Map[String,String])(implicitparser:kantan.xpath.XmlParser):kantan.xpath.RemoteXmlSource[A]" title="Permalink" target="_top">
         <img src="../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -457,6 +457,23 @@ see <a href="XmlSource.html#asNode(a:A):kantan.xpath.ParseResult[kantan.xpath.No
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="kantan.xpath.RemoteXmlSource#retry" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="retry:kantan.xpath.RetryStrategy"></a>
+      <a id="retry:RetryStrategy"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">retry</span><span class="result">: <a href="RetryStrategy.html" class="extype" name="kantan.xpath.RetryStrategy">RetryStrategy</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.RemoteXmlSource@retry:kantan.xpath.RetryStrategy" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -611,6 +628,23 @@ see <a href="XmlSource.html#asNode(a:A):kantan.xpath.ParseResult[kantan.xpath.No
       </a>
     </span>
       <p class="shortcomment cmt">Sets the specified header to the specified value.</p>
+    </li><li name="kantan.xpath.RemoteXmlSource#withRetry" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="withRetry(strategy:kantan.xpath.RetryStrategy):kantan.xpath.RemoteXmlSource[A]"></a>
+      <a id="withRetry(RetryStrategy):RemoteXmlSource[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">withRetry</span><span class="params">(<span name="strategy">strategy: <a href="RetryStrategy.html" class="extype" name="kantan.xpath.RetryStrategy">RetryStrategy</a></span>)</span><span class="result">: <a href="" class="extype" name="kantan.xpath.RemoteXmlSource">RemoteXmlSource</a>[<span class="extype" name="kantan.xpath.RemoteXmlSource.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.RemoteXmlSource@withRetry(strategy:kantan.xpath.RetryStrategy):kantan.xpath.RemoteXmlSource[A]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="kantan.xpath.RemoteXmlSource#withUserAgent" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="withUserAgent(value:String):kantan.xpath.RemoteXmlSource[A]"></a>
       <a id="withUserAgent(String):RemoteXmlSource[A]"></a>

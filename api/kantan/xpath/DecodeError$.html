@@ -51,7 +51,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/nrinaudo/kantan.xpath/tree/master/core/src/main/scala/kantan/xpath/XPathError.scala" target="_blank">XPathError.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/nrinaudo/kantan.xpath/tree/master/core/src/main/scala/kantan/xpath/Errors.scala" target="_blank">Errors.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Serializable" class="extype" target="_top">Serializable</a>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
@@ -92,16 +92,33 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="kantan.xpath.DecodeError.TypeError" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="TypeErrorextendsDecodeErrorwithProductwithSerializable"></a>
-      <a id="TypeError:TypeError"></a>
+              <ol><li name="kantan.xpath.DecodeError.NotFound" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NotFoundextendsDecodeErrorwithProductwithSerializable"></a>
+      <a id="NotFound:NotFound"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="DecodeError$$TypeError.html"><span class="name">TypeError</span></a><span class="params">(<span name="cause">cause: <span class="extype" name="scala.Throwable">Throwable</span></span>)</span><span class="result"> extends <a href="DecodeError.html" class="extype" name="kantan.xpath.DecodeError">DecodeError</a> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <a href="DecodeError$$NotFound.html"><span class="name">NotFound</span></a><span class="params">()</span><span class="result"> extends <a href="DecodeError.html" class="extype" name="kantan.xpath.DecodeError">DecodeError</a> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.DecodeError$@NotFoundextendsDecodeErrorwithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Error that occurs when a single result was requested by an XPath expression, but no node was matched.</p>
+    </li><li name="kantan.xpath.DecodeError.TypeError" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TypeErrorextendsDecodeErrorwithProductwithSerializable"></a>
+      <a id="TypeError:TypeError"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="DecodeError$$TypeError.html"><span class="name">TypeError</span></a><span class="params">(<span name="message">message: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <a href="DecodeError.html" class="extype" name="kantan.xpath.DecodeError">DecodeError</a> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4><span class="permalink">
       <a href="../../index.html#kantan.xpath.DecodeError$@TypeErrorextendsDecodeErrorwithProductwithSerializable" title="Permalink" target="_top">
@@ -167,23 +184,6 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="kantan.xpath.DecodeError.NotFound" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="NotFound"></a>
-      <a id="NotFound:NotFound"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="DecodeError$$NotFound$.html"><span class="name">NotFound</span></a><span class="result"> extends <a href="DecodeError.html" class="extype" name="kantan.xpath.DecodeError">DecodeError</a> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#kantan.xpath.DecodeError$@NotFound" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Error that occurs when a single result was requested by an XPath expression, but no node was matched.</p>
     </li><li name="kantan.xpath.DecodeError.TypeError" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="TypeError"></a>
       <a id="TypeError:TypeError"></a>

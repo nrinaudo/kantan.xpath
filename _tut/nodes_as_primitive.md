@@ -49,7 +49,7 @@ of your code. For example:
 
 ```scala
 scala> rawData.evalXPath[java.net.URL](xp"//element/@id")
-res2: kantan.xpath.XPathResult[java.net.URL] = Failure(TypeError(no protocol: 1))
+res2: kantan.xpath.XPathResult[java.net.URL] = Failure(kantan.xpath.DecodeError$TypeError$$anon$1: Not a valid URL: '1)
 ```
 
 In some cases, however, we don't really care for runtime safety and are fine with our program crashing at the first
@@ -80,8 +80,8 @@ scala> rawData.evalXPath[Vector[Boolean]](xp"//element/@enabled")
 res5: kantan.xpath.XPathResult[Vector[Boolean]] = Success(Vector(true, false, true, false))
 ```
 
-[`evalXPath`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.ops$$XmlSourceOps@evalXPath[B](expr:String)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]
-[`unsafeEvalXPath`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.ops$$XmlSourceOps@unsafeEvalXPath[B](expr:String)(implicitevidence$1:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):B
-[`XPathResult`]:{{ site.baseUrl }}/api/index.html#kantan.xpath.package@XPathResult[A]=kantan.codecs.Result[kantan.xpath.XPathError,A]
+[`evalXPath`]:{{ site.baseurl }}/api/index.html#kantan.xpath.ops$$XmlSourceOps@evalXPath[B](expr:String)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]
+[`unsafeEvalXPath`]:{{ site.baseurl }}/api/index.html#kantan.xpath.ops$$XmlSourceOps@unsafeEvalXPath[B](expr:String)(implicitevidence$1:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):B
+[`XPathResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@XPathResult[A]=kantan.codecs.Result[kantan.xpath.XPathError,A]
 [`CanBuildFrom`]:http://www.scala-lang.org/api/2.11.8/#scala.collection.generic.CanBuildFrom
 [`List`]:http://www.scala-lang.org/api/2.11.8/#scala.collection.immutable.List

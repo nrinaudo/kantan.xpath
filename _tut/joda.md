@@ -11,7 +11,7 @@ support for it through a dedicated module.
 The `joda-time` module can be used by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-joda-time" % "0.1.4"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-joda-time" % "0.1.5"
 ```
 
 You then need to import the corresponding package:
@@ -60,4 +60,4 @@ res2: kantan.xpath.XPathResult[List[org.joda.time.LocalDate]] = Success(List(197
 [`LocalDateTime`]:http://joda-time.sourceforge.net/apidocs/org/joda/time/LocalDateTime.html
 [`LocalTime`]:http://joda-time.sourceforge.net/apidocs/org/joda/time/LocalTime.html
 [`DateTimeFormat`]:http://joda-time.sourceforge.net/apidocs/org/joda/time/format/DateTimeFormat.html
-[`NodeDecoder`]:{{ site.baseUri }}/api/index.html#kantan.xpath.package@NodeDecoder[A]=kantan.codecs.Decoder[Option[kantan.xpath.package.Node],A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]
+[`NodeDecoder`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@NodeDecoder[A]=kantan.codecs.Decoder[Option[kantan.xpath.package.Node],A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]

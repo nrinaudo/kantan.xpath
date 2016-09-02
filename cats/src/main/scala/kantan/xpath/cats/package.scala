@@ -42,5 +42,6 @@ package object cats extends CatsInstances {
     override def flatMap[A, B](fa: Query[A])(f: A => Query[B]) = fa.flatMap(f)
     override def map[A, B](fa: Query[A])(f: A => B) = fa.map(f)
     override def pure[A](x: A) = Query(_ ⇒ x)
+    override def tailRecM[A, B](a: A)(f: A ⇒ Query[Either[A, B]]) = defaultTailRecM(a)(f)
   }
 }

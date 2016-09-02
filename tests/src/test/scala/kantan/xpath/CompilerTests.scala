@@ -17,7 +17,7 @@
 package kantan.xpath
 
 import _root_.cats.Traverse.ops._
-import _root_.cats.std.list._
+import _root_.cats.instances.list._
 import cats._
 import kantan.codecs.Result
 import kantan.codecs.laws.CodecValue

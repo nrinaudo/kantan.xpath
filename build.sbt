@@ -4,7 +4,7 @@ import UnidocKeys._
 import de.heikoseeberger.sbtheader.license.Apache2_0
 import scala.xml.transform.{RewriteRule, RuleTransformer}
 
-val kantanCodecsVersion  = "0.1.7"
+val kantanCodecsVersion  = "0.1.8-SNAPSHOT"
 val macroParadiseVersion = "2.1.0"
 val nekoHtmlVersion      = "1.9.22"
 val scalatestVersion     = "3.0.0-M9"

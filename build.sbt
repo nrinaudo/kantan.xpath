@@ -2,6 +2,7 @@ import com.typesafe.sbt.SbtGhPages.GhPagesKeys._
 import com.typesafe.sbt.SbtSite.SiteKeys._
 import UnidocKeys._
 import de.heikoseeberger.sbtheader.license.Apache2_0
+import scala.xml.transform.{RewriteRule, RuleTransformer}
 
 val kantanCodecsVersion  = "0.1.7"
 val macroParadiseVersion = "2.1.0"
@@ -45,6 +46,18 @@ lazy val baseSettings = Seq(
     _.filterNot(Set("-Ywarn-unused-import"))
   },
   headers := Map("scala" -> Apache2_0("2016", "Nicolas Rinaudo")),
+  // don't include scoverage as a dependency in the pom
+  // this code was copied from https://github.com/mongodb/mongo-spark
+  pomPostProcess := { (node: xml.Node) =>
+    new RuleTransformer(
+      new RewriteRule {
+        override def transform(node: xml.Node): Seq[xml.Node] = node match {
+          case e: xml.Elem
+              if e.label == "dependency" && e.child.exists(child => child.label == "groupId" && child.text == "org.scoverage") => Nil
+          case _ => Seq(node)
+        }
+      }).transform(node).head
+  },
   resolvers ++= Seq(
     Resolver.sonatypeRepo("releases"),
     Resolver.sonatypeRepo("snapshots")

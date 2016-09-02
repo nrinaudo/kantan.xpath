@@ -17,8 +17,8 @@
 package kantan.xpath.cats
 
 import arbitrary._
-import cats.laws.discipline.MonadTests
 import cats.instances.all._
+import cats.laws.discipline.MonadTests
 import equality._
 import kantan.xpath.Query
 import org.scalatest.FunSuite

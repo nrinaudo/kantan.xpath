@@ -1,5 +1,4 @@
 import com.typesafe.sbt.SbtGhPages.GhPagesKeys._
-import com.typesafe.sbt.SbtSite.SiteKeys._
 import UnidocKeys._
 import de.heikoseeberger.sbtheader.license.Apache2_0
 import scala.xml.transform.{RewriteRule, RuleTransformer}
@@ -132,6 +131,10 @@ def macroDependencies(v: String): List[ModuleID] =
     else Nil
   }
 
+// Custom settings required by sbt.site.
+lazy val tutSiteDir = settingKey[String]("Website tutorial directory")
+lazy val apiSiteDir = settingKey[String]("Unidoc API directory")
+
 
 
 // - root projects -----------------------------------------------------------------------------------------------------
@@ -167,8 +170,7 @@ lazy val tests = project
 
 lazy val docs = project
   .settings(allSettings)
-  .settings(site.settings)
-  .settings(site.preprocessSite())
+  .enablePlugins(PreprocessPlugin)
   .settings(ghpages.settings)
   .settings(unidocSettings)
   .settings(
@@ -182,8 +184,10 @@ lazy val docs = project
   .settings(tutSettings)
   .settings(tutScalacOptions ~= (_.filterNot(Set("-Ywarn-unused-import"))))
   .settings(
-    site.addMappingsToSiteDir(mappings in (ScalaUnidoc, packageDoc), "api"),
-    site.addMappingsToSiteDir(tut, "_tut"),
+    tutSiteDir := "_tut",
+    apiSiteDir := "api",
+    addMappingsToSiteDir(tut, tutSiteDir),
+    addMappingsToSiteDir(mappings in (ScalaUnidoc, packageDoc), apiSiteDir),
     git.remoteRepo := "git@github.com:nrinaudo/kantan.xpath.git",
     ghpagesNoJekyll := false,
     includeFilter in makeSite := "*.yml" | "*.md" | "*.html" | "*.css" | "*.png" | "*.jpg" | "*.gif" | "*.js" |

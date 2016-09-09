@@ -31,7 +31,7 @@ would be to provide an [`XmlSource`] instance for [`Node`]:
 ```tut:silent
 import kantan.xpath._
 
-implicit val node: XmlSource[Node] = XmlSource(n ⇒ ParseResult.success(n))
+implicit val node: XmlSource[Node] = XmlSource.from(ParseResult.success)
 ```
 
 ## Adapting existing instances

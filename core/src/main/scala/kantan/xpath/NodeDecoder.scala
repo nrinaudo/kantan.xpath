@@ -26,9 +26,12 @@ object NodeDecoder extends GeneratedDecoders {
   def apply[A](implicit da: NodeDecoder[A]): NodeDecoder[A] = da
 
   /** Creates a new [[NodeDecoder]] from the specified function. */
-  def apply[A](f: Option[Node] ⇒ DecodeResult[A]): NodeDecoder[A] = Decoder(f)
+  def from[A](f: Option[Node] ⇒ DecodeResult[A]): NodeDecoder[A] = Decoder.from(f)
 
-  def fromFound[A](f: Node ⇒ DecodeResult[A]): NodeDecoder[A] = Decoder(_.map(f).getOrElse(DecodeResult.notFound))
+  @deprecated("use from instead (see https://github.com/nrinaudo/kantan.xpath/issues/10)", "0.1.6")
+  def apply[A](f: Option[Node] ⇒ DecodeResult[A]): NodeDecoder[A] = Decoder.from(f)
+
+  def fromFound[A](f: Node ⇒ DecodeResult[A]): NodeDecoder[A] = Decoder.from(_.map(f).getOrElse(DecodeResult.notFound))
 }
 
 /** Provides default [[NodeDecoder]] instances. */

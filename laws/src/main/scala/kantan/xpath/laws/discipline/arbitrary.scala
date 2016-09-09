@@ -109,7 +109,7 @@ trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstance
     Arbitrary(Arbitrary.arbitrary[A].map(a ⇒ s"<root>${f(a)}</root>".asUnsafeNode))
 
   implicit def arbNodeDecoder[A: Arbitrary]: Arbitrary[NodeDecoder[A]] =
-    Arbitrary(arb[Option[Node] ⇒ DecodeResult[A]].map(f ⇒ NodeDecoder(f)))
+    Arbitrary(arb[Option[Node] ⇒ DecodeResult[A]].map(f ⇒ NodeDecoder.from(f)))
 
   /*
   implicit def arbTuple1[A: Arbitrary]: Arbitrary[Tuple1[A]] =

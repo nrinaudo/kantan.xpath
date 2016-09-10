@@ -38,7 +38,7 @@ package object scalaz extends ScalazInstances {
 
   implicit val queryMonad: Monad[Query] = new Monad[Query] {
     override def point[A](a: ⇒ A) = Query(_ ⇒ a)
-    override def bind[A, B](fa: Query[A])(f: (A) => Query[B]) = fa.flatMap(f)
-    override def map[A, B](fa: Query[A])(f: A => B) = fa.map(f)
+    override def bind[A, B](fa: Query[A])(f: (A) ⇒ Query[B]) = fa.flatMap(f)
+    override def map[A, B](fa: Query[A])(f: A ⇒ B) = fa.map(f)
     }
 }

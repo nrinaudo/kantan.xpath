@@ -17,7 +17,6 @@
 package kantan.xpath
 
 import javax.xml.xpath.XPathConstants
-import kantan.codecs.Result
 import scala.collection.generic.CanBuildFrom
 import scala.collection.mutable
 
@@ -50,10 +49,10 @@ object Compiler {
       def fold(i: Int, nodes: NodeList, out: mutable.Builder[A, F[A]]): DecodeResult[F[A]] = {
         if(i < nodes.getLength) {
           da.decode(Option(nodes.item(i))) match {
-            case Result.Success(a) ⇒
+            case Success(a) ⇒
               out += a
               fold(i + 1, nodes, out)
-            case f@Result.Failure(_) ⇒ f
+            case f@Failure(_) ⇒ f
           }
         }
         else DecodeResult.success(out.result())

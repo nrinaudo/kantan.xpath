@@ -50,7 +50,7 @@ of [`String`] into one of [`InputSource`]:
 
 ```tut:silent
 implicit def stringSource(implicit parser: XmlParser): XmlSource[String] =
-  XmlSource[InputSource].contramap(s => new InputSource(new java.io.StringReader(s)))
+  XmlSource[InputSource].contramap(s ⇒ new InputSource(new java.io.StringReader(s)))
 ```
 
 

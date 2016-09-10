@@ -28,6 +28,12 @@ package object xpath {
 
   // - Result types ----------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
+  type Success[A] = Result.Success[A]
+  val Success = Result.Success
+
+  type Failure[A] = Result.Failure[A]
+  val Failure = Result.Failure
+
   /** Represents the result of any XPath action.
     *
     * An [[XPathResult]] is either a [[CompileResult]] or a [[ReadResult]].

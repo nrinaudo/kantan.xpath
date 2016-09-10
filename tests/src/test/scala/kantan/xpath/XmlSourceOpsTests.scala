@@ -17,7 +17,6 @@
 package kantan.xpath
 
 import kantan.codecs.Result
-import kantan.codecs.Result.{Failure, Success}
 import kantan.codecs.laws.CodecValue
 import kantan.xpath.implicits._
 import kantan.xpath.laws.discipline.arbitrary._

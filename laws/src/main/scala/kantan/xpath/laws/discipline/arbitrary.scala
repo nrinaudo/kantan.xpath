@@ -16,7 +16,6 @@
 
 package kantan.xpath.laws.discipline
 
-import kantan.codecs.Result
 import kantan.codecs.laws._
 import kantan.codecs.laws.CodecValue.{IllegalValue, LegalValue}
 import kantan.xpath._
@@ -24,7 +23,7 @@ import kantan.xpath.DecodeError.TypeError
 import kantan.xpath.ParseError.{IOError, SyntaxError}
 import kantan.xpath.ops._
 import org.scalacheck._
-import org.scalacheck.Arbitrary.{arbitrary => arb}
+import org.scalacheck.Arbitrary.{arbitrary ⇒ arb}
 import org.scalacheck.Gen._
 
 object arbitrary extends ArbitraryInstances
@@ -51,9 +50,9 @@ trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstance
   // - Arbitrary results -----------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
   implicit def arbDecodeResult[A: Arbitrary]: Arbitrary[DecodeResult[A]] =
-    Arbitrary(oneOf(arb[Result.Failure[DecodeError]], arb[Result.Success[A]]))
+    Arbitrary(oneOf(arb[Failure[DecodeError]], arb[Success[A]]))
   implicit def arbReadResult[A: Arbitrary]: Arbitrary[ReadResult[A]] =
-    Arbitrary(oneOf(arb[Result.Failure[ReadError]], arb[Result.Success[A]]))
+    Arbitrary(oneOf(arb[Failure[ReadError]], arb[Success[A]]))
 
 
 
@@ -110,11 +109,6 @@ trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstance
 
   implicit def arbNodeDecoder[A: Arbitrary]: Arbitrary[NodeDecoder[A]] =
     Arbitrary(arb[Option[Node] ⇒ DecodeResult[A]].map(f ⇒ NodeDecoder.from(f)))
-
-  /*
-  implicit def arbTuple1[A: Arbitrary]: Arbitrary[Tuple1[A]] =
-    Arbitrary(arb[A].map(a ⇒ Tuple1(a)))
-    */
 
   implicit def arbQuery[A: Arbitrary]: Arbitrary[Query[A]] =
     Arbitrary(implicitly[Arbitrary[Node ⇒ A]].arbitrary.map(f ⇒ Query(f)))

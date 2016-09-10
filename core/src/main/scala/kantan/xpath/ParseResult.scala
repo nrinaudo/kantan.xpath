@@ -17,12 +17,11 @@
 package kantan.xpath
 
 import kantan.codecs.Result
-import kantan.codecs.Result.Success
 
 /** Provides instance creation methods for [[ParseResult]]. */
 object ParseResult {
   /** Creates a success with the specified value. */
-  def success[A](a: A): ParseResult[A] = Success(a)
+  def success[A](a: A): ParseResult[A] = Result.success(a)
 
   /** Evaluates the specified by-name parameter, wrapping it in a success if successful or a
     * failure otherwise.

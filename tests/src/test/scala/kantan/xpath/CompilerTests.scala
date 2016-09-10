@@ -19,7 +19,6 @@ package kantan.xpath
 import _root_.cats.Traverse.ops._
 import _root_.cats.instances.list._
 import cats._
-import kantan.codecs.Result
 import kantan.codecs.laws.CodecValue
 import kantan.xpath.implicits._
 import kantan.xpath.laws.discipline.arbitrary._
@@ -50,7 +49,7 @@ class CompilerTests extends FunSuite with GeneratorDrivenPropertyChecks {
 
   test("'first' expressions should fail on empty results") {
     forAll { value: Value[Int] ⇒
-      assert(value.encoded.evalXPath[Int](xp"//element2") == Result.Failure(DecodeError.NotFound()))
+      assert(value.encoded.evalXPath[Int](xp"//element2") == DecodeResult.notFound)
     }
   }
 

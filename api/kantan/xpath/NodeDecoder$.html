@@ -146,23 +146,6 @@
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="kantan.xpath.NodeDecoder#apply" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="apply[A](f:Option[kantan.xpath.Node]=&gt;kantan.xpath.DecodeResult[A]):kantan.xpath.NodeDecoder[A]"></a>
-      <a id="apply[A]((Option[Node])⇒DecodeResult[A]):NodeDecoder[A]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">apply</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="f">f: (<a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="package.html#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>]) ⇒ <a href="package.html#DecodeResult[A]=kantan.codecs.Result[kantan.xpath.DecodeError,A]" class="extmbr" name="kantan.xpath.DecodeResult">DecodeResult</a>[<span class="extype" name="kantan.xpath.NodeDecoder.apply.A">A</span>]</span>)</span><span class="result">: <a href="package.html#NodeDecoder[A]=kantan.codecs.Decoder[Option[kantan.xpath.package.Node],A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]" class="extmbr" name="kantan.xpath.NodeDecoder">NodeDecoder</a>[<span class="extype" name="kantan.xpath.NodeDecoder.apply.A">A</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#kantan.xpath.NodeDecoder$@apply[A](f:Option[kantan.xpath.Node]=&gt;kantan.xpath.DecodeResult[A]):kantan.xpath.NodeDecoder[A]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Creates a new <a href="package.html#NodeDecoder[A]=kantan.codecs.Decoder[Option[kantan.xpath.package.Node],A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]" class="extmbr" name="kantan.xpath.NodeDecoder">NodeDecoder</a> from the specified function.</p>
-    </li><li name="kantan.xpath.NodeDecoder#apply" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="apply[A](implicitda:kantan.xpath.NodeDecoder[A]):kantan.xpath.NodeDecoder[A]"></a>
       <a id="apply[A](NodeDecoder[A]):NodeDecoder[A]"></a>
       <h4 class="signature">
@@ -1024,6 +1007,23 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="kantan.xpath.NodeDecoder#from" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="from[A](f:Option[kantan.xpath.Node]=&gt;kantan.xpath.DecodeResult[A]):kantan.xpath.NodeDecoder[A]"></a>
+      <a id="from[A]((Option[Node])⇒DecodeResult[A]):NodeDecoder[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">from</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="f">f: (<a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="package.html#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>]) ⇒ <a href="package.html#DecodeResult[A]=kantan.codecs.Result[kantan.xpath.DecodeError,A]" class="extmbr" name="kantan.xpath.DecodeResult">DecodeResult</a>[<span class="extype" name="kantan.xpath.NodeDecoder.from.A">A</span>]</span>)</span><span class="result">: <a href="package.html#NodeDecoder[A]=kantan.codecs.Decoder[Option[kantan.xpath.package.Node],A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]" class="extmbr" name="kantan.xpath.NodeDecoder">NodeDecoder</a>[<span class="extype" name="kantan.xpath.NodeDecoder.from.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.NodeDecoder$@from[A](f:Option[kantan.xpath.Node]=&gt;kantan.xpath.DecodeResult[A]):kantan.xpath.NodeDecoder[A]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Creates a new <a href="package.html#NodeDecoder[A]=kantan.codecs.Decoder[Option[kantan.xpath.package.Node],A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]" class="extmbr" name="kantan.xpath.NodeDecoder">NodeDecoder</a> from the specified function.</p>
     </li><li name="kantan.xpath.NodeDecoder#fromFound" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="fromFound[A](f:kantan.xpath.Node=&gt;kantan.xpath.DecodeResult[A]):kantan.xpath.NodeDecoder[A]"></a>
       <a id="fromFound[A]((Node)⇒DecodeResult[A]):NodeDecoder[A]"></a>
@@ -1999,7 +1999,30 @@
 
         
 
-        
+        <div id="values" class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="kantan.xpath.NodeDecoder#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply[A](f:Option[kantan.xpath.Node]=&gt;kantan.xpath.DecodeResult[A]):kantan.xpath.NodeDecoder[A]"></a>
+      <a id="apply[A]((Option[Node])⇒DecodeResult[A]):NodeDecoder[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 0.1.6) use from instead (see https://github.com/nrinaudo/kantan.xpath/issues/10)">apply</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="f">f: (<a href="http://www.scala-lang.org/api/2.11.8/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="package.html#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>]) ⇒ <a href="package.html#DecodeResult[A]=kantan.codecs.Result[kantan.xpath.DecodeError,A]" class="extmbr" name="kantan.xpath.DecodeResult">DecodeResult</a>[<span class="extype" name="kantan.xpath.NodeDecoder.apply.A">A</span>]</span>)</span><span class="result">: <a href="package.html#NodeDecoder[A]=kantan.codecs.Decoder[Option[kantan.xpath.package.Node],A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]" class="extmbr" name="kantan.xpath.NodeDecoder">NodeDecoder</a>[<span class="extype" name="kantan.xpath.NodeDecoder.apply.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.NodeDecoder$@apply[A](f:Option[kantan.xpath.Node]=&gt;kantan.xpath.DecodeResult[A]):kantan.xpath.NodeDecoder[A]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 0.1.6)</i> use from instead (see https://github.com/nrinaudo/kantan.xpath/issues/10)</p></dd></dl></div>
+    </li></ol>
+            </div>
         </div>
 
         <div id="inheritedMembers">

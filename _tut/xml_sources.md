@@ -31,7 +31,7 @@ would be to provide an [`XmlSource`] instance for [`Node`]:
 ```scala
 import kantan.xpath._
 
-implicit val node: XmlSource[Node] = XmlSource(n ⇒ ParseResult.success(n))
+implicit val node: XmlSource[Node] = XmlSource.from(ParseResult.success)
 ```
 
 ## Adapting existing instances
@@ -50,7 +50,7 @@ of [`String`] into one of [`InputSource`]:
 
 ```scala
 implicit def stringSource(implicit parser: XmlParser): XmlSource[String] =
-  XmlSource[InputSource].contramap(s => new InputSource(new java.io.StringReader(s)))
+  XmlSource[InputSource].contramap(s ⇒ new InputSource(new java.io.StringReader(s)))
 ```
 
 

@@ -152,23 +152,6 @@ implementation.
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="kantan.xpath.XmlSource#apply" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="apply[A](f:A=&gt;kantan.xpath.ParseResult[kantan.xpath.Node]):kantan.xpath.XmlSource[A]"></a>
-      <a id="apply[A]((A)⇒ParseResult[Node]):XmlSource[A]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">apply</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="kantan.xpath.XmlSource.apply.A">A</span>) ⇒ <a href="package.html#ParseResult[A]=kantan.codecs.Result[kantan.xpath.ParseError,A]" class="extmbr" name="kantan.xpath.ParseResult">ParseResult</a>[<a href="package.html#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>]</span>)</span><span class="result">: <a href="XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a>[<span class="extype" name="kantan.xpath.XmlSource.apply.A">A</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#kantan.xpath.XmlSource$@apply[A](f:A=&gt;kantan.xpath.ParseResult[kantan.xpath.Node]):kantan.xpath.XmlSource[A]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Turns the specified function into a new <a href="XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a> instance.</p>
-    </li><li name="kantan.xpath.XmlSource#apply" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="apply[A](implicits:kantan.xpath.XmlSource[A]):kantan.xpath.XmlSource[A]"></a>
       <a id="apply[A](XmlSource[A]):XmlSource[A]"></a>
       <h4 class="signature">
@@ -333,6 +316,23 @@ implementation.
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="kantan.xpath.XmlSource#from" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="from[A](f:A=&gt;kantan.xpath.ParseResult[kantan.xpath.Node]):kantan.xpath.XmlSource[A]"></a>
+      <a id="from[A]((A)⇒ParseResult[Node]):XmlSource[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">from</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="kantan.xpath.XmlSource.from.A">A</span>) ⇒ <a href="package.html#ParseResult[A]=kantan.codecs.Result[kantan.xpath.ParseError,A]" class="extmbr" name="kantan.xpath.ParseResult">ParseResult</a>[<a href="package.html#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>]</span>)</span><span class="result">: <a href="XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a>[<span class="extype" name="kantan.xpath.XmlSource.from.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.XmlSource$@from[A](f:A=&gt;kantan.xpath.ParseResult[kantan.xpath.Node]):kantan.xpath.XmlSource[A]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Turns the specified function into a new <a href="XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a> instance.</p>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
@@ -679,7 +679,30 @@ implementation.
 
         
 
-        
+        <div id="values" class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="kantan.xpath.XmlSource#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply[A](f:A=&gt;kantan.xpath.ParseResult[kantan.xpath.Node]):kantan.xpath.XmlSource[A]"></a>
+      <a id="apply[A]((A)⇒ParseResult[Node]):XmlSource[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 0.1.6) use from instead (see https://github.com/nrinaudo/kantan.xpath/issues/10)">apply</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="kantan.xpath.XmlSource.apply.A">A</span>) ⇒ <a href="package.html#ParseResult[A]=kantan.codecs.Result[kantan.xpath.ParseError,A]" class="extmbr" name="kantan.xpath.ParseResult">ParseResult</a>[<a href="package.html#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>]</span>)</span><span class="result">: <a href="XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a>[<span class="extype" name="kantan.xpath.XmlSource.apply.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#kantan.xpath.XmlSource$@apply[A](f:A=&gt;kantan.xpath.ParseResult[kantan.xpath.Node]):kantan.xpath.XmlSource[A]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Annotations</dt><dd>
+                <span class="name">@deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 0.1.6)</i> use from instead (see https://github.com/nrinaudo/kantan.xpath/issues/10)</p></dd></dl></div>
+    </li></ol>
+            </div>
         </div>
 
         <div id="inheritedMembers">

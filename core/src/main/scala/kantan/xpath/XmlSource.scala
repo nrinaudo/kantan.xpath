@@ -17,9 +17,7 @@
 package kantan.xpath
 
 import java.io._
-import java.net.{URI, URL}
-import java.nio.file.{Files, Path}
-import scala.io.Codec
+import kantan.codecs.resource.ReaderResource
 
 /** Type class for turning instances of `A` into valid instances of [[Node]].
   *
@@ -46,11 +44,11 @@ trait XmlSource[-A] extends Serializable { self ⇒
 
   /** Compiles the specified XPath expression and evaluates it against specified value. */
   def unsafeEval[B](a: A, expr: XPathExpression)(implicit cmp: Compiler[B]): B =
-    eval(a, expr).get
+  eval(a, expr).get
 
   /** Compiles the specified XPath expression and evaluates it against the specified value. */
   def eval[B](a: A, expr: XPathExpression)(implicit cmp: Compiler[B]): XPathResult[B] =
-    eval(a, cmp.compile(expr))
+  eval(a, cmp.compile(expr))
 
   /** Evaluates the specified XPath expression against specified value. */
   def unsafeEval[B](a: A, expr: Query[DecodeResult[B]]): B = eval(a, expr).get
@@ -100,37 +98,10 @@ object XmlSource {
 
   /** Turns an [[InputSource]] into a source of XML data. */
   implicit def inputSource(implicit parser: XmlParser): XmlSource[InputSource] =
-    XmlSource.from(parser.parse)
+  XmlSource.from(parser.parse)
 
-  /** Turns a `Reader` into a source of XML data. */
-  implicit def reader(implicit parser: XmlParser): XmlSource[Reader] = inputSource.contramap(r ⇒ new InputSource(r))
-
-  /** Turns an `InputStream` into a source of XML data. */
-  implicit def inputStream(implicit codec: Codec, parser: XmlParser): XmlSource[InputStream] =
-    reader.contramapResult(i ⇒ ParseResult(new InputStreamReader(i, codec.charSet)))
-
-  /** Turns a `File` into a source of XML data. */
-  implicit def file(implicit codec: Codec, parser: XmlParser): XmlSource[File] =
-    inputStream.contramapResult(f ⇒ ParseResult(new FileInputStream(f)))
-
-  /** Turns a `String` into a source of XML data. */
-  implicit def string(implicit parser: XmlParser): XmlSource[String] = reader.contramap(s ⇒ new StringReader(s))
-
-  /** Turns an `URL` into a source of XML data. */
-  implicit def url(implicit codec: Codec, parser: XmlParser): RemoteXmlSource[URL] = RemoteXmlSource(u ⇒ ParseResult(u))
-
-  /** Turns an `URI` into a source of XML data. */
-  implicit def uri(implicit codec: Codec, parser: XmlParser): RemoteXmlSource[URI] = url.contramap(_.toURL)
-
-  /** Turns an `Array[Byte]` into a source of XML data. */
-  implicit def bytes(implicit codec: Codec, parser: XmlParser): XmlSource[Array[Byte]] =
-    inputStream.contramap(bs ⇒ new ByteArrayInputStream(bs))
-
-  /** Turns an `Array[Char]` into a source of XML data. */
-  implicit def chars(implicit parser: XmlParser): XmlSource[Array[Char]] =
-    reader.contramap(cs ⇒ new CharArrayReader(cs))
-
-  /** Turns a `Path` into a source of XML data. */
-  implicit def path(implicit codec: Codec): XmlSource[Path] =
-    reader.contramapResult(p ⇒ ParseResult(Files.newBufferedReader(p, codec.charSet)))
+  implicit def fromResource[A](implicit ra: ReaderResource[A], parser: XmlParser): XmlSource[A] =
+    inputSource.contramapResult { a ⇒
+      ra.open(a).map(r ⇒ new InputSource(r)).leftMap(e ⇒ ParseError.IOError(e.getMessage, e.getCause))
+    }
 }

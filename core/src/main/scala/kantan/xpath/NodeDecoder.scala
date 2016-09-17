@@ -23,7 +23,7 @@ import kantan.xpath.DecodeError.TypeError
 /** Provides instance creation and summoning methods. */
 object NodeDecoder extends GeneratedDecoders {
   /** Returns an implicit instance of `NodeDecoder[A]` if one is found in scope, fails compilation otherwise. */
-  def apply[A](implicit da: NodeDecoder[A]): NodeDecoder[A] = da
+  def apply[A](implicit ev: NodeDecoder[A]): NodeDecoder[A] = macro imp.summon[NodeDecoder[A]]
 
   /** Creates a new [[NodeDecoder]] from the specified function. */
   def from[A](f: Option[Node] ⇒ DecodeResult[A]): NodeDecoder[A] = Decoder.from(f)
@@ -44,8 +44,9 @@ trait NodeDecoderInstances {
     implicit val attr: NodeDecoder[Attr] = NodeDecoder.fromFound(n ⇒ DecodeResult(n.asInstanceOf[Attr]))
 
   /** Turns any of the string decodes provided by kantan.codecs into node decoders. */
-  implicit def fromString[A](implicit da: StringDecoder[A]): NodeDecoder[A] =
-    NodeDecoder.fromFound(n ⇒ da.mapError(t ⇒ TypeError(t.getMessage, t.getCause)).decode(n.getTextContent))
+  implicit def fromString[A: StringDecoder]: NodeDecoder[A] =
+    NodeDecoder.fromFound(n ⇒ StringDecoder[A]
+      .mapError(t ⇒ TypeError(t.getMessage, t.getCause)).decode(n.getTextContent))
 
   implicit def optionNodeDecoder[A: NodeDecoder]: NodeDecoder[Option[A]] =
     Decoder.optionalDecoder

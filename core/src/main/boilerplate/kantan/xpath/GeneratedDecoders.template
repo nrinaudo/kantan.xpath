@@ -9,8 +9,8 @@ trait GeneratedDecoders {
     }#
   ]
 
-  [#def decoder[[#I1#], O]([#x1: XPathExpression#])(f: ([#I1#]) ⇒ O)(implicit [#c1: Compiler[I1]#]): NodeDecoder[O] =
-    decoder([#c1.compile(x1)#])(f)#
+  [#def decoder[[#I1: Compiler#], O]([#x1: XPathExpression#])(f: ([#I1#]) ⇒ O): NodeDecoder[O] =
+    decoder([#Compiler[I1].compile(x1)#])(f)#
 
   ]
 
@@ -19,7 +19,7 @@ trait GeneratedDecoders {
 
   ]
 
-  [#def tuple[[#I1#]]([#x1: XPathExpression#])(implicit [#c1: Compiler[I1]#]): NodeDecoder[Tuple1[[#I1#]]] =
+  [#def tuple[[#I1: Compiler#]]([#x1: XPathExpression#]): NodeDecoder[Tuple1[[#I1#]]] =
     decoder([#x1#])(([#i1: I1#]) ⇒ Tuple1([#i1#]))#
 
   ]

@@ -32,23 +32,24 @@ trait Compiler[A] {
 
 /** Provides implicit methods to summon [[Compiler]] instances. */
 object Compiler {
+  def apply[A](implicit ev: Compiler[A]): Compiler[A] = macro imp.summon[Compiler[A]]
+
   /** Type level trickery, this lets us makes the difference between types and type constructors. */
   type Id[A] = A
 
   /** Compiles XPath expressions into [[Query]] instances that will only retrieve the first match. */
-  implicit def xpath1[A](implicit da: NodeDecoder[A]): Compiler[Id[A]] = new Compiler[Id[A]] {
+  implicit def xpath1[A: NodeDecoder]: Compiler[Id[A]] = new Compiler[Id[A]] {
     override def compile(expr: XPathExpression) = Query { n ⇒
-      da.decode(Option(expr.evaluate(n, XPathConstants.NODE).asInstanceOf[Node]))
+      NodeDecoder[A].decode(Option(expr.evaluate(n, XPathConstants.NODE).asInstanceOf[Node]))
     }
   }
 
   /** Compiles XPath expressions into [[Query]] instances that retrieve very match. */
-  implicit def xpathN[F[_], A]
-  (implicit da: NodeDecoder[A], cbf: CanBuildFrom[Nothing, A, F[A]]): Compiler[F[A]] =
+  implicit def xpathN[F[_], A: NodeDecoder](implicit cbf: CanBuildFrom[Nothing, A, F[A]]): Compiler[F[A]] =
     new Compiler[F[A]] {
       def fold(i: Int, nodes: NodeList, out: mutable.Builder[A, F[A]]): DecodeResult[F[A]] = {
         if(i < nodes.getLength) {
-          da.decode(Option(nodes.item(i))) match {
+          NodeDecoder[A].decode(Option(nodes.item(i))) match {
             case Success(a) ⇒
               out += a
               fold(i + 1, nodes, out)

@@ -22,6 +22,6 @@ import kantan.xpath.laws.discipline.arbitrary._
 import org.scalacheck.Arbitrary
 
 object NodeDecoderTests {
-  def apply[A](implicit la: NodeDecoderLaws[A], al: Arbitrary[LegalNode[A]]): NodeDecoderTests[A] =
+  def apply[A: NodeDecoderLaws](implicit al: Arbitrary[LegalNode[A]]): NodeDecoderTests[A] =
     DecoderTests[Option[Node], A, DecodeError, codecs.type]
 }

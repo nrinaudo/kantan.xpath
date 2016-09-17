@@ -38,14 +38,14 @@ object Query {
     override def eval(n: Node): A = f(n)
   }
 
-  def apply[A](expr: XPathExpression)(implicit cmp: Compiler[A]): Query[DecodeResult[A]] =
-    cmp.compile(expr)
+  def apply[A: Compiler](expr: XPathExpression): Query[DecodeResult[A]] =
+    Compiler[A].compile(expr)
 
   /** Compiles the specified XPath expression. */
-  def compile[A](str: String)(implicit cmp: Compiler[A], xpath: XPathCompiler): CompileResult[Query[DecodeResult[A]]] =
-    xpath.compile(str).map(cmp.compile)
+  def compile[A: Compiler](str: String)(implicit xpath: XPathCompiler): CompileResult[Query[DecodeResult[A]]] =
+    xpath.compile(str).map(Compiler[A].compile)
 
   /** Compiles the specified XPath expression. */
-  def unsafeCompile[A](str: String)(implicit cmp: Compiler[A], xpath: XPathCompiler): Query[DecodeResult[A]] =
+  def unsafeCompile[A: Compiler](str: String)(implicit xpath: XPathCompiler): Query[DecodeResult[A]] =
     Query.compile(str).getOrElse(sys.error(s"Not a valid XPath expression: '$str'."))
 }

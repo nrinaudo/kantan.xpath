@@ -43,12 +43,12 @@ trait XmlSource[-A] extends Serializable { self ⇒
   def asUnsafeNode(a: A): Node = asNode(a).get
 
   /** Compiles the specified XPath expression and evaluates it against specified value. */
-  def unsafeEval[B](a: A, expr: XPathExpression)(implicit cmp: Compiler[B]): B =
+  def unsafeEval[B: Compiler](a: A, expr: XPathExpression): B =
   eval(a, expr).get
 
   /** Compiles the specified XPath expression and evaluates it against the specified value. */
-  def eval[B](a: A, expr: XPathExpression)(implicit cmp: Compiler[B]): XPathResult[B] =
-  eval(a, cmp.compile(expr))
+  def eval[B: Compiler](a: A, expr: XPathExpression): XPathResult[B] =
+  eval(a, Compiler[B].compile(expr))
 
   /** Evaluates the specified XPath expression against specified value. */
   def unsafeEval[B](a: A, expr: Query[DecodeResult[B]]): B = eval(a, expr).get
@@ -83,7 +83,7 @@ trait XmlSource[-A] extends Serializable { self ⇒
   */
 object XmlSource {
   /** Summons an [[XmlSource]] instance if one can be found. */
-  def apply[A](implicit s: XmlSource[A]): XmlSource[A] = s
+  def apply[A](implicit ev: XmlSource[A]): XmlSource[A] = macro imp.summon[XmlSource[A]]
 
   /** Turns the specified function into a new [[XmlSource]] instance. */
   def from[A](f: A ⇒ ParseResult[Node]): XmlSource[A] = new XmlSource[A] {
@@ -98,10 +98,10 @@ object XmlSource {
 
   /** Turns an [[InputSource]] into a source of XML data. */
   implicit def inputSource(implicit parser: XmlParser): XmlSource[InputSource] =
-  XmlSource.from(parser.parse)
+    XmlSource.from(parser.parse)
 
-  implicit def fromResource[A](implicit ra: ReaderResource[A], parser: XmlParser): XmlSource[A] =
+  implicit def fromResource[A: ReaderResource](implicit parser: XmlParser): XmlSource[A] =
     inputSource.contramapResult { a ⇒
-      ra.open(a).map(r ⇒ new InputSource(r)).leftMap(e ⇒ ParseError.IOError(e.getMessage, e.getCause))
+      ReaderResource[A].open(a).map(r ⇒ new InputSource(r)).leftMap(e ⇒ ParseError.IOError(e.getMessage, e.getCause))
     }
 }

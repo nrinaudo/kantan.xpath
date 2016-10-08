@@ -10,7 +10,7 @@ bones: it provides decoders for [`Xor`] as well as a few useful type class insta
 The `cats` module can be used by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-cats" % "0.1.6"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-cats" % "0.1.7"
 ```
 
 You then need to import the corresponding package:

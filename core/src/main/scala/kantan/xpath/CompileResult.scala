@@ -16,15 +16,8 @@
 
 package kantan.xpath
 
-import kantan.codecs.{Result, ResultCompanion}
+import kantan.codecs.ResultCompanion
 
-/** Provides instance creation methods for [[ParseResult]]. */
-object ParseResult extends ResultCompanion.WithDefault[ParseError] {
-  override protected def fromThrowable(t: Throwable) = ParseError.SyntaxError(t)
-
-  /** Evaluates the specified by-name parameter and passes it to the specified parsing function, wrapping any error
-    * along the way in a failure.
-    */
-  def open[A, B](a: ⇒ A)(parse: A ⇒ ParseResult[B]): ParseResult[B] =
-    Result.nonFatal(a).leftMap(ParseError.IOError.apply).flatMap(parse)
+object CompileResult extends ResultCompanion.WithDefault[CompileError] {
+  override protected def fromThrowable(t: Throwable) = CompileError(t)
 }

@@ -21,7 +21,10 @@ import kantan.codecs.{Decoder, Result}
 package object xpath {
   // - Codec types -----------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
-  /** Type class for types that can be decoded from an XML [[Node]]. */
+  /** Type class for types that can be decoded from an XML [[Node]].
+    *
+    * @documentable
+    */
   type NodeDecoder[A] = Decoder[Option[Node], A, DecodeError, codecs.type]
 
 
@@ -39,12 +42,14 @@ package object xpath {
     * An [[XPathResult]] is either a [[CompileResult]] or a [[ReadResult]].
     *
     * @see kantan.codecs.Result
+    * @documentable
     */
   type XPathResult[A] = Result[XPathError, A]
 
   /** Represents the result of taking a string and compiling it into an XPath query.
     *
     * @see kantan.codecs.Result
+    * @documentable
     */
   type CompileResult[A] = Result[CompileError, A]
 
@@ -53,6 +58,7 @@ package object xpath {
     * A [[ReadResult]] is either a [[DecodeResult]] or a [[ParseResult]].
     *
     * @see kantan.codecs.Result
+    * @documentable
     */
   type ReadResult[A] = Result[ReadError, A]
 
@@ -61,6 +67,7 @@ package object xpath {
     * Creation methods can be found in the [[DecodeResult$ companion object]].
     *
     * @see kantan.codecs.Result
+    * @documentable
     */
   type DecodeResult[A] = Result[DecodeError, A]
 
@@ -69,6 +76,7 @@ package object xpath {
     * Creation methods can be found in the [[ParseResult$ companion object]].
     *
     * @see kantan.codecs.Result
+    * @documentable
     */
   type ParseResult[A] = Result[ParseError, A]
 

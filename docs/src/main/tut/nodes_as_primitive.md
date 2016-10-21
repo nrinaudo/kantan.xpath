@@ -70,6 +70,6 @@ rawData.evalXPath[Vector[Boolean]](xp"//element/@enabled")
 
 [`evalXPath`]:{{ site.baseurl }}/api/index.html#kantan.xpath.ops$$XmlSourceOps@evalXPath[B](expr:String)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]
 [`unsafeEvalXPath`]:{{ site.baseurl }}/api/index.html#kantan.xpath.ops$$XmlSourceOps@unsafeEvalXPath[B](expr:String)(implicitevidence$1:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):B
-[`XPathResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@XPathResult[A]=kantan.codecs.Result[kantan.xpath.XPathError,A]
+[`XPathResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$XPathResult
 [`CanBuildFrom`]:http://www.scala-lang.org/api/2.11.8/#scala.collection.generic.CanBuildFrom
 [`List`]:http://www.scala-lang.org/api/2.11.8/#scala.collection.immutable.List

@@ -60,7 +60,7 @@ implicit def stringSource(implicit parser: XmlParser): XmlSource[String] =
 [`String`]:https://docs.oracle.com/javase/7/docs/api/java/lang/String.html
 [`XmlSource`]:{{ site.baseurl }}/api/#kantan.xpath.XmlSource
 [`Node`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@Node=org.w3c.dom.Node
-[`ParseResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@ParseResult=kantan.codecs.Result[kantan.xpath.ParseError,kantan.xpath.package.Node]
+[`ParseResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$ParseResult
 [`InputSource`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@InputSource=org.xml.sax.InputSource
 [`XmlParser`]:{{ site.baseurl }}/api/index.html#kantan.xpath.XmlParser
 [`contramap`]:{{ site.baseurl }}/api/index.html#kantan.xpath.XmlSource@contramap[B](f:B=>A):kantan.xpath.XmlSource[B]

@@ -58,9 +58,9 @@ The following instance for cats type classes are provided:
 [`Monad`]:http://typelevel.org/cats/api/index.html#cats.Monad
 [`Xor`]:http://typelevel.org/cats/api/#cats.data.Xor
 [`Monoid`]:http://typelevel.org/cats/api/index.html#cats.package@Monoid[A]=cats.kernel.Monoid[A]
-[`NodeDecoder`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@NodeDecoder[A]=kantan.codecs.Decoder[Option[kantan.xpath.package.Node],A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]
-[`XPathResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@XPathResult[A]=kantan.codecs.Result[kantan.xpath.XPathError,A]
-[`ReadResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@ReadResult[A]=kantan.codecs.Result[kantan.xpath.ReadError,A]
-[`ParseResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@ParseResult[A]=kantan.codecs.Result[kantan.xpath.ParseError,A]
-[`DecodeResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@DecodeResult[A]=kantan.codecs.Result[kantan.xpath.DecodeError,A]
-[`CompileResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@CompileResult[A]=kantan.codecs.Result[kantan.xpath.CompileError,A]
+[`NodeDecoder`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$NodeDecoder
+[`XPathResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$XPathResult
+[`ReadResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$ReadResult
+[`ParseResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$ParseResult
+[`DecodeResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$DecodeResult
+[`CompileResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$CompileResult

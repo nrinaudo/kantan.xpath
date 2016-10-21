@@ -16,17 +16,14 @@
 
 package kantan.xpath
 
-import kantan.codecs.Decoder
-import kantan.codecs.strings._
+import kantan.codecs.{Decoder, DecoderCompanion}
+import kantan.codecs.strings.StringDecoder
 import kantan.xpath.DecodeError.TypeError
 
 /** Provides instance creation and summoning methods. */
-object NodeDecoder extends GeneratedDecoders {
+object NodeDecoder extends GeneratedDecoders with DecoderCompanion[Option[Node], DecodeError, codecs.type ] {
   /** Returns an implicit instance of `NodeDecoder[A]` if one is found in scope, fails compilation otherwise. */
   def apply[A](implicit ev: NodeDecoder[A]): NodeDecoder[A] = macro imp.summon[NodeDecoder[A]]
-
-  /** Creates a new [[NodeDecoder]] from the specified function. */
-  def from[A](f: Option[Node] ⇒ DecodeResult[A]): NodeDecoder[A] = Decoder.from(f)
 
   @deprecated("use from instead (see https://github.com/nrinaudo/kantan.xpath/issues/10)", "0.1.6")
   def apply[A](f: Option[Node] ⇒ DecodeResult[A]): NodeDecoder[A] = Decoder.from(f)

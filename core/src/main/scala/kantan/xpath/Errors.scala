@@ -40,7 +40,7 @@ sealed abstract class DecodeError extends ReadError
 
 object DecodeError {
   /** Error that occurs when a single result was requested by an XPath expression, but no node was matched. */
-  final case class NotFound() extends DecodeError
+  case object NotFound extends DecodeError
 
   /** Error that occurs when a node was attempted to be decoded as a type its value is not compatible with. */
   sealed case class TypeError(message: String) extends DecodeError {

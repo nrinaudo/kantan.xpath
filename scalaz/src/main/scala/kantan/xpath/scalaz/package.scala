@@ -35,10 +35,4 @@ package object scalaz extends ScalazInstances {
   implicit val xmlSource = new Contravariant[XmlSource] {
     override def contramap[A, B](fa: XmlSource[A])(f: B ⇒ A) = fa.contramap(f)
   }
-
-  implicit val queryMonad: Monad[Query] = new Monad[Query] {
-    override def point[A](a: ⇒ A) = Query(_ ⇒ a)
-    override def bind[A, B](fa: Query[A])(f: (A) ⇒ Query[B]) = fa.flatMap(f)
-    override def map[A, B](fa: Query[A])(f: A ⇒ B) = fa.map(f)
-    }
 }

@@ -24,5 +24,5 @@ import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline
 
 class PathDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
-  checkAll("NodeDecoder[Path]", NodeDecoderTests[Path].decoder[Int, Int])
+  checkAll("NodeDecoder[Path]", NodeDecoderTests[Path].bijectiveDecoder[Int, Int])
 }

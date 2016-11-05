@@ -19,9 +19,11 @@ package kantan.xpath.laws.discipline
 import kantan.codecs.laws.discipline.DecoderTests
 import kantan.xpath._
 import kantan.xpath.laws.discipline.arbitrary._
-import org.scalacheck.Arbitrary
+import org.scalacheck.{Arbitrary, Cogen, Gen}
 
 object NodeDecoderTests {
-  def apply[A: NodeDecoderLaws](implicit al: Arbitrary[LegalNode[A]]): NodeDecoderTests[A] =
+  implicit val arb: Arbitrary[Node] = arbNode(identity[String])(Arbitrary(Gen.identifier))
+
+  def apply[A: NodeDecoderLaws: Arbitrary: Cogen](implicit al: Arbitrary[LegalNode[A]]): NodeDecoderTests[A] =
     DecoderTests[Option[Node], A, DecodeError, codecs.type]
 }

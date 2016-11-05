@@ -1,8 +1,6 @@
 // - Dependency versions -----------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------------------------
 val kantanCodecsVersion  = "0.1.10-SNAPSHOT"
-val kindProjectorVersion = "0.8.1"
-val macroParadiseVersion = "2.1.0"
 val nekoHtmlVersion      = "1.9.22"
 val scalatestVersion     = "3.0.1-SNAP1"
 val scalazVersion        = "7.2.2"

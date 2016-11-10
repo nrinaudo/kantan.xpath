@@ -2,7 +2,7 @@
 // ---------------------------------------------------------------------------------------------------------------------
 val kantanCodecsVersion  = "0.1.10-SNAPSHOT"
 val nekoHtmlVersion      = "1.9.22"
-val scalatestVersion     = "3.0.0"
+val scalatestVersion     = "3.0.1"
 
 kantanProject in ThisBuild := "xpath"
 

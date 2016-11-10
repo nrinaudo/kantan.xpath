@@ -50,7 +50,7 @@ case class RemoteXmlSource[A](toURL: A ⇒ ParseResult[URL], retry: RetryStrateg
 
   override def contramap[B](f: B ⇒ A): RemoteXmlSource[B] = copy(toURL = f andThen toURL)
 
-  override def contramapResult[B](f: B ⇒ ParseResult[A]): RemoteXmlSource[B] =
+  override def contramapResult[AA <: A, B](f: B ⇒ ParseResult[AA]): RemoteXmlSource[B] =
     copy(toURL = (b: B) ⇒ f(b).flatMap(toURL))
 
   /** Sets the specified header to the specified value. */

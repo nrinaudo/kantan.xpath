@@ -25,9 +25,6 @@ object NodeDecoder extends GeneratedDecoders with DecoderCompanion[Option[Node],
   /** Returns an implicit instance of `NodeDecoder[A]` if one is found in scope, fails compilation otherwise. */
   def apply[A](implicit ev: NodeDecoder[A]): NodeDecoder[A] = macro imp.summon[NodeDecoder[A]]
 
-  @deprecated("use from instead (see https://github.com/nrinaudo/kantan.xpath/issues/10)", "0.1.6")
-  def apply[A](f: Option[Node] ⇒ DecodeResult[A]): NodeDecoder[A] = Decoder.from(f)
-
   def fromFound[A](f: Node ⇒ DecodeResult[A]): NodeDecoder[A] = Decoder.from(_.map(f).getOrElse(DecodeResult.notFound))
 }
 

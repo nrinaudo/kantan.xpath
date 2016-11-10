@@ -69,7 +69,8 @@ trait XmlSource[-A] extends Serializable { self ⇒
     *
     * @see [[contramap]]
     */
-  def contramapResult[B](f: B ⇒ ParseResult[A]): XmlSource[B] = XmlSource.from((b: B) ⇒ f(b).flatMap(self.asNode))
+  def contramapResult[AA <: A, B](f: B ⇒ ParseResult[AA]): XmlSource[B] =
+    XmlSource.from((b: B) ⇒ f(b).flatMap(self.asNode))
 }
 
 /** Defines convenience methods for creating and summoning [[XmlSource]] instances.
@@ -89,9 +90,6 @@ object XmlSource {
   def from[A](f: A ⇒ ParseResult[Node]): XmlSource[A] = new XmlSource[A] {
     override def asNode(a: A) = f(a)
   }
-
-  @deprecated("use from instead (see https://github.com/nrinaudo/kantan.xpath/issues/10)", "0.1.6")
-  def apply[A](f: A ⇒ ParseResult[Node]): XmlSource[A] = XmlSource.from(f)
 
   /** Turns a [[Node]] into a source of XML data. */
   implicit val node: XmlSource[Node] = XmlSource.from(ParseResult.success)

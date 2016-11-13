@@ -16,6 +16,8 @@
 
 package kantan.xpath
 
+import java.text.DateFormat
+import java.util.Date
 import kantan.codecs.{Decoder, DecoderCompanion}
 import kantan.codecs.strings.StringDecoder
 import kantan.xpath.DecodeError.TypeError
@@ -26,6 +28,8 @@ object NodeDecoder extends GeneratedDecoders with DecoderCompanion[Option[Node],
   def apply[A](implicit ev: NodeDecoder[A]): NodeDecoder[A] = macro imp.summon[NodeDecoder[A]]
 
   def fromFound[A](f: Node ⇒ DecodeResult[A]): NodeDecoder[A] = Decoder.from(_.map(f).getOrElse(DecodeResult.notFound))
+
+  def dateDecoder(format: DateFormat): NodeDecoder[Date] = codecs.fromString(StringDecoder.dateDecoder(format))
 }
 
 /** Provides default [[NodeDecoder]] instances. */

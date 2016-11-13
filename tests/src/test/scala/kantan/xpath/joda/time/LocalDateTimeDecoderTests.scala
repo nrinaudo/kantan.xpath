@@ -25,7 +25,7 @@ import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline
 
 class LocalDateTimeDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
-  implicit val formatter = DateTimeFormat.mediumDateTime()
+  implicit val codec = localDateTimeCodec(DateTimeFormat.mediumDateTime())
 
   checkAll("NodeDecoder[LocalDateTime]", NodeDecoderTests[LocalDateTime].decoder[Int, Int])
 }

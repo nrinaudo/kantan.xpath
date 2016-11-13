@@ -21,8 +21,11 @@ import kantan.xpath.joda.time._
 ```
 
 There are so many different ways of serialising dates that kantan.xpath doesn't have a default implementation - whatever
-the choice, it would end up more often wrong than right. What you can do, however, is declare an implicit
-[`DateTimeFormat`]. This will get you a [`NodeDecoder`] instance for the following types:
+the choice, it would end up more often wrong than right.
+ 
+ If you can provide a [`DateTimeFormat`] instance, however, you can easily get [`NodeDecoder`] instance for the 
+ following types:
+
 
 * [`DateTime`]
 * [`LocalDate`]
@@ -37,12 +40,13 @@ import kantan.xpath.implicits._
 val input = "<root><date value='12-10-1978'/><date value='09-01-2015'/></root>"
 ```
 
-We'd first need to declare the appropriate [`DateTimeFormat`]:
+We'd simply need to declare the appropriate decoder through:
 
 ```tut:silent
+import kantan.xpath.joda.time._
 import org.joda.time.format._
 
-implicit val format = DateTimeFormat.forPattern("DD-MM-yyyy")
+implicit val decoder = localDateDecoder(DateTimeFormat.forPattern("DD-MM-yyyy"))
 ```
 
 And we're done, as far as decoding is concerned. We only need to get a regular expression together and evaluate it:

@@ -22,8 +22,8 @@ import kantan.xpath.joda.time._
 
 There are so many different ways of serialising dates that kantan.xpath doesn't have a default implementation - whatever
 the choice, it would end up more often wrong than right.
- 
- If you can provide a [`DateTimeFormat`] instance, however, you can easily get [`NodeDecoder`] instance for the 
+
+ If you can provide a [`DateTimeFormat`] instance, however, you can easily get [`NodeDecoder`] instance for the
  following types:
 
 
@@ -63,4 +63,4 @@ input.evalXPath[List[org.joda.time.LocalDate]](xp"//date/@value")
 [`LocalDateTime`]:http://joda-time.sourceforge.net/apidocs/org/joda/time/LocalDateTime.html
 [`LocalTime`]:http://joda-time.sourceforge.net/apidocs/org/joda/time/LocalTime.html
 [`DateTimeFormat`]:http://joda-time.sourceforge.net/apidocs/org/joda/time/format/DateTimeFormat.html
-[`NodeDecoder`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$NodeDecoder
+[`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html

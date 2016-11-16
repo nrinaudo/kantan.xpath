@@ -31,17 +31,16 @@ The following instance for cats type classes are provided:
 * [`Monad`] for all result types.
 * [`BiFunctor`] for all result types.
 
-[`Functor`]:http://typelevel.org/cats/api/#cats.Functor
-[`BiFunctor`]:http://typelevel.org/cats/api/#cats.functor.Bifunctor
-[`Order`]:http://typelevel.org/cats/api/index.html#cats.package@Order[A]=cats.kernel.Order[A]
-[`Show`]:http://typelevel.org/cats/api/index.html#cats.Show
-[`Traverse`]:http://typelevel.org/cats/api/index.html#cats.Traverse
-[`Monad`]:http://typelevel.org/cats/api/index.html#cats.Monad
-[`Monoid`]:http://typelevel.org/cats/api/index.html#cats.package@Monoid[A]=cats.kernel.Monoid[A]
-[`NodeDecoder`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$NodeDecoder
-[`XPathResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$XPathResult
+[`Functor`]:http://typelevel.org/cats/api/cats/Functor.html
+[`BiFunctor`]:http://typelevel.org/cats/api/cats/functor/Bifunctor.html
+[`Order`]:http://typelevel.org/cats/api/cats/kernel/Order.html
+[`Show`]:http://typelevel.org/cats/api/cats/Show.html
+[`Traverse`]:http://typelevel.org/cats/api/cats/Traverse.html
+[`Monad`]:http://typelevel.org/cats/api/cats/Monad.html
+[`Monoid`]:http://typelevel.org/cats/api/cats/kernel/Monoid.html
+[`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html
+[`XPathResult`]:{{ site.baseurl }}/api/kantan/xpath/XPathResult$.html
 [`ReadResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$ReadResult
-[`ParseResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$ParseResult
-[`DecodeResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package
-$$DecodeResult
-[`CompileResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$CompileResult
+[`ParseResult`]:{{ site.baseurl }}/api/kantan/xpath/package$$ParseResult.html
+[`DecodeResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$DecodeResult
+[`CompileResult`]:{{ site.baseurl }}/api/kantan/xpath/CompileResult$.html

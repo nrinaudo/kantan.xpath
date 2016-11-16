@@ -67,9 +67,9 @@ The following instance for cats type classes are provided:
 [`Monoid`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.Monoid
 [`\/`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.$bslash$div
 [`Maybe`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.Maybe
-[`NodeDecoder`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$NodeDecoder
-[`XPathResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$XPathResult
+[`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html
+[`XPathResult`]:{{ site.baseurl }}/api/kantan/xpath/XPathResult$.html
 [`ReadResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$ReadResult
-[`ParseResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$ParseResult
+[`ParseResult`]:{{ site.baseurl }}/api/kantan/xpath/package$$ParseResult.html
 [`DecodeResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$DecodeResult
-[`CompileResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$CompileResult
+[`CompileResult`]:{{ site.baseurl }}/api/kantan/xpath/CompileResult$.html

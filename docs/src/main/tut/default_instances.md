@@ -95,8 +95,8 @@ The following types have an instance of [`XmlSource`] out of the box:
 * [`URI`]
 
 
-[`BigInt`]:http://www.scala-lang.org/api/current/index.html#scala.math.BigInt
-[`BigDecimal`]:http://www.scala-lang.org/api/current/index.html#scala.math.BigDecimal
+[`BigInt`]:http://www.scala-lang.org/api/current/scala/math/BigInt.html
+[`BigDecimal`]:http://www.scala-lang.org/api/current/scala/math/BigDecimal.html
 [`Byte`]:https://docs.oracle.com/javase/7/docs/api/java/lang/Byte.html
 [`Char`]:https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html
 [`Boolean`]:https://docs.oracle.com/javase/7/docs/api/java/lang/Boolean.html
@@ -113,7 +113,7 @@ The following types have an instance of [`XmlSource`] out of the box:
 [`InputStream`]:https://docs.oracle.com/javase/7/docs/api/java/io/InputStream.html
 [`File`]:https://docs.oracle.com/javase/7/docs/api/java/io/File.html
 [`Path`]:https://docs.oracle.com/javase/7/docs/api/java/nio/file/Path.html
-[`XmlSource`]:{{ site.baseurl }}/api/#kantan.xpath.XmlSource
-[`NodeDecoder`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$NodeDecoder
+[`XmlSource`]:{{ site.baseurl }}/api/kantan/xpath/XmlSource.html
+[`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html
 [`Date`]:https://docs.oracle.com/javase/7/docs/api/java/util/Date.html
 [`DateFormat`]:https://docs.oracle.com/javase/7/docs/api/java/text/DateFormat.html

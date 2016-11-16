@@ -15,7 +15,7 @@ somehow. kantan.xpath extends most things that "can be turned into XML" with use
 
 This is done through the [`XmlSource`] type class: any type `A` such that there exists a value of type
 [`XmlSource[A]`][`XmlSource`] in the implicit scope will be enriched with
-[useful methods]({{ site.baseurl }}/api/#kantan.xpath.ops$$XmlSourceOps).
+[useful methods]({{ site.baseurl }}/api/kantan/xpath/ops/XmlSourceOps.html).
 
 Implementing our own [`XmlSource`] for types that aren't supported by default is fairly simple.
 
@@ -58,12 +58,12 @@ implicit def stringSource(implicit parser: XmlParser): XmlSource[String] =
 [`URI`]:https://docs.oracle.com/javase/7/docs/api/java/net/URI.html
 [`File`]:https://docs.oracle.com/javase/7/docs/api/java/io/File.html
 [`String`]:https://docs.oracle.com/javase/7/docs/api/java/lang/String.html
-[`XmlSource`]:{{ site.baseurl }}/api/#kantan.xpath.XmlSource
-[`Node`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@Node=org.w3c.dom.Node
-[`ParseResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$ParseResult
-[`InputSource`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@InputSource=org.xml.sax.InputSource
-[`XmlParser`]:{{ site.baseurl }}/api/index.html#kantan.xpath.XmlParser
-[`contramap`]:{{ site.baseurl }}/api/index.html#kantan.xpath.XmlSource@contramap[B](f:B=>A):kantan.xpath.XmlSource[B]
-[`nekohtml`]:{{ site.baseurl }}/api/#kantan.xpath.nekohtml.package
-[`evalXPath`]:{{ site.baseurl }}/api/index.html#kantan.xpath.ops$$XmlSourceOps@evalXPath[B](expr:String)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]
-[`contramapResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.XmlSource@contramapResult[B](f:B=>kantan.xpath.ParseResult[A]):kantan.xpath.XmlSource[B]
+[`XmlSource`]:{{ site.baseurl }}/api/kantan/xpath/XmlSource.html
+[`Node`]:{{ site.baseurl }}/api/kantan/xpath/index.html#Node=org.w3c.dom.Node
+[`ParseResult`]:{{ site.baseurl }}/api/kantan/xpath/package$$ParseResult.html
+[`InputSource`]:{{ site.baseurl }}/api/kantan/xpath/index.html#InputSource=org.xml.sax.InputSource
+[`XmlParser`]:{{ site.baseurl }}/api/kantan/xpath/XmlParser.html
+[`contramap`]:{{ site.baseurl }}/api/kantan/xpath/XmlSource.html#contramapResult[AA<:A,B](f:B=>kantan.xpath.ParseResult[AA]):kantan.xpath.XmlSource[B]
+[`nekohtml`]:{{ site.baseurl }}/api/kantan/xpath/nekohtml/index.html
+[`evalXPath`]:{{ site.baseurl }}/api/kantan/xpath/ops/XmlSourceOps.html#evalXPath[B](expr:kantan.xpath.XPathExpression)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]
+[`contramapResult`]:{{ site.baseurl }}/api/kantan/xpath/XmlSource.html#contramapResult[AA<:A,B](f:B=>kantan.xpath.ParseResult[AA]):kantan.xpath.XmlSource[B]

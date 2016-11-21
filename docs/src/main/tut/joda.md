@@ -20,12 +20,7 @@ You then need to import the corresponding package:
 import kantan.xpath.joda.time._
 ```
 
-There are so many different ways of serialising dates that kantan.xpath doesn't have a default implementation - whatever
-the choice, it would end up more often wrong than right.
-
- If you can provide a [`DateTimeFormat`] instance, however, you can easily get [`NodeDecoder`] instance for the
- following types:
-
+kantan.xpath has default, ISO 8601 compliant [`NodeDecoder`] instances for the following types:
 
 * [`DateTime`]
 * [`LocalDate`]
@@ -37,19 +32,27 @@ Let's imagine for example that we want to extract dates from the following strin
 ```tut:silent
 import kantan.xpath.implicits._
 
-val input = "<root><date value='12-10-1978'/><date value='09-01-2015'/></root>"
+val input = "<root><date value='1978-10-12'/><date value='2015-01-09'/></root>"
 ```
 
-We'd simply need to declare the appropriate decoder through:
+This is directly supported:
+
+```tut
+input.evalXPath[List[org.joda.time.LocalDate]](xp"//date/@value")
+```
+
+It is, of course, possible to declare your own [`NodeDecoder`]. This is, for example, how you'd create a custom
+[`NodeDecoder[LocalDate]`][`NodeDecoder`]:
 
 ```tut:silent
-import kantan.xpath.joda.time._
 import org.joda.time.format._
 
-implicit val decoder = localDateDecoder(DateTimeFormat.forPattern("DD-MM-yyyy"))
+val input = "<root><date value='12-10-1978'/><date value='09-01-2015'/></root>"
+
+implicit val decoder = localDateDecoder(DateTimeFormat.forPattern("dd-MM-yyyy"))
 ```
 
-And we're done, as far as decoding is concerned. We only need to get a regular expression together and evaluate it:
+And we're done, as far as decoding is concerned. We only need to get an XPath expression together and evaluate it:
 
 ```tut
 input.evalXPath[List[org.joda.time.LocalDate]](xp"//date/@value")

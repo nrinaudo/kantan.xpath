@@ -16,16 +16,17 @@
 
 package kantan.xpath.joda.time
 
-import arbitrary._
+import kantan.xpath._
+import kantan.xpath.joda.time.arbitrary._
 import kantan.xpath.laws.discipline.NodeDecoderTests
 import org.joda.time.DateTime
-import org.joda.time.format.ISODateTimeFormat
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline
 
 class DateTimeDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
-  implicit val codec = dateTimeCodec(ISODateTimeFormat.dateTime)
+  // This is apparently necessary for Scala 2.10
+  implicit val decoder: NodeDecoder[DateTime] = defaultDateTimeDecoder.value
 
   checkAll("NodeDecoder[DateTime]", NodeDecoderTests[DateTime].decoder[Int, Int])
 }

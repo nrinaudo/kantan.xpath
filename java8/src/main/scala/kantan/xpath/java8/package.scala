@@ -20,8 +20,6 @@ import kantan.codecs.strings.StringDecoder
 import kantan.codecs.strings.java8.TimeDecoderCompanion
 
 package object java8 extends TimeDecoderCompanion[Option[Node], DecodeError, codecs.type] {
-  override type Decoder[A] = NodeDecoder[A]
-
-  override def decoderFrom[D](d: StringDecoder[D]): NodeDecoder[D] = codecs.fromString(d)
+  override def decoderFrom[D](d: StringDecoder[D]) = codecs.fromString(d)
 }
 

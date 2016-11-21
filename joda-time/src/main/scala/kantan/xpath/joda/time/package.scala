@@ -17,6 +17,8 @@
 package kantan.xpath.joda
 
 import kantan.codecs.strings.joda.time._
+import kantan.codecs.strings.StringDecoder
+import kantan.xpath.{codecs, DecodeError, Node}
 
 /** Brings all joda time instances in scope.
   *
@@ -24,4 +26,6 @@ import kantan.codecs.strings.joda.time._
   * `kantan.codec.strings.joda.time._`. The sole purpose of this is to keep things simple for users that don't want or
   * need to learn about kantan.xpath's internals.
   */
-package object time extends JodaTimeInstances
+package object time extends JodaTimeDecoderCompanion[Option[Node], DecodeError, codecs.type] {
+  override def decoderFrom[D](d: StringDecoder[D]) = codecs.fromString(d)
+}

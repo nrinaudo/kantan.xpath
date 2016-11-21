@@ -20,6 +20,9 @@ in your SBT build file:
 // Core library, included automatically if any other module is imported.
 libraryDependencies += "com.nrinaudo" %% "kantan.xpath" % "@VERSION@"
 
+// Java 8 date and time instances.
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-java8" % "@VERSION@"
+
 // Provides scalaz type class instances.
 libraryDependencies += "com.nrinaudo" %% "kantan.xpath-scalaz" % "@VERSION@"
 

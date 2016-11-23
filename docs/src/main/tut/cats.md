@@ -10,7 +10,7 @@ bones: it provides a few useful type class instances.
 The `cats` module can be used by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-cats" % "0.1.7"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-cats" % "0.1.8"
 ```
 
 You then need to import the corresponding package:

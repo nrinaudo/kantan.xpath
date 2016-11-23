@@ -10,7 +10,7 @@ bones: it provides decoders for [`Maybe`] and [`\/`] as well as a few useful typ
 The `scalaz` module can be used by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-scalaz" % "0.1.7"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-scalaz" % "0.1.8"
 ```
 
 You then need to import the corresponding package:

@@ -25,17 +25,15 @@ lazy val root = Project(id = "kantan-xpath", base = file("."))
       |import kantan.xpath.joda.time._
     """.stripMargin
   )
-  .aggregate((
-    Seq[ProjectReference](core, nekohtml, docs, laws, tests, cats, scalaz, jodaTime) ++
-    ifJava8(Seq(java8))
-  ):_*)
+  .aggregate(core, nekohtml, docs, laws, tests, cats, scalaz, jodaTime)
+  .aggregate(ifJava8[ProjectReference](java8):_*)
   .dependsOn(core, nekohtml, jodaTime)
 
 lazy val tests = project
   .enablePlugins(UnpublishedPlugin)
   .enablePlugins(spray.boilerplate.BoilerplatePlugin)
   .dependsOn(core, cats, laws, jodaTime, cats, scalaz, nekohtml)
-  .aggregate(ifJava8(Seq(java8)):_*)
+  .aggregate(ifJava8[ProjectReference](java8):_*)
   .settings(libraryDependencies ++= Seq(
     "com.nrinaudo"  %% "kantan.codecs-cats-laws"      % kantanCodecsVersion % "test",
     "com.nrinaudo"  %% "kantan.codecs-joda-time-laws" % kantanCodecsVersion % "test",
@@ -45,10 +43,11 @@ lazy val tests = project
 
 lazy val docs = project
   .settings(unidocProjectFilter in (ScalaUnidoc, unidoc) :=
-    inAnyProject -- inProjects(ifNotJava8(Seq(java8)):_*)
+    inAnyProject -- inProjects(ifNotJava8[ProjectReference](java8):_*)
   )
   .enablePlugins(DocumentationPlugin)
   .dependsOn(core, nekohtml, cats, scalaz, jodaTime)
+  .dependsOn(ifJava8[ClasspathDep[ProjectReference]](java8):_*)
 
 
 

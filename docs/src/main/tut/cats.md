@@ -2,7 +2,7 @@
 layout: tutorial
 title: "Cats module"
 section: tutorial
-sort_order: 11
+sort_order: 12
 ---
 kantan.xpath has a [cats](https://github.com/typelevel/cats) module that is, in its current incarnation, fairly bare
 bones: it provides a few useful type class instances.

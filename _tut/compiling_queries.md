@@ -61,7 +61,7 @@ You can use [`compile`] to compile raw strings:
 
 ```scala
 scala> val query = Query.compile[List[Int]]("//element/@id")
-query: kantan.xpath.CompileResult[kantan.xpath.Query[kantan.xpath.DecodeResult[List[Int]]]] = Success(kantan.xpath.Query$$anon$1@7e777785)
+query: kantan.xpath.CompileResult[kantan.xpath.Query[kantan.xpath.DecodeResult[List[Int]]]] = Success(kantan.xpath.Query$$anon$1@3e256c0f)
 ```
 
 The returned value is not directly a [`Query`], though, but rather a [`CompileResult`] containing an instance of
@@ -69,11 +69,11 @@ The returned value is not directly a [`Query`], though, but rather a [`CompileRe
 some error handling in place.
 
 
-[`Query`]:{{ site.baseurl }}/api/#kantan.xpath.Query
-[`compile`]:{{ site.baseurl }}/api/index.html#kantan.xpath.Query$@compile[A](str:String)(implicitcmp:kantan.xpath.Compiler[A]):kantan.xpath.XPathResult[kantan.xpath.Query[kantan.xpath.DecodeResult[A]]]
+[`Query`]:{{ site.baseurl }}/api/kantan/xpath/Query.html
+[`compile`]:{{ site.baseurl }}/api/kantan/xpath/Query$.html#compile[A](str:String)(implicitevidence$2:kantan.xpath.Compiler[A],implicitxpath:kantan.xpath.XPathCompiler):kantan.xpath.CompileResult[kantan.xpath.Query[kantan.xpath.DecodeResult[A]]]
 [`get`]:https://nrinaudo.github.io/kantan.codecs/api/index.html#kantan.codecs.Result@get:S
-[`CompileResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@CompileResult[A]=kantan.codecs.Result[kantan.xpath.CompileError,A]
+[`CompileResult`]:{{ site.baseurl }}/api/kantan/xpath/CompileResult$.html
 [`xpath`]:{{ site.baseurl }}/api/index.html#kantan.xpath.ops$$StringOps@xpath[A](implicitcomp:kantan.xpath.Compiler[A]):kantan.xpath.Query[kantan.xpath.DecodeResult[A]]
-[`evalXPath`]:{{ site.baseurl }}/api/index.html#kantan.xpath.ops$$XmlSourceOps@evalXPath[B](expr:kantan.xpath.Query[kantan.xpath.DecodeResult[B]])(implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.ReadResult[B]
-[`Query.apply`]:{{ site.baseurl }}/api/index.html#kantan.xpath.Query$@apply[A](expr:kantan.xpath.XPathExpression)(implicitcmp:kantan.xpath.Compiler[A]):kantan.xpath.Query[kantan.xpath.DecodeResult[A]]
-[`XPathExpression`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@XPathExpression=javax.xml.xpath.XPathExpression
+[`evalXPath`]:{{ site.baseurl }}/api/kantan/xpath/ops/XmlSourceOps.html#evalXPath[B](expr:kantan.xpath.XPathExpression)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]
+[`Query.apply`]:{{ site.baseurl }}/api/kantan/xpath/Query$.html#apply[A](expr:kantan.xpath.XPathExpression)(implicitevidence$1:kantan.xpath.Compiler[A]):kantan.xpath.Query[kantan.xpath.DecodeResult[A]]
+[`XPathExpression`]:{{ site.baseurl }}/api/kantan/xpath/index.html#XPathExpression=javax.xml.xpath.XPathExpression

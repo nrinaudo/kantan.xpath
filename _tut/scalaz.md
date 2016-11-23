@@ -2,7 +2,7 @@
 layout: tutorial
 title: "Scalaz module"
 section: tutorial
-sort_order: 12
+sort_order: 13
 ---
 kantan.xpath has a [scalaz](https://github.com/scalaz/scalaz) module that is, in its current incarnation, fairly bare
 bones: it provides decoders for [`Maybe`] and [`\/`] as well as a few useful type class instances.
@@ -10,7 +10,7 @@ bones: it provides decoders for [`Maybe`] and [`\/`] as well as a few useful typ
 The `scalaz` module can be used by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-scalaz" % "0.1.7"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-scalaz" % "0.1.8"
 ```
 
 You then need to import the corresponding package:
@@ -69,9 +69,9 @@ The following instance for cats type classes are provided:
 [`Monoid`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.Monoid
 [`\/`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.$bslash$div
 [`Maybe`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.Maybe
-[`NodeDecoder`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@NodeDecoder[A]=kantan.codecs.Decoder[Option[kantan.xpath.package.Node],A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]
-[`XPathResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@XPathResult[A]=kantan.codecs.Result[kantan.xpath.XPathError,A]
-[`ReadResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@ReadResult[A]=kantan.codecs.Result[kantan.xpath.ReadError,A]
-[`ParseResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@ParseResult[A]=kantan.codecs.Result[kantan.xpath.ParseError,A]
-[`DecodeResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@DecodeResult[A]=kantan.codecs.Result[kantan.xpath.DecodeError,A]
-[`CompileResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@CompileResult[A]=kantan.codecs.Result[kantan.xpath.CompileError,A]
+[`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html
+[`XPathResult`]:{{ site.baseurl }}/api/kantan/xpath/XPathResult$.html
+[`ReadResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$ReadResult
+[`ParseResult`]:{{ site.baseurl }}/api/kantan/xpath/package$$ParseResult.html
+[`DecodeResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$DecodeResult
+[`CompileResult`]:{{ site.baseurl }}/api/kantan/xpath/CompileResult$.html

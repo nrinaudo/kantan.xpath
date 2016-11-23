@@ -49,7 +49,7 @@ of your code. For example:
 
 ```scala
 scala> rawData.evalXPath[java.net.URL](xp"//element/@id")
-res2: kantan.xpath.XPathResult[java.net.URL] = Failure(kantan.xpath.DecodeError$TypeError$$anon$1: Not a valid URL: '1)
+res2: kantan.xpath.XPathResult[java.net.URL] = Failure(kantan.xpath.DecodeError$TypeError$$anon$1: Not a valid URL: '1')
 ```
 
 In some cases, however, we don't really care for runtime safety and are fine with our program crashing at the first
@@ -80,8 +80,8 @@ scala> rawData.evalXPath[Vector[Boolean]](xp"//element/@enabled")
 res5: kantan.xpath.XPathResult[Vector[Boolean]] = Success(Vector(true, false, true, false))
 ```
 
-[`evalXPath`]:{{ site.baseurl }}/api/index.html#kantan.xpath.ops$$XmlSourceOps@evalXPath[B](expr:String)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]
-[`unsafeEvalXPath`]:{{ site.baseurl }}/api/index.html#kantan.xpath.ops$$XmlSourceOps@unsafeEvalXPath[B](expr:String)(implicitevidence$1:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):B
-[`XPathResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@XPathResult[A]=kantan.codecs.Result[kantan.xpath.XPathError,A]
-[`CanBuildFrom`]:http://www.scala-lang.org/api/2.11.8/#scala.collection.generic.CanBuildFrom
-[`List`]:http://www.scala-lang.org/api/2.11.8/#scala.collection.immutable.List
+[`evalXPath`]:{{ site.baseurl }}/api/kantan/xpath/ops/XmlSourceOps.html#evalXPath[B](expr:kantan.xpath.XPathExpression)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]
+[`unsafeEvalXPath`]:{{ site.baseurl }}/api/kantan/xpath/ops/XmlSourceOps.html#unsafeEvalXPath[B](expr:kantan.xpath.XPathExpression)(implicitevidence$1:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):B
+[`XPathResult`]:{{ site.baseurl }}/api/kantan/xpath/XPathResult$.html
+[`CanBuildFrom`]:http://www.scala-lang.org/api/current/scala/collection/generic/CanBuildFrom.html
+[`List`]:http://www.scala-lang.org/api/current/scala/collection/immutable/List.html

@@ -1,68 +1,160 @@
 <!DOCTYPE html >
 <html>
         <head>
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
           <title></title>
           <meta name="description" content="" />
           <meta name="keywords" content="" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="lib/index.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
       <script type="text/javascript" src="lib/jquery.js"></script>
-      <script type="text/javascript" src="lib/jquery-ui.js"></script>
-      <script type="text/javascript" src="lib/jquery.layout.js"></script>
+      <script type="text/javascript" src="lib/jquery.panzoom.min.js"></script>
+      <script type="text/javascript" src="lib/jquery.mousewheel.min.js"></script>
       <script type="text/javascript" src="lib/index.js"></script>
+      <script type="text/javascript" src="index.js"></script>
       <script type="text/javascript" src="lib/scheduler.js"></script>
+      <script type="text/javascript" src="lib/template.js"></script>
+      <script type="text/javascript" src="lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+        /* this variable can be used by the JS to determine the path to the root document */
+        var toRoot = '';
+      </script>
     
         </head>
         <body>
-      <div id="library">
-        <img class="class icon" alt="class icon" src="lib/class.png" />
-        <img class="trait icon" alt="trait icon" src="lib/trait.png" />
-        <img class="object icon" alt="trait icon" src="lib/object.png" />
-        <img class="package icon" alt="trait icon" src="lib/package.png" />
-      </div>
-      <div id="browser" class="ui-layout-west">
-      <div class="ui-west-center">
-      <div id="filter">
-          <div id="textfilter"></div>
-          <div id="letters"><span>#</span><a target="template" href="index/index-a.html">A</a><a target="template" href="index/index-b.html">B</a><a target="template" href="index/index-c.html">C</a><a target="template" href="index/index-d.html">D</a><a target="template" href="index/index-e.html">E</a><a target="template" href="index/index-f.html">F</a><a target="template" href="index/index-g.html">G</a><a target="template" href="index/index-h.html">H</a><a target="template" href="index/index-i.html">I</a><span>J</span><a target="template" href="index/index-k.html">K</a><a target="template" href="index/index-l.html">L</a><a target="template" href="index/index-m.html">M</a><a target="template" href="index/index-n.html">N</a><a target="template" href="index/index-o.html">O</a><a target="template" href="index/index-p.html">P</a><a target="template" href="index/index-q.html">Q</a><a target="template" href="index/index-r.html">R</a><a target="template" href="index/index-s.html">S</a><a target="template" href="index/index-t.html">T</a><a target="template" href="index/index-u.html">U</a><span>V</span><a target="template" href="index/index-w.html">W</a><a target="template" href="index/index-x.html">X</a><span>Y</span><span>Z</span> – <a target="template" href="deprecated-list.html">deprecated</a></div>
-      </div>
-      <div class="pack" id="tpl">
-            
-            <ol class="templates"></ol>
-            <ol class="packages"> <li class="pack" title="kantan">
-            <a class="tplshow" href="kantan/package.html" target="template">kantan</a>
-            <ol class="templates"></ol>
-            <ol class="packages"> <li class="pack" title="kantan.xpath">
-            <a class="tplshow" href="kantan/xpath/package.html" target="template">kantan.xpath</a>
-            <ol class="templates"><li title="kantan.xpath.codecs"><a class="tplshow" href="kantan/xpath/codecs$.html" target="template"><span class="object">(object)</span><div class="placeholder"></div><span class="tplLink">codecs</span></a></li><li title="kantan.xpath.CompileError"><a class="tplshow" href="kantan/xpath/CompileError$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="kantan/xpath/CompileError.html" target="template"><span class="case class">(case class)</span><span class="tplLink">CompileError</span></a></li><li title="kantan.xpath.Compiler"><a class="tplshow" href="kantan/xpath/Compiler$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="kantan/xpath/Compiler.html" target="template"><span class="trait">(trait)</span><span class="tplLink">Compiler</span></a></li><li title="kantan.xpath.DecodeError"><a class="tplshow" href="kantan/xpath/DecodeError$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="kantan/xpath/DecodeError.html" target="template"><span class="class">(class)</span><span class="tplLink">DecodeError</span></a></li><li title="kantan.xpath.DecodeResult"><a class="tplshow" href="kantan/xpath/DecodeResult$.html" target="template"><span class="object">(object)</span><div class="placeholder"></div><span class="tplLink">DecodeResult</span></a></li><li title="kantan.xpath.GeneratedDecoders"><div class="placeholder"></div><a class="tplshow" href="kantan/xpath/GeneratedDecoders.html" target="template"><span class="trait">(trait)</span><span class="tplLink">GeneratedDecoders</span></a></li><li title="kantan.xpath.implicits"><a class="tplshow" href="kantan/xpath/implicits$.html" target="template"><span class="object">(object)</span><div class="placeholder"></div><span class="tplLink">implicits</span></a></li><li title="kantan.xpath.NodeDecoder"><a class="tplshow" href="kantan/xpath/NodeDecoder$.html" target="template"><span class="object">(object)</span><div class="placeholder"></div><span class="tplLink">NodeDecoder</span></a></li><li title="kantan.xpath.NodeDecoderInstances"><div class="placeholder"></div><a class="tplshow" href="kantan/xpath/NodeDecoderInstances.html" target="template"><span class="trait">(trait)</span><span class="tplLink">NodeDecoderInstances</span></a></li><li title="kantan.xpath.ParseError"><a class="tplshow" href="kantan/xpath/ParseError$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="kantan/xpath/ParseError.html" target="template"><span class="class">(class)</span><span class="tplLink">ParseError</span></a></li><li title="kantan.xpath.ParseResult"><a class="tplshow" href="kantan/xpath/ParseResult$.html" target="template"><span class="object">(object)</span><div class="placeholder"></div><span class="tplLink">ParseResult</span></a></li><li title="kantan.xpath.Query"><a class="tplshow" href="kantan/xpath/Query$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="kantan/xpath/Query.html" target="template"><span class="trait">(trait)</span><span class="tplLink">Query</span></a></li><li title="kantan.xpath.ReadError"><div class="placeholder"></div><a class="tplshow" href="kantan/xpath/ReadError.html" target="template"><span class="class">(class)</span><span class="tplLink">ReadError</span></a></li><li title="kantan.xpath.RemoteXmlSource"><div class="placeholder"></div><a class="tplshow" href="kantan/xpath/RemoteXmlSource.html" target="template"><span class="case class">(case class)</span><span class="tplLink">RemoteXmlSource</span></a></li><li title="kantan.xpath.RetryStrategy"><a class="tplshow" href="kantan/xpath/RetryStrategy$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="kantan/xpath/RetryStrategy.html" target="template"><span class="case class">(case class)</span><span class="tplLink">RetryStrategy</span></a></li><li title="kantan.xpath.XmlParser"><a class="tplshow" href="kantan/xpath/XmlParser$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="kantan/xpath/XmlParser.html" target="template"><span class="trait">(trait)</span><span class="tplLink">XmlParser</span></a></li><li title="kantan.xpath.XmlSource"><a class="tplshow" href="kantan/xpath/XmlSource$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="kantan/xpath/XmlSource.html" target="template"><span class="trait">(trait)</span><span class="tplLink">XmlSource</span></a></li><li title="kantan.xpath.XPathCompiler"><a class="tplshow" href="kantan/xpath/XPathCompiler$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="kantan/xpath/XPathCompiler.html" target="template"><span class="trait">(trait)</span><span class="tplLink">XPathCompiler</span></a></li><li title="kantan.xpath.XPathError"><div class="placeholder"></div><a class="tplshow" href="kantan/xpath/XPathError.html" target="template"><span class="class">(class)</span><span class="tplLink">XPathError</span></a></li></ol>
-            <ol class="packages"> <li class="pack" title="kantan.xpath.laws">
-            <a class="tplshow" href="kantan/xpath/laws/package.html" target="template">kantan.xpath.laws</a>
-            <ol class="templates"></ol>
-            <ol class="packages"> <li class="pack" title="kantan.xpath.laws.discipline">
-            <a class="tplshow" href="kantan/xpath/laws/discipline/package.html" target="template">kantan.xpath.laws.discipline</a>
-            <ol class="templates"><li title="kantan.xpath.laws.discipline.arbitrary"><a class="tplshow" href="kantan/xpath/laws/discipline/arbitrary$.html" target="template"><span class="object">(object)</span><div class="placeholder"></div><span class="tplLink">arbitrary</span></a></li><li title="kantan.xpath.laws.discipline.ArbitraryArities"><div class="placeholder"></div><a class="tplshow" href="kantan/xpath/laws/discipline/ArbitraryArities.html" target="template"><span class="trait">(trait)</span><span class="tplLink">ArbitraryArities</span></a></li><li title="kantan.xpath.laws.discipline.ArbitraryInstances"><div class="placeholder"></div><a class="tplshow" href="kantan/xpath/laws/discipline/ArbitraryInstances.html" target="template"><span class="trait">(trait)</span><span class="tplLink">ArbitraryInstances</span></a></li><li title="kantan.xpath.laws.discipline.NodeDecoderTests"><a class="tplshow" href="kantan/xpath/laws/discipline/NodeDecoderTests$.html" target="template"><span class="object">(object)</span><div class="placeholder"></div><span class="tplLink">NodeDecoderTests</span></a></li></ol>
-            <ol class="packages"> </ol>
-          </li></ol>
-          </li><li class="pack" title="kantan.xpath.literals">
-            <a class="tplshow" href="kantan/xpath/literals/package.html" target="template">kantan.xpath.literals</a>
-            <ol class="templates"><li title="kantan.xpath.literals.LiteralMacros"><a class="tplshow" href="kantan/xpath/literals/LiteralMacros$.html" target="template"><span class="object">(object)</span><div class="placeholder"></div><span class="tplLink">LiteralMacros</span></a></li><li title="kantan.xpath.literals.ToXPathLiteral"><div class="placeholder"></div><a class="tplshow" href="kantan/xpath/literals/ToXPathLiteral.html" target="template"><span class="trait">(trait)</span><span class="tplLink">ToXPathLiteral</span></a></li><li title="kantan.xpath.literals.XPathLiteral"><div class="placeholder"></div><a class="tplshow" href="kantan/xpath/literals/XPathLiteral.html" target="template"><span class="class">(class)</span><span class="tplLink">XPathLiteral</span></a></li></ol>
-            <ol class="packages"> </ol>
-          </li><li class="pack" title="kantan.xpath.nekohtml">
-            <a class="tplshow" href="kantan/xpath/nekohtml/package.html" target="template">kantan.xpath.nekohtml</a>
-            <ol class="templates"><li title="kantan.xpath.nekohtml.NekoParser"><div class="placeholder"></div><a class="tplshow" href="kantan/xpath/nekohtml/NekoParser.html" target="template"><span class="class">(class)</span><span class="tplLink">NekoParser</span></a></li></ol>
-            <ol class="packages"> </ol>
-          </li><li class="pack" title="kantan.xpath.ops">
-            <a class="tplshow" href="kantan/xpath/ops/package.html" target="template">kantan.xpath.ops</a>
-            <ol class="templates"><li title="kantan.xpath.ops.AllOps"><div class="placeholder"></div><a class="tplshow" href="kantan/xpath/ops/AllOps.html" target="template"><span class="trait">(trait)</span><span class="tplLink">AllOps</span></a></li><li title="kantan.xpath.ops.expression"><a class="tplshow" href="kantan/xpath/ops/expression$.html" target="template"><span class="object">(object)</span><div class="placeholder"></div><span class="tplLink">expression</span></a></li><li title="kantan.xpath.ops.ExpressionOps"><div class="placeholder"></div><a class="tplshow" href="kantan/xpath/ops/ExpressionOps.html" target="template"><span class="class">(class)</span><span class="tplLink">ExpressionOps</span></a></li><li title="kantan.xpath.ops.ToExpressionOps"><div class="placeholder"></div><a class="tplshow" href="kantan/xpath/ops/ToExpressionOps.html" target="template"><span class="trait">(trait)</span><span class="tplLink">ToExpressionOps</span></a></li><li title="kantan.xpath.ops.ToXmlSourceOps"><div class="placeholder"></div><a class="tplshow" href="kantan/xpath/ops/ToXmlSourceOps.html" target="template"><span class="trait">(trait)</span><span class="tplLink">ToXmlSourceOps</span></a></li><li title="kantan.xpath.ops.xmlSource"><a class="tplshow" href="kantan/xpath/ops/xmlSource$.html" target="template"><span class="object">(object)</span><div class="placeholder"></div><span class="tplLink">xmlSource</span></a></li><li title="kantan.xpath.ops.XmlSourceOps"><div class="placeholder"></div><a class="tplshow" href="kantan/xpath/ops/XmlSourceOps.html" target="template"><span class="class">(class)</span><span class="tplLink">XmlSourceOps</span></a></li></ol>
-            <ol class="packages"> </ol>
-          </li></ol>
-          </li></ol>
-          </li></ol>
-          </div></div><script src="index.js"></script>
+      <div id="search">
+        <span id="doc-title"><span id="doc-version"></span></span>
+        <span class="close-results"><span class="left">&lt;</span> Back</span>
+        <div id="textfilter">
+          <span class="input">
+            <input autocapitalize="none" placeholder="Search" id="index-input" type="text" accesskey="/" />
+            <i class="clear material-icons"></i>
+            <i id="search-icon" class="material-icons"></i>
+          </span>
+        </div>
     </div>
-      <div id="content" class="ui-layout-center">
-        <iframe id="template" name="template" src="package.html"></iframe>
+      <div id="search-results">
+        <div id="search-progress">
+          <div id="progress-fill"></div>
+        </div>
+        <div id="results-content">
+          <div id="entity-results"></div>
+          <div id="member-results"></div>
+        </div>
+      </div>
+      <div id="content-scroll-container" style="-webkit-overflow-scrolling: touch;">
+        <div id="content-container" style="-webkit-overflow-scrolling: touch;">
+          <div id="subpackage-spacer">
+            <div id="packages">
+              <h1>Packages</h1>
+              <ul>
+                <li name="_root_.root" visbl="pub" class="indented0 current" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="_root_"></a><a id="root:_root_"></a>
+      <span class="permalink">
+      <a href="index.html#_root_" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">root</span>
+      </span>
+      
+      
+    </li><li name="_root_.kantan" visbl="pub" class="indented1 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="kantan"></a><a id="kantan:kantan"></a>
+      <span class="permalink">
+      <a href="index.html#kantan" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="kantan/index.html">
+              <span class="name">kantan</span>
+            </a>
+      </span>
+      
+      
+    </li>
+              </ul>
+            </div>
+          </div>
+          <div id="content">
+            <body class="package value">
+      <div id="definition">
+        <div class="big-circle package">p</div>
+        
+        <h1>root package<span class="permalink">
+      <a href="index.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span></h1>
+        
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">root</span>
+      </span>
+      </h4>
+
+      
+          <div id="comment" class="fullcommenttop"></div>
+        
+
+      
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+    </body>
+          </div>
+        </div>
       </div>
     </body>
       </html>

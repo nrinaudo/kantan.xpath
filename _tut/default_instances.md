@@ -35,16 +35,17 @@ There are so many different ways of writing dates that there is no reasonable de
 defaulting to ISO 8601 might make sense, but there doesn't appear to be a sane way of implementing that in Java’s crusty
 date / time API.
 
-Instead of providing a default implementation that is likely going to be incorrect for most people, kantan.xpath expects
-an implicit [`DateFormat`] instance in scope, and will decode using that format.
+Instead of providing a default implementation that is likely going to be incorrect for most people, kantan.xpath
+provides easy tools for creating decoders from an instance of [`DateFormat`].
 
-We could for example declare a formatter for something ISO 8601-like:
+We could for example declare a decoder for something ISO 8601-like:
 
 ```scala
 import kantan.xpath.implicits._
+import kantan.xpath.NodeDecoder
 import java.util.{Locale, Date}
 
-implicit val formatter = new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH)
+implicit val decoder = NodeDecoder.dateDecoder(new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH))
 ```
 
 And we're now capable of decoding XML content as dates:
@@ -97,8 +98,8 @@ The following types have an instance of [`XmlSource`] out of the box:
 * [`URI`]
 
 
-[`BigInt`]:http://www.scala-lang.org/api/current/index.html#scala.math.BigInt
-[`BigDecimal`]:http://www.scala-lang.org/api/current/index.html#scala.math.BigDecimal
+[`BigInt`]:http://www.scala-lang.org/api/current/scala/math/BigInt.html
+[`BigDecimal`]:http://www.scala-lang.org/api/current/scala/math/BigDecimal.html
 [`Byte`]:https://docs.oracle.com/javase/7/docs/api/java/lang/Byte.html
 [`Char`]:https://docs.oracle.com/javase/7/docs/api/java/lang/Character.html
 [`Boolean`]:https://docs.oracle.com/javase/7/docs/api/java/lang/Boolean.html
@@ -115,7 +116,7 @@ The following types have an instance of [`XmlSource`] out of the box:
 [`InputStream`]:https://docs.oracle.com/javase/7/docs/api/java/io/InputStream.html
 [`File`]:https://docs.oracle.com/javase/7/docs/api/java/io/File.html
 [`Path`]:https://docs.oracle.com/javase/7/docs/api/java/nio/file/Path.html
-[`XmlSource`]:{{ site.baseurl }}/api/#kantan.xpath.XmlSource
-[`NodeDecoder`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package@NodeDecoder[A]=kantan.codecs.Decoder[kantan.xpath.package.Node,A,kantan.xpath.DecodeError,kantan.xpath.codecs.type]
+[`XmlSource`]:{{ site.baseurl }}/api/kantan/xpath/XmlSource.html
+[`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html
 [`Date`]:https://docs.oracle.com/javase/7/docs/api/java/util/Date.html
 [`DateFormat`]:https://docs.oracle.com/javase/7/docs/api/java/text/DateFormat.html

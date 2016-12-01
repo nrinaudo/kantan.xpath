@@ -44,6 +44,7 @@ object XmlParser {
     */
   implicit val builtIn: XmlParser = {
     val factory: DocumentBuilderFactory = DocumentBuilderFactory.newInstance()
+    factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
     XmlParser(source ⇒ ParseResult(factory.newDocumentBuilder().parse(source)))
   }
 }

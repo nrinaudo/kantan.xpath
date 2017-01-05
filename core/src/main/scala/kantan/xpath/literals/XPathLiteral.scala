@@ -16,12 +16,22 @@
 
 package kantan.xpath.literals
 
-import kantan.xpath.XPathExpression
+import contextual._
+import kantan.xpath.{XPathCompiler, XPathExpression}
 
-final class XPathLiteral(val sc: StringContext) extends AnyVal {
-  def xp(args: Any*): XPathExpression = macro LiteralMacros.xpImpl
-}
+object XPathLiteral extends Interpolator {
+  def contextualize(interpolation: StaticInterpolation): Seq[ContextType] = {
+    interpolation.parts.foreach {
+      case lit@Literal(_, _) ⇒
+        implicitly[XPathCompiler].compile(interpolation.literals.head).leftMap { e ⇒
+          interpolation.error(lit, 0, e.getMessage)
+        }
+      case hole@Hole(_, _) ⇒
+        interpolation.abort(hole, "substitution is not supported")
+    }
+    Nil
+  }
 
-trait ToXPathLiteral {
-  implicit def toXPathLiteral(sc: StringContext): XPathLiteral = new XPathLiteral(sc)
+  def evaluate(interpolation: RuntimeInterpolation): XPathExpression =
+    implicitly[XPathCompiler].compile(interpolation.parts.mkString).get
 }

@@ -14,8 +14,12 @@
  * limitations under the License.
  */
 
-package kantan.xpath
+package kantan.xpath.literals
 
-package object macros {
-  type Context = scala.reflect.macros.blackbox.Context
+import contextual._
+
+trait ToXPathLiteral {
+  implicit class XPathStringContext(sc: StringContext) {
+    val xp = Prefix(XPathLiteral, sc)
+  }
 }

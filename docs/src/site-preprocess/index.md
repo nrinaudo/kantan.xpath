@@ -11,7 +11,7 @@ kantan.xpath is an XPath expression evaluation library for the [Scala programmin
 
 ## Getting started
 
-kantan.xpath is currently available both for Scala 2.10 and 2.11.
+kantan.xpath is currently available both for Scala 2.10, 2.11 and 2.12.
 
 The current version is `@VERSION@`, which can be added to your project with one or more of the following line(s)
 in your SBT build file:

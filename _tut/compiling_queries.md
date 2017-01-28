@@ -61,7 +61,7 @@ You can use [`compile`] to compile raw strings:
 
 ```scala
 scala> val query = Query.compile[List[Int]]("//element/@id")
-query: kantan.xpath.CompileResult[kantan.xpath.Query[kantan.xpath.DecodeResult[List[Int]]]] = Success(kantan.xpath.Query$$anon$1@3e256c0f)
+query: kantan.xpath.CompileResult[kantan.xpath.Query[kantan.xpath.DecodeResult[List[Int]]]] = Success(kantan.xpath.Query$$anon$1@694ee2a3)
 ```
 
 The returned value is not directly a [`Query`], though, but rather a [`CompileResult`] containing an instance of

@@ -127,21 +127,21 @@
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="kantan.xpath">xpath</a></dd></dl></div>
     </li><li class="current-entities indented3">
                         <span class="separator"></span>
-                        <a class="object" href="" title=""></a>
-                        <a href="" title="">
-                          LiteralMacros
-                        </a>
-                      </li><li class="current-entities indented3">
-                        <span class="separator"></span>
                         <a class="trait" href="ToXPathLiteral.html" title=""></a>
                         <a href="ToXPathLiteral.html" title="">
                           ToXPathLiteral
                         </a>
                       </li><li class="current-entities indented3">
                         <span class="separator"></span>
-                        <a class="class" href="XPathLiteral.html" title=""></a>
-                        <a href="XPathLiteral.html" title="">
+                        <a class="object" href="" title=""></a>
+                        <a href="" title="">
                           XPathLiteral
+                        </a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="ToXPathLiteral$XPathStringContext.html" title=""></a>
+                        <a href="ToXPathLiteral$XPathStringContext.html" title="">
+                          XPathStringContext
                         </a>
                       </li>
               </ul>
@@ -152,8 +152,8 @@
       <div id="definition">
         <div class="big-circle object">o</div>
         <p id="owner"><a href="../../index.html" class="extype" name="kantan">kantan</a>.<a href="../index.html" class="extype" name="kantan.xpath">xpath</a>.<a href="index.html" class="extype" name="kantan.xpath.literals">literals</a></p>
-        <h1>LiteralMacros<span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html" title="Permalink">
+        <h1>XPathLiteral<span class="permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span></h1>
@@ -166,16 +166,16 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">LiteralMacros</span>
+        <span class="name">XPathLiteral</span><span class="result"> extends <span class="extype" name="contextual.Interpolator">Interpolator</span></span>
       </span>
       </h4>
 
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/nrinaudo/kantan.xpath/tree/master/core/src/main/scala/kantan/xpath/literals/LiteralMacros.scala" target="_blank">LiteralMacros.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/nrinaudo/kantan.xpath/tree/master/core/src/main/scala/kantan/xpath/literals/XPathLiteral.scala" target="_blank">XPathLiteral.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">
             Linear Supertypes
           </span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="contextual.Interpolator">Interpolator</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -201,7 +201,7 @@
                   <span class="filtertype">Inherited<br />
                   </span>
                   <ol id="linearization">
-                    <li class="in" name="kantan.xpath.literals.LiteralMacros"><span>LiteralMacros</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                    <li class="in" name="kantan.xpath.literals.XPathLiteral"><span>XPathLiteral</span></li><li class="in" name="contextual.Interpolator"><span>Interpolator</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                   </ol>
                 </div><div class="ancestors">
               <span class="filtertype"></span>
@@ -221,7 +221,186 @@
         <div id="allMembers">
         
 
-        
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="contextual.Interpolator.ContextType" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="ContextType&lt;:contextual.Context"></a><a id="ContextType:ContextType"></a>
+      <span class="permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#ContextType&lt;:contextual.Context" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ContextType</span><span class="result"> &lt;: <span class="extype" name="contextual.Context">Context</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Interpolator</dd></dl></div>
+    </li><li name="contextual.Interpolator.Embedding" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Embedding[Value]extendsAnyRef"></a><a id="Embedding[Value]:Embedding[Value]"></a>
+      <span class="permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#Embedding[Value]extendsAnyRef" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Embedding</span><span class="tparams">[<span name="Value">Value</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Interpolator</dd></dl></div>
+    </li><li name="contextual.Interpolator.Hole" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="HoleextendsInterpolator.this.StaticPartwithProductwithSerializable"></a><a id="Hole:Hole"></a>
+      <span class="permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#HoleextendsInterpolator.this.StaticPartwithProductwithSerializable" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Hole</span><span class="result"> extends <span class="extype" name="contextual.Interpolator.StaticPart">StaticPart</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Interpolator</dd></dl></div>
+    </li><li name="contextual.Interpolator.Input" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="Input"></a><a id="Input:Input"></a>
+      <span class="permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#Input" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Input</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Interpolator</dd></dl></div>
+    </li><li name="contextual.Interpolator.Literal" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="LiteralextendsInterpolator.this.StaticPartwithInterpolator.this.RuntimePartwithProductwithSerializable"></a><a id="Literal:Literal"></a>
+      <span class="permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#LiteralextendsInterpolator.this.StaticPartwithInterpolator.this.RuntimePartwithProductwithSerializable" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Literal</span><span class="result"> extends <span class="extype" name="contextual.Interpolator.StaticPart">StaticPart</span> with <span class="extype" name="contextual.Interpolator.RuntimePart">RuntimePart</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Interpolator</dd></dl></div>
+    </li><li name="contextual.Interpolator.Part" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="PartextendsProductwithSerializable"></a><a id="Part:Part"></a>
+      <span class="permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#PartextendsProductwithSerializable" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Part</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Interpolator</dd></dl></div>
+    </li><li name="contextual.Interpolator.RuntimeInterpolation" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="RuntimeInterpolationextendsAnyRef"></a><a id="RuntimeInterpolation:RuntimeInterpolation"></a>
+      <span class="permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#RuntimeInterpolationextendsAnyRef" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">RuntimeInterpolation</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Interpolator</dd></dl></div>
+    </li><li name="contextual.Interpolator.RuntimePart" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="RuntimePartextendsInterpolator.this.PartwithProductwithSerializable"></a><a id="RuntimePart:RuntimePart"></a>
+      <span class="permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#RuntimePartextendsInterpolator.this.PartwithProductwithSerializable" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <span class="name">RuntimePart</span><span class="result"> extends <span class="extype" name="contextual.Interpolator.Part">Part</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Interpolator</dd></dl></div>
+    </li><li name="contextual.Interpolator.StaticInterpolation" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="StaticInterpolationextendsAnyRef"></a><a id="StaticInterpolation:StaticInterpolation"></a>
+      <span class="permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#StaticInterpolationextendsAnyRef" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <span class="name">StaticInterpolation</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Interpolator</dd></dl></div>
+    </li><li name="contextual.Interpolator.StaticPart" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="StaticPartextendsInterpolator.this.PartwithProductwithSerializable"></a><a id="StaticPart:StaticPart"></a>
+      <span class="permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#StaticPartextendsInterpolator.this.PartwithProductwithSerializable" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <span class="name">StaticPart</span><span class="result"> extends <span class="extype" name="contextual.Interpolator.Part">Part</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Interpolator</dd></dl></div>
+    </li><li name="contextual.Interpolator.Substitution" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="SubstitutionextendsInterpolator.this.RuntimePartwithProductwithSerializable"></a><a id="Substitution:Substitution"></a>
+      <span class="permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#SubstitutionextendsInterpolator.this.RuntimePartwithProductwithSerializable" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Substitution</span><span class="result"> extends <span class="extype" name="contextual.Interpolator.RuntimePart">RuntimePart</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Interpolator</dd></dl></div>
+    </li></ol>
+            </div>
 
         
 
@@ -231,7 +410,7 @@
                 <li name="scala.AnyRef#!=" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a><a id="!=(Any):Boolean"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html#!=(x$1:Any):Boolean" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#!=(x$1:Any):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -247,7 +426,7 @@
     </li><li name="scala.AnyRef###" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="##():Int"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html###():Int" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html###():Int" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -263,7 +442,7 @@
     </li><li name="scala.AnyRef#==" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a><a id="==(Any):Boolean"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html#==(x$1:Any):Boolean" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#==(x$1:Any):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -279,7 +458,7 @@
     </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html#asInstanceOf[T0]:T0" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#asInstanceOf[T0]:T0" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -295,7 +474,7 @@
     </li><li name="scala.AnyRef#clone" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a><a id="clone():AnyRef"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html#clone():Object" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#clone():Object" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -314,10 +493,42 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="kantan.xpath.literals.XPathLiteral#contextualize" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="contextualize(interpolation:kantan.xpath.literals.XPathLiteral.StaticInterpolation):Seq[kantan.xpath.literals.XPathLiteral.ContextType]"></a><a id="contextualize(StaticInterpolation):Seq[ContextType]"></a>
+      <span class="permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#contextualize(interpolation:kantan.xpath.literals.XPathLiteral.StaticInterpolation):Seq[kantan.xpath.literals.XPathLiteral.ContextType]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">contextualize</span><span class="params">(<span name="interpolation">interpolation: <a href="#StaticInterpolationextendsAnyRef" class="extmbr" name="kantan.xpath.literals.XPathLiteral.StaticInterpolation">StaticInterpolation</a></span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<a href="#ContextType&lt;:contextual.Context" class="extmbr" name="kantan.xpath.literals.XPathLiteral.ContextType">ContextType</a>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kantan.xpath.literals.XPathLiteral">XPathLiteral</a> → Interpolator</dd></dl></div>
+    </li><li name="contextual.Interpolator#embed" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="embed[Value]:Interpolator.this.Embedding[Value]"></a><a id="embed[Value]:Embedding[Value]"></a>
+      <span class="permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#embed[Value]:Interpolator.this.Embedding[Value]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">embed</span><span class="tparams">[<span name="Value">Value</span>]</span><span class="result">: <a href="#Embedding[Value]extendsAnyRef" class="extmbr" name="kantan.xpath.literals.XPathLiteral.Embedding">Embedding</a>[<span class="extype" name="contextual.Interpolator.embed.Value">Value</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Interpolator</dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html#eq(x$1:AnyRef):Boolean" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#eq(x$1:AnyRef):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -333,7 +544,7 @@
     </li><li name="scala.AnyRef#equals" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="equals(x$1:Any):Boolean"></a><a id="equals(Any):Boolean"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html#equals(x$1:Any):Boolean" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#equals(x$1:Any):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -346,10 +557,42 @@
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="kantan.xpath.literals.XPathLiteral#evaluate" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="evaluate(interpolation:kantan.xpath.literals.XPathLiteral.RuntimeInterpolation):kantan.xpath.XPathExpression"></a><a id="evaluate(RuntimeInterpolation):XPathExpression"></a>
+      <span class="permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#evaluate(interpolation:kantan.xpath.literals.XPathLiteral.RuntimeInterpolation):kantan.xpath.XPathExpression" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">evaluate</span><span class="params">(<span name="interpolation">interpolation: <a href="#RuntimeInterpolationextendsAnyRef" class="extmbr" name="kantan.xpath.literals.XPathLiteral.RuntimeInterpolation">RuntimeInterpolation</a></span>)</span><span class="result">: <a href="../index.html#XPathExpression=javax.xml.xpath.XPathExpression" class="extmbr" name="kantan.xpath.XPathExpression">XPathExpression</a></span>
+      </span>
+      
+      
+    </li><li name="contextual.Interpolator#evaluator" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="evaluator(contexts:Seq[Interpolator.this.ContextType],interpolation:Interpolator.this.StaticInterpolation):interpolation.macroContext.Tree"></a><a id="evaluator(Seq[ContextType],StaticInterpolation):scala.reflect.macros.whitebox.Context.Tree"></a>
+      <span class="permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#evaluator(contexts:Seq[Interpolator.this.ContextType],interpolation:Interpolator.this.StaticInterpolation):interpolation.macroContext.Tree" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">evaluator</span><span class="params">(<span name="contexts">contexts: <span class="extype" name="scala.Seq">Seq</span>[<a href="#ContextType&lt;:contextual.Context" class="extmbr" name="kantan.xpath.literals.XPathLiteral.ContextType">ContextType</a>]</span>, <span name="interpolation">interpolation: <a href="#StaticInterpolationextendsAnyRef" class="extmbr" name="kantan.xpath.literals.XPathLiteral.StaticInterpolation">StaticInterpolation</a></span>)</span><span class="result">: <span class="extype" name="scala.reflect.macros.Aliases.Tree">scala.reflect.macros.whitebox.Context.Tree</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Interpolator</dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html#finalize():Unit" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#finalize():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -371,7 +614,7 @@
     </li><li name="scala.AnyRef#getClass" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html#getClass():Class[_]" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#getClass():Class[_]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -387,7 +630,7 @@
     </li><li name="scala.AnyRef#hashCode" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html#hashCode():Int" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#hashCode():Int" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -403,7 +646,7 @@
     </li><li name="scala.Any#isInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html#isInstanceOf[T0]:Boolean" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#isInstanceOf[T0]:Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -419,7 +662,7 @@
     </li><li name="scala.AnyRef#ne" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a><a id="ne(AnyRef):Boolean"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html#ne(x$1:AnyRef):Boolean" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#ne(x$1:AnyRef):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -435,7 +678,7 @@
     </li><li name="scala.AnyRef#notify" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html#notify():Unit" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#notify():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -451,7 +694,7 @@
     </li><li name="scala.AnyRef#notifyAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notifyAll():Unit"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html#notifyAll():Unit" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#notifyAll():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -467,7 +710,7 @@
     </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -483,7 +726,7 @@
     </li><li name="scala.AnyRef#toString" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html#toString():String" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#toString():String" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -499,7 +742,7 @@
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html#wait():Unit" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#wait():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -521,7 +764,7 @@
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait(x$1:Long,x$2:Int):Unit"></a><a id="wait(Long,Int):Unit"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -543,7 +786,7 @@
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait(x$1:Long):Unit"></a><a id="wait(Long):Unit"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html#wait(x$1:Long):Unit" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#wait(x$1:Long):Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -562,22 +805,6 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="kantan.xpath.literals.LiteralMacros#xpImpl" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="xpImpl(c:kantan.xpath.macros.Context)(args:c.Expr[Any]*):c.Expr[kantan.xpath.XPathExpression]"></a><a id="xpImpl(Context)(scala.reflect.macros.blackbox.Context.Expr[Any]*):scala.reflect.macros.blackbox.Context.Expr[XPathExpression]"></a>
-      <span class="permalink">
-      <a href="../../../kantan/xpath/literals/LiteralMacros$.html#xpImpl(c:kantan.xpath.macros.Context)(args:c.Expr[Any]*):c.Expr[kantan.xpath.XPathExpression]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">xpImpl</span><span class="params">(<span name="c">c: <span class="extype" name="kantan.xpath.macros.Context">Context</span></span>)</span><span class="params">(<span name="args">args: <span class="extype" name="scala.reflect.macros.Aliases.Expr">scala.reflect.macros.blackbox.Context.Expr</span>[<span class="extype" name="scala.Any">Any</span>]*</span>)</span><span class="result">: <span class="extype" name="scala.reflect.macros.Aliases.Expr">scala.reflect.macros.blackbox.Context.Expr</span>[<a href="../index.html#XPathExpression=javax.xml.xpath.XPathExpression" class="extmbr" name="kantan.xpath.XPathExpression">XPathExpression</a>]</span>
-      </span>
-      
-      
     </li>
               </ol>
             </div>
@@ -588,7 +815,9 @@
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.AnyRef">
+        <div class="parent" name="contextual.Interpolator">
+              <h3>Inherited from <span class="extype" name="contextual.Interpolator">Interpolator</span></h3>
+            </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>

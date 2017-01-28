@@ -26,16 +26,16 @@ This lets you create new regular expression by prefixing string literals with [`
 
 ```scala
 scala> xp"//a[@href]"
-res0: kantan.xpath.XPathExpression = com.sun.org.apache.xpath.internal.jaxp.XPathExpressionImpl@65e6b55a
+res0: kantan.xpath.XPathExpression = com.sun.org.apache.xpath.internal.jaxp.XPathExpressionImpl@2e95c632
 ```
 
 And, as promised, this fails *at compile time* if the xpath expression is not valid:
 
 ```scala
 scala> xp"!@#"
-<console>:16: error: Illegal xpath expression: !@#
+<console>:16: error: javax.xml.transform.TransformerException: A location path was expected, but the following token was encountered:  !
        xp"!@#"
-       ^
+          ^
 ```
 
 ## Simple evaluation

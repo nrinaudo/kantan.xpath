@@ -26,21 +26,9 @@ lazy val root = Project(id = "kantan-xpath", base = file("."))
       |import kantan.xpath.joda.time._
     """.stripMargin
   )
-  .aggregate(core, nekohtml, docs, laws, tests, cats, scalaz, jodaTime)
+  .aggregate(core, nekohtml, docs, laws, cats, scalaz, jodaTime)
   .aggregate(ifJava8[ProjectReference](java8):_*)
   .dependsOn(core, nekohtml, jodaTime)
-
-lazy val tests = project
-  .enablePlugins(UnpublishedPlugin)
-  .enablePlugins(spray.boilerplate.BoilerplatePlugin)
-  .dependsOn(core, cats, laws, jodaTime, cats, scalaz, nekohtml)
-  .aggregate(ifJava8[ProjectReference](java8):_*)
-  .settings(libraryDependencies ++= Seq(
-    "com.nrinaudo"  %% "kantan.codecs-cats-laws"      % kantanCodecsVersion % "test",
-    "com.nrinaudo"  %% "kantan.codecs-joda-time-laws" % kantanCodecsVersion % "test",
-    "com.nrinaudo"  %% "kantan.codecs-scalaz-laws"    % kantanCodecsVersion % "test",
-    "org.scalatest" %% "scalatest"                    % scalatestVersion    % "test"
-  ))
 
 lazy val docs = project
   .settings(unidocProjectFilter in (ScalaUnidoc, unidoc) :=
@@ -63,8 +51,10 @@ lazy val core = project
   .enablePlugins(spray.boilerplate.BoilerplatePlugin)
   .settings(libraryDependencies ++= Seq(
     "com.propensive" %% "contextual"    % contextualVersion,
-    "com.nrinaudo"   %% "kantan.codecs" % kantanCodecsVersion
+    "com.nrinaudo"   %% "kantan.codecs" % kantanCodecsVersion,
+    "org.scalatest"  %% "scalatest"     % scalatestVersion    % "test"
   ))
+  .laws("laws")
 
 lazy val laws = project
   .settings(
@@ -86,8 +76,12 @@ lazy val jodaTime = Project(id = "joda-time", base = file("joda-time"))
     name       := "joda-time"
   )
   .enablePlugins(PublishedPlugin)
-  .dependsOn(core)
-  .settings(libraryDependencies += "com.nrinaudo" %% "kantan.codecs-joda-time" % kantanCodecsVersion)
+  .dependsOn(core, laws % "test")
+  .settings(libraryDependencies ++= Seq(
+    "com.nrinaudo"  %% "kantan.codecs-joda-time"      % kantanCodecsVersion,
+    "com.nrinaudo"  %% "kantan.codecs-joda-time-laws" % kantanCodecsVersion % "test",
+    "org.scalatest" %% "scalatest"                    % scalatestVersion    % "test"
+  ))
 
 
 
@@ -117,7 +111,10 @@ lazy val nekohtml = project
   )
   .enablePlugins(PublishedPlugin)
   .dependsOn(core)
-  .settings(libraryDependencies += "net.sourceforge.nekohtml" % "nekohtml"  % nekoHtmlVersion)
+  .settings(libraryDependencies ++= Seq(
+    "net.sourceforge.nekohtml" %  "nekohtml"  % nekoHtmlVersion,
+    "org.scalatest"            %% "scalatest" % scalatestVersion % "test"
+  ))
 
 
 
@@ -129,8 +126,12 @@ lazy val cats = project
     name       := "cats"
   )
   .enablePlugins(PublishedPlugin)
-  .dependsOn(core)
-  .settings(libraryDependencies += "com.nrinaudo" %% "kantan.codecs-cats" % kantanCodecsVersion)
+  .dependsOn(core, laws % "test")
+  .settings(libraryDependencies ++= Seq(
+    "com.nrinaudo"  %% "kantan.codecs-cats"      % kantanCodecsVersion,
+    "com.nrinaudo"  %% "kantan.codecs-cats-laws" % kantanCodecsVersion % "test",
+    "org.scalatest" %% "scalatest"               % scalatestVersion    % "test"
+  ))
 
 
 
@@ -142,5 +143,9 @@ lazy val scalaz = project
     name       := "scalaz"
   )
   .enablePlugins(PublishedPlugin)
-  .dependsOn(core)
-  .settings(libraryDependencies += "com.nrinaudo" %% "kantan.codecs-scalaz" % kantanCodecsVersion)
+  .dependsOn(core, laws % "test")
+  .settings(libraryDependencies ++= Seq(
+    "com.nrinaudo"  %% "kantan.codecs-scalaz"      % kantanCodecsVersion,
+    "com.nrinaudo"  %% "kantan.codecs-scalaz-laws" % kantanCodecsVersion % "test",
+    "org.scalatest" %% "scalatest"                 % scalatestVersion    % "test"
+  ))

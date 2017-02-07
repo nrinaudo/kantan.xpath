@@ -16,73 +16,43 @@
 
 package kantan.xpath
 
+import kantan.codecs._
+
 /** Describes an error that can occur while dealing with XPath. */
-sealed abstract class XPathError extends Exception with Product with Serializable
+sealed abstract class XPathError(msg: String) extends Error(msg)
 
 /** Describes a XPath expression compilation error. */
-sealed case class CompileError(message: String) extends XPathError {
-  override final val getMessage = message
-}
+sealed case class CompileError(message: String) extends XPathError(message)
 
-object CompileError {
-  def apply(msg: String, t: Throwable): CompileError = new CompileError(msg) {
-    override val getCause = t
-  }
-
-  def apply(t: Throwable): CompileError = CompileError(Option(t.getMessage).getOrElse("Compile error"), t)
-}
+object CompileError extends ErrorCompanion("an unspecified compilation error occurred")(s ⇒ new CompileError(s))
 
 /** Describes an error that occurred while parsing and / or decoding XML content. */
-sealed abstract class ReadError extends XPathError
+sealed abstract class ReadError(msg: String) extends XPathError(msg)
 
 /** Describes an error that occurred while decoding some XML content. */
-sealed abstract class DecodeError extends ReadError
+sealed abstract class DecodeError(msg: String) extends ReadError(msg)
 
 object DecodeError {
   /** Error that occurs when a single result was requested by an XPath expression, but no node was matched. */
-  case object NotFound extends DecodeError
+  case object NotFound extends DecodeError("no matched node")
 
   /** Error that occurs when a node was attempted to be decoded as a type its value is not compatible with. */
-  sealed case class TypeError(message: String) extends DecodeError {
-    override final val getMessage = message
-  }
+  sealed case class TypeError(message: String) extends DecodeError(message)
 
-  object TypeError {
-    def apply(msg: String, t: Throwable): TypeError = new TypeError(msg) {
-      override val getCause = t
-    }
-
-    def apply(t: Throwable): TypeError = TypeError(Option(t.getMessage).getOrElse("Type error"), t)
-  }
+  object TypeError extends ErrorCompanion("an unspecified type error occurred")(s ⇒ new TypeError(s))
 }
 
 /** Describes errors that occur while parsing XML content. */
-sealed abstract class ParseError extends ReadError
+sealed abstract class ParseError(msg: String) extends ReadError(msg)
 
 object ParseError {
   /** Error that occurs when an XML document is not valid. */
-  sealed case class SyntaxError(message: String) extends ParseError {
-    override final val getMessage = message
-  }
+  sealed case class SyntaxError(message: String) extends ParseError(message)
 
-  object SyntaxError {
-    def apply(msg: String, t: Throwable): SyntaxError = new SyntaxError(msg) {
-      override val getCause = t
-    }
-
-    def apply(t: Throwable): SyntaxError = SyntaxError(Option(t.getMessage).getOrElse("Syntax error"), t)
-  }
+  object SyntaxError extends ErrorCompanion("an unspecified syntax error occurred")(s ⇒ new SyntaxError(s))
 
   /** Error that occurs when something IO related went bad. */
-  sealed case class IOError(message: String) extends ParseError {
-    override val getMessage = message
-  }
+  sealed case class IOError(message: String) extends ParseError(message)
 
-  object IOError {
-    def apply(msg: String, t: Throwable): IOError = new IOError(msg) {
-      override val getCause = t
-    }
-
-    def apply(t: Throwable): IOError = IOError(Option(t.getMessage).getOrElse("IO error"), t)
-  }
+  object IOError extends ErrorCompanion("an unspecified IO error occurred")(s ⇒ new IOError(s))
 }

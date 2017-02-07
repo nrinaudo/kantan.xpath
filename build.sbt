@@ -5,7 +5,7 @@ import sbtunidoc.Plugin.UnidocKeys._
 // - Dependency versions -----------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------------------------
 val contextualVersion    = "1.0.0"
-val kantanCodecsVersion  = "0.1.11"
+val kantanCodecsVersion  = "0.1.12-SNAPSHOT"
 val nekoHtmlVersion      = "1.9.22"
 val scalatestVersion     = "3.0.1"
 

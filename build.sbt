@@ -1,14 +1,5 @@
 import sbtunidoc.Plugin.UnidocKeys._
 
-
-
-// - Dependency versions -----------------------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------------------------------------------
-val contextualVersion    = "1.0.0"
-val kantanCodecsVersion  = "0.1.12-SNAPSHOT"
-val nekoHtmlVersion      = "1.9.22"
-val scalatestVersion     = "3.0.1"
-
 kantanProject in ThisBuild := "xpath"
 
 
@@ -50,9 +41,9 @@ lazy val core = project
   .enablePlugins(PublishedPlugin)
   .enablePlugins(spray.boilerplate.BoilerplatePlugin)
   .settings(libraryDependencies ++= Seq(
-    "com.propensive" %% "contextual"    % contextualVersion,
-    "com.nrinaudo"   %% "kantan.codecs" % kantanCodecsVersion,
-    "org.scalatest"  %% "scalatest"     % scalatestVersion    % "test"
+    "com.propensive" %% "contextual"    % Versions.contextual,
+    "com.nrinaudo"   %% "kantan.codecs" % Versions.kantanCodecs,
+    "org.scalatest"  %% "scalatest"     % Versions.scalatest    % "test"
   ))
   .laws("laws")
 
@@ -64,7 +55,7 @@ lazy val laws = project
   .enablePlugins(PublishedPlugin)
   .enablePlugins(spray.boilerplate.BoilerplatePlugin)
   .dependsOn(core)
-  .settings(libraryDependencies += "com.nrinaudo" %% "kantan.codecs-laws" % kantanCodecsVersion)
+  .settings(libraryDependencies += "com.nrinaudo" %% "kantan.codecs-laws" % Versions.kantanCodecs)
 
 
 
@@ -78,9 +69,9 @@ lazy val jodaTime = Project(id = "joda-time", base = file("joda-time"))
   .enablePlugins(PublishedPlugin)
   .dependsOn(core, laws % "test")
   .settings(libraryDependencies ++= Seq(
-    "com.nrinaudo"  %% "kantan.codecs-joda-time"      % kantanCodecsVersion,
-    "com.nrinaudo"  %% "kantan.codecs-joda-time-laws" % kantanCodecsVersion % "test",
-    "org.scalatest" %% "scalatest"                    % scalatestVersion    % "test"
+    "com.nrinaudo"  %% "kantan.codecs-joda-time"      % Versions.kantanCodecs,
+    "com.nrinaudo"  %% "kantan.codecs-joda-time-laws" % Versions.kantanCodecs % "test",
+    "org.scalatest" %% "scalatest"                    % Versions.scalatest    % "test"
   ))
 
 
@@ -95,9 +86,9 @@ lazy val java8 = project
   .enablePlugins(PublishedPlugin)
   .dependsOn(core, laws % "test")
   .settings(libraryDependencies ++= Seq(
-    "com.nrinaudo"  %% "kantan.codecs-java8"      % kantanCodecsVersion,
-    "com.nrinaudo"  %% "kantan.codecs-java8-laws" % kantanCodecsVersion % "test",
-    "org.scalatest" %% "scalatest"                % scalatestVersion    % "test"
+    "com.nrinaudo"  %% "kantan.codecs-java8"      % Versions.kantanCodecs,
+    "com.nrinaudo"  %% "kantan.codecs-java8-laws" % Versions.kantanCodecs % "test",
+    "org.scalatest" %% "scalatest"                % Versions.scalatest    % "test"
   ))
 
 
@@ -112,8 +103,8 @@ lazy val nekohtml = project
   .enablePlugins(PublishedPlugin)
   .dependsOn(core)
   .settings(libraryDependencies ++= Seq(
-    "net.sourceforge.nekohtml" %  "nekohtml"  % nekoHtmlVersion,
-    "org.scalatest"            %% "scalatest" % scalatestVersion % "test"
+    "net.sourceforge.nekohtml" %  "nekohtml"  % Versions.nekoHtml,
+    "org.scalatest"            %% "scalatest" % Versions.scalatest % "test"
   ))
 
 
@@ -128,9 +119,9 @@ lazy val cats = project
   .enablePlugins(PublishedPlugin)
   .dependsOn(core, laws % "test")
   .settings(libraryDependencies ++= Seq(
-    "com.nrinaudo"  %% "kantan.codecs-cats"      % kantanCodecsVersion,
-    "com.nrinaudo"  %% "kantan.codecs-cats-laws" % kantanCodecsVersion % "test",
-    "org.scalatest" %% "scalatest"               % scalatestVersion    % "test"
+    "com.nrinaudo"  %% "kantan.codecs-cats"      % Versions.kantanCodecs,
+    "com.nrinaudo"  %% "kantan.codecs-cats-laws" % Versions.kantanCodecs % "test",
+    "org.scalatest" %% "scalatest"               % Versions.scalatest    % "test"
   ))
 
 
@@ -145,7 +136,7 @@ lazy val scalaz = project
   .enablePlugins(PublishedPlugin)
   .dependsOn(core, laws % "test")
   .settings(libraryDependencies ++= Seq(
-    "com.nrinaudo"  %% "kantan.codecs-scalaz"      % kantanCodecsVersion,
-    "com.nrinaudo"  %% "kantan.codecs-scalaz-laws" % kantanCodecsVersion % "test",
-    "org.scalatest" %% "scalatest"                 % scalatestVersion    % "test"
+    "com.nrinaudo"  %% "kantan.codecs-scalaz"      % Versions.kantanCodecs,
+    "com.nrinaudo"  %% "kantan.codecs-scalaz-laws" % Versions.kantanCodecs % "test",
+    "org.scalatest" %% "scalatest"                 % Versions.scalatest    % "test"
   ))

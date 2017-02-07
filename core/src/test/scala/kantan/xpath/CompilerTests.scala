@@ -16,9 +16,6 @@
 
 package kantan.xpath
 
-import _root_.cats.Traverse.ops._
-import _root_.cats.instances.list._
-import cats._
 import kantan.codecs.laws.CodecValue
 import kantan.xpath.implicits._
 import kantan.xpath.laws.discipline.arbitrary._
@@ -56,7 +53,8 @@ class CompilerTests extends FunSuite with GeneratorDrivenPropertyChecks {
   test("'all' expressions should fail on lists containing at least one illegal value and succeed on others") {
     forAll { values: List[Value[Int]] ⇒
       assert(encodeAll(values).evalXPath[List[Int]](xp"//element") ==
-             values.map(v ⇒ NodeDecoder[Int].decode(Option(v.encoded))).sequenceU)
+             DecodeResult.sequence(values.map(v ⇒ NodeDecoder[Int].decode(Option(v.encoded)))))
+             //values.map(v ⇒ NodeDecoder[Int].decode(Option(v.encoded))).sequenceU)
     }
   }
 }

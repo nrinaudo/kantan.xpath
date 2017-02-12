@@ -21,7 +21,7 @@ lazy val root = Project(id = "kantan-xpath", base = file("."))
 
 lazy val docs = project
   .settings(unidocProjectFilter in (ScalaUnidoc, unidoc) :=
-    inAnyProject -- inProjectsIf(java8Supported)(java8)
+    inAnyProject -- inProjectsIf(!java8Supported)(java8)
   )
   .enablePlugins(DocumentationPlugin)
   .dependsOn(core, nekohtml, cats, scalaz, jodaTime)

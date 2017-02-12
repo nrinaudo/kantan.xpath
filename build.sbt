@@ -18,16 +18,16 @@ lazy val root = Project(id = "kantan-xpath", base = file("."))
     """.stripMargin
   )
   .aggregate(core, nekohtml, docs, laws, cats, scalaz, jodaTime)
-  .aggregate(ifJava8[ProjectReference](java8):_*)
+  .aggregateIf(java8Supported)(java8)
   .dependsOn(core, nekohtml, jodaTime)
 
 lazy val docs = project
   .settings(unidocProjectFilter in (ScalaUnidoc, unidoc) :=
-    inAnyProject -- inProjects(ifNotJava8[ProjectReference](java8):_*)
+    inAnyProject -- inProjectsIf(java8Supported)(java8)
   )
   .enablePlugins(DocumentationPlugin)
   .dependsOn(core, nekohtml, cats, scalaz, jodaTime)
-  .dependsOn(ifJava8[ClasspathDep[ProjectReference]](java8):_*)
+  .dependsOnIf(java8Supported)(java8)
 
 
 

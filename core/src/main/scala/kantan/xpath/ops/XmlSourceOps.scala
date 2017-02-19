@@ -26,27 +26,24 @@ import kantan.xpath._
   * f.evalXPath[List[java.net.URI]]("//a/@href")
   * }}}
   */
-final class XmlSourceOps[A](val a: A) extends AnyVal {
+final class XmlSourceOps[A: XmlSource](val a: A) {
   /** Shorthand for [[XmlSource.asNode]]. */
-  def asNode(implicit source: XmlSource[A]): ParseResult[Node] = source.asNode(a)
+  def asNode: ParseResult[Node] = XmlSource[A].asNode(a)
 
   /** Shorthand for [[XmlSource.asUnsafeNode]]. */
-  def asUnsafeNode(implicit source: XmlSource[A]): Node = source.asUnsafeNode(a)
+  def asUnsafeNode: Node = XmlSource[A].asUnsafeNode(a)
 
-  def unsafeEvalXPath[B: Compiler](expr: XPathExpression)(implicit source: XmlSource[A]): B = source.unsafeEval(a, expr)
+  def unsafeEvalXPath[B: Compiler](expr: XPathExpression): B = XmlSource[A].unsafeEval(a, expr)
 
-  def evalXPath[B: Compiler](expr: XPathExpression)(implicit source: XmlSource[A]): XPathResult[B] =
-    source.eval(a, expr)
+  def evalXPath[B: Compiler](expr: XPathExpression): XPathResult[B] = XmlSource[A].eval(a, expr)
 
-  def unsafeEvalXPath[B](expr: Query[DecodeResult[B]])(implicit source: XmlSource[A]): B =
-    source.unsafeEval(a, expr)
+  def unsafeEvalXPath[B](expr: Query[DecodeResult[B]]): B = XmlSource[A].unsafeEval(a, expr)
 
-  def evalXPath[B](expr: Query[DecodeResult[B]])(implicit source: XmlSource[A]): ReadResult[B] =
-    source.eval(a, expr)
+  def evalXPath[B](expr: Query[DecodeResult[B]]): ReadResult[B] = XmlSource[A].eval(a, expr)
 }
 
 trait ToXmlSourceOps {
-  implicit def toXmlSourceOps[A](a: A): XmlSourceOps[A] = new XmlSourceOps(a)
+  implicit def toXmlSourceOps[A: XmlSource](a: A): XmlSourceOps[A] = new XmlSourceOps(a)
 }
 
 object xmlSource extends ToXmlSourceOps

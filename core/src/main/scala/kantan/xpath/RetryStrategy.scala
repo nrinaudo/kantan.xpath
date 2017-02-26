@@ -26,7 +26,7 @@ package kantan.xpath
   *               In order to double waiting times between each attempt, for example, one would pass
   *               `i ⇒ 2 ^ i`.
   */
-case class RetryStrategy(max: Int, delay: Long, factor: Int ⇒ Int) {
+final case class RetryStrategy(max: Int, delay: Long, factor: Int ⇒ Int) {
   def delayFor(count: Int): Long = factor(count) * delay
 }
 

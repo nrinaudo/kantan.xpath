@@ -36,9 +36,13 @@ object NodeDecoder extends GeneratedDecoders with DecoderCompanion[Option[Node],
 trait NodeDecoderInstances {
   /** Decodes nodes as nodes. */
     implicit val node: NodeDecoder[Node] = NodeDecoder.fromFound(n ⇒ DecodeResult.success(n))
+
     /** Decodes nodes as elements. */
+    @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
     implicit val element: NodeDecoder[Element] = NodeDecoder.fromFound(n ⇒ DecodeResult(n.asInstanceOf[Element]))
+
     /** Decodes nodes as attributes. */
+    @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
     implicit val attr: NodeDecoder[Attr] = NodeDecoder.fromFound(n ⇒ DecodeResult(n.asInstanceOf[Attr]))
 
   /** Turns any of the string decodes provided by kantan.codecs into node decoders. */

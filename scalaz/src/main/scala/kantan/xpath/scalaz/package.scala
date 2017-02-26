@@ -32,7 +32,7 @@ package object scalaz extends ScalazInstances {
   // - Misc. instances -------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
   /** `Contravariant` instance for `XmlSource`. */
-  implicit val xmlSource = new Contravariant[XmlSource] {
+  implicit val xmlSource: Contravariant[XmlSource] = new Contravariant[XmlSource] {
     override def contramap[A, B](fa: XmlSource[A])(f: B ⇒ A) = fa.contramap(f)
   }
 }

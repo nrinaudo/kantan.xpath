@@ -31,7 +31,7 @@ one XPath expression per field to extract:
 import kantan.xpath._
 import kantan.xpath.implicits._
 
-implicit val elementDecoder = NodeDecoder.tuple[Int, Boolean](xp"./@id", xp"./@enabled")
+implicit val elementDecoder: NodeDecoder[(Int, Boolean)] = NodeDecoder.tuple[Int, Boolean](xp"./@id", xp"./@enabled")
 ```
 
 Now that we have told kantan.xpath how to decode an XML node to an instance of `(Int, Boolean)`, we can simply call

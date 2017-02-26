@@ -30,6 +30,7 @@ And this will bring [`NodeDecoder`] instances in scope for the following types:
 These will use the default Java 8 formats. For example:
 
 ```tut:silent
+import kantan.xpath._
 import kantan.xpath.implicits._
 import java.time._
 
@@ -49,7 +50,7 @@ import java.time.format.DateTimeFormatter
 
 val input = "<root><date value='12-10-1978'/><date value='09-01-2015'/></root>"
 
-implicit val decoder = localDateDecoder(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+implicit val decoder: NodeDecoder[LocalDate] = localDateDecoder(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
 ```
 
 And we can now simply write:

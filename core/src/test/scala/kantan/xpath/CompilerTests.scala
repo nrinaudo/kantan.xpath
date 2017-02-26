@@ -28,6 +28,7 @@ import org.scalatest.prop.GeneratorDrivenPropertyChecks
 class CompilerTests extends FunSuite with GeneratorDrivenPropertyChecks {
   type Value[A] = CodecValue[Node, A, codecs.type]
 
+  @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
   def encodeAll[A](bs: List[Value[A]]): Element = {
     val n = bs.foldLeft("<root></root>".asNode.get.asInstanceOf[Document]) { (doc, b) ⇒
       val an = b.encoded.cloneNode(true)

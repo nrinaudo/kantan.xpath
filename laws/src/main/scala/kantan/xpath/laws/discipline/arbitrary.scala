@@ -58,14 +58,15 @@ trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstance
   // - Arbitrary results -----------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
   implicit def arbDecodeResult[A: Arbitrary]: Arbitrary[DecodeResult[A]] =
-    Arbitrary(oneOf(arb[Failure[DecodeError]], arb[Success[A]]))
+    Arbitrary(oneOf(arb[Failure[DecodeError]]: Gen[DecodeResult[A]], arb[Success[A]]: Gen[DecodeResult[A]]))
   implicit def arbReadResult[A: Arbitrary]: Arbitrary[ReadResult[A]] =
-    Arbitrary(oneOf(arb[Failure[ReadError]], arb[Success[A]]))
+    Arbitrary(oneOf(arb[Failure[ReadError]]: Gen[ReadResult[A]], arb[Success[A]]: Gen[ReadResult[A]]))
 
 
 
   // - Arbitrary values ------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
+  @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
   private def asCDataNode(value: String): Node = {
     val n = s"<element></element>".asUnsafeNode.getFirstChild.asInstanceOf[Element]
     n.setTextContent(value)

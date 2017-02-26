@@ -23,9 +23,8 @@ import java.net.{URL, URLConnection}
   * The main purpose here is to allow application developers to set their own HTTP headers: when scrapping websites,
   * it's typically necessary to change the default user agent to something a bit more browser-like.
   */
-case class RemoteXmlSource[A](toURL: A ⇒ ParseResult[URL], retry: RetryStrategy = RetryStrategy.None,
-                              headers: Map[String, String] = Map.empty)
-(implicit parser: XmlParser) extends XmlSource[A] {
+final case class RemoteXmlSource[A](toURL: A ⇒ ParseResult[URL], retry: RetryStrategy, headers: Map[String, String])
+                             (implicit parser: XmlParser) extends XmlSource[A] {
   private def open(url: URL): URLConnection = {
     val con = url.openConnection()
     headers.foreach { case (n, v) ⇒ con.setRequestProperty(n, v) }

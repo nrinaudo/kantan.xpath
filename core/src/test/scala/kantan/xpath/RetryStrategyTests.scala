@@ -21,8 +21,8 @@ import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 
 class RetryStrategyTests extends FunSuite with GeneratorDrivenPropertyChecks {
-  implicit val arbInt = Arbitrary(Gen.choose(0, 100))
-  implicit val arbLong = Arbitrary(Gen.choose(0L, 24 * 60 * 60 * 1000L))
+  implicit val arbInt: Arbitrary[Int] = Arbitrary(Gen.choose(0, 100))
+  implicit val arbLong: Arbitrary[Long] = Arbitrary(Gen.choose(0L, 24 * 60 * 60 * 1000L))
 
   test("RetryStrategy.NoDelay should always have a delay of 0") {
     forAll { max: Int ⇒

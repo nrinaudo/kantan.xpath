@@ -1,16 +1,33 @@
+/*
+ * Copyright 2017 Nicolas Rinaudo
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package kantan.xpath
 
-import kantan.xpath.laws.discipline.NodeDecoderTests
+import kantan.xpath.laws.discipline._
 import kantan.xpath.laws.discipline.arbitrary._
 import kantan.xpath.implicits._
+import org.scalacheck.Arbitrary
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline
 
 class TupleTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
   [#// This is necessary for scala 2.10
-  implicit val legalFloat1 = arbLegalTuple1[[#Float#]]
-  implicit val illegalFloat1 = arbIllegalTuple1[[#Float#]]
+  implicit val legalFloat1: Arbitrary[LegalNode[Tuple1[[#Float#]]]] = arbLegalTuple1[[#Float#]]
+  implicit val illegalFloat1: Arbitrary[IllegalNode[Tuple1[[#Float#]]]] = arbIllegalTuple1[[#Float#]]
   implicit val floatDecoder1: NodeDecoder[Tuple1[[#Float#]]] = NodeDecoder.tuple[[#Float#]]([#xp"@field1"#])
   checkAll("NodeDecoder[Tuple1[[#Float#]]]", NodeDecoderTests[Tuple1[[#Float#]]].decoder[Int, Int])#
 

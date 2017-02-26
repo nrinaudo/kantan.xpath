@@ -45,7 +45,7 @@ import kantan.xpath.implicits._
 import kantan.xpath.NodeDecoder
 import java.util.{Locale, Date}
 
-implicit val decoder = NodeDecoder.dateDecoder(new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH))
+implicit val decoder: NodeDecoder[Date] = NodeDecoder.dateDecoder(new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH))
 ```
 
 And we're now capable of decoding XML content as dates:

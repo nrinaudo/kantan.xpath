@@ -49,7 +49,7 @@ of your code. For example:
 
 ```scala
 scala> rawData.evalXPath[java.net.URL](xp"//element/@id")
-res2: kantan.xpath.XPathResult[java.net.URL] = Failure(kantan.xpath.DecodeError$TypeError$$anon$1: Not a valid URL: '1')
+res2: kantan.xpath.XPathResult[java.net.URL] = Failure(TypeError: '1' is not a valid URL)
 ```
 
 In some cases, however, we don't really care for runtime safety and are fine with our program crashing at the first

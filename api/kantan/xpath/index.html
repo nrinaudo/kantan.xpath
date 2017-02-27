@@ -750,13 +750,13 @@
       </a>
     </span>
       <span class="modifier_kind">
-        <span class="modifier"></span>
+        <span class="modifier">final </span>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
         <a title="XmlSource implementation anything that can be turned into a java.io.URL." href="RemoteXmlSource.html">
               <span class="name">RemoteXmlSource</span>
-            </a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="toURL">toURL: (<span class="extype" name="kantan.xpath.RemoteXmlSource.A">A</span>) ⇒ <a href="package$$ParseResult.html" class="extype" name="kantan.xpath.ParseResult">ParseResult</a>[<span class="extype" name="java.net.URL">URL</span>]</span>, <span name="retry">retry: <a href="RetryStrategy.html" class="extype" name="kantan.xpath.RetryStrategy">RetryStrategy</a> = <span class="symbol"><span class="name"><a href="RetryStrategy$.html">RetryStrategy.None</a></span></span></span>, <span name="headers">headers: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">Map.empty</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="parser">parser: <a href="XmlParser.html" class="extype" name="kantan.xpath.XmlParser">XmlParser</a></span>)</span><span class="result"> extends <a href="XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a>[<span class="extype" name="kantan.xpath.RemoteXmlSource.A">A</span>] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+            </a><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="toURL">toURL: (<span class="extype" name="kantan.xpath.RemoteXmlSource.A">A</span>) ⇒ <a href="package$$ParseResult.html" class="extype" name="kantan.xpath.ParseResult">ParseResult</a>[<span class="extype" name="java.net.URL">URL</span>]</span>, <span name="retry">retry: <a href="RetryStrategy.html" class="extype" name="kantan.xpath.RetryStrategy">RetryStrategy</a></span>, <span name="headers">headers: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="parser">parser: <a href="XmlParser.html" class="extype" name="kantan.xpath.XmlParser">XmlParser</a></span>)</span><span class="result"> extends <a href="XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a>[<span class="extype" name="kantan.xpath.RemoteXmlSource.A">A</span>] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       
       <p class="shortcomment cmt"><a href="XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a> implementation anything that can be turned into a <code>java.io.URL</code>.</p><div class="fullcomment"><div class="comment cmt"><p><a href="XmlSource.html" class="extype" name="kantan.xpath.XmlSource">XmlSource</a> implementation anything that can be turned into a <code>java.io.URL</code>.</p><p>The main purpose here is to allow application developers to set their own HTTP headers: when scrapping websites,
@@ -770,7 +770,7 @@ it's typically necessary to change the default user agent to something a bit mor
       </a>
     </span>
       <span class="modifier_kind">
-        <span class="modifier"></span>
+        <span class="modifier">final </span>
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
@@ -821,9 +821,9 @@ most circumstances. Still, if some non-standard options are required, one can al
 instance.
 </p></div></div>
     </li><li name="kantan.xpath.XPathError" visbl="pub" class="indented0 " data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="XPathErrorextendsExceptionwithProductwithSerializable"></a><a id="XPathError:XPathError"></a>
+      <a id="XPathErrorextendsError"></a><a id="XPathError:XPathError"></a>
       <span class="permalink">
-      <a href="../../kantan/xpath/index.html#XPathErrorextendsExceptionwithProductwithSerializable" title="Permalink">
+      <a href="../../kantan/xpath/index.html#XPathErrorextendsError" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -834,7 +834,7 @@ instance.
       <span class="symbol">
         <a title="Describes an error that can occur while dealing with XPath." href="XPathError.html">
               <span class="name">XPathError</span>
-            </a><span class="result"> extends <span class="extype" name="scala.Exception">Exception</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+            </a><span class="result"> extends <span class="extype" name="kantan.codecs.Error">Error</span></span>
       </span>
       
       <p class="shortcomment cmt">Describes an error that can occur while dealing with XPath.</p>
@@ -970,7 +970,7 @@ importing <code>kantan.xpath.ops._</code>.</p><p>See the <a href="XmlSource$.htm
       <span class="symbol">
         <a title="" href="CompileError$.html">
               <span class="name">CompileError</span>
-            </a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+            </a><span class="result"> extends <span class="extype" name="kantan.codecs.ErrorCompanion">ErrorCompanion</span>[<a href="CompileError.html" class="extype" name="kantan.xpath.CompileError">CompileError</a>] with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       
       

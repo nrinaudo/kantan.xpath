@@ -29,7 +29,7 @@ res0: String =
 We'll be trying to turn each `element` node into values of the following type:
 
 ```scala
-case class El(id: Int, enabled: Boolean)
+final case class El(id: Int, enabled: Boolean)
 ```
 
 In the same way that we had to declare a [`NodeCoder[(Int, Boolean)]`][`NodeDecoder`] to decode tuples, we'll need a
@@ -41,7 +41,7 @@ import kantan.xpath._
 import kantan.xpath.implicits._
 
 // There is no need to specify type parameters here, the Scala compiler works them out from El.apply.
-implicit val elDecoder = NodeDecoder.decoder(xp"./@id", xp"./@enabled")(El.apply)
+implicit val elDecoder: NodeDecoder[El] = NodeDecoder.decoder(xp"./@id", xp"./@enabled")(El.apply)
 ```
 
 Now that we have told kantan.xpath how to decode an XML node to an instance of `El`, we can simply call

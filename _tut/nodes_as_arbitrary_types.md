@@ -44,7 +44,7 @@ instance creation function to provide as a parameter and will need to write it o
 import kantan.xpath._
 import kantan.xpath.implicits._
 
-implicit val elDecoder = NodeDecoder.decoder(xp"./@id", xp"./@enabled") { (id: Int, enabled: Boolean) ⇒
+implicit val elDecoder: NodeDecoder[El] = NodeDecoder.decoder(xp"./@id", xp"./@enabled") { (id: Int, enabled: Boolean) ⇒
   new El(id, enabled)
 }
 ```

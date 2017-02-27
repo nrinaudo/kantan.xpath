@@ -162,7 +162,7 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">SyntaxError</span><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">SyntaxError</span><span class="result"> extends <span class="extype" name="kantan.codecs.ErrorCompanion">ErrorCompanion</span>[<a href="ParseError$$SyntaxError.html" class="extype" name="kantan.xpath.ParseError.SyntaxError">SyntaxError</a>] with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
 
@@ -171,7 +171,7 @@
           <span class="toggle">
             Linear Supertypes
           </span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="kantan.codecs.ErrorCompanion">ErrorCompanion</span>[<a href="ParseError$$SyntaxError.html" class="extype" name="kantan.xpath.ParseError.SyntaxError">SyntaxError</a>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -197,7 +197,7 @@
                   <span class="filtertype">Inherited<br />
                   </span>
                   <ol id="linearization">
-                    <li class="in" name="kantan.xpath.ParseError.SyntaxError"><span>SyntaxError</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                    <li class="in" name="kantan.xpath.ParseError.SyntaxError"><span>SyntaxError</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="kantan.codecs.ErrorCompanion"><span>ErrorCompanion</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                   </ol>
                 </div><div class="ancestors">
               <span class="filtertype"></span>
@@ -272,10 +272,10 @@
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="kantan.xpath.ParseError.SyntaxError#apply" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="apply(t:Throwable):kantan.xpath.ParseError.SyntaxError"></a><a id="apply(Throwable):SyntaxError"></a>
+    </li><li name="kantan.codecs.ErrorCompanion#apply" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(cause:Throwable):T"></a><a id="apply(Throwable):SyntaxError"></a>
       <span class="permalink">
-      <a href="../../kantan/xpath/ParseError$$SyntaxError$.html#apply(t:Throwable):kantan.xpath.ParseError.SyntaxError" title="Permalink">
+      <a href="../../kantan/xpath/ParseError$$SyntaxError$.html#apply(cause:Throwable):T" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -284,14 +284,14 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="t">t: <span class="extype" name="scala.Throwable">Throwable</span></span>)</span><span class="result">: <a href="ParseError$$SyntaxError.html" class="extype" name="kantan.xpath.ParseError.SyntaxError">SyntaxError</a></span>
+        <span class="name">apply</span><span class="params">(<span name="cause">cause: <span class="extype" name="scala.Throwable">Throwable</span></span>)</span><span class="result">: <a href="ParseError$$SyntaxError.html" class="extype" name="kantan.xpath.ParseError.SyntaxError">SyntaxError</a></span>
       </span>
       
-      
-    </li><li name="kantan.xpath.ParseError.SyntaxError#apply" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="apply(msg:String,t:Throwable):kantan.xpath.ParseError.SyntaxError"></a><a id="apply(String,Throwable):SyntaxError"></a>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ErrorCompanion</dd></dl></div>
+    </li><li name="kantan.codecs.ErrorCompanion#apply" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply(msg:String,cause:Throwable):T"></a><a id="apply(String,Throwable):SyntaxError"></a>
       <span class="permalink">
-      <a href="../../kantan/xpath/ParseError$$SyntaxError$.html#apply(msg:String,t:Throwable):kantan.xpath.ParseError.SyntaxError" title="Permalink">
+      <a href="../../kantan/xpath/ParseError$$SyntaxError$.html#apply(msg:String,cause:Throwable):T" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -300,10 +300,10 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="msg">msg: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="t">t: <span class="extype" name="scala.Throwable">Throwable</span></span>)</span><span class="result">: <a href="ParseError$$SyntaxError.html" class="extype" name="kantan.xpath.ParseError.SyntaxError">SyntaxError</a></span>
+        <span class="name">apply</span><span class="params">(<span name="msg">msg: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="cause">cause: <span class="extype" name="scala.Throwable">Throwable</span></span>)</span><span class="result">: <a href="ParseError$$SyntaxError.html" class="extype" name="kantan.xpath.ParseError.SyntaxError">SyntaxError</a></span>
       </span>
       
-      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ErrorCompanion</dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <span class="permalink">
@@ -604,6 +604,8 @@
               <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
             </div><div class="parent" name="java.io.Serializable">
               <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="kantan.codecs.ErrorCompanion">
+              <h3>Inherited from <span class="extype" name="kantan.codecs.ErrorCompanion">ErrorCompanion</span>[<a href="ParseError$$SyntaxError.html" class="extype" name="kantan.xpath.ParseError.SyntaxError">SyntaxError</a>]</h3>
             </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">

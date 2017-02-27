@@ -11,7 +11,7 @@ support for it through a dedicated module.
 The `joda-time` module can be used by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-joda-time" % "0.1.8"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-joda-time" % "0.1.9"
 ```
 
 You then need to import the corresponding package:
@@ -30,6 +30,7 @@ kantan.xpath has default, ISO 8601 compliant [`NodeDecoder`] instances for the f
 Let's imagine for example that we want to extract dates from the following string:
 
 ```scala
+import kantan.xpath._
 import kantan.xpath.implicits._
 
 val input = "<root><date value='1978-10-12'/><date value='2015-01-09'/></root>"
@@ -46,11 +47,12 @@ It is, of course, possible to declare your own [`NodeDecoder`]. This is, for exa
 [`NodeDecoder[LocalDate]`][`NodeDecoder`]:
 
 ```scala
+import org.joda.time.LocalDate
 import org.joda.time.format._
 
 val input = "<root><date value='12-10-1978'/><date value='09-01-2015'/></root>"
 
-implicit val decoder = localDateDecoder(DateTimeFormat.forPattern("dd-MM-yyyy"))
+implicit val decoder: NodeDecoder[LocalDate] = localDateDecoder(DateTimeFormat.forPattern("dd-MM-yyyy"))
 ```
 
 And we're done, as far as decoding is concerned. We only need to get an XPath expression together and evaluate it:

@@ -50,7 +50,7 @@ trait NodeDecoderInstances {
     NodeDecoder.fromFound { n ⇒
       val text = n.getTextContent
       if(text == null) DecodeResult.typeError(new NullPointerException("null text content"))
-      else             StringDecoder[A].mapError(t ⇒ TypeError(t.getMessage, t.getCause)).decode(text)
+      else             StringDecoder[A].leftMap(t ⇒ TypeError(t.getMessage, t.getCause)).decode(text)
     }
 
   implicit def optionNodeDecoder[A: NodeDecoder]: NodeDecoder[Option[A]] =

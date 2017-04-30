@@ -16,6 +16,7 @@
 
 package kantan.xpath
 
+import kantan.codecs.laws.discipline.SerializableTests
 import kantan.xpath.laws.discipline.arbitrary._
 import kantan.xpath.laws.discipline.NodeDecoderTests
 import org.scalatest.FunSuite
@@ -24,4 +25,5 @@ import org.typelevel.discipline.scalatest.Discipline
 
 class OptionDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
   checkAll("NodeDecoder[Option[Int]]", NodeDecoderTests[Option[Int]].decoder[Int, Int])
+  checkAll("NodeDecoder[Option[Int]]", SerializableTests[NodeDecoder[Option[Int]]].serializable)
 }

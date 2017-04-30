@@ -17,6 +17,7 @@
 package kantan.xpath
 
 import java.net.URL
+import kantan.codecs.laws.discipline.SerializableTests
 import kantan.xpath.laws.discipline.NodeDecoderTests
 import kantan.xpath.laws.discipline.arbitrary._
 import org.scalatest.FunSuite
@@ -25,4 +26,5 @@ import org.typelevel.discipline.scalatest.Discipline
 
 class URLDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
   checkAll("NodeDecoder[URL]", NodeDecoderTests[URL].decoder[Int, Int])
+  checkAll("NodeDecoder[URL]", SerializableTests[NodeDecoder[URL]].serializable)
 }

@@ -25,7 +25,7 @@ import scala.collection.mutable
   * There's very little reason to interact with this class directly, it's only meant to act as a bridge between
   * [[XPathCompiler]] and [[Query]].
   */
-trait Compiler[A] {
+trait Compiler[A] extends Serializable {
   /** Turns the specified XPath expression into a valid [[Query]]. */
   def compile(expr: XPathExpression): Query[DecodeResult[A]]
 }

@@ -16,6 +16,7 @@
 
 package kantan.xpath
 
+import javax.xml.namespace.QName
 import javax.xml.xpath.XPathFactory
 import kantan.codecs.Result
 
@@ -24,8 +25,12 @@ import kantan.codecs.Result
   * There's always a [[XPathCompiler$.builtIn default instance]] in scope, which should be perfectly suitable for
   * most circumstances. Still, if some non-standard options are required, one can always declare a local implicit
   * instance.
+  *
+  * Be careful, however: the default compiler performs some tricks to make sure its results are serializable. If you're
+  * planning on using frameworks that require serialization, such as Apache Spark, think twice about using a non-default
+  * compiler.
   */
-trait XPathCompiler {
+trait XPathCompiler extends Serializable {
   def compile(str: String): CompileResult[XPathExpression]
 }
 
@@ -36,8 +41,18 @@ object XPathCompiler {
   }
 
   /** Default compiler, always in scope. */
-  implicit val builtIn: XPathCompiler = {
-    val xpath = XPathFactory.newInstance().newXPath()
-    XPathCompiler(str ⇒ Result.nonFatal(xpath.compile(str)).leftMap(CompileError.apply))
+  @SuppressWarnings(Array("org.wartremover.warts.Serializable"))
+  implicit val builtIn: XPathCompiler = XPathCompiler { str ⇒
+    Result.nonFatal(XPathFactory.newInstance().newXPath().compile(str))
+      .leftMap(CompileError.apply)
+      .map { _ ⇒ new XPathExpression with Serializable {
+        private val expression: String = str
+        @transient private lazy val compiled = XPathFactory.newInstance().newXPath().compile(expression)
+
+        override def evaluate(item: scala.Any, returnType: QName) = compiled.evaluate(item, returnType)
+        override def evaluate(item: scala.Any) = compiled.evaluate(item)
+        override def evaluate(source: InputSource, returnType: QName) = compiled.evaluate(source, returnType)
+        override def evaluate(source: InputSource) = compiled.evaluate(source)
+      }}
   }
 }

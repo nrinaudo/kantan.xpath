@@ -16,6 +16,7 @@
 
 package kantan.xpath
 
+import kantan.codecs.laws.discipline.SerializableTests
 import kantan.xpath.laws.discipline._
 import kantan.xpath.laws.discipline.arbitrary._
 import kantan.xpath.implicits._
@@ -29,7 +30,8 @@ class TupleTests extends FunSuite with GeneratorDrivenPropertyChecks with Discip
   implicit val legalFloat1: Arbitrary[LegalNode[Tuple1[[#Float#]]]] = arbLegalTuple1[[#Float#]]
   implicit val illegalFloat1: Arbitrary[IllegalNode[Tuple1[[#Float#]]]] = arbIllegalTuple1[[#Float#]]
   implicit val floatDecoder1: NodeDecoder[Tuple1[[#Float#]]] = NodeDecoder.tuple[[#Float#]]([#xp"@field1"#])
-  checkAll("NodeDecoder[Tuple1[[#Float#]]]", NodeDecoderTests[Tuple1[[#Float#]]].decoder[Int, Int])#
+  checkAll("NodeDecoder[Tuple1[[#Float#]]]", NodeDecoderTests[Tuple1[[#Float#]]].decoder[Int, Int])
+  checkAll("NodeDecoder[Tuple1[[#Float#]]]", SerializableTests[NodeDecoder[Tuple1[[#Float#]]]].serializable)#
 
   ]
 }

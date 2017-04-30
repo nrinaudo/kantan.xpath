@@ -18,6 +18,7 @@ package kantan.xpath
 
 import java.text.SimpleDateFormat
 import java.util.{Date, Locale}
+import kantan.codecs.laws.discipline.SerializableTests
 import kantan.codecs.strings.StringCodec
 import kantan.xpath.laws.discipline.NodeDecoderTests
 import kantan.xpath.laws.discipline.arbitrary._
@@ -30,4 +31,5 @@ class DateDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with 
     StringCodec.dateCodec(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH))
 
   checkAll("NodeDecoder[Date]", NodeDecoderTests[Date].decoder[Int, Int])
+  checkAll("NodeDecoder[Date]", SerializableTests[NodeDecoder[Date]].serializable)
 }

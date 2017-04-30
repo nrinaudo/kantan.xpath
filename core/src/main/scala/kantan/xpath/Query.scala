@@ -20,7 +20,7 @@ package kantan.xpath
   *
   * Instance creation is achieved through the [[Query$ companion object]].
   */
-trait Query[A]  { self ⇒
+trait Query[A] extends Serializable { self ⇒
   def eval(n: Node): A
 
   def map[B](f: A ⇒ B): Query[B] = Query(n ⇒ f(self.eval(n)))

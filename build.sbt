@@ -21,7 +21,7 @@ lazy val root = Project(id = "kantan-xpath", base = file("."))
 
 lazy val docs = project
   .settings(unidocProjectFilter in (ScalaUnidoc, unidoc) :=
-    inAnyProject -- inProjectsIf(!java8Supported)(java8)
+            inAnyProject -- inProjectsIf(!java8Supported)(java8)
   )
   .enablePlugins(DocumentationPlugin)
   .dependsOn(core, nekohtml, cats, scalaz, jodaTime)
@@ -36,8 +36,14 @@ lazy val core = project
     moduleName := "kantan.xpath",
     name       := "core"
   )
-  .enablePlugins(PublishedPlugin)
-  .enablePlugins(spray.boilerplate.BoilerplatePlugin)
+  // TODO: disable when we upgrade to 2.12.3, which appears to fix this issue.
+  // This is necessary because with scala 2.12.x, we use too many nested lambdas for deserialisation to succeed with the
+  // "optimised" behaviour.
+  .settings(scalacOptions ++= (CrossVersion.partialVersion(scalaVersion.value) match {
+  case Some((_, x)) if x == 12 ⇒ Seq("-Ydelambdafy:inline")
+  case _             ⇒ Seq.empty
+  }))
+  .enablePlugins(PublishedPlugin, spray.boilerplate.BoilerplatePlugin)
   .settings(libraryDependencies ++= Seq(
     "com.propensive" %% "contextual"    % Versions.contextual,
     "com.nrinaudo"   %% "kantan.codecs" % Versions.kantanCodecs,
@@ -50,8 +56,7 @@ lazy val laws = project
     moduleName := "kantan.xpath-laws",
     name       := "laws"
   )
-  .enablePlugins(PublishedPlugin)
-  .enablePlugins(spray.boilerplate.BoilerplatePlugin)
+  .enablePlugins(PublishedPlugin, spray.boilerplate.BoilerplatePlugin)
   .dependsOn(core)
   .settings(libraryDependencies += "com.nrinaudo" %% "kantan.codecs-laws" % Versions.kantanCodecs)
 

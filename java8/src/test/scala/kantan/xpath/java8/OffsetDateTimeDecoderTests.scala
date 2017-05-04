@@ -17,6 +17,7 @@
 package kantan.xpath.java8
 
 import java.time.OffsetDateTime
+import kantan.codecs.laws.discipline.SerializableTests
 import kantan.xpath._
 import kantan.xpath.java8.arbitrary._
 import kantan.xpath.laws.discipline.NodeDecoderTests
@@ -25,8 +26,6 @@ import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline
 
 class OffsetDateTimeDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
-  // This is apparently necessary for Scala 2.10
-  implicit val decoder: NodeDecoder[OffsetDateTime] = defaultOffsetDateTimeDecoder.value
-
   checkAll("NodeDecoder[OffsetDateTime]", NodeDecoderTests[OffsetDateTime].decoder[Int, Int])
+  checkAll("NodeDecoder[OffsetDateTime]", SerializableTests[NodeDecoder[OffsetDateTime]].serializable)
 }

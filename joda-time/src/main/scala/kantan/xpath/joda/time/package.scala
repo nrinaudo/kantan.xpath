@@ -16,9 +16,11 @@
 
 package kantan.xpath.joda
 
+import kantan.codecs.export.Exported
 import kantan.codecs.strings.joda.time._
 import kantan.codecs.strings.StringDecoder
-import kantan.xpath.{codecs, DecodeError, Node}
+import kantan.xpath.{codecs, DecodeError, Node, NodeDecoder}
+import org.joda.time.{DateTime, LocalDate, LocalDateTime, LocalTime}
 
 /** Brings all joda time instances in scope.
   *
@@ -28,4 +30,13 @@ import kantan.xpath.{codecs, DecodeError, Node}
   */
 package object time extends JodaTimeDecoderCompanion[Option[Node], DecodeError, codecs.type] {
   override def decoderFrom[D](d: StringDecoder[D]) = codecs.fromString(d)
+
+  implicit val defaultDateTimeNodeDecoder: Exported[NodeDecoder[DateTime]] =
+    Exported(defaultDateTimeDecoder)
+  implicit val defaultLocalDateTimeNodeDecoder: Exported[NodeDecoder[LocalDateTime]] =
+    Exported(defaultLocalDateTimeDecoder)
+  implicit val defaultLocalDateNodeDecoder: Exported[NodeDecoder[LocalDate]] =
+    Exported(defaultLocalDateDecoder)
+  implicit val defaultLocalTimeNodeDecoder: Exported[NodeDecoder[LocalTime]] =
+    Exported(defaultLocalTimeDecoder)
 }

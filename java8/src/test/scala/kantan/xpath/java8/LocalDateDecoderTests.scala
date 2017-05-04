@@ -17,6 +17,7 @@
 package kantan.xpath.java8
 
 import java.time.LocalDate
+import kantan.codecs.laws.discipline.SerializableTests
 import kantan.xpath._
 import kantan.xpath.java8.arbitrary._
 import kantan.xpath.laws.discipline.NodeDecoderTests
@@ -25,8 +26,6 @@ import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline
 
 class LocalDateDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
-  // This is apparently necessary for Scala 2.10
-  implicit val decoder: NodeDecoder[LocalDate] = defaultLocalDateDecoder.value
-
   checkAll("NodeDecoder[LocalDate]", NodeDecoderTests[LocalDate].decoder[Int, Int])
+  checkAll("NodeDecoder[LocalDate]", SerializableTests[NodeDecoder[LocalDate]].serializable)
 }

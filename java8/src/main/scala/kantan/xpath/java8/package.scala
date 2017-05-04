@@ -16,10 +16,26 @@
 
 package kantan.xpath
 
+import java.time._
+import kantan.codecs.export.Exported
 import kantan.codecs.strings.StringDecoder
 import kantan.codecs.strings.java8.TimeDecoderCompanion
 
 package object java8 extends TimeDecoderCompanion[Option[Node], DecodeError, codecs.type] {
   override def decoderFrom[D](d: StringDecoder[D]) = codecs.fromString(d)
+
+
+  implicit val defaultInstantNodeDecoder: Exported[NodeDecoder[Instant]] =
+    Exported(defaultInstantDecoder)
+  implicit val defaultZonedDateTimeNodeDecoder: Exported[NodeDecoder[ZonedDateTime]] =
+    Exported(defaultZonedDateTimeDecoder)
+  implicit val defaultOffsetDateTimeNodeDecoder: Exported[NodeDecoder[OffsetDateTime]] =
+    Exported(defaultOffsetDateTimeDecoder)
+  implicit val defaultLocalDateTimeNodeDecoder: Exported[NodeDecoder[LocalDateTime]] =
+    Exported(defaultLocalDateTimeDecoder)
+  implicit val defaultLocalDateNodeDecoder: Exported[NodeDecoder[LocalDate]] =
+    Exported(defaultLocalDateDecoder)
+  implicit val defaultLocalTimeNodeDecoder: Exported[NodeDecoder[LocalTime]] =
+    Exported(defaultLocalTimeDecoder)
 }
 

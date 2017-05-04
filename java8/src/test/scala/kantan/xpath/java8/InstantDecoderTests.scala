@@ -17,6 +17,7 @@
 package kantan.xpath.java8
 
 import java.time.Instant
+import kantan.codecs.laws.discipline.SerializableTests
 import kantan.xpath.NodeDecoder
 import kantan.xpath.java8.arbitrary._
 import kantan.xpath.laws.discipline.NodeDecoderTests
@@ -25,8 +26,6 @@ import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline
 
 class InstantDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
-  // This is apparently necessary for Scala 2.10
-  implicit val decoder: NodeDecoder[Instant] = defaultInstantDecoder.value
-
   checkAll("NodeDecoder[Instant]", NodeDecoderTests[Instant].decoder[Int, Int])
+  checkAll("NodeDecoder[Instant]", SerializableTests[NodeDecoder[Instant]].serializable)
 }

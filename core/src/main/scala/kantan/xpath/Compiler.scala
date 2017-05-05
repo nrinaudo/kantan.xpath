@@ -17,7 +17,7 @@
 package kantan.xpath
 
 import javax.xml.xpath.XPathConstants
-import scala.collection.generic.CanBuildFrom
+import kantan.codecs.collection.HasBuilder
 import scala.collection.mutable
 
 /** Compiles XPath expressions.
@@ -46,7 +46,7 @@ object Compiler {
   }
 
   /** Compiles XPath expressions into [[Query]] instances that retrieve very match. */
-  implicit def xpathN[F[_], A: NodeDecoder](implicit cbf: CanBuildFrom[Nothing, A, F[A]]): Compiler[F[A]] =
+  implicit def xpathN[F[_], A: NodeDecoder](implicit cbf: HasBuilder[F, A]): Compiler[F[A]] =
     new Compiler[F[A]] {
       def fold(i: Int, nodes: NodeList, out: mutable.Builder[A, F[A]]): DecodeResult[F[A]] = {
         if(i < nodes.getLength) {
@@ -63,7 +63,7 @@ object Compiler {
 
       @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
       override def compile(expr: XPathExpression) = Query { n ⇒
-        fold(0, expr.evaluate(n, XPathConstants.NODESET).asInstanceOf[NodeList], cbf())
+        fold(0, expr.evaluate(n, XPathConstants.NODESET).asInstanceOf[NodeList], cbf.newBuilder)
       }
     }
 }

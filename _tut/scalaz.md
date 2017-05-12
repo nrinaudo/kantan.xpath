@@ -10,7 +10,7 @@ bones: it provides decoders for [`Maybe`] and [`\/`] as well as a few useful typ
 The `scalaz` module can be used by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-scalaz" % "0.1.9"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-scalaz" % "0.1.10"
 ```
 
 You then need to import the corresponding package:
@@ -35,7 +35,7 @@ We can then simply write the following:
 
 ```scala
 scala> "<foo><bar value='1'/><bar value='foo'/></foo>".evalXPath[List[Int \/ String]](xp"//bar/@value")
-res0: kantan.xpath.XPathResult[List[scalaz.\/[Int,String]]] = Success(List(-\/(1), \/-(foo)))
+res0: kantan.xpath.XPathResult[List[Int \/ String]] = Success(List(-\/(1), \/-(foo)))
 ```
 
 ## `Maybe` decoder

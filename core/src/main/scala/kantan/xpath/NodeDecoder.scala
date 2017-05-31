@@ -24,9 +24,6 @@ import kantan.xpath.DecodeError.TypeError
 
 /** Provides instance creation and summoning methods. */
 object NodeDecoder extends GeneratedDecoders with DecoderCompanion[Option[Node], DecodeError, codecs.type ] {
-  /** Returns an implicit instance of `NodeDecoder[A]` if one is found in scope, fails compilation otherwise. */
-  def apply[A](implicit ev: NodeDecoder[A]): NodeDecoder[A] = macro imp.summon[NodeDecoder[A]]
-
   def fromFound[A](f: Node ⇒ DecodeResult[A]): NodeDecoder[A] = Decoder.from(_.map(f).getOrElse(DecodeResult.notFound))
 
   def dateDecoder(format: DateFormat): NodeDecoder[Date] = codecs.fromString(StringDecoder.dateDecoder(format))

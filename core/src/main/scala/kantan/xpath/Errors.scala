@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Nicolas Rinaudo
+ * Copyright 2016 Nicolas Rinaudo
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 package kantan.xpath
 
-import kantan.codecs._
+import kantan.codecs.error._
 
 /** Describes an error that can occur while dealing with XPath. */
 sealed abstract class XPathError(msg: String) extends Error(msg)

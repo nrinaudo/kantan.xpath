@@ -1,2 +1,2 @@
-addSbtPlugin("com.nrinaudo" % "kantan.sbt"      % "1.4.4")
-addSbtPlugin("io.spray"     % "sbt-boilerplate" % "0.6.0")
+addSbtPlugin("com.nrinaudo" % "kantan.sbt-boilerplate" % "1.5.1")
+addSbtPlugin("com.nrinaudo" % "kantan.sbt-kantan"      % "1.5.1")

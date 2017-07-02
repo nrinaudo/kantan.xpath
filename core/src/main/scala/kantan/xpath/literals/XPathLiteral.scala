@@ -20,6 +20,8 @@ import contextual._
 import kantan.xpath.{XPathCompiler, XPathExpression}
 
 object XPathLiteral extends Interpolator {
+  type Output = XPathExpression
+
   @SuppressWarnings(Array("org.wartremover.warts.TraversableOps"))
   def contextualize(interpolation: StaticInterpolation): Seq[ContextType] = {
     interpolation.parts.foreach {

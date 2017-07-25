@@ -26,7 +26,7 @@ This lets you create new regular expression by prefixing string literals with [`
 
 ```scala
 scala> xp"//a[@href]"
-res0: kantan.xpath.XPathExpression = kantan.xpath.XPathCompiler$$anonfun$1$$anonfun$apply$3$$anon$2@66697d98
+res0: kantan.xpath.XPathExpression = kantan.xpath.XPathCompiler$$anonfun$1$$anonfun$apply$3$$anon$2@38c1d824
 ```
 
 And, as promised, this fails *at compile time* if the xpath expression is not valid:

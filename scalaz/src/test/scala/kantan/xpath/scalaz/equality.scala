@@ -23,7 +23,7 @@ import scalaz.Equal
 import scalaz.syntax.equal._
 
 object equality {
-  implicit def queryEqual[A: Equal: Arbitrary]: Equal[Query[A]]= new Equal[Query[A]] {
+  implicit def queryEqual[A: Equal: Arbitrary]: Equal[Query[A]] = new Equal[Query[A]] {
     implicit val arb = arbNode((a: A) ⇒ a.toString)
     override def equal(a1: Query[A], a2: Query[A]) =
       kantan.codecs.laws.discipline.equality.eq(a1.eval, a2.eval) { (d1, d2) ⇒

@@ -35,9 +35,10 @@ class XmlSourceOpsTests extends FunSuite with GeneratorDrivenPropertyChecks {
 
   private def cmp[A, F, E, T](value: CodecValue[E, A, T], res: Try[A]): Boolean = cmp(value, Result.fromTry(res))
 
-
   test("XmlSource instances should have a working asNode method") {
-    forAll { value: Value[Int] ⇒ assert(cmp(value, value.encoded.asNode.flatMap(_.evalXPath[Int](xp"/element")))) }
+    forAll { value: Value[Int] ⇒
+      assert(cmp(value, value.encoded.asNode.flatMap(_.evalXPath[Int](xp"/element"))))
+    }
   }
 
   // This test is not as good as it could be - we're not comparing decoded XML. The reason for that is that, apparently,
@@ -53,10 +54,14 @@ class XmlSourceOpsTests extends FunSuite with GeneratorDrivenPropertyChecks {
   }
 
   test("XmlSource instances should have a working evalXPath(String) method") {
-    forAll { value: Value[Int] ⇒ assert(cmp(value, value.encoded.evalXPath[Int](xp"/element"))) }
+    forAll { value: Value[Int] ⇒
+      assert(cmp(value, value.encoded.evalXPath[Int](xp"/element")))
+    }
   }
 
   test("XmlSource instances should have a working unsafeEvalXPath(String) method") {
-    forAll { value: Value[Int] ⇒ assert(cmp(value, Try(value.encoded.unsafeEvalXPath[Int](xp"/element")))) }
+    forAll { value: Value[Int] ⇒
+      assert(cmp(value, Try(value.encoded.unsafeEvalXPath[Int](xp"/element"))))
+    }
   }
 }

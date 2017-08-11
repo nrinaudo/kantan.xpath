@@ -23,11 +23,9 @@ package object scalaz extends ScalazInstances {
   // - Equal instances for errors --------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
   implicit val compileErrorEq: Equal[CompileError] = Equal.equalA[CompileError]
-  implicit val readErrorEq: Equal[ReadError] = Equal.equalA[ReadError]
-  implicit val decodeErrorEq: Equal[DecodeError] = Equal.equalA[DecodeError]
-  implicit val parseErrorEq: Equal[ParseError] = Equal.equalA[ParseError]
-
-
+  implicit val readErrorEq: Equal[ReadError]       = Equal.equalA[ReadError]
+  implicit val decodeErrorEq: Equal[DecodeError]   = Equal.equalA[DecodeError]
+  implicit val parseErrorEq: Equal[ParseError]     = Equal.equalA[ParseError]
 
   // - Misc. instances -------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------

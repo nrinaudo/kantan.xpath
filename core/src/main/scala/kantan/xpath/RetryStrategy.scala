@@ -31,24 +31,25 @@ final case class RetryStrategy(max: Int, delay: Long, factor: Int ⇒ Int) {
 }
 
 object RetryStrategy {
+
   /** Retry strategy that will retry up to `count` times without any delay between attempts. */
-  def NoDelay(count: Int): RetryStrategy = RetryStrategy(count, 0, _ ⇒ 0)
+  def noDelay(count: Int): RetryStrategy = RetryStrategy(count, 0, _ ⇒ 0)
 
   /** No failure will be retried. */
-  val None: RetryStrategy = NoDelay(0)
+  val none: RetryStrategy = noDelay(0)
 
   /** Retry strategy that will retry up to `count` times with a fixed delay of `delay` ms between each attempt. */
-  def Fixed(count: Int, delay: Long): RetryStrategy = RetryStrategy(count, delay, _ ⇒ 1)
+  def fixed(count: Int, delay: Long): RetryStrategy = RetryStrategy(count, delay, _ ⇒ 1)
 
   /** Retry strategy that will retry up to `count` times with a linearly increasing delay between each attempt.
     *
     * The first attempt will be done with a delay of `delay` ms, the second one `2 * delay`, the third `3 * delay`...
     */
-  def Linear(count: Int, delay: Long): RetryStrategy = RetryStrategy(count, delay, identity)
+  def linear(count: Int, delay: Long): RetryStrategy = RetryStrategy(count, delay, identity)
 
   /** Retry strategy that will retry up to `count` times with a quadratically increasing delay between each attempt.
     *
     * The first attempt will be done with a delay of `delay` ms, the second one `4 * delay`, the third `8 * delay`...
     */
-  def Quadratic(count: Int, delay: Long): RetryStrategy = RetryStrategy(count, delay, i ⇒ i * i)
+  def quadratic(count: Int, delay: Long): RetryStrategy = RetryStrategy(count, delay, i ⇒ i * i)
 }

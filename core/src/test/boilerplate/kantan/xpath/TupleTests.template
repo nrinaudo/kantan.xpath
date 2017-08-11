@@ -26,7 +26,7 @@ import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline
 
 class TupleTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
-  [#// This is necessary for scala 2.10
+  [#
   implicit val legalFloat1: Arbitrary[LegalNode[Tuple1[[#Float#]]]] = arbLegalTuple1[[#Float#]]
   implicit val illegalFloat1: Arbitrary[IllegalNode[Tuple1[[#Float#]]]] = arbIllegalTuple1[[#Float#]]
   implicit val floatDecoder1: NodeDecoder[Tuple1[[#Float#]]] = NodeDecoder.tuple[[#Float#]]([#xp"@field1"#])

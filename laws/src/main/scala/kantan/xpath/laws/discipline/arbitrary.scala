@@ -17,43 +17,37 @@
 package kantan.xpath.laws.discipline
 
 import imp.imp
-import kantan.codecs.laws._
-import kantan.codecs.laws.CodecValue.{IllegalValue, LegalValue}
-import kantan.xpath._
-import kantan.xpath.DecodeError.TypeError
-import kantan.xpath.ParseError.{IOError, SyntaxError}
+import kantan.codecs.laws._, CodecValue.{IllegalValue, LegalValue}
+import kantan.xpath._, DecodeError.TypeError, ParseError.{IOError, SyntaxError}
 import kantan.xpath.ops._
-import org.scalacheck._
-import org.scalacheck.Arbitrary.{arbitrary => arb}
-import org.scalacheck.Gen._
+import org.scalacheck._, Arbitrary.{arbitrary ⇒ arb}, Gen._
 import org.scalacheck.rng.Seed
 
 object arbitrary extends ArbitraryInstances
 
-trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstances
-                                 with kantan.xpath.laws.discipline.ArbitraryArities {
+trait ArbitraryInstances
+    extends kantan.codecs.laws.discipline.ArbitraryInstances with kantan.xpath.laws.discipline.ArbitraryArities {
   // - Arbitrary errors ------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
   implicit val arbCompileError: Arbitrary[CompileError] = Arbitrary(genException.map(CompileError.apply))
-  implicit val arbTypeError: Arbitrary[TypeError] = Arbitrary(genException.map(TypeError.apply))
+  implicit val arbTypeError: Arbitrary[TypeError]       = Arbitrary(genException.map(TypeError.apply))
   implicit val arbDecodeError: Arbitrary[DecodeError] =
     Arbitrary(oneOf(const(DecodeError.NotFound), arbTypeError.arbitrary))
   implicit val arbSyntaxError: Arbitrary[SyntaxError] = Arbitrary(genException.map(SyntaxError.apply))
-  implicit val arbIOError: Arbitrary[IOError] = Arbitrary(genIoException.map(IOError.apply))
+  implicit val arbIOError: Arbitrary[IOError]         = Arbitrary(genIoException.map(IOError.apply))
   implicit val arbParseError: Arbitrary[ParseError] =
     Arbitrary(oneOf(arbSyntaxError.arbitrary, arbIOError.arbitrary))
   implicit val arbReadError: Arbitrary[ReadError] =
-      Arbitrary(oneOf(arb[DecodeError], arb[ParseError]))
+    Arbitrary(oneOf(arb[DecodeError], arb[ParseError]))
   implicit val arbXPathError: Arbitrary[XPathError] =
     Arbitrary(oneOf(arb[ReadError], arb[CompileError]))
 
-  implicit val cogenCsvDecodeError: Cogen[DecodeError] = Cogen { (seed: Seed, err: DecodeError) ⇒ err match {
-    case DecodeError.NotFound       ⇒ seed
-    case DecodeError.TypeError(msg) ⇒ imp[Cogen[String]].perturb(seed, msg)
-  }}
-
-
-
+  implicit val cogenCsvDecodeError: Cogen[DecodeError] = Cogen { (seed: Seed, err: DecodeError) ⇒
+    err match {
+      case DecodeError.NotFound       ⇒ seed
+      case DecodeError.TypeError(msg) ⇒ imp[Cogen[String]].perturb(seed, msg)
+    }
+  }
 
   // - Arbitrary results -----------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
@@ -62,13 +56,11 @@ trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstance
   implicit def arbReadResult[A: Arbitrary]: Arbitrary[ReadResult[A]] =
     Arbitrary(oneOf(arb[Failure[ReadError]]: Gen[ReadResult[A]], arb[Success[A]]: Gen[ReadResult[A]]))
 
-
-
   // - Arbitrary values ------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
   @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
   private def asCDataNode(value: String): Node = {
-    val n = s"<element></element>".asUnsafeNode.getFirstChild.asInstanceOf[Element]
+    val n = "<element></element>".asUnsafeNode.getFirstChild.asInstanceOf[Element]
     n.setTextContent(value)
     n
   }
@@ -84,32 +76,34 @@ trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstance
   implicit val arbIllegalXml: Arbitrary[IllegalValue[String, Node, codecs.type]] =
     Arbitrary(Gen.alphaStr.suchThat(_.asNode.isFailure).map(IllegalValue.apply))
 
-
-  implicit def arbLegalFoundNode[A](implicit la: Arbitrary[LegalString[A]])
-  : Arbitrary[LegalValue[Node, A, codecs.type]] =
-      Arbitrary(la.arbitrary.map(_.mapEncoded(asCDataNode).tag[codecs.type]))
+  implicit def arbLegalFoundNode[A](
+    implicit la: Arbitrary[LegalString[A]]
+  ): Arbitrary[LegalValue[Node, A, codecs.type]] =
+    Arbitrary(la.arbitrary.map(_.mapEncoded(asCDataNode).tag[codecs.type]))
 
   implicit def arbLegalNode[A](implicit la: Arbitrary[LegalValue[Node, A, codecs.type]]): Arbitrary[LegalNode[A]] =
     Arbitrary(la.arbitrary.map(_.mapEncoded(Option.apply)))
 
-  implicit def arbIllegalFoundNode[A](implicit ia: Arbitrary[IllegalString[A]])
-  : Arbitrary[IllegalValue[Node, A, codecs.type]] =
-      Arbitrary(ia.arbitrary.map(_.mapEncoded(asCDataNode).tag[codecs.type]))
+  implicit def arbIllegalFoundNode[A](
+    implicit ia: Arbitrary[IllegalString[A]]
+  ): Arbitrary[IllegalValue[Node, A, codecs.type]] =
+    Arbitrary(ia.arbitrary.map(_.mapEncoded(asCDataNode).tag[codecs.type]))
 
-  implicit def arbIllegalNode[A](implicit ia: Arbitrary[IllegalValue[Node, A, codecs.type]])
-  : Arbitrary[IllegalNode[A]] =
+  implicit def arbIllegalNode[A](
+    implicit ia: Arbitrary[IllegalValue[Node, A, codecs.type]]
+  ): Arbitrary[IllegalNode[A]] =
     Arbitrary(ia.arbitrary.map(_.mapEncoded(Option.apply).tag[codecs.type]))
 
   implicit def arbLegalNodeOpt[A](implicit la: Arbitrary[LegalString[A]]): Arbitrary[LegalNode[Option[A]]] =
-    Arbitrary(Gen.oneOf(
-      la.arbitrary.map(_.mapEncoded(e ⇒ Option(asCDataNode(e))).mapDecoded(Option.apply).tag[codecs.type]),
-      Gen.const(CodecValue.LegalValue[Option[Node], Option[A], codecs.type](Option.empty, Option.empty))
-    ))
+    Arbitrary(
+      Gen.oneOf(
+        la.arbitrary.map(_.mapEncoded(e ⇒ Option(asCDataNode(e))).mapDecoded(Option.apply).tag[codecs.type]),
+        Gen.const(CodecValue.LegalValue[Option[Node], Option[A], codecs.type](Option.empty, Option.empty))
+      )
+    )
 
   implicit def arbIllegalNodeOpt[A](implicit la: Arbitrary[IllegalString[A]]): Arbitrary[IllegalNode[Option[A]]] =
     Arbitrary(la.arbitrary.map(_.mapEncoded(e ⇒ Option(asCDataNode(e))).mapDecoded(Option.apply).tag[codecs.type]))
-
-
 
   // - Misc. arbitraries -----------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
@@ -117,14 +111,14 @@ trait ArbitraryInstances extends kantan.codecs.laws.discipline.ArbitraryInstance
     Arbitrary(Arbitrary.arbitrary[A].map(a ⇒ s"<root>${f(a)}</root>".asUnsafeNode))
 
   implicit val cogenNode: Cogen[Node] = {
-    def accumulate(node: Node, acc: List[String]): List[String] = {
+    def accumulate(node: Node, acc: List[(String, Short)]): List[(String, Short)] = {
       val children = node.getChildNodes
-      (0 to children.getLength).foldLeft(node.toString :: acc) { (a, i) ⇒
+      (0 to children.getLength).foldLeft((node.getNodeName, node.getNodeType) :: acc) { (a, i) ⇒
         accumulate(children.item(i), a)
       }
     }
 
-    Cogen.cogenList[String].contramap(n ⇒ accumulate(n, List.empty[String]))
+    Cogen.cogenList[(String, Short)].contramap(n ⇒ accumulate(n, List.empty))
   }
 
   implicit def arbNodeDecoder[A: Arbitrary]: Arbitrary[NodeDecoder[A]] =

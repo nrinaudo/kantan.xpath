@@ -26,12 +26,14 @@ import javax.xml.parsers.DocumentBuilderFactory
   * process to tidy up messy HTML documents.
   */
 trait XmlParser {
+
   /** Turns the specified `InputSource` into a `Document`. */
   def parse(source: InputSource): ParseResult[Node]
 }
 
 /** Declares the default [[XmlParser]] instance in the implicit scope. */
 object XmlParser {
+
   /** Helper creation method, turns the specified function into an `XmlParser`. */
   def apply(f: InputSource ⇒ ParseResult[Node]): XmlParser = new XmlParser {
     override def parse(source: InputSource) = f(source)

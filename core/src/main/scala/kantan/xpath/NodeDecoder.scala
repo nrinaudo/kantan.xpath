@@ -23,7 +23,7 @@ import kantan.codecs.strings.StringDecoder
 import kantan.xpath.DecodeError.TypeError
 
 /** Provides instance creation and summoning methods. */
-object NodeDecoder extends GeneratedDecoders with DecoderCompanion[Option[Node], DecodeError, codecs.type ] {
+object NodeDecoder extends GeneratedDecoders with DecoderCompanion[Option[Node], DecodeError, codecs.type] {
   def fromFound[A](f: Node ⇒ DecodeResult[A]): NodeDecoder[A] = Decoder.from(_.map(f).getOrElse(DecodeResult.notFound))
 
   def dateDecoder(format: DateFormat): NodeDecoder[Date] = codecs.fromString(StringDecoder.dateDecoder(format))
@@ -31,23 +31,24 @@ object NodeDecoder extends GeneratedDecoders with DecoderCompanion[Option[Node],
 
 /** Provides default [[NodeDecoder]] instances. */
 trait NodeDecoderInstances {
+
   /** Decodes nodes as nodes. */
-    implicit val node: NodeDecoder[Node] = NodeDecoder.fromFound(n ⇒ DecodeResult.success(n))
+  implicit val node: NodeDecoder[Node] = NodeDecoder.fromFound(n ⇒ DecodeResult.success(n))
 
-    /** Decodes nodes as elements. */
-    @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
-    implicit val element: NodeDecoder[Element] = NodeDecoder.fromFound(n ⇒ DecodeResult(n.asInstanceOf[Element]))
+  /** Decodes nodes as elements. */
+  @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
+  implicit val element: NodeDecoder[Element] = NodeDecoder.fromFound(n ⇒ DecodeResult(n.asInstanceOf[Element]))
 
-    /** Decodes nodes as attributes. */
-    @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
-    implicit val attr: NodeDecoder[Attr] = NodeDecoder.fromFound(n ⇒ DecodeResult(n.asInstanceOf[Attr]))
+  /** Decodes nodes as attributes. */
+  @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
+  implicit val attr: NodeDecoder[Attr] = NodeDecoder.fromFound(n ⇒ DecodeResult(n.asInstanceOf[Attr]))
 
   /** Turns any of the string decodes provided by kantan.codecs into node decoders. */
   implicit def fromString[A: StringDecoder]: NodeDecoder[A] =
     NodeDecoder.fromFound { n ⇒
       val text = n.getTextContent
       if(text == null) DecodeResult.typeError(new NullPointerException("null text content"))
-      else             StringDecoder[A].leftMap(t ⇒ TypeError(t.getMessage, t.getCause)).decode(text)
+      else StringDecoder[A].leftMap(t ⇒ TypeError(t.getMessage, t.getCause)).decode(text)
     }
 
   implicit def optionNodeDecoder[A: NodeDecoder]: NodeDecoder[Option[A]] =

@@ -26,6 +26,7 @@ import scala.collection.mutable
   * [[XPathCompiler]] and [[Query]].
   */
 trait Compiler[A] extends Serializable {
+
   /** Turns the specified XPath expression into a valid [[Query]]. */
   def compile(expr: XPathExpression): Query[DecodeResult[A]]
 }
@@ -48,19 +49,16 @@ object Compiler {
   /** Compiles XPath expressions into [[Query]] instances that retrieve very match. */
   implicit def xpathN[F[_], A: NodeDecoder](implicit cbf: HasBuilder[F, A]): Compiler[F[A]] =
     new Compiler[F[A]] {
-      def fold(i: Int, nodes: NodeList, out: mutable.Builder[A, F[A]]): DecodeResult[F[A]] = {
+      def fold(i: Int, nodes: NodeList, out: mutable.Builder[A, F[A]]): DecodeResult[F[A]] =
         if(i < nodes.getLength) {
           NodeDecoder[A].decode(Option(nodes.item(i))) match {
             case Success(a) ⇒
               out += a
               fold(i + 1, nodes, out)
-            case f@Failure(_) ⇒ f
+            case f @ Failure(_) ⇒ f
           }
         }
         else DecodeResult.success(out.result())
-
-      }
-
       @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
       override def compile(expr: XPathExpression) = Query { n ⇒
         fold(0, expr.evaluate(n, XPathConstants.NODESET).asInstanceOf[NodeList], cbf.newBuilder)

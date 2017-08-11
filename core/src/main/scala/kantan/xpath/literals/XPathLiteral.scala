@@ -25,11 +25,11 @@ object XPathLiteral extends Interpolator {
   @SuppressWarnings(Array("org.wartremover.warts.TraversableOps"))
   def contextualize(interpolation: StaticInterpolation): Seq[ContextType] = {
     interpolation.parts.foreach {
-      case lit@Literal(_, _) ⇒
+      case lit @ Literal(_, _) ⇒
         implicitly[XPathCompiler].compile(interpolation.literals.head).leftMap { e ⇒
           interpolation.error(lit, 0, e.getMessage)
         }
-      case hole@Hole(_, _) ⇒
+      case hole @ Hole(_, _) ⇒
         interpolation.abort(hole, "substitution is not supported")
     }
     Nil

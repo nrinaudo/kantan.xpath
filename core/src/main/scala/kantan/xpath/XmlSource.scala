@@ -28,6 +28,7 @@ import kantan.codecs.resource.ReaderResource
   * See the [[XmlSource$ companion object]] for construction methods and default instances.
   */
 trait XmlSource[-A] extends Serializable { self ⇒
+
   /** Turns the specified value into a [[Node]].
     *
     * Results are wrapped in a [[ParseResult]], which makes this method safe. For an unsafe alternative, see
@@ -44,20 +45,21 @@ trait XmlSource[-A] extends Serializable { self ⇒
 
   /** Compiles the specified XPath expression and evaluates it against specified value. */
   def unsafeEval[B: Compiler](a: A, expr: XPathExpression): B =
-  eval(a, expr).get
+    eval(a, expr).get
 
   /** Compiles the specified XPath expression and evaluates it against the specified value. */
   def eval[B: Compiler](a: A, expr: XPathExpression): XPathResult[B] =
-  eval(a, Compiler[B].compile(expr))
+    eval(a, Compiler[B].compile(expr))
 
   /** Evaluates the specified XPath expression against specified value. */
   def unsafeEval[B](a: A, expr: Query[DecodeResult[B]]): B = eval(a, expr).get
 
   /** Evaluates the specified XPath expression against specified value. */
-  def eval[B](a: A, expr: Query[DecodeResult[B]]): ReadResult[B] = for {
-    node ← asNode(a)
-    b    ← expr.eval(node)
-  } yield b
+  def eval[B](a: A, expr: Query[DecodeResult[B]]): ReadResult[B] =
+    for {
+      node ← asNode(a)
+      b    ← expr.eval(node)
+    } yield b
 
   /** Turns an `XmlSource[A]` into an `XmlSource[B]`.
     *
@@ -83,6 +85,7 @@ trait XmlSource[-A] extends Serializable { self ⇒
   * implementation.
   */
 object XmlSource {
+
   /** Summons an [[XmlSource]] instance if one can be found. */
   def apply[A](implicit ev: XmlSource[A]): XmlSource[A] = macro imp.summon[XmlSource[A]]
 

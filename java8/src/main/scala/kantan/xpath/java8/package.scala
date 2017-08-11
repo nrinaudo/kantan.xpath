@@ -24,7 +24,6 @@ import kantan.codecs.strings.java8.TimeDecoderCompanion
 package object java8 extends TimeDecoderCompanion[Option[Node], DecodeError, codecs.type] {
   override def decoderFrom[D](d: StringDecoder[D]) = codecs.fromString(d)
 
-
   implicit val defaultInstantNodeDecoder: Exported[NodeDecoder[Instant]] =
     Exported(defaultInstantDecoder)
   implicit val defaultZonedDateTimeNodeDecoder: Exported[NodeDecoder[ZonedDateTime]] =
@@ -38,4 +37,3 @@ package object java8 extends TimeDecoderCompanion[Option[Node], DecodeError, cod
   implicit val defaultLocalTimeNodeDecoder: Exported[NodeDecoder[LocalTime]] =
     Exported(defaultLocalTimeDecoder)
 }
-

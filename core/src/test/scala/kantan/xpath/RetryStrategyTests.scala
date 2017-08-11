@@ -21,41 +21,51 @@ import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 
 class RetryStrategyTests extends FunSuite with GeneratorDrivenPropertyChecks {
-  implicit val arbInt: Arbitrary[Int] = Arbitrary(Gen.choose(0, 100))
+  implicit val arbInt: Arbitrary[Int]   = Arbitrary(Gen.choose(0, 100))
   implicit val arbLong: Arbitrary[Long] = Arbitrary(Gen.choose(0L, 24 * 60 * 60 * 1000L))
 
-  test("RetryStrategy.NoDelay should always have a delay of 0") {
+  test("RetryStrategy.noDelay should always have a delay of 0") {
     forAll { max: Int ⇒
-      val strat = RetryStrategy.NoDelay(max)
-      (0 to max).foreach { i ⇒ assert(strat.delayFor(i) == 0) }
+      val strat = RetryStrategy.noDelay(max)
+      (0 to max).foreach { i ⇒
+        assert(strat.delayFor(i) == 0)
+      }
     }
   }
 
-  test("RetryStrategy.None should always have a delay of 0") {
+  test("RetryStrategy.none should always have a delay of 0") {
     forAll { max: Int ⇒
-      val strat = RetryStrategy.NoDelay(max)
-      (0 to max).foreach { i ⇒ assert(strat.delayFor(i) == 0) }
+      val strat = RetryStrategy.none
+      (0 to max).foreach { i ⇒
+        assert(strat.delayFor(i) == 0)
+      }
     }
   }
 
-  test("RetryStrategy.Fixed should have a fixed delay") {
+  test("RetryStrategy.fixed should have a fixed delay") {
     forAll { (max: Int, delay: Long) ⇒
-      val strat = RetryStrategy.Fixed(max, delay)
-      (0 to max).foreach { i ⇒ assert(strat.delayFor(i) == delay) }
+      val strat = RetryStrategy.fixed(max, delay)
+      (0 to max).foreach { i ⇒
+        assert(strat.delayFor(i) == delay)
+      }
     }
   }
 
-  test("RetryStrategy.Linear should have a linearly increasing delay") {
+  test("RetryStrategy.linear should have a linearly increasing delay") {
     forAll { (max: Int, delay: Long) ⇒
-      val strat = RetryStrategy.Linear(max, delay)
-      (0 to max).foreach { i ⇒ assert(strat.delayFor(i) == i * delay) }
+      val strat = RetryStrategy.linear(max, delay)
+      (0 to max).foreach { i ⇒
+        assert(strat.delayFor(i) == i * delay)
+      }
     }
   }
 
-  test("RetryStrategy.Quadratic should have a quadratically increasing delay") {
+  test("RetryStrategy.quadratic should have a quadratically increasing delay") {
     forAll { (max: Int, delay: Long) ⇒
-      val strat = RetryStrategy.Quadratic(max, delay)
-      (0 to max).foreach { i ⇒ assert(strat.delayFor(i) == delay * (i * i)) }
+      val strat = RetryStrategy.quadratic(max, delay)
+      (0 to max).foreach { i ⇒
+        assert(strat.delayFor(i) == delay * (i * i))
+      }
     }
   }
 }

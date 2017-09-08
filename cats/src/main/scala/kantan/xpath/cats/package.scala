@@ -24,11 +24,9 @@ package object cats extends CatsInstances {
   // - Eq instances for errors -----------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
   implicit val compileErrorEq: Eq[CompileError] = Eq.fromUniversalEquals[CompileError]
-  implicit val readErrorEq: Eq[ReadError] = Eq.fromUniversalEquals[ReadError]
-  implicit val decodeErrorEq: Eq[DecodeError] = Eq.fromUniversalEquals[DecodeError]
-  implicit val parseErrorEq: Eq[ParseError] = Eq.fromUniversalEquals[ParseError]
-
-
+  implicit val readErrorEq: Eq[ReadError]       = Eq.fromUniversalEquals[ReadError]
+  implicit val decodeErrorEq: Eq[DecodeError]   = Eq.fromUniversalEquals[DecodeError]
+  implicit val parseErrorEq: Eq[ParseError]     = Eq.fromUniversalEquals[ParseError]
 
   // - Misc. instances -------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------

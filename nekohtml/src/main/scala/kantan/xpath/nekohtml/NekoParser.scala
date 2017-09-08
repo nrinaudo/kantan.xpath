@@ -21,12 +21,12 @@ import org.apache.xerces.parsers.DOMParser
 import org.cyberneko.html.HTMLConfiguration
 
 class NekoParser(val conf: HTMLConfiguration) extends XmlParser {
-    override def parse(source: InputSource): ParseResult[Node] = {
-      val parser = new DOMParser(conf)
+  override def parse(source: InputSource): ParseResult[Node] = {
+    val parser = new DOMParser(conf)
 
-      ParseResult {
-        parser.parse(source)
-        parser.getDocument
-      }
+    ParseResult {
+      parser.parse(source)
+      parser.getDocument
     }
+  }
 }

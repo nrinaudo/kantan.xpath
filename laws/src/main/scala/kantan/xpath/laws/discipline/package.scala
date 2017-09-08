@@ -16,16 +16,15 @@
 
 package kantan.xpath.laws
 
-import kantan.codecs.laws._
-import kantan.codecs.laws.CodecValue.{IllegalValue, LegalValue}
+import kantan.codecs.laws._, CodecValue.{IllegalValue, LegalValue}
 import kantan.codecs.laws.discipline.DecoderTests
 import kantan.xpath._
 
 package object discipline {
-  type LegalNode[A] = LegalValue[Option[Node], A, codecs.type]
+  type LegalNode[A]   = LegalValue[Option[Node], A, codecs.type]
   type IllegalNode[A] = IllegalValue[Option[Node], A, codecs.type]
-  type NodeValue[A] = CodecValue[Option[Node], A, codecs.type]
+  type NodeValue[A]   = CodecValue[Option[Node], A, codecs.type]
 
-  type NodeDecoderLaws[A] = DecoderLaws[Option[Node], A, DecodeError, codecs.type]
+  type NodeDecoderLaws[A]  = DecoderLaws[Option[Node], A, DecodeError, codecs.type]
   type NodeDecoderTests[A] = DecoderTests[Option[Node], A, DecodeError, codecs.type]
 }

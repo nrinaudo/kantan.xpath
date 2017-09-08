@@ -33,6 +33,7 @@ sealed abstract class ReadError(msg: String) extends XPathError(msg)
 sealed abstract class DecodeError(msg: String) extends ReadError(msg)
 
 object DecodeError {
+
   /** Error that occurs when a single result was requested by an XPath expression, but no node was matched. */
   case object NotFound extends DecodeError("no matched node")
 
@@ -46,6 +47,7 @@ object DecodeError {
 sealed abstract class ParseError(msg: String) extends ReadError(msg)
 
 object ParseError {
+
   /** Error that occurs when an XML document is not valid. */
   sealed case class SyntaxError(message: String) extends ParseError(message)
 

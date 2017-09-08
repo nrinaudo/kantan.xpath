@@ -16,14 +16,14 @@
 
 package kantan.xpath.cats
 
-import _root_.cats.syntax.eq._
 import _root_.cats.Eq
+import _root_.cats.syntax.eq._
 import kantan.xpath.Query
 import kantan.xpath.laws.discipline.arbitrary._
 import org.scalacheck.Arbitrary
 
 object equality {
-  implicit def queryEq[A: Eq: Arbitrary]: Eq[Query[A]]= new Eq[Query[A]] {
+  implicit def queryEq[A: Eq: Arbitrary]: Eq[Query[A]] = new Eq[Query[A]] {
     implicit val arb = arbNode((a: A) ⇒ a.toString)
     override def eqv(a1: Query[A], a2: Query[A]) =
       kantan.codecs.laws.discipline.equality.eq(a1.eval, a2.eval) { (d1, d2) ⇒

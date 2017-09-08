@@ -27,8 +27,6 @@ package object xpath {
     */
   type NodeDecoder[A] = Decoder[Option[Node], A, DecodeError, codecs.type]
 
-
-
   // - Result types ----------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
   type Success[A] = Result.Success[A]
@@ -80,15 +78,13 @@ package object xpath {
     */
   type ParseResult[A] = Result[ParseError, A]
 
-
-
   // - XML types -------------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
-  type Element = org.w3c.dom.Element
-  type Node = org.w3c.dom.Node
-  type Document = org.w3c.dom.Document
-  type Attr = org.w3c.dom.Attr
-  type NodeList = org.w3c.dom.NodeList
-  type InputSource = org.xml.sax.InputSource
+  type Element         = org.w3c.dom.Element
+  type Node            = org.w3c.dom.Node
+  type Document        = org.w3c.dom.Document
+  type Attr            = org.w3c.dom.Attr
+  type NodeList        = org.w3c.dom.NodeList
+  type InputSource     = org.xml.sax.InputSource
   type XPathExpression = javax.xml.xpath.XPathExpression
 }

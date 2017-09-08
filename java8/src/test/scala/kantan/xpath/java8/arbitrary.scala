@@ -16,5 +16,6 @@
 
 package kantan.xpath.java8
 
-object arbitrary extends kantan.xpath.laws.discipline.ArbitraryInstances with
-                         kantan.codecs.strings.java8.laws.discipline.ArbitraryInstances
+object arbitrary
+    extends kantan.xpath.laws.discipline.ArbitraryInstances
+    with kantan.codecs.strings.java8.laws.discipline.ArbitraryInstances

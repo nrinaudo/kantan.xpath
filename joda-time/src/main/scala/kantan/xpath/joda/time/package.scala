@@ -17,8 +17,8 @@
 package kantan.xpath.joda
 
 import kantan.codecs.export.Exported
-import kantan.codecs.strings.joda.time._
 import kantan.codecs.strings.StringDecoder
+import kantan.codecs.strings.joda.time._
 import kantan.xpath.{codecs, DecodeError, Node, NodeDecoder}
 import org.joda.time.{DateTime, LocalDate, LocalDateTime, LocalTime}
 

@@ -17,8 +17,8 @@
 package kantan.xpath
 
 import kantan.codecs.laws.discipline.SerializableTests
-import kantan.xpath.laws.discipline.arbitrary._
 import kantan.xpath.laws.discipline.NodeDecoderTests
+import kantan.xpath.laws.discipline.arbitrary._
 import org.scalatest.FunSuite
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.typelevel.discipline.scalatest.Discipline

@@ -27,6 +27,7 @@ import kantan.xpath._
   * }}}
   */
 final class XmlSourceOps[A: XmlSource](val a: A) {
+
   /** Shorthand for [[XmlSource.asNode]]. */
   def asNode: ParseResult[Node] = XmlSource[A].asNode(a)
 

@@ -23,7 +23,7 @@ import org.scalatest.FunSuite
 class NekohtmlTests extends FunSuite {
   test("The nekohtml parser should clean up metacritic data") {
     val letters = ('a' to 'z').map(c ⇒ s"/browse/games/title/ps2/$c").toList
-    val result = getClass.getResource("/metacritic.html").evalXPath[List[String]](xp"//ul[@class='letternav']//a/@href")
+    val result  = getClass.getResource("/metacritic.html").evalXPath[List[String]](xp"//ul[@class='letternav']//a/@href")
 
     assert(result == Success(letters))
   }

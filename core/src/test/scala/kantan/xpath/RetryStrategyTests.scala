@@ -17,10 +17,10 @@
 package kantan.xpath
 
 import org.scalacheck.{Arbitrary, Gen}
-import org.scalatest.FunSuite
+import org.scalatest.{FunSuite, Matchers}
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 
-class RetryStrategyTests extends FunSuite with GeneratorDrivenPropertyChecks {
+class RetryStrategyTests extends FunSuite with GeneratorDrivenPropertyChecks with Matchers {
   implicit val arbInt: Arbitrary[Int]   = Arbitrary(Gen.choose(0, 100))
   implicit val arbLong: Arbitrary[Long] = Arbitrary(Gen.choose(0L, 24 * 60 * 60 * 1000L))
 
@@ -28,7 +28,7 @@ class RetryStrategyTests extends FunSuite with GeneratorDrivenPropertyChecks {
     forAll { max: Int ⇒
       val strat = RetryStrategy.noDelay(max)
       (0 to max).foreach { i ⇒
-        assert(strat.delayFor(i) == 0)
+        strat.delayFor(i) should be(0)
       }
     }
   }
@@ -37,7 +37,7 @@ class RetryStrategyTests extends FunSuite with GeneratorDrivenPropertyChecks {
     forAll { max: Int ⇒
       val strat = RetryStrategy.none
       (0 to max).foreach { i ⇒
-        assert(strat.delayFor(i) == 0)
+        strat.delayFor(i) should be(0)
       }
     }
   }
@@ -46,7 +46,7 @@ class RetryStrategyTests extends FunSuite with GeneratorDrivenPropertyChecks {
     forAll { (max: Int, delay: Long) ⇒
       val strat = RetryStrategy.fixed(max, delay)
       (0 to max).foreach { i ⇒
-        assert(strat.delayFor(i) == delay)
+        strat.delayFor(i) should be(delay)
       }
     }
   }
@@ -55,7 +55,7 @@ class RetryStrategyTests extends FunSuite with GeneratorDrivenPropertyChecks {
     forAll { (max: Int, delay: Long) ⇒
       val strat = RetryStrategy.linear(max, delay)
       (0 to max).foreach { i ⇒
-        assert(strat.delayFor(i) == i * delay)
+        strat.delayFor(i) should be(i * delay)
       }
     }
   }
@@ -64,7 +64,7 @@ class RetryStrategyTests extends FunSuite with GeneratorDrivenPropertyChecks {
     forAll { (max: Int, delay: Long) ⇒
       val strat = RetryStrategy.quadratic(max, delay)
       (0 to max).foreach { i ⇒
-        assert(strat.delayFor(i) == delay * (i * i))
+        strat.delayFor(i) should be(delay * (i * i))
       }
     }
   }

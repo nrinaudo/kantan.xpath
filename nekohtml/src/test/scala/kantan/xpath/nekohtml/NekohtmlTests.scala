@@ -16,15 +16,15 @@
 
 package kantan.xpath.nekohtml
 
-import kantan.xpath._
+import kantan.codecs.scalatest.ResultValues
 import kantan.xpath.implicits._
-import org.scalatest.FunSuite
+import org.scalatest.{FunSuite, Matchers}
 
-class NekohtmlTests extends FunSuite {
+class NekohtmlTests extends FunSuite with Matchers with ResultValues {
   test("The nekohtml parser should clean up metacritic data") {
     val letters = ('a' to 'z').map(c ⇒ s"/browse/games/title/ps2/$c").toList
     val result  = getClass.getResource("/metacritic.html").evalXPath[List[String]](xp"//ul[@class='letternav']//a/@href")
 
-    assert(result == Success(letters))
+    result.success.value should be(letters)
   }
 }

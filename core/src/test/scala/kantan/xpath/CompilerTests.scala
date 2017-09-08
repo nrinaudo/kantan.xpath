@@ -19,13 +19,13 @@ package kantan.xpath
 import kantan.codecs.laws.CodecValue
 import kantan.xpath.implicits._
 import kantan.xpath.laws.discipline.arbitrary._
-import org.scalatest.FunSuite
+import org.scalatest.{FunSuite, Matchers}
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 
 // TODO: these tests rely on CodeValue serializing values to a node named 'element'. This is fragile.
 // TODO: Arbitrary[List[CodecValue[Node, A]]] never ends up generating lists of legal values only, which sorts of
 //       defeats the purpose.
-class CompilerTests extends FunSuite with GeneratorDrivenPropertyChecks {
+class CompilerTests extends FunSuite with GeneratorDrivenPropertyChecks with Matchers {
   type Value[A] = CodecValue[Node, A, codecs.type]
 
   @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
@@ -41,23 +41,21 @@ class CompilerTests extends FunSuite with GeneratorDrivenPropertyChecks {
 
   test("'first' expressions should fail on illegal values and succeed on legal ones") {
     forAll { value: Value[Int] ⇒
-      assert(value.encoded.evalXPath[Int](xp"//element") == NodeDecoder[Int].decode(Option(value.encoded)))
+      value.encoded.evalXPath[Int](xp"//element") should be(NodeDecoder[Int].decode(Option(value.encoded)))
     }
   }
 
   test("'first' expressions should fail on empty results") {
     forAll { value: Value[Int] ⇒
-      assert(value.encoded.evalXPath[Int](xp"//element2") == DecodeResult.notFound)
+      value.encoded.evalXPath[Int](xp"//element2") should be(DecodeResult.notFound)
     }
   }
 
   test("'all' expressions should fail on lists containing at least one illegal value and succeed on others") {
     forAll { values: List[Value[Int]] ⇒
-      assert(
-        encodeAll(values).evalXPath[List[Int]](xp"//element") ==
-          DecodeResult.sequence(values.map(v ⇒ NodeDecoder[Int].decode(Option(v.encoded))))
+      encodeAll(values).evalXPath[List[Int]](xp"//element") should be(
+        DecodeResult.sequence(values.map(v ⇒ NodeDecoder[Int].decode(Option(v.encoded))))
       )
-    //values.map(v ⇒ NodeDecoder[Int].decode(Option(v.encoded))).sequenceU)
     }
   }
 }

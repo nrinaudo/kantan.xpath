@@ -20,24 +20,26 @@ import kantan.codecs.Result
 import kantan.codecs.laws.CodecValue
 import kantan.xpath.implicits._
 import kantan.xpath.laws.discipline.arbitrary._
-import org.scalatest.FunSuite
+import org.scalatest.{FunSuite, Matchers}
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import scala.util.Try
 
-class XmlSourceOpsTests extends FunSuite with GeneratorDrivenPropertyChecks {
+class XmlSourceOpsTests extends FunSuite with GeneratorDrivenPropertyChecks with Matchers {
   type Value[A] = CodecValue[Node, A, codecs.type]
 
-  private def cmp[A, F, E, T](value: CodecValue[E, A, T], res: Result[F, A]): Boolean = (value, res) match {
-    case (CodecValue.LegalValue(_, n1), Success(n2)) ⇒ n1 == n2
-    case (CodecValue.IllegalValue(_), Failure(_))    ⇒ true
-    case _                                           ⇒ false
+  private def cmp[A, F, E, T](value: CodecValue[E, A, T], res: Result[F, A]): Unit = (value, res) match {
+    case (CodecValue.LegalValue(_, n1), Success(n2)) ⇒
+      n1 should be(n2)
+      ()
+    case (CodecValue.IllegalValue(_), Failure(_)) ⇒ ()
+    case (a, b)                                   ⇒ fail(s"$a is not compatible with $b")
   }
 
-  private def cmp[A, F, E, T](value: CodecValue[E, A, T], res: Try[A]): Boolean = cmp(value, Result.fromTry(res))
+  private def cmp[A, F, E, T](value: CodecValue[E, A, T], res: Try[A]): Unit = cmp(value, Result.fromTry(res))
 
   test("XmlSource instances should have a working asNode method") {
     forAll { value: Value[Int] ⇒
-      assert(cmp(value, value.encoded.asNode.flatMap(_.evalXPath[Int](xp"/element"))))
+      cmp(value, value.encoded.asNode.flatMap(_.evalXPath[Int](xp"/element")))
     }
   }
 
@@ -45,23 +47,23 @@ class XmlSourceOpsTests extends FunSuite with GeneratorDrivenPropertyChecks {
   // Node equality is not something the JDK deals with.
   test("XmlSource instances should have a working asUnsafeNode method") {
     forAll { value: CodecValue[String, Node, codecs.type] ⇒
-      assert((value, Result.fromTry(Try(value.encoded.asUnsafeNode))) match {
+      (value, Result.fromTry(Try(value.encoded.asUnsafeNode))) match {
         case (CodecValue.LegalValue(_, _), Success(_)) ⇒ true
         case (CodecValue.IllegalValue(_), Failure(_))  ⇒ true
-        case _                                         ⇒ false
-      })
+        case (a, b)                                    ⇒ fail(s"$a is not compatible with $b")
+      }
     }
   }
 
   test("XmlSource instances should have a working evalXPath(String) method") {
     forAll { value: Value[Int] ⇒
-      assert(cmp(value, value.encoded.evalXPath[Int](xp"/element")))
+      cmp(value, value.encoded.evalXPath[Int](xp"/element"))
     }
   }
 
   test("XmlSource instances should have a working unsafeEvalXPath(String) method") {
     forAll { value: Value[Int] ⇒
-      assert(cmp(value, Try(value.encoded.unsafeEvalXPath[Int](xp"/element"))))
+      cmp(value, Try(value.encoded.unsafeEvalXPath[Int](xp"/element")))
     }
   }
 }

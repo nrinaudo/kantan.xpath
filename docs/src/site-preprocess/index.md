@@ -34,6 +34,9 @@ libraryDependencies += "com.nrinaudo" %% "kantan.xpath-nekohtml" % "@VERSION@"
 
 // Provides joda-time decoders.
 libraryDependencies += "com.nrinaudo" %% "kantan.xpath-joda-time" % "@VERSION@"
+
+// Provides refined decoders.
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-refined" % "@VERSION@"
 ```
 
 ## Motivation

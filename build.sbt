@@ -12,11 +12,12 @@ lazy val root = Project(id = "kantan-xpath", base = file("."))
       |import kantan.xpath._
       |import kantan.xpath.implicits._
       |import kantan.xpath.joda.time._
+      |import kantan.xpath.refined._
     """.stripMargin
   )
-  .aggregate(core, nekohtml, docs, laws, cats, scalaz, jodaTime)
+  .aggregate(core, nekohtml, docs, laws, cats, scalaz, jodaTime, refined)
   .aggregateIf(java8Supported)(java8)
-  .dependsOn(core, nekohtml, jodaTime)
+  .dependsOn(core, nekohtml, jodaTime, refined)
 
 lazy val docs = project
   .settings(
@@ -24,7 +25,7 @@ lazy val docs = project
       inAnyProject -- inProjectsIf(!java8Supported)(java8)
   )
   .enablePlugins(DocumentationPlugin)
-  .dependsOn(core, nekohtml, cats, scalaz, jodaTime)
+  .dependsOn(core, nekohtml, cats, scalaz, jodaTime, refined)
   .dependsOnIf(java8Supported)(java8)
 
 // - core projects -----------------------------------------------------------------------------------------------------
@@ -141,5 +142,22 @@ lazy val scalaz = project
       "com.nrinaudo" %% "kantan.codecs-scalaz"      % Versions.kantanCodecs,
       "com.nrinaudo" %% "kantan.codecs-scalaz-laws" % Versions.kantanCodecs % "test",
       "com.nrinaudo" %% "kantan.codecs-scalatest"   % Versions.kantanCodecs % "test"
+    )
+  )
+
+// - refined project ---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
+lazy val refined = project
+  .settings(
+    moduleName := "kantan.xpath-refined",
+    name       := "refined"
+  )
+  .enablePlugins(PublishedPlugin)
+  .dependsOn(core, laws % "test")
+  .settings(
+    libraryDependencies ++= Seq(
+      "com.nrinaudo" %% "kantan.codecs-refined"      % Versions.kantanCodecs,
+      "com.nrinaudo" %% "kantan.codecs-refined-laws" % Versions.kantanCodecs % "test",
+      "com.nrinaudo" %% "kantan.codecs-scalatest"    % Versions.kantanCodecs % "test"
     )
   )

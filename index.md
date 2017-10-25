@@ -4,36 +4,39 @@ layout: index
 
 [![Build Status](https://travis-ci.org/nrinaudo/kantan.xpath.svg)](https://travis-ci.org/nrinaudo/kantan.xpath)
 [![codecov](https://codecov.io/gh/nrinaudo/kantan.xpath/branch/master/graph/badge.svg)](https://codecov.io/gh/nrinaudo/kantan.xpath)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.nrinaudo/kantan.xpath_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.nrinaudo/kantan.xpath_2.11)
+[![Latest version](https://index.scala-lang.org/nrinaudo/kantan.xpath/kantan.xpath/latest.svg)](https://index.scala-lang.org/nrinaudo/kantan.xpath)
 [![Join the chat at https://gitter.im/nrinaudo/kantan.xpath](https://img.shields.io/badge/gitter-join%20chat-52c435.svg)](https://gitter.im/nrinaudo/kantan.xpath)
 
 kantan.xpath is an XPath expression evaluation library for the [Scala programming language](http://www.scala-lang.org).
 
 ## Getting started
 
-kantan.xpath is currently available for Scala 2.10, 2.11 and 2.12.
+kantan.xpath is currently available for Scala 2.11 and 2.12.
 
-The current version is `0.2.0`, which can be added to your project with one or more of the following line(s)
+The current version is `0.2.1-SNAPSHOT`, which can be added to your project with one or more of the following line(s)
 in your SBT build file:
 
 ```scala
 // Core library, included automatically if any other module is imported.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath" % "0.2.0"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath" % "0.2.1-SNAPSHOT"
 
 // Java 8 date and time instances.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-java8" % "0.2.0"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-java8" % "0.2.1-SNAPSHOT"
 
 // Provides scalaz type class instances.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-scalaz" % "0.2.0"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-scalaz" % "0.2.1-SNAPSHOT"
 
 // Provides cats type class instances.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-cats" % "0.2.0"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-cats" % "0.2.1-SNAPSHOT"
 
 // Provides "dirty" HTML parsing through NekoHTML.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-nekohtml" % "0.2.0"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-nekohtml" % "0.2.1-SNAPSHOT"
 
 // Provides joda-time decoders.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-joda-time" % "0.2.0"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-joda-time" % "0.2.1-SNAPSHOT"
+
+// Provides refined decoders.
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-refined" % "0.2.1-SNAPSHOT"
 ```
 
 ## Motivation

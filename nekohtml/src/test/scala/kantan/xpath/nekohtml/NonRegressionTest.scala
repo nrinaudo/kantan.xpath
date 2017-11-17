@@ -16,17 +16,11 @@
 
 package kantan.xpath.nekohtml
 
-import kantan.xpath.{InputSource, Node, ParseResult, XmlParser}
-import org.apache.xerces.parsers.DOMParser
-import org.cyberneko.html.HTMLConfiguration
+import kantan.xpath.implicits._
+import org.scalatest.{FunSuite, Matchers}
 
-class NekoParser(val conf: HTMLConfiguration) extends XmlParser {
-  override def parse(source: InputSource): ParseResult[Node] = conf.synchronized {
-    val parser = new DOMParser(conf)
-
-    ParseResult {
-      parser.parse(source)
-      parser.getDocument
-    }
+class NonRegressionTests extends FunSuite with Matchers {
+  test("Parsing should be thread safe") {
+    all((1 to 10).par.map(_ ⇒ "<html><body>text</body></html>".asNode)) should be a 'success
   }
 }

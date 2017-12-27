@@ -16,8 +16,7 @@
 
 package kantan.xpath
 
-import _root_.cats.Eq
-import _root_.cats.functor.Contravariant
+import _root_.cats._
 import kantan.codecs.cats.CatsInstances
 
 package object cats extends CatsInstances {

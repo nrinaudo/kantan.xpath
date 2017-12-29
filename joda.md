@@ -11,7 +11,7 @@ support for it through a dedicated module.
 The `joda-time` module can be used by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-joda-time" % "0.4.0-SNAPSHOT"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-joda-time" % "0.3.2"
 ```
 
 You then need to import the corresponding package:
@@ -40,6 +40,9 @@ This is directly supported:
 
 ```scala
 scala> input.evalXPath[List[org.joda.time.LocalDate]](xp"//date/@value")
+<console>:13: warning: Unused import
+       import kantan.xpath._
+                           ^
 res1: kantan.xpath.XPathResult[List[org.joda.time.LocalDate]] = Success(List(1978-10-12, 2015-01-09))
 ```
 
@@ -59,6 +62,18 @@ And we're done, as far as decoding is concerned. We only need to get an XPath ex
 
 ```scala
 scala> input.evalXPath[List[org.joda.time.LocalDate]](xp"//date/@value")
+<console>:10: warning: Unused import
+       import kantan.xpath.joda.time._
+                                     ^
+<console>:13: warning: Unused import
+       import kantan.xpath._
+                           ^
+<console>:18: warning: Unused import
+       import org.joda.time.LocalDate
+                            ^
+<console>:20: warning: Unused import
+       import org.joda.time.format._
+                                   ^
 res4: kantan.xpath.XPathResult[List[org.joda.time.LocalDate]] = Success(List(1978-10-12, 2015-01-09))
 ```
 

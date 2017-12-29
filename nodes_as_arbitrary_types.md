@@ -54,6 +54,9 @@ Now that we have told kantan.xpath how to decode an XML node to an instance of `
 
 ```scala
 scala> rawData.evalXPath[List[El]](xp"//element")
+<console>:12: warning: Unused import
+       import kantan.xpath._
+                           ^
 res2: kantan.xpath.XPathResult[List[El]] = Success(List(El(1, true), El(2, false), El(3, true), El(4, false)))
 ```
 

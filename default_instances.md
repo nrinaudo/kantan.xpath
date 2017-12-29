@@ -52,6 +52,12 @@ And we're now capable of decoding XML content as dates:
 
 ```scala
 scala> "<date>2000-01-00T00:00:00.000</date>".evalXPath[Date](xp"/date")
+<console>:12: warning: Unused import
+       import kantan.xpath.NodeDecoder
+                           ^
+<console>:13: warning: Unused import
+       import java.util.{Locale, Date}
+                         ^
 res1: kantan.xpath.XPathResult[java.util.Date] = Success(Fri Dec 31 00:00:00 CET 1999)
 ```
 
@@ -68,6 +74,18 @@ sometimes a boolean, for example:
 
 ```scala
 scala> "<root><either>123</either><either>true</either></root>".evalXPath[List[Either[Int, Boolean]]](xp"//either")
+<console>:12: warning: Unused import
+       import kantan.xpath.NodeDecoder
+                           ^
+<console>:13: warning: Unused import
+       import java.util.{Locale, Date}
+                         ^
+<console>:13: warning: Unused import
+       import java.util.{Locale, Date}
+                                 ^
+<console>:14: warning: Unused import
+       import decoder
+                                           ^
 res2: kantan.xpath.XPathResult[List[Either[Int,Boolean]]] = Success(List(Left(123), Right(true)))
 ```
 
@@ -80,6 +98,18 @@ This is useful for XML where some nodes or attributes are optional. For example:
 
 ```scala
 scala> "<root><opt/></root>".evalXPath[Option[Int]](xp"//opt/@value")
+<console>:12: warning: Unused import
+       import kantan.xpath.NodeDecoder
+                           ^
+<console>:13: warning: Unused import
+       import java.util.{Locale, Date}
+                         ^
+<console>:13: warning: Unused import
+       import java.util.{Locale, Date}
+                                 ^
+<console>:14: warning: Unused import
+       import decoder
+                                           ^
 res3: kantan.xpath.XPathResult[Option[Int]] = Success(None)
 ```
 

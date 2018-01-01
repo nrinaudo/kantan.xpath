@@ -41,9 +41,6 @@ We can decode the bracketed dates without providing an explicit decoder:
 
 ```scala
 scala> input.evalXPath[List[LocalDate]](xp"//date/@value")
-<console>:13: warning: Unused import
-       import kantan.xpath._
-                           ^
 res1: kantan.xpath.XPathResult[List[java.time.LocalDate]] = Success(List(1978-10-12, 2015-01-09))
 ```
 
@@ -61,15 +58,6 @@ And we can now simply write:
 
 ```scala
 scala> input.evalXPath[List[LocalDate]](xp"//date/@value")
-<console>:10: warning: Unused import
-       import kantan.xpath.java8._
-                                 ^
-<console>:13: warning: Unused import
-       import kantan.xpath._
-                           ^
-<console>:21: warning: Unused import
-       import java.time.format.DateTimeFormatter
-                               ^
 res4: kantan.xpath.XPathResult[List[java.time.LocalDate]] = Success(List(1978-10-12, 2015-01-09))
 ```
 

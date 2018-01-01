@@ -33,12 +33,6 @@ We can then simply write the following:
 
 ```scala
 scala> "<foo><bar value='1'/></foo>".evalXPath[PositiveInt](xp"//bar/@value")
-<console>:12: warning: Unused import
-       import eu.timepit.refined.api.Refined
-                                     ^
-<console>:13: warning: Unused import
-       import eu.timepit.refined.numeric.Positive
-                                         ^
 res1: kantan.xpath.XPathResult[PositiveInt] = Success(1)
 ```
 
@@ -46,11 +40,5 @@ And, for an error case:
 
 ```scala
 scala> "<foo><bar value='-1'/></foo>".evalXPath[PositiveInt](xp"//bar/@value")
-<console>:12: warning: Unused import
-       import eu.timepit.refined.api.Refined
-                                     ^
-<console>:13: warning: Unused import
-       import eu.timepit.refined.numeric.Positive
-                                         ^
 res2: kantan.xpath.XPathResult[PositiveInt] = Failure(TypeError: Not acceptable: 'Predicate failed: (-1 > 0).')
 ```

@@ -15,9 +15,9 @@ lazy val root = Project(id = "kantan-xpath", base = file("."))
       |import kantan.xpath.refined._
     """.stripMargin
   )
-  .aggregate(core, nekohtml, docs, laws, cats, scalaz, jodaTime, refined)
+  .aggregate(cats, core, docs, enumeratum, jodaTime, laws, nekohtml, refined, scalaz)
   .aggregateIf(java8Supported)(java8)
-  .dependsOn(core, nekohtml, jodaTime, refined)
+  .dependsOn(core, jodaTime, nekohtml, refined)
 
 lazy val docs = project
   .settings(
@@ -25,7 +25,7 @@ lazy val docs = project
       inAnyProject -- inProjectsIf(!java8Supported)(java8)
   )
   .enablePlugins(DocumentationPlugin)
-  .dependsOn(core, nekohtml, cats, scalaz, jodaTime, refined)
+  .dependsOn(cats, core, enumeratum, jodaTime, nekohtml, refined, scalaz)
   .dependsOnIf(java8Supported)(java8)
 
 // - core projects -----------------------------------------------------------------------------------------------------
@@ -159,5 +159,22 @@ lazy val refined = project
       "com.nrinaudo" %% "kantan.codecs-refined"      % Versions.kantanCodecs,
       "com.nrinaudo" %% "kantan.codecs-refined-laws" % Versions.kantanCodecs % "test",
       "com.nrinaudo" %% "kantan.codecs-scalatest"    % Versions.kantanCodecs % "test"
+    )
+  )
+
+// - Enuemratum project ------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
+lazy val enumeratum = project
+  .settings(
+    moduleName := "kantan.xpath-enumeratum",
+    name       := "enumeratum"
+  )
+  .enablePlugins(PublishedPlugin)
+  .dependsOn(core, laws % "test")
+  .settings(
+    libraryDependencies ++= Seq(
+      "com.nrinaudo" %% "kantan.codecs-enumeratum"      % Versions.kantanCodecs,
+      "com.nrinaudo" %% "kantan.codecs-enumeratum-laws" % Versions.kantanCodecs % "test",
+      "com.nrinaudo" %% "kantan.codecs-scalatest"       % Versions.kantanCodecs % "test"
     )
   )

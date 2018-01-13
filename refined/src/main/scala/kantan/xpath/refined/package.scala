@@ -16,6 +16,6 @@
 
 package kantan.xpath
 
-import kantan.codecs.refined.RefinedInstances
+import kantan.codecs.refined.DecoderInstances
 
-package object refined extends RefinedInstances
+package object refined extends DecoderInstances

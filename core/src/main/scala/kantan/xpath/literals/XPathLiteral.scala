@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package kantan.xpath.literals
+package kantan.xpath
+package literals
 
 import contextual._
-import kantan.xpath.{XPathCompiler, XPathExpression}
 
 object XPathLiteral extends Interpolator {
   type Output = XPathExpression

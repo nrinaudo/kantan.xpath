@@ -16,14 +16,11 @@
 
 package kantan.xpath
 
-import kantan.codecs.laws.discipline.SerializableTests
-import kantan.xpath.laws.discipline.NodeDecoderTests
-import kantan.xpath.laws.discipline.arbitrary._
-import org.scalatest.FunSuite
-import org.scalatest.prop.GeneratorDrivenPropertyChecks
-import org.typelevel.discipline.scalatest.Discipline
+import laws.discipline._, arbitrary._
 
-class ShortDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
+class ShortDecoderTests extends DisciplineSuite {
+
   checkAll("NodeDecoder[Short]", NodeDecoderTests[Short].decoder[Int, Int])
   checkAll("NodeDecoder[Short]", SerializableTests[NodeDecoder[Short]].serializable)
+
 }

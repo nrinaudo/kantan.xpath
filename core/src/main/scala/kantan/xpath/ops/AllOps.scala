@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
-package kantan.xpath.ops
+package kantan.xpath
+package ops
 
 trait AllOps extends ToExpressionOps with ToXmlSourceOps

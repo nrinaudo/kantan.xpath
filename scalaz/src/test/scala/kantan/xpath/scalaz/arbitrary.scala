@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-package kantan.xpath.scalaz
+package kantan.xpath
+package scalaz
 
 object arbitrary
     extends kantan.codecs.scalaz.laws.discipline.ArbitraryInstances with kantan.xpath.laws.discipline.ArbitraryInstances

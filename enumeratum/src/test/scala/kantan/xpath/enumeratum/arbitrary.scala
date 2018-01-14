@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-package kantan.xpath.enumeratum
+package kantan.xpath
+package enumeratum
 
 object arbitrary
     extends kantan.xpath.laws.discipline.ArbitraryInstances

@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package kantan.xpath.laws.discipline
+package kantan.xpath
+package laws
+package discipline
 
-import kantan.codecs.laws.discipline.DecoderTests
-import kantan.xpath._
-import kantan.xpath.laws.discipline.arbitrary._
+import laws.discipline.arbitrary._
 import org.scalacheck.{Arbitrary, Cogen, Gen}
 
 object NodeDecoderTests {

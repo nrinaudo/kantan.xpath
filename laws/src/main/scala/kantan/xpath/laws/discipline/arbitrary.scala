@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
-package kantan.xpath.laws.discipline
+package kantan.xpath
+package laws
+package discipline
 
+import DecodeError.TypeError
+import ParseError.{IOError, SyntaxError}
 import imp.imp
 import kantan.codecs.laws._, CodecValue.{IllegalValue, LegalValue}
-import kantan.xpath._, DecodeError.TypeError, ParseError.{IOError, SyntaxError}
-import kantan.xpath.ops._
+import ops._
 import org.scalacheck._, Arbitrary.{arbitrary ⇒ arb}, Gen._
 import org.scalacheck.rng.Seed
 

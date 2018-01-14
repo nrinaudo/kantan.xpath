@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package kantan.xpath.ops
-
-import kantan.xpath._
+package kantan.xpath
+package ops
 
 final class ExpressionOps[A](val expr: Query[DecodeResult[A]]) extends AnyVal {
   def mapResult[B](f: A ⇒ B): Query[DecodeResult[B]] = expr.map(_.map(f))

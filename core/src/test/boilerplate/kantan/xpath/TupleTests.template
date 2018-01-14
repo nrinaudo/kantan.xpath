@@ -16,16 +16,11 @@
 
 package kantan.xpath
 
-import kantan.codecs.laws.discipline.SerializableTests
-import kantan.xpath.laws.discipline._
-import kantan.xpath.laws.discipline.arbitrary._
-import kantan.xpath.implicits._
+import laws.discipline._, arbitrary._
+import implicits._
 import org.scalacheck.Arbitrary
-import org.scalatest.FunSuite
-import org.scalatest.prop.GeneratorDrivenPropertyChecks
-import org.typelevel.discipline.scalatest.Discipline
 
-class TupleTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
+class TupleTests extends DisciplineSuite {
   [#
   implicit val legalFloat1: Arbitrary[LegalNode[Tuple1[[#Float#]]]] = arbLegalTuple1[[#Float#]]
   implicit val illegalFloat1: Arbitrary[IllegalNode[Tuple1[[#Float#]]]] = arbIllegalTuple1[[#Float#]]

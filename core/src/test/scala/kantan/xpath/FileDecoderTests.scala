@@ -17,14 +17,9 @@
 package kantan.xpath
 
 import java.io.File
-import kantan.codecs.laws.discipline.SerializableTests
-import kantan.xpath.laws.discipline.NodeDecoderTests
-import kantan.xpath.laws.discipline.arbitrary._
-import org.scalatest.FunSuite
-import org.scalatest.prop.GeneratorDrivenPropertyChecks
-import org.typelevel.discipline.scalatest.Discipline
+import laws.discipline._, arbitrary._
 
-class FileDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
+class FileDecoderTests extends DisciplineSuite {
   checkAll("NodeDecoder[File]", NodeDecoderTests[File].bijectiveDecoder[Int, Int])
   checkAll("NodeDecoder[File]", SerializableTests[NodeDecoder[File]].serializable)
 }

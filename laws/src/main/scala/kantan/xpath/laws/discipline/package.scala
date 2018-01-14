@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package kantan.xpath.laws
+package kantan.xpath
+package laws
 
 import kantan.codecs.laws._, CodecValue.{IllegalValue, LegalValue}
-import kantan.codecs.laws.discipline.DecoderTests
-import kantan.xpath._
+import kantan.codecs.laws.discipline._
 
-package object discipline {
+package object discipline extends DisciplinePackage {
   type LegalNode[A]   = LegalValue[Option[Node], A, codecs.type]
   type IllegalNode[A] = IllegalValue[Option[Node], A, codecs.type]
   type NodeValue[A]   = CodecValue[Option[Node], A, codecs.type]

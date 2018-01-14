@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package kantan.xpath.cats
+package kantan.xpath
+package cats
 
 import _root_.cats.Eq
 import _root_.cats.syntax.eq._
-import kantan.xpath.Query
-import kantan.xpath.laws.discipline.arbitrary._
+import laws.discipline.arbitrary._
 import org.scalacheck.Arbitrary
 
 object equality {

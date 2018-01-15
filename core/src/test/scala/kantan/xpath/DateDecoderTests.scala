@@ -18,15 +18,10 @@ package kantan.xpath
 
 import java.text.SimpleDateFormat
 import java.util.{Date, Locale}
-import kantan.codecs.laws.discipline.SerializableTests
 import kantan.codecs.strings.StringCodec
-import kantan.xpath.laws.discipline.NodeDecoderTests
-import kantan.xpath.laws.discipline.arbitrary._
-import org.scalatest.FunSuite
-import org.scalatest.prop.GeneratorDrivenPropertyChecks
-import org.typelevel.discipline.scalatest.Discipline
+import laws.discipline._, arbitrary._
 
-class DateDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
+class DateDecoderTests extends DisciplineSuite {
   implicit val codec: StringCodec[Date] =
     StringCodec.dateCodec(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.ENGLISH))
 

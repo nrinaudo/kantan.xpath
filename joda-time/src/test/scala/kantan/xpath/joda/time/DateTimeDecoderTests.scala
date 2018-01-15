@@ -14,18 +14,15 @@
  * limitations under the License.
  */
 
-package kantan.xpath.joda.time
+package kantan.xpath
+package joda.time
 
-import kantan.codecs.laws.discipline.SerializableTests
-import kantan.xpath._
-import kantan.xpath.joda.time.arbitrary._
-import kantan.xpath.laws.discipline.NodeDecoderTests
+import laws.discipline._, arbitrary._
 import org.joda.time.DateTime
-import org.scalatest.FunSuite
-import org.scalatest.prop.GeneratorDrivenPropertyChecks
-import org.typelevel.discipline.scalatest.Discipline
 
-class DateTimeDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
+class DateTimeDecoderTests extends DisciplineSuite {
+
   checkAll("NodeDecoder[DateTime]", NodeDecoderTests[DateTime].decoder[Int, Int])
   checkAll("NodeDecoder[DateTime]", SerializableTests[NodeDecoder[DateTime]].serializable)
+
 }

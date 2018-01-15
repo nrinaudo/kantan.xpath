@@ -16,9 +16,9 @@
 
 package kantan.xpath
 
+import implicits._
 import kantan.codecs.laws.CodecValue
-import kantan.xpath.implicits._
-import kantan.xpath.laws.discipline.arbitrary._
+import laws.discipline.arbitrary._
 import org.scalatest.{FunSuite, Matchers}
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 

@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-package kantan.xpath.refined
+package kantan.xpath
+package refined
 
 import eu.timepit.refined.api.Refined
 import eu.timepit.refined.numeric.Positive
-import kantan.codecs.laws.discipline.SerializableTests
-import kantan.xpath.NodeDecoder
-import kantan.xpath.laws.discipline.NodeDecoderTests
-import kantan.xpath.refined.arbitrary._
-import org.scalatest.FunSuite
-import org.scalatest.prop.GeneratorDrivenPropertyChecks
-import org.typelevel.discipline.scalatest.Discipline
+import laws.discipline._, arbitrary._
 
-class RefinedNodeDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
+class RefinedNodeDecoderTests extends DisciplineSuite {
+
   checkAll("NodeDecoder[Int Refined Positive]", NodeDecoderTests[Int Refined Positive].decoder[Int, Int])
   checkAll("NodeDecoder[Int Refined Positive]", SerializableTests[NodeDecoder[Int Refined Positive]].serializable)
+
 }

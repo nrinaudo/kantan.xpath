@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
-package kantan.xpath.enumeratum
+package kantan.xpath
+package enumeratum
 
 import arbitrary._
 import kantan.codecs.enumeratum.laws.discipline.Enumerated
-import kantan.codecs.laws.discipline.SerializableTests
-import kantan.xpath.NodeDecoder
-import kantan.xpath.laws.discipline.NodeDecoderTests
-import org.scalatest.FunSuite
-import org.typelevel.discipline.scalatest.Discipline
+import laws.discipline._
 
-class EnumCodecTests extends FunSuite with Discipline {
+class EnumCodecTests extends DisciplineSuite {
 
   checkAll("NodeDecoder[Enumerated]", SerializableTests[NodeDecoder[Enumerated]].serializable)
   checkAll("NodeDecoder[Enumerated]", NodeDecoderTests[Enumerated].decoder[String, Float])

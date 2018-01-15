@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-package kantan.xpath.literals
+package kantan.xpath
+package literals
 
 import contextual._
 

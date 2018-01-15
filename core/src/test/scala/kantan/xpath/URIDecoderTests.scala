@@ -17,14 +17,11 @@
 package kantan.xpath
 
 import java.net.URI
-import kantan.codecs.laws.discipline.SerializableTests
-import kantan.xpath.laws.discipline.NodeDecoderTests
-import kantan.xpath.laws.discipline.arbitrary._
-import org.scalatest.FunSuite
-import org.scalatest.prop.GeneratorDrivenPropertyChecks
-import org.typelevel.discipline.scalatest.Discipline
+import laws.discipline._, arbitrary._
 
-class URIDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
+class URIDecoderTests extends DisciplineSuite {
+
   checkAll("NodeDecoder[URI]", NodeDecoderTests[URI].decoder[Int, Int])
   checkAll("NodeDecoder[URI]", SerializableTests[NodeDecoder[URI]].serializable)
+
 }

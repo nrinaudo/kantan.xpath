@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-package kantan.xpath.cats
+package kantan.xpath
+package cats
 
 object arbitrary
     extends kantan.codecs.cats.laws.discipline.ArbitraryInstances with kantan.xpath.laws.discipline.ArbitraryInstances

@@ -14,18 +14,15 @@
  * limitations under the License.
  */
 
-package kantan.xpath.java8
+package kantan.xpath
+package java8
 
 import java.time.LocalDateTime
-import kantan.codecs.laws.discipline.SerializableTests
-import kantan.xpath._
-import kantan.xpath.java8.arbitrary._
-import kantan.xpath.laws.discipline.NodeDecoderTests
-import org.scalatest.FunSuite
-import org.scalatest.prop.GeneratorDrivenPropertyChecks
-import org.typelevel.discipline.scalatest.Discipline
+import laws.discipline._, arbitrary._
 
-class LocalDateTimeDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
+class LocalDateTimeDecoderTests extends DisciplineSuite {
+
   checkAll("NodeDecoder[LocalDateTime]", NodeDecoderTests[LocalDateTime].decoder[Int, Int])
   checkAll("NodeDecoder[LocalDateTime]", SerializableTests[NodeDecoder[LocalDateTime]].serializable)
+
 }

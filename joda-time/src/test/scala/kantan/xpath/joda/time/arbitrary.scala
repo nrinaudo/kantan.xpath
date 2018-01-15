@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-package kantan.xpath.joda.time
+package kantan.xpath
+package joda.time
 
 object arbitrary
     extends kantan.codecs.strings.joda.time.laws.discipline.ArbitraryInstances

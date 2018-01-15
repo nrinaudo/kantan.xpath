@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package kantan.xpath.scalaz
+package kantan.xpath
+package scalaz
 
-import kantan.xpath.Query
-import kantan.xpath.laws.discipline.arbitrary._
+import _root_.scalaz.Equal
+import _root_.scalaz.syntax.equal._
+import laws.discipline.arbitrary._
 import org.scalacheck.Arbitrary
-import scalaz.Equal
-import scalaz.syntax.equal._
 
 object equality {
   implicit def queryEqual[A: Equal: Arbitrary]: Equal[Query[A]] = new Equal[Query[A]] {

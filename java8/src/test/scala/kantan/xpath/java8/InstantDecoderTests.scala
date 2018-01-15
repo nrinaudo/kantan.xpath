@@ -14,18 +14,15 @@
  * limitations under the License.
  */
 
-package kantan.xpath.java8
+package kantan.xpath
+package java8
 
 import java.time.Instant
-import kantan.codecs.laws.discipline.SerializableTests
-import kantan.xpath.NodeDecoder
-import kantan.xpath.java8.arbitrary._
-import kantan.xpath.laws.discipline.NodeDecoderTests
-import org.scalatest.FunSuite
-import org.scalatest.prop.GeneratorDrivenPropertyChecks
-import org.typelevel.discipline.scalatest.Discipline
+import laws.discipline._, arbitrary._
 
-class InstantDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
+class InstantDecoderTests extends DisciplineSuite {
+
   checkAll("NodeDecoder[Instant]", NodeDecoderTests[Instant].decoder[Int, Int])
   checkAll("NodeDecoder[Instant]", SerializableTests[NodeDecoder[Instant]].serializable)
+
 }

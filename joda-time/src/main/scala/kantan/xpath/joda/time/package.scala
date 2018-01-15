@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package kantan.xpath.joda
+package kantan.xpath
+package joda
 
 import kantan.codecs.export.Exported
 import kantan.codecs.strings.StringDecoder
 import kantan.codecs.strings.joda.time._
-import kantan.xpath.{codecs, DecodeError, Node, NodeDecoder}
 import org.joda.time.{DateTime, LocalDate, LocalDateTime, LocalTime}
 
 /** Brings all joda time instances in scope.

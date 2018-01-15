@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package kantan.xpath.scalaz
+package kantan.xpath
+package scalaz
 
-import _root_.scalaz.scalacheck.ScalazProperties.equal
-import kantan.codecs.scalaz.laws.discipline.scalatest.ScalazSuite
-import kantan.xpath._
-import kantan.xpath.scalaz.arbitrary._
+import _root_.scalaz.scalacheck.ScalazProperties.{equal ⇒ equ}
+import arbitrary._
+import kantan.codecs.scalaz.laws.discipline.ScalazDisciplineSuite
 
-class InstancesTests extends ScalazSuite {
-  checkAll("ReadError", equal.laws[ReadError])
-  checkAll("DecodeError", equal.laws[DecodeError])
-  checkAll("ParseError", equal.laws[ParseError])
+class InstancesTests extends ScalazDisciplineSuite {
+  checkAll("ReadError", equ.laws[ReadError])
+  checkAll("DecodeError", equ.laws[DecodeError])
+  checkAll("ParseError", equ.laws[ParseError])
 }

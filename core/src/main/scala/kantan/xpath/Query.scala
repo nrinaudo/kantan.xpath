@@ -43,9 +43,9 @@ object Query {
 
   /** Compiles the specified XPath expression. */
   def compile[A: Compiler](str: String)(implicit xpath: XPathCompiler): CompileResult[Query[DecodeResult[A]]] =
-    xpath.compile(str).map(Compiler[A].compile)
+    xpath.compile(str).right.map(Compiler[A].compile)
 
   /** Compiles the specified XPath expression. */
   def unsafeCompile[A: Compiler](str: String)(implicit xpath: XPathCompiler): Query[DecodeResult[A]] =
-    Query.compile(str).getOrElse(sys.error(s"Not a valid XPath expression: '$str'."))
+    Query.compile(str).right.getOrElse(sys.error(s"Not a valid XPath expression: '$str'."))
 }

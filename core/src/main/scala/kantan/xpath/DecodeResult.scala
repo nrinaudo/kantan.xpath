@@ -16,14 +16,14 @@
 
 package kantan.xpath
 
-import kantan.codecs.{Result, ResultCompanion}
+import kantan.codecs.ResultCompanion
 
 /** Provides instance creation methods for [[DecodeResult]]. */
 object DecodeResult extends ResultCompanion.WithDefault[DecodeError] {
   override protected def fromThrowable(t: Throwable) = DecodeError.TypeError(t)
 
   /** Failure with an error of [[DecodeError.NotFound]]. */
-  val notFound: DecodeResult[Nothing]                = Result.failure(DecodeError.NotFound)
-  def typeError(str: String): DecodeResult[Nothing]  = Result.failure(DecodeError.TypeError(str))
-  def typeError(e: Exception): DecodeResult[Nothing] = Result.failure(DecodeError.TypeError(e))
+  val notFound: DecodeResult[Nothing]                = failure(DecodeError.NotFound)
+  def typeError(str: String): DecodeResult[Nothing]  = failure(DecodeError.TypeError(str))
+  def typeError(e: Exception): DecodeResult[Nothing] = failure(DecodeError.TypeError(e))
 }

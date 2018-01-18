@@ -30,7 +30,7 @@ class CompilerTests extends FunSuite with GeneratorDrivenPropertyChecks with Mat
 
   @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
   def encodeAll[A](bs: List[Value[A]]): Element = {
-    val n = bs.foldLeft("<root></root>".asNode.get.asInstanceOf[Document]) { (doc, b) ⇒
+    val n = bs.foldLeft("<root></root>".asNode.right.get.asInstanceOf[Document]) { (doc, b) ⇒
       val an = b.encoded.cloneNode(true)
       doc.adoptNode(an)
       doc.getFirstChild.appendChild(an)

@@ -24,20 +24,8 @@ import kantan.xpath.cats._
 The following instance for cats type classes are provided:
 
 * [`Functor`] for [`NodeDecoder`].
-* [`Order`] for all result types ([`DecodeResult`], [`XPathResult`], [`ReadResult`], [`ParseResult`] and [`CompileResult`]).
-* [`Show`] for all result types.
-* [`Monoid`] for all result types.
-* [`Traverse`] for all result types.
-* [`Monad`] for all result types.
-* [`BiFunctor`] for all result types.
 
 [`Functor`]:http://typelevel.org/cats/api/cats/Functor.html
-[`BiFunctor`]:http://typelevel.org/cats/api/cats/functor/Bifunctor.html
-[`Order`]:http://typelevel.org/cats/api/cats/kernel/Order.html
-[`Show`]:http://typelevel.org/cats/api/cats/Show.html
-[`Traverse`]:http://typelevel.org/cats/api/cats/Traverse.html
-[`Monad`]:http://typelevel.org/cats/api/cats/Monad.html
-[`Monoid`]:http://typelevel.org/cats/api/cats/kernel/Monoid.html
 [`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html
 [`XPathResult`]:{{ site.baseurl }}/api/kantan/xpath/XPathResult$.html
 [`ReadResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$ReadResult

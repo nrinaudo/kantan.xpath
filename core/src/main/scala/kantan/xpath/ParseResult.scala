@@ -26,5 +26,5 @@ object ParseResult extends ResultCompanion.WithDefault[ParseError] {
     * along the way in a failure.
     */
   def open[A, B](a: ⇒ A)(parse: A ⇒ ParseResult[B]): ParseResult[B] =
-    Result.nonFatal(a).leftMap(ParseError.IOError.apply).flatMap(parse)
+    Result.nonFatal(a).left.map(ParseError.IOError.apply).right.flatMap(parse)
 }

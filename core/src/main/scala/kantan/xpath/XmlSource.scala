@@ -41,24 +41,27 @@ trait XmlSource[-A] extends Serializable { self ⇒
     * This method is unsafe - it will throw an exception should any error occur during parsing. For a safe alternative,
     * see [[asNode]].
     */
-  def asUnsafeNode(a: A): Node = asNode(a).get
+  @SuppressWarnings(Array("org.wartremover.warts.EitherProjectionPartial"))
+  def asUnsafeNode(a: A): Node = asNode(a).right.get
 
   /** Compiles the specified XPath expression and evaluates it against specified value. */
+  @SuppressWarnings(Array("org.wartremover.warts.EitherProjectionPartial"))
   def unsafeEval[B: Compiler](a: A, expr: XPathExpression): B =
-    eval(a, expr).get
+    eval(a, expr).right.get
 
   /** Compiles the specified XPath expression and evaluates it against the specified value. */
   def eval[B: Compiler](a: A, expr: XPathExpression): XPathResult[B] =
     eval(a, Compiler[B].compile(expr))
 
   /** Evaluates the specified XPath expression against specified value. */
-  def unsafeEval[B](a: A, expr: Query[DecodeResult[B]]): B = eval(a, expr).get
+  @SuppressWarnings(Array("org.wartremover.warts.EitherProjectionPartial"))
+  def unsafeEval[B](a: A, expr: Query[DecodeResult[B]]): B = eval(a, expr).right.get
 
   /** Evaluates the specified XPath expression against specified value. */
   def eval[B](a: A, expr: Query[DecodeResult[B]]): ReadResult[B] =
     for {
-      node ← asNode(a)
-      b    ← expr.eval(node)
+      node ← asNode(a).right
+      b    ← expr.eval(node).right
     } yield b
 
   /** Turns an `XmlSource[A]` into an `XmlSource[B]`.
@@ -72,7 +75,7 @@ trait XmlSource[-A] extends Serializable { self ⇒
     * @see [[contramap]]
     */
   def contramapResult[AA <: A, B](f: B ⇒ ParseResult[AA]): XmlSource[B] =
-    XmlSource.from((b: B) ⇒ f(b).flatMap(self.asNode))
+    XmlSource.from((b: B) ⇒ f(b).right.flatMap(self.asNode))
 }
 
 /** Defines convenience methods for creating and summoning [[XmlSource]] instances.
@@ -103,6 +106,11 @@ object XmlSource {
 
   implicit def fromResource[A: ReaderResource](implicit parser: XmlParser): XmlSource[A] =
     inputSource.contramapResult { a ⇒
-      ReaderResource[A].open(a).map(r ⇒ new InputSource(r)).leftMap(e ⇒ ParseError.IOError(e.getMessage, e.getCause))
+      ReaderResource[A]
+        .open(a)
+        .right
+        .map(r ⇒ new InputSource(r))
+        .left
+        .map(e ⇒ ParseError.IOError(e.getMessage, e.getCause))
     }
 }

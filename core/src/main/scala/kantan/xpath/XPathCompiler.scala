@@ -18,7 +18,6 @@ package kantan.xpath
 
 import javax.xml.namespace.QName
 import javax.xml.xpath.XPathFactory
-import kantan.codecs.Result
 
 /** Compiles XPath expressions.
   *
@@ -44,19 +43,16 @@ object XPathCompiler {
   /** Default compiler, always in scope. */
   @SuppressWarnings(Array("org.wartremover.warts.Serializable"))
   implicit val builtIn: XPathCompiler = XPathCompiler { str ⇒
-    Result
-      .nonFatal(XPathFactory.newInstance().newXPath().compile(str))
-      .leftMap(CompileError.apply)
-      .map { _ ⇒
-        new XPathExpression with Serializable {
-          private val expression: String       = str
-          @transient private lazy val compiled = XPathFactory.newInstance().newXPath().compile(expression)
+    CompileResult(XPathFactory.newInstance().newXPath().compile(str)).right.map { _ ⇒
+      new XPathExpression with Serializable {
+        private val expression: String       = str
+        @transient private lazy val compiled = XPathFactory.newInstance().newXPath().compile(expression)
 
-          override def evaluate(item: scala.Any, returnType: QName)     = compiled.evaluate(item, returnType)
-          override def evaluate(item: scala.Any)                        = compiled.evaluate(item)
-          override def evaluate(source: InputSource, returnType: QName) = compiled.evaluate(source, returnType)
-          override def evaluate(source: InputSource)                    = compiled.evaluate(source)
-        }
+        override def evaluate(item: scala.Any, returnType: QName)     = compiled.evaluate(item, returnType)
+        override def evaluate(item: scala.Any)                        = compiled.evaluate(item)
+        override def evaluate(source: InputSource, returnType: QName) = compiled.evaluate(source, returnType)
+        override def evaluate(source: InputSource)                    = compiled.evaluate(source)
       }
+    }
   }
 }

@@ -52,10 +52,10 @@ object Compiler {
       def fold(i: Int, nodes: NodeList, out: mutable.Builder[A, F[A]]): DecodeResult[F[A]] =
         if(i < nodes.getLength) {
           NodeDecoder[A].decode(Option(nodes.item(i))) match {
-            case Success(a) ⇒
+            case Right(a) ⇒
               out += a
               fold(i + 1, nodes, out)
-            case f @ Failure(_) ⇒ f
+            case Left(f) ⇒ Left(f)
           }
         }
         else DecodeResult.success(out.result())

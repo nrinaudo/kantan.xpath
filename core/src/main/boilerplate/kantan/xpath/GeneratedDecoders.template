@@ -19,7 +19,7 @@ package kantan.xpath
 trait GeneratedDecoders {
   [#def decoder[[#I1#], O]([#x1: Query[DecodeResult[I1]]#])(f: ([#I1#]) ⇒ O): NodeDecoder[O] = NodeDecoder.fromFound { n ⇒
       for {
-        [#i1 ← x1.eval(n)#
+        [#i1 ← x1.eval(n).right#
         ]
       } yield f([#i1#])
     }#

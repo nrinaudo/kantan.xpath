@@ -16,7 +16,7 @@
 
 package kantan
 
-import kantan.codecs.{Decoder, Result}
+import kantan.codecs.Decoder
 
 package object xpath {
   // - Codec types -----------------------------------------------------------------------------------------------------
@@ -29,54 +29,44 @@ package object xpath {
 
   // - Result types ----------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
-  type Success[A] = Result.Success[A]
-  val Success = Result.Success
-
-  type Failure[A] = Result.Failure[A]
-  val Failure = Result.Failure
 
   /** Represents the result of any XPath action.
     *
     * An [[XPathResult]] is either a [[CompileResult]] or a [[ReadResult]].
     *
-    * @see kantan.codecs.Result
     * @documentable
     */
-  type XPathResult[A] = Result[XPathError, A]
+  type XPathResult[A] = Either[XPathError, A]
 
   /** Represents the result of taking a string and compiling it into an XPath query.
     *
-    * @see kantan.codecs.Result
     * @documentable
     */
-  type CompileResult[A] = Result[CompileError, A]
+  type CompileResult[A] = Either[CompileError, A]
 
   /** Represents the result of applying an XPath expression, applying to raw data and turning it into usable types.
     *
     * A [[ReadResult]] is either a [[DecodeResult]] or a [[ParseResult]].
     *
-    * @see kantan.codecs.Result
     * @documentable
     */
-  type ReadResult[A] = Result[ReadError, A]
+  type ReadResult[A] = Either[ReadError, A]
 
   /** Represents the result of taking some raw XPath result and turning it into a usable type.
     *
     * Creation methods can be found in the [[DecodeResult$ companion object]].
     *
-    * @see kantan.codecs.Result
     * @documentable
     */
-  type DecodeResult[A] = Result[DecodeError, A]
+  type DecodeResult[A] = Either[DecodeError, A]
 
   /** Represents the result of taking some raw data and turning it into a usable type.
     *
     * Creation methods can be found in the [[ParseResult$ companion object]].
     *
-    * @see kantan.codecs.Result
     * @documentable
     */
-  type ParseResult[A] = Result[ParseError, A]
+  type ParseResult[A] = Either[ParseError, A]
 
   // - XML types -------------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------

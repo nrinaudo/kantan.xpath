@@ -18,7 +18,7 @@ package kantan.xpath
 package ops
 
 final class ExpressionOps[A](val expr: Query[DecodeResult[A]]) extends AnyVal {
-  def mapResult[B](f: A ⇒ B): Query[DecodeResult[B]] = expr.map(_.map(f))
+  def mapResult[B](f: A ⇒ B): Query[DecodeResult[B]] = expr.map(_.right.map(f))
 }
 
 trait ToExpressionOps {

@@ -21,6 +21,6 @@ import org.scalatest.{FunSuite, Matchers}
 
 class NonRegressionTests extends FunSuite with Matchers {
   test("Parsing should be thread safe") {
-    all((1 to 10).par.map(_ ⇒ "<html><body>text</body></html>".asNode)) should be a 'success
+    all((1 to 10).par.map(_ ⇒ "<html><body>text</body></html>".asNode)) should be a 'right
   }
 }

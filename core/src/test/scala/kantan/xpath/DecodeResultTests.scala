@@ -16,39 +16,39 @@
 
 package kantan.xpath
 
-import kantan.codecs.scalatest.ResultValues
 import org.scalatest.{FunSuite, Matchers}
+import org.scalatest.EitherValues._
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 
 @SuppressWarnings(Array("org.wartremover.warts.Throw"))
-class DecodeResultTests extends FunSuite with GeneratorDrivenPropertyChecks with Matchers with ResultValues {
+class DecodeResultTests extends FunSuite with GeneratorDrivenPropertyChecks with Matchers {
   test("DecodeResult.success should return a success") {
     forAll { i: Int ⇒
-      DecodeResult.success(i).success.value should be(i)
+      DecodeResult.success(i).right.value should be(i)
     }
   }
 
   test("DecodeResult.apply should return a success on 'good' values") {
     forAll { i: Int ⇒
-      DecodeResult(i).success.value should be(i)
+      DecodeResult(i).right.value should be(i)
     }
   }
 
   test("DecodeResult.apply should return a failure on 'bad' values") {
     forAll { e: Exception ⇒
-      DecodeResult(throw e).failure.value should be(DecodeError.TypeError(e))
+      DecodeResult(throw e).left.value should be(DecodeError.TypeError(e))
     }
   }
 
   test("DecodeResult.typeError(Exception) should return a type error") {
     forAll { e: Exception ⇒
-      DecodeResult.typeError(e).failure.value should be(DecodeError.TypeError(e))
+      DecodeResult.typeError(e).left.value should be(DecodeError.TypeError(e))
     }
   }
 
   test("DecodeResult.typeError(String) should return a type error") {
     forAll { s: String ⇒
-      DecodeResult.typeError(s).failure.value should be(DecodeError.TypeError(new Exception(s)))
+      DecodeResult.typeError(s).left.value should be(DecodeError.TypeError(new Exception(s)))
     }
   }
 }

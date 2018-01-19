@@ -52,13 +52,6 @@ trait ArbitraryInstances
     }
   }
 
-  // - Arbitrary results -----------------------------------------------------------------------------------------------
-  // -------------------------------------------------------------------------------------------------------------------
-  implicit def arbDecodeResult[A: Arbitrary]: Arbitrary[DecodeResult[A]] =
-    Arbitrary(oneOf(arb[Failure[DecodeError]]: Gen[DecodeResult[A]], arb[Success[A]]: Gen[DecodeResult[A]]))
-  implicit def arbReadResult[A: Arbitrary]: Arbitrary[ReadResult[A]] =
-    Arbitrary(oneOf(arb[Failure[ReadError]]: Gen[ReadResult[A]], arb[Success[A]]: Gen[ReadResult[A]]))
-
   // - Arbitrary values ------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
   @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
@@ -77,7 +70,7 @@ trait ArbitraryInstances
   })
 
   implicit val arbIllegalXml: Arbitrary[IllegalValue[String, Node, codecs.type]] =
-    Arbitrary(Gen.alphaStr.suchThat(_.asNode.isFailure).map(IllegalValue.apply))
+    Arbitrary(Gen.alphaStr.suchThat(_.asNode.isLeft).map(IllegalValue.apply))
 
   implicit def arbLegalFoundNode[A](
     implicit la: Arbitrary[LegalString[A]]

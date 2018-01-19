@@ -16,27 +16,27 @@
 
 package kantan.xpath
 
-import kantan.codecs.scalatest.ResultValues
 import org.scalatest.{FunSuite, Matchers}
+import org.scalatest.EitherValues._
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 
 @SuppressWarnings(Array("org.wartremover.warts.Throw"))
-class ParseResultTests extends FunSuite with GeneratorDrivenPropertyChecks with Matchers with ResultValues {
+class ParseResultTests extends FunSuite with GeneratorDrivenPropertyChecks with Matchers {
   test("ParseResult.success should return a success") {
     forAll { i: Int ⇒
-      ParseResult.success(i).success.value should be(i)
+      ParseResult.success(i).right.value should be(i)
     }
   }
 
   test("ParseResult.apply should return a success on 'good' values") {
     forAll { i: Int ⇒
-      ParseResult(i).success.value should be(i)
+      ParseResult(i).right.value should be(i)
     }
   }
 
   test("ParseResult.apply should return a failure on 'bad' values") {
     forAll { e: Exception ⇒
-      ParseResult(throw e).failure.value should be(ParseError.SyntaxError(e))
+      ParseResult(throw e).left.value should be(ParseError.SyntaxError(e))
     }
   }
 }

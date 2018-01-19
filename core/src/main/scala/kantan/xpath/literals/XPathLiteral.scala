@@ -22,11 +22,13 @@ import contextual._
 object XPathLiteral extends Interpolator {
   type Output = XPathExpression
 
-  @SuppressWarnings(Array("org.wartremover.warts.TraversableOps"))
+  @SuppressWarnings(
+    Array("org.wartremover.warts.TraversableOps", "org.wartremover.warts.Product", "org.wartremover.warts.Serializable")
+  )
   def contextualize(interpolation: StaticInterpolation): Seq[ContextType] = {
     interpolation.parts.foreach {
       case lit @ Literal(_, _) ⇒
-        implicitly[XPathCompiler].compile(interpolation.literals.head).leftMap { e ⇒
+        implicitly[XPathCompiler].compile(interpolation.literals.head).left.map { e ⇒
           interpolation.error(lit, 0, e.getMessage)
         }
       case hole @ Hole(_, _) ⇒
@@ -35,6 +37,7 @@ object XPathLiteral extends Interpolator {
     Nil
   }
 
+  @SuppressWarnings(Array("org.wartremover.warts.EitherProjectionPartial"))
   def evaluate(interpolation: RuntimeInterpolation): XPathExpression =
-    implicitly[XPathCompiler].compile(interpolation.parts.mkString).get
+    implicitly[XPathCompiler].compile(interpolation.parts.mkString).right.get
 }

@@ -109,7 +109,7 @@ trait ArbitraryInstances
   implicit val cogenNode: Cogen[Node] = {
     def accumulate(node: Node, acc: List[(String, Short)]): List[(String, Short)] = {
       val children = node.getChildNodes
-      (0 to children.getLength).foldLeft((node.getNodeName, node.getNodeType) :: acc) { (a, i) ⇒
+      (0 until children.getLength).foldLeft((node.getNodeName, node.getNodeType) :: acc) { (a, i) ⇒
         accumulate(children.item(i), a)
       }
     }

@@ -18,9 +18,6 @@ package kantan.xpath
 package laws
 package discipline
 
-import DecodeError.TypeError
-import ParseError.{IOError, SyntaxError}
-import imp.imp
 import kantan.codecs.laws._, CodecValue.{IllegalValue, LegalValue}
 import ops._
 import org.scalacheck._, Arbitrary.{arbitrary ⇒ arb}, Gen._
@@ -32,12 +29,15 @@ trait ArbitraryInstances
     extends kantan.codecs.laws.discipline.ArbitraryInstances with kantan.xpath.laws.discipline.ArbitraryArities {
   // - Arbitrary errors ------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
-  implicit val arbCompileError: Arbitrary[CompileError] = Arbitrary(genException.map(CompileError.apply))
-  implicit val arbTypeError: Arbitrary[TypeError]       = Arbitrary(genException.map(TypeError.apply))
+  implicit val arbCompileError: Arbitrary[CompileError]          = Arbitrary(genException.map(CompileError.apply))
+  implicit val arbTypeError: Arbitrary[DecodeError.TypeError]    = Arbitrary(genException.map(DecodeError.TypeError.apply))
+  implicit val arbNotFound: Arbitrary[DecodeError.NotFound.type] = Arbitrary(const(DecodeError.NotFound))
   implicit val arbDecodeError: Arbitrary[DecodeError] =
-    Arbitrary(oneOf(const(DecodeError.NotFound), arbTypeError.arbitrary))
-  implicit val arbSyntaxError: Arbitrary[SyntaxError] = Arbitrary(genException.map(SyntaxError.apply))
-  implicit val arbIOError: Arbitrary[IOError]         = Arbitrary(genIoException.map(IOError.apply))
+    Arbitrary(oneOf(arbNotFound.arbitrary, arbTypeError.arbitrary))
+  implicit val arbSyntaxError: Arbitrary[ParseError.SyntaxError] = Arbitrary(
+    genException.map(ParseError.SyntaxError.apply)
+  )
+  implicit val arbIOError: Arbitrary[ParseError.IOError] = Arbitrary(genIoException.map(ParseError.IOError.apply))
   implicit val arbParseError: Arbitrary[ParseError] =
     Arbitrary(oneOf(arbSyntaxError.arbitrary, arbIOError.arbitrary))
   implicit val arbReadError: Arbitrary[ReadError] =
@@ -45,10 +45,35 @@ trait ArbitraryInstances
   implicit val arbXPathError: Arbitrary[XPathError] =
     Arbitrary(oneOf(arb[ReadError], arb[CompileError]))
 
-  implicit val cogenCsvDecodeError: Cogen[DecodeError] = Cogen { (seed: Seed, err: DecodeError) ⇒
-    err match {
-      case DecodeError.NotFound       ⇒ seed
-      case DecodeError.TypeError(msg) ⇒ imp[Cogen[String]].perturb(seed, msg)
+  implicit val cogenCompileError: Cogen[CompileError]          = Cogen[String].contramap(_.message)
+  implicit val cogenTypeError: Cogen[DecodeError.TypeError]    = Cogen[String].contramap(_.message)
+  implicit val cogenNotFound: Cogen[DecodeError.NotFound.type] = Cogen[Unit].contramap(_ ⇒ ())
+  implicit val cogenDecodeError: Cogen[DecodeError] = Cogen { (seed: Seed, error: DecodeError) ⇒
+    error match {
+      case err: DecodeError.TypeError     ⇒ cogenTypeError.perturb(seed, err)
+      case err: DecodeError.NotFound.type ⇒ cogenNotFound.perturb(seed, err)
+    }
+  }
+  implicit val cogenSyntaxError: Cogen[ParseError.SyntaxError] = Cogen[String].contramap(_.message)
+  implicit val cogenIOError: Cogen[ParseError.IOError]         = Cogen[String].contramap(_.message)
+  implicit val cogenParseError: Cogen[ParseError] = Cogen { (seed: Seed, error: ParseError) ⇒
+    error match {
+      case err: ParseError.SyntaxError ⇒ cogenSyntaxError.perturb(seed, err)
+      case err: ParseError.IOError     ⇒ cogenIOError.perturb(seed, err)
+    }
+  }
+
+  implicit val cogenReadError: Cogen[ReadError] = Cogen { (seed: Seed, error: ReadError) ⇒
+    error match {
+      case err: DecodeError ⇒ cogenDecodeError.perturb(seed, err)
+      case err: ParseError  ⇒ cogenParseError.perturb(seed, err)
+    }
+  }
+
+  implicit val cogenXPathError: Cogen[XPathError] = Cogen { (seed: Seed, error: XPathError) ⇒
+    error match {
+      case err: ReadError    ⇒ cogenReadError.perturb(seed, err)
+      case err: CompileError ⇒ cogenCompileError.perturb(seed, err)
     }
   }
 
@@ -122,4 +147,7 @@ trait ArbitraryInstances
 
   implicit def arbQuery[A: Arbitrary]: Arbitrary[Query[A]] =
     Arbitrary(implicitly[Arbitrary[Node ⇒ A]].arbitrary.map(f ⇒ Query(f)))
+
+  implicit def arbXmlSource[A: Arbitrary: Cogen](implicit n: Arbitrary[Node]): Arbitrary[XmlSource[A]] =
+    Arbitrary(arb[A ⇒ ParseResult[Node]].map(XmlSource.from))
 }

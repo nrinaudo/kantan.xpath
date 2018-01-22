@@ -37,6 +37,9 @@ libraryDependencies += "com.nrinaudo" %% "kantan.xpath-joda-time" % "@VERSION@"
 
 // Provides refined decoders.
 libraryDependencies += "com.nrinaudo" %% "kantan.xpath-refined" % "@VERSION@"
+
+// Provides enumeratum decoders.
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-enumeratum" % "@VERSION@"
 ```
 
 ## Motivation

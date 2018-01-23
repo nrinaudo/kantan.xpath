@@ -142,9 +142,6 @@ trait ArbitraryInstances
     Cogen.cogenList[(String, Short)].contramap(n ⇒ accumulate(n, List.empty))
   }
 
-  implicit def arbNodeDecoder[A: Arbitrary]: Arbitrary[NodeDecoder[A]] =
-    Arbitrary(arb[Option[Node] ⇒ DecodeResult[A]].map(f ⇒ NodeDecoder.from(f)))
-
   implicit def arbQuery[A: Arbitrary]: Arbitrary[Query[A]] =
     Arbitrary(implicitly[Arbitrary[Node ⇒ A]].arbitrary.map(f ⇒ Query(f)))
 

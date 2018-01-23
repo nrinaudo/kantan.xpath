@@ -23,12 +23,17 @@ import kantan.xpath.cats._
 
 The following instance for cats type classes are provided:
 
-* [`Functor`] for [`NodeDecoder`].
+* [`MonadError`] and [`SemigroupK`] for [`NodeDecoder`].
+* [`Contravariant`] for [`XmlSource`].
+* [`Show`] and [`Eq`] for all error types ([`XPathError`] and all its descendants).
+* [`Show`] for [`Node`].
 
-[`Functor`]:http://typelevel.org/cats/api/cats/Functor.html
+[`MonadError`]:https://typelevel.org/cats/api/cats/MonadError.html
+[`SemigroupK`]:https://typelevel.org/cats/api/cats/SemigroupK.html
+[`Contravariant`]:http://typelevel.org/cats/api/cats/Contravariant.html
+[`Show`]:https://typelevel.org/cats/api/cats/Show.html
+[`Eq`]:https://typelevel.org/cats/api/cats/kernel/Eq.html
 [`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html
-[`XPathResult`]:{{ site.baseurl }}/api/kantan/xpath/XPathResult$.html
-[`ReadResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$ReadResult
-[`ParseResult`]:{{ site.baseurl }}/api/kantan/xpath/package$$ParseResult.html
-[`DecodeResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$DecodeResult
-[`CompileResult`]:{{ site.baseurl }}/api/kantan/xpath/CompileResult$.html
+[`Node`]:{{ site.baseurl }}/api/kantan/xpath/index.html#Node=org.w3c.dom.Node
+[`XPathError`]:{{ site.baseurl }}/api/kantan/xpath/XPathError.html
+[`XmlSource`]:{{ site.baseurl }}/api/kantan/xpath/XmlSource.html

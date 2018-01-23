@@ -17,18 +17,27 @@
 package kantan.xpath
 
 import _root_.cats._
-import kantan.codecs.cats.CatsInstances
+import kantan.codecs.cats._
 
-package object cats extends CatsInstances {
-  // - Eq instances for errors -----------------------------------------------------------------------------------------
+package object cats extends DecoderInstances with CommonInstances {
+
+  // - Eq instances ----------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
-  implicit val compileErrorEq: Eq[CompileError] = Eq.fromUniversalEquals[CompileError]
-  implicit val readErrorEq: Eq[ReadError]       = Eq.fromUniversalEquals[ReadError]
-  implicit val decodeErrorEq: Eq[DecodeError]   = Eq.fromUniversalEquals[DecodeError]
-  implicit val parseErrorEq: Eq[ParseError]     = Eq.fromUniversalEquals[ParseError]
+
+  implicit val xpathCompileErrorEq: Eq[CompileError]          = Eq.fromUniversalEquals
+  implicit val xpathReadErrorEq: Eq[ReadError]                = Eq.fromUniversalEquals
+  implicit val xpathDecodeErrorEq: Eq[DecodeError]            = Eq.fromUniversalEquals
+  implicit val xpathNotFoundEq: Eq[DecodeError.NotFound.type] = Eq.fromUniversalEquals
+  implicit val xpathTypeErrorEq: Eq[DecodeError.TypeError]    = Eq.fromUniversalEquals
+  implicit val xpathParseErrorEq: Eq[ParseError]              = Eq.fromUniversalEquals
+  implicit val xpathSyntaxErrorEq: Eq[ParseError.SyntaxError] = Eq.fromUniversalEquals
+  implicit val xpathIOErrorEq: Eq[ParseError.IOError]         = Eq.fromUniversalEquals
+  implicit val xpathXPathErrorEq: Eq[XPathError]              = Eq.fromUniversalEquals
+  implicit val xpathNodeEq: Eq[Node]                          = Eq.instance((n1, n2) ⇒ n1.isEqualNode(n2))
 
   // - Misc. instances -------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
+
   /** `Contravariant` instance for `XmlSource`. */
   implicit val xmlSource: Contravariant[XmlSource] = new Contravariant[XmlSource] {
     override def contramap[A, B](fa: XmlSource[A])(f: B ⇒ A) = fa.contramap(f)

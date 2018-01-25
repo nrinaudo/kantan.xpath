@@ -40,6 +40,9 @@ libraryDependencies += "com.nrinaudo" %% "kantan.xpath-refined" % "@VERSION@"
 
 // Provides enumeratum decoders.
 libraryDependencies += "com.nrinaudo" %% "kantan.xpath-enumeratum" % "@VERSION@"
+
+// Provides libra decoders.
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-libra" % "@VERSION@"
 ```
 
 ## Motivation

@@ -17,12 +17,16 @@
 package kantan.xpath
 package scalaz
 
-import _root_.scalaz.scalacheck.ScalazProperties.{equal ⇒ equ}
-import arbitrary._
+import _root_.scalaz.Scalaz._
+import _root_.scalaz.scalacheck.ScalazProperties._
+import arbitrary._, equality._
 import kantan.codecs.scalaz.laws.discipline.ScalazDisciplineSuite
+import org.scalacheck.Arbitrary
 
-class InstancesTests extends ScalazDisciplineSuite {
-  checkAll("ReadError", equ.laws[ReadError])
-  checkAll("DecodeError", equ.laws[DecodeError])
-  checkAll("ParseError", equ.laws[ParseError])
+class XmlSourceTests extends ScalazDisciplineSuite {
+
+  implicit val arb: Arbitrary[Node] = arbNode[Int](_.toString)
+
+  checkAll("XmlSource", contravariant.laws[XmlSource])
+
 }

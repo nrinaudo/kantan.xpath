@@ -15,17 +15,18 @@
  */
 
 package kantan.xpath
-package cats
+package scalaz
 
-import _root_.cats.implicits._
-import _root_.cats.laws.discipline.ContravariantTests
-import laws.discipline._, arbitrary._, equality._
+import _root_.scalaz.Scalaz._
+import _root_.scalaz.scalacheck.ScalazProperties.{equal ⇒ equ}
+import arbitrary._
+import kantan.codecs.scalaz.laws.discipline.ScalazDisciplineSuite
 import org.scalacheck.Arbitrary
 
-class XmlSourceTests extends DisciplineSuite {
+class NodeTests extends ScalazDisciplineSuite {
 
   implicit val arb: Arbitrary[Node] = arbNode[Int](_.toString)
 
-  checkAll("XmlSource", ContravariantTests[XmlSource].contravariant[Int, Int, Int])
+  checkAll("Node", equ.laws[Node])
 
 }

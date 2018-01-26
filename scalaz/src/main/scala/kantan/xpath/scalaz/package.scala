@@ -17,15 +17,22 @@
 package kantan.xpath
 
 import _root_.scalaz._
-import kantan.codecs.scalaz.ScalazInstances
+import kantan.codecs.scalaz._
 
-package object scalaz extends ScalazInstances {
+package object scalaz extends DecoderInstances with CommonInstances {
   // - Equal instances for errors --------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
-  implicit val compileErrorEq: Equal[CompileError] = Equal.equalA[CompileError]
-  implicit val readErrorEq: Equal[ReadError]       = Equal.equalA[ReadError]
-  implicit val decodeErrorEq: Equal[DecodeError]   = Equal.equalA[DecodeError]
-  implicit val parseErrorEq: Equal[ParseError]     = Equal.equalA[ParseError]
+
+  implicit val xpathCompileErrorEqual: Equal[CompileError]          = Equal.equalA
+  implicit val xpathReadErrorEqual: Equal[ReadError]                = Equal.equalA
+  implicit val xpathDecodeErrorEqual: Equal[DecodeError]            = Equal.equalA
+  implicit val xpathNotFoundEqual: Equal[DecodeError.NotFound.type] = Equal.equalA
+  implicit val xpathTypeErrorEqual: Equal[DecodeError.TypeError]    = Equal.equalA
+  implicit val xpathParseErrorEqual: Equal[ParseError]              = Equal.equalA
+  implicit val xpathSyntaxErrorEqual: Equal[ParseError.SyntaxError] = Equal.equalA
+  implicit val xpathIOErrorEqual: Equal[ParseError.IOError]         = Equal.equalA
+  implicit val xpathXPathErrorEqual: Equal[XPathError]              = Equal.equalA
+  implicit val xpathNodeEqual: Equal[Node]                          = Equal.equal((n1, n2) ⇒ n1.isEqualNode(n2))
 
   // - Misc. instances -------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------

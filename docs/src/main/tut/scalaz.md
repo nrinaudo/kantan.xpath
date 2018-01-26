@@ -50,14 +50,20 @@ instance, there exists a [`NodeDecoder`] instance for `Maybe[A]`.
 
 The following instance for cats type classes are provided:
 
-* [`Functor`] for [`NodeDecoder`].
+* [`MonadError`] and [`Plus`] for [`NodeDecoder`].
+* [`Contravariant`] for [`XmlSource`].
+* [`Show`] and [`Equal`] for all error types ([`XPathError`] and all its descendants).
+* [`Equal`] for [`Node`].
 
-[`Functor`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.Functor
+[`MonadError`]:https://static.javadoc.io/org.scalaz/scalaz_2.12/7.2.18/scalaz/MonadError.html
+[`Contravariant`]:https://static.javadoc.io/org.scalaz/scalaz_2.12/7.2.18/scalaz/Contravariant.html
+[`Functor`]:https://static.javadoc.io/org.scalaz/scalaz_2.12/7.2.18/scalaz/Functor.html
+[`Plus`]:https://static.javadoc.io/org.scalaz/scalaz_2.12/7.2.18/scalaz/Plus.html
+[`Show`]:https://static.javadoc.io/org.scalaz/scalaz_2.12/7.2.18/scalaz/Show.html
+[`Equal`]:https://static.javadoc.io/org.scalaz/scalaz_2.12/7.2.18/scalaz/Equal.html
 [`\/`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.$bslash$div
 [`Maybe`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.Maybe
 [`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html
-[`XPathResult`]:{{ site.baseurl }}/api/kantan/xpath/XPathResult$.html
-[`ReadResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$ReadResult
-[`ParseResult`]:{{ site.baseurl }}/api/kantan/xpath/package$$ParseResult.html
-[`DecodeResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$DecodeResult
-[`CompileResult`]:{{ site.baseurl }}/api/kantan/xpath/CompileResult$.html
+[`XPathError`]:{{ site.baseurl }}/api/kantan/xpath/XPathError.html
+[`XmlSource`]:{{ site.baseurl }}/api/kantan/xpath/XmlSource.html
+[`Node`]:{{ site.baseurl }}/api/kantan/xpath/index.html#Node=org.w3c.dom.Node

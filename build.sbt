@@ -15,9 +15,9 @@ lazy val root = Project(id = "kantan-xpath", base = file("."))
       |import kantan.xpath.refined._
     """.stripMargin
   )
-  .aggregate(cats, core, docs, enumeratum, jodaTime, laws, nekohtml, refined, scalaz)
+  .aggregate(cats, core, docs, enumeratum, jodaTime, laws, libra, nekohtml, refined, scalaz)
   .aggregateIf(java8Supported)(java8)
-  .dependsOn(core, jodaTime, nekohtml, refined)
+  .dependsOn(core, jodaTime, libra, nekohtml, refined)
 
 lazy val docs = project
   .settings(
@@ -25,7 +25,7 @@ lazy val docs = project
       inAnyProject -- inProjectsIf(!java8Supported)(java8)
   )
   .enablePlugins(DocumentationPlugin)
-  .dependsOn(cats, core, enumeratum, jodaTime, nekohtml, refined, scalaz)
+  .dependsOn(cats, core, enumeratum, jodaTime, libra, nekohtml, refined, scalaz)
   .dependsOnIf(java8Supported)(java8)
 
 // - core projects -----------------------------------------------------------------------------------------------------
@@ -162,7 +162,7 @@ lazy val refined = project
     )
   )
 
-// - Enuemratum project ------------------------------------------------------------------------------------------------
+// - Enumeratum project ------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------------------------
 lazy val enumeratum = project
   .settings(
@@ -176,5 +176,22 @@ lazy val enumeratum = project
       "com.nrinaudo"  %% "kantan.codecs-enumeratum"      % Versions.kantanCodecs,
       "com.nrinaudo"  %% "kantan.codecs-enumeratum-laws" % Versions.kantanCodecs % "test",
       "org.scalatest" %% "scalatest"                     % Versions.scalatest % "test"
+    )
+  )
+
+// - Libra project -----------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
+lazy val libra = project
+  .settings(
+    moduleName := "kantan.xpath-libra",
+    name       := "libra"
+  )
+  .enablePlugins(PublishedPlugin)
+  .dependsOn(core, laws % "test")
+  .settings(
+    libraryDependencies ++= Seq(
+      "com.nrinaudo"  %% "kantan.codecs-libra"      % Versions.kantanCodecs,
+      "com.nrinaudo"  %% "kantan.codecs-libra-laws" % Versions.kantanCodecs % "test",
+      "org.scalatest" %% "scalatest"                % Versions.scalatest % "test"
     )
   )

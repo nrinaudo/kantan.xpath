@@ -18,11 +18,20 @@ package kantan.xpath
 package scalaz
 
 import _root_.scalaz.Equal
-import _root_.scalaz.syntax.equal._
-import laws.discipline.arbitrary._
+import _root_.scalaz.Scalaz._
+import arbitrary._
 import org.scalacheck.Arbitrary
 
-object equality {
+object equality extends kantan.codecs.scalaz.laws.discipline.EqualInstances {
+
+  implicit def xmlSourceEqual[A: Equal: Arbitrary]: Equal[XmlSource[A]] = new Equal[XmlSource[A]] {
+
+    override def equal(a1: XmlSource[A], a2: XmlSource[A]) =
+      kantan.codecs.laws.discipline.equality.eq(a1.asNode, a2.asNode) { (d1, d2) ⇒
+        d1 === d2
+      }
+  }
+
   implicit def queryEqual[A: Equal: Arbitrary]: Equal[Query[A]] = new Equal[Query[A]] {
     implicit val arb = arbNode((a: A) ⇒ a.toString)
     override def equal(a1: Query[A], a2: Query[A]) =
@@ -30,4 +39,5 @@ object equality {
         d1 === d2
       }
   }
+
 }

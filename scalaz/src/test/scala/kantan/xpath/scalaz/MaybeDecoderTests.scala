@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package scalaz
+package kantan.xpath.scalaz
 
-import _root_.scalaz.Maybe
-import _root_.scalaz.scalacheck.ScalazArbitrary._
-import laws.discipline._, arbitrary._
+import kantan.xpath.laws.discipline.NodeDecoderTests
+import kantan.xpath.scalaz.arbitrary._
+import org.scalatest.FunSuite
+import org.scalatest.prop.GeneratorDrivenPropertyChecks
+import org.typelevel.discipline.scalatest.Discipline
+import scalaz.Maybe
 
-class MaybeDecoderTests extends DisciplineSuite {
+class MaybeDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
   checkAll("NodeDecoder[Maybe[Int]]", NodeDecoderTests[Maybe[Int]].decoder[Int, Int])
 }

@@ -18,6 +18,4 @@ package kantan.xpath
 
 import kantan.codecs.ResultCompanion
 
-object CompileResult extends ResultCompanion.WithDefault[CompileError] {
-  override protected def fromThrowable(t: Throwable) = CompileError(t)
-}
+object CompileResult extends ResultCompanion.WithError[CompileError]

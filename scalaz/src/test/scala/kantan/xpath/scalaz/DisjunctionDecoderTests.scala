@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package scalaz
+package kantan.xpath.scalaz
 
 import _root_.scalaz.\/
-import _root_.scalaz.scalacheck.ScalazArbitrary._
-import laws.discipline._, arbitrary._
+import kantan.xpath.laws.discipline.NodeDecoderTests
+import kantan.xpath.scalaz.arbitrary._
+import org.scalatest.FunSuite
+import org.scalatest.prop.GeneratorDrivenPropertyChecks
+import org.typelevel.discipline.scalatest.Discipline
 
-class DisjunctionDecoderTests extends DisciplineSuite {
-
+class DisjunctionDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
   checkAll("NodeDecoder[Int \\/ Boolean]", NodeDecoderTests[Int \/ Boolean].decoder[Int, Int])
-
 }

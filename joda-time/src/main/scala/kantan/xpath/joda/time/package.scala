@@ -22,21 +22,22 @@ import kantan.codecs.strings.StringDecoder
 import kantan.codecs.strings.joda.time._
 import org.joda.time.{DateTime, LocalDate, LocalDateTime, LocalTime}
 
-/** Brings all joda time instances in scope.
+/** Declares [[kantan.xpath.NodeDecoder]] instances joda-time types.
   *
-  * Note that this is a convenience - the exact same effect can be achieved by importing
-  * `kantan.codec.strings.joda.time._`. The sole purpose of this is to keep things simple for users that don't want or
-  * need to learn about kantan.xpath's internals.
+  * Note that the type for default codecs might come as a surprise: the wrapping `Exported` is used to lower their
+  * priority. This is necessary because the standard use case will be to `import kantan.xpath.joda.time._`, which
+  * brings both the instance creation and default instances in scope. Without this type trickery, custom instances
+  * and default ones would always clash.
   */
 package object time extends JodaTimeDecoderCompanion[Option[Node], DecodeError, codecs.type] {
+
   override def decoderFrom[D](d: StringDecoder[D]) = codecs.fromString(d)
 
-  implicit val defaultDateTimeNodeDecoder: Exported[NodeDecoder[DateTime]] =
-    Exported(defaultDateTimeDecoder)
-  implicit val defaultLocalDateTimeNodeDecoder: Exported[NodeDecoder[LocalDateTime]] =
-    Exported(defaultLocalDateTimeDecoder)
-  implicit val defaultLocalDateNodeDecoder: Exported[NodeDecoder[LocalDate]] =
-    Exported(defaultLocalDateDecoder)
-  implicit val defaultLocalTimeNodeDecoder: Exported[NodeDecoder[LocalTime]] =
-    Exported(defaultLocalTimeDecoder)
+  implicit val defaultDateTimeNodeDecoder: Exported[NodeDecoder[DateTime]] = Exported(defaultDateTimeDecoder)
+  implicit val defaultLocalDateTimeNodeDecoder: Exported[NodeDecoder[LocalDateTime]] = Exported(
+    defaultLocalDateTimeDecoder
+  )
+  implicit val defaultLocalTimeNodeDecoder: Exported[NodeDecoder[LocalTime]] = Exported(defaultLocalTimeDecoder)
+  implicit val defaultLocalDateNodeDecoder: Exported[NodeDecoder[LocalDate]] = Exported(defaultLocalDateDecoder)
+
 }

@@ -25,6 +25,7 @@ lazy val docs = project
       inAnyProject -- inProjectsIf(!java8Supported)(java8)
   )
   .enablePlugins(DocumentationPlugin)
+  .settings(name := "docs")
   .dependsOn(cats, core, enumeratum, jodaTime, libra, nekohtml, refined, scalaz)
   .dependsOnIf(java8Supported)(java8)
 

@@ -60,7 +60,18 @@ And we're done, as far as decoding is concerned. We only need to get an XPath ex
 input.evalXPath[List[org.joda.time.LocalDate]](xp"//date/@value")
 ```
 
+Note that while you can pass a [`DateTimeFormatter`] directly, the preferred way of dealing with pattern strings is to
+use the literal syntax provided by kantan.xpath:
 
+```tut:silent
+localDateDecoder(fmt"dd-MM-yyyy")
+```
+
+The advantage is that this is checked at compile time - invalid pattern strings will cause a compilation error:
+
+```tut:fail
+localDateDecoder(fmt"FOOBAR")
+```
 
 [`Date`]:https://docs.oracle.com/javase/7/docs/api/java/util/Date.html
 [`DateTime`]:http://joda-time.sourceforge.net/apidocs/org/joda/time/DateTime.html
@@ -69,3 +80,4 @@ input.evalXPath[List[org.joda.time.LocalDate]](xp"//date/@value")
 [`LocalTime`]:http://joda-time.sourceforge.net/apidocs/org/joda/time/LocalTime.html
 [`DateTimeFormat`]:http://joda-time.sourceforge.net/apidocs/org/joda/time/format/DateTimeFormat.html
 [`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html
+[`DateTimeFormatter`]:http://joda-time.sourceforge.net/apidocs/org/joda/time/format/DateTimeFormatter.html

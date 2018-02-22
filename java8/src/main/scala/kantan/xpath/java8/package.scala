@@ -21,7 +21,15 @@ import kantan.codecs.export.Exported
 import kantan.codecs.strings.StringDecoder
 import kantan.codecs.strings.java8.TimeDecoderCompanion
 
+/** Declares [[kantan.xpath.NodeDecoder]] instances java8 date and time types.
+  *
+  * Note that the type for default codecs might come as a surprise: the wrapping `Exported` is used to lower their
+  * priority. This is necessary because the standard use case will be to `import kantan.xpath.java8._`, which
+  * brings both the instance creation and default instances in scope. Without this type trickery, custom instances
+  * and default ones would always clash.
+  */
 package object java8 extends TimeDecoderCompanion[Option[Node], DecodeError, codecs.type] {
+
   override def decoderFrom[D](d: StringDecoder[D]) = codecs.fromString(d)
 
   implicit val defaultInstantNodeDecoder: Exported[NodeDecoder[Instant]] =
@@ -36,4 +44,5 @@ package object java8 extends TimeDecoderCompanion[Option[Node], DecodeError, cod
     Exported(defaultLocalDateDecoder)
   implicit val defaultLocalTimeNodeDecoder: Exported[NodeDecoder[LocalTime]] =
     Exported(defaultLocalTimeDecoder)
+
 }

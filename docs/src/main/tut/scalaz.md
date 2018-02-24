@@ -61,8 +61,8 @@ The following instance for cats type classes are provided:
 [`Plus`]:https://static.javadoc.io/org.scalaz/scalaz_2.12/7.2.18/scalaz/Plus.html
 [`Show`]:https://static.javadoc.io/org.scalaz/scalaz_2.12/7.2.18/scalaz/Show.html
 [`Equal`]:https://static.javadoc.io/org.scalaz/scalaz_2.12/7.2.18/scalaz/Equal.html
-[`\/`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.$bslash$div
-[`Maybe`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.Maybe
+[`\/`]:https://static.javadoc.io/org.scalaz/scalaz_2.12/7.2.19/scalaz/$bslash$div.html
+[`Maybe`]:https://static.javadoc.io/org.scalaz/scalaz_2.12/7.2.19/scalaz/Maybe.html
 [`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html
 [`XPathError`]:{{ site.baseurl }}/api/kantan/xpath/XPathError.html
 [`XmlSource`]:{{ site.baseurl }}/api/kantan/xpath/XmlSource.html

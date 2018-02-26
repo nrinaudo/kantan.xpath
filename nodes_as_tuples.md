@@ -46,11 +46,11 @@ Now that we have told kantan.xpath how to decode an XML node to an instance of `
 
 ```scala
 scala> rawData.evalXPath[List[(Int, Boolean)]](xp"//element")
-res2: kantan.xpath.XPathResult[List[(Int, Boolean)]] = Success(List((1,true), (2,false), (3,true), (4,false)))
+res2: kantan.xpath.XPathResult[List[(Int, Boolean)]] = Right(List((1,true), (2,false), (3,true), (4,false)))
 ```
 
 [`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html
 [`tuple`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html#tuple[I1,I2](x1:kantan.xpath.Query[kantan.xpath.DecodeResult[I1]],x2:kantan.xpath.Query[kantan.xpath.DecodeResult[I2]]):kantan.xpath.NodeDecoder[(I1,I2)]
 [`CompileResult`]:{{ site.baseurl }}/api/kantan/xpath/CompileResult$.html
-[`get`]:https://nrinaudo.github.io/kantan.codecs/api/index.html#kantan.codecs.Result@get:S
+[`get`]:https://nrinaudo.github.io/kantan.codecs/api/kantan/codecs/Result.html#get:S
 [`evalXPath`]:{{ site.baseurl }}/api/kantan/xpath/ops/XmlSourceOps.html#evalXPath[B](expr:kantan.xpath.XPathExpression)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]

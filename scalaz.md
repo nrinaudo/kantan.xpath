@@ -10,7 +10,7 @@ bones: it provides decoders for [`Maybe`] and [`\/`] as well as a few useful typ
 The `scalaz` module can be used by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-scalaz" % "0.3.2"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-scalaz" % "0.4.0"
 ```
 
 You then need to import the corresponding package:
@@ -35,7 +35,7 @@ We can then simply write the following:
 
 ```scala
 scala> "<foo><bar value='1'/><bar value='foo'/></foo>".evalXPath[List[Int \/ String]](xp"//bar/@value")
-res0: kantan.xpath.XPathResult[List[Int \/ String]] = Success(List(-\/(1), \/-(foo)))
+res0: kantan.xpath.XPathResult[List[Int \/ String]] = Right(List(-\/(1), \/-(foo)))
 ```
 
 ## `Maybe` decoder
@@ -45,33 +45,27 @@ instance, there exists a [`NodeDecoder`] instance for `Maybe[A]`.
 
 ```scala
 scala> "<foo><bar/></foo>".evalXPath[Maybe[Int]](xp"//bar/@value")
-res1: kantan.xpath.XPathResult[scalaz.Maybe[Int]] = Success(Empty())
+res1: kantan.xpath.XPathResult[scalaz.Maybe[Int]] = Right(Empty())
 ```
 
 ## Scalaz instances
 
 The following instance for cats type classes are provided:
 
-* [`Functor`] for [`NodeDecoder`].
-* [`Order`] for all result types ([`DecodeResult`], [`XPathResult`], [`ReadResult`], [`ParseResult`] and [`CompileResult`]).
-* [`Monoid`] for all result types.
-* [`Show`] for all result types.
-* [`Traverse`] for all result types.
-* [`Monad`] for all result types.
-* [`BiFunctor`] for all result types.
+* [`MonadError`] and [`Plus`] for [`NodeDecoder`].
+* [`Contravariant`] for [`XmlSource`].
+* [`Show`] and [`Equal`] for all error types ([`XPathError`] and all its descendants).
+* [`Equal`] for [`Node`].
 
-[`Functor`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.Functor
-[`BiFunctor`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.Bifunctor
-[`Order`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.Order
-[`Show`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.Show
-[`Traverse`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.Show
-[`Monad`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.Monad
-[`Monoid`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.Monoid
-[`\/`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.$bslash$div
-[`Maybe`]:https://oss.sonatype.org/service/local/repositories/releases/archive/org/scalaz/scalaz_2.11/7.2.3/scalaz_2.11-7.2.3-javadoc.jar/!/index.html#scalaz.Maybe
+[`MonadError`]:https://static.javadoc.io/org.scalaz/scalaz_2.12/7.2.18/scalaz/MonadError.html
+[`Contravariant`]:https://static.javadoc.io/org.scalaz/scalaz_2.12/7.2.18/scalaz/Contravariant.html
+[`Functor`]:https://static.javadoc.io/org.scalaz/scalaz_2.12/7.2.18/scalaz/Functor.html
+[`Plus`]:https://static.javadoc.io/org.scalaz/scalaz_2.12/7.2.18/scalaz/Plus.html
+[`Show`]:https://static.javadoc.io/org.scalaz/scalaz_2.12/7.2.18/scalaz/Show.html
+[`Equal`]:https://static.javadoc.io/org.scalaz/scalaz_2.12/7.2.18/scalaz/Equal.html
+[`\/`]:https://static.javadoc.io/org.scalaz/scalaz_2.12/7.2.19/scalaz/$bslash$div.html
+[`Maybe`]:https://static.javadoc.io/org.scalaz/scalaz_2.12/7.2.19/scalaz/Maybe.html
 [`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html
-[`XPathResult`]:{{ site.baseurl }}/api/kantan/xpath/XPathResult$.html
-[`ReadResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$ReadResult
-[`ParseResult`]:{{ site.baseurl }}/api/kantan/xpath/package$$ParseResult.html
-[`DecodeResult`]:{{ site.baseurl }}/api/index.html#kantan.xpath.package$$DecodeResult
-[`CompileResult`]:{{ site.baseurl }}/api/kantan/xpath/CompileResult$.html
+[`XPathError`]:{{ site.baseurl }}/api/kantan/xpath/XPathError.html
+[`XmlSource`]:{{ site.baseurl }}/api/kantan/xpath/XmlSource.html
+[`Node`]:{{ site.baseurl }}/api/kantan/xpath/index.html#Node=org.w3c.dom.Node

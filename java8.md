@@ -9,7 +9,7 @@ kantan.xpath API - we still support Java 7. There is, however, a dedicated optio
 adding the following line to your `build.sbt` file:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-java8" % "0.3.2"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-java8" % "0.4.0"
 ```
 
 You then need to import the corresponding package:
@@ -41,7 +41,7 @@ We can decode the bracketed dates without providing an explicit decoder:
 
 ```scala
 scala> input.evalXPath[List[LocalDate]](xp"//date/@value")
-res1: kantan.xpath.XPathResult[List[java.time.LocalDate]] = Success(List(1978-10-12, 2015-01-09))
+res1: kantan.xpath.XPathResult[List[java.time.LocalDate]] = Right(List(1978-10-12, 2015-01-09))
 ```
 
 It's also possible to provide your own format. For example, for [`LocalDateTime`]:
@@ -58,7 +58,23 @@ And we can now simply write:
 
 ```scala
 scala> input.evalXPath[List[LocalDate]](xp"//date/@value")
-res4: kantan.xpath.XPathResult[List[java.time.LocalDate]] = Success(List(1978-10-12, 2015-01-09))
+res4: kantan.xpath.XPathResult[List[java.time.LocalDate]] = Right(List(1978-10-12, 2015-01-09))
+```
+
+Note that while you can pass a [`DateTimeFormatter`] directly, the preferred way of dealing with pattern strings is to
+use the literal syntax provided by kantan.xpath:
+
+```scala
+localDateDecoder(fmt"dd-MM-yyyy")
+```
+
+The advantage is that this is checked at compile time - invalid pattern strings will cause a compilation error:
+
+```scala
+scala> localDateDecoder(fmt"FOOBAR")
+<console>:27: error: Invalid pattern: 'FOOBAR'
+       localDateDecoder(fmt"FOOBAR")
+                            ^
 ```
 
 [`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html
@@ -68,3 +84,4 @@ res4: kantan.xpath.XPathResult[List[java.time.LocalDate]] = Success(List(1978-10
 [`ZonedDateTime`]:https://docs.oracle.com/javase/8/docs/api/java/time/ZonedDateTime.html
 [`LocalDate`]:https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html
 [`LocalTime`]:https://docs.oracle.com/javase/8/docs/api/java/time/LocalTime.html
+[`DateTimeFormatter`]:https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html

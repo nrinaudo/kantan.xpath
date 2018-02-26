@@ -52,7 +52,7 @@ And we're now capable of decoding XML content as dates:
 
 ```scala
 scala> "<date>2000-01-00T00:00:00.000</date>".evalXPath[Date](xp"/date")
-res1: kantan.xpath.XPathResult[java.util.Date] = Success(Fri Dec 31 00:00:00 CET 1999)
+res1: kantan.xpath.XPathResult[java.util.Date] = Right(Fri Dec 31 00:00:00 CET 1999)
 ```
 
 Note that kantan.xpath has a joda-time module, a very well thought out alternative to `java.util.Date`.
@@ -68,7 +68,7 @@ sometimes a boolean, for example:
 
 ```scala
 scala> "<root><either>123</either><either>true</either></root>".evalXPath[List[Either[Int, Boolean]]](xp"//either")
-res2: kantan.xpath.XPathResult[List[Either[Int,Boolean]]] = Success(List(Left(123), Right(true)))
+res2: kantan.xpath.XPathResult[List[Either[Int,Boolean]]] = Right(List(Left(123), Right(true)))
 ```
 
 ### `Option`
@@ -80,7 +80,7 @@ This is useful for XML where some nodes or attributes are optional. For example:
 
 ```scala
 scala> "<root><opt/></root>".evalXPath[Option[Int]](xp"//opt/@value")
-res3: kantan.xpath.XPathResult[Option[Int]] = Success(None)
+res3: kantan.xpath.XPathResult[Option[Int]] = Right(None)
 ```
 
 ## `XmlSource`

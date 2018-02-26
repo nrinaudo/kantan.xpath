@@ -47,7 +47,7 @@ You can now use the compiled query where you used to specify strings, such as in
 
 ```scala
 scala> rawData.evalXPath(query)
-res2: kantan.xpath.ReadResult[List[Int]] = Success(List(1, 2, 3, 4))
+res2: kantan.xpath.ReadResult[List[Int]] = Right(List(1, 2, 3, 4))
 ```
 
 Note that since compiled queries carry the information of the type they return, you don't need to specify type
@@ -61,7 +61,7 @@ You can use [`compile`] to compile raw strings:
 
 ```scala
 scala> val query = Query.compile[List[Int]]("//element/@id")
-query: kantan.xpath.CompileResult[kantan.xpath.Query[kantan.xpath.DecodeResult[List[Int]]]] = Success(kantan.xpath.Query$$anon$1@5d363047)
+query: kantan.xpath.CompileResult[kantan.xpath.Query[kantan.xpath.DecodeResult[List[Int]]]] = Right(kantan.xpath.Query$$anon$1@645cb04b)
 ```
 
 The returned value is not directly a [`Query`], though, but rather a [`CompileResult`] containing an instance of
@@ -71,9 +71,8 @@ some error handling in place.
 
 [`Query`]:{{ site.baseurl }}/api/kantan/xpath/Query.html
 [`compile`]:{{ site.baseurl }}/api/kantan/xpath/Query$.html#compile[A](str:String)(implicitevidence$2:kantan.xpath.Compiler[A],implicitxpath:kantan.xpath.XPathCompiler):kantan.xpath.CompileResult[kantan.xpath.Query[kantan.xpath.DecodeResult[A]]]
-[`get`]:https://nrinaudo.github.io/kantan.codecs/api/index.html#kantan.codecs.Result@get:S
+[`get`]:https://nrinaudo.github.io/kantan.codecs/api/kantan/codecs/Result.html#get:S
 [`CompileResult`]:{{ site.baseurl }}/api/kantan/xpath/CompileResult$.html
-[`xpath`]:{{ site.baseurl }}/api/index.html#kantan.xpath.ops$$StringOps@xpath[A](implicitcomp:kantan.xpath.Compiler[A]):kantan.xpath.Query[kantan.xpath.DecodeResult[A]]
 [`evalXPath`]:{{ site.baseurl }}/api/kantan/xpath/ops/XmlSourceOps.html#evalXPath[B](expr:kantan.xpath.XPathExpression)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]
 [`Query.apply`]:{{ site.baseurl }}/api/kantan/xpath/Query$.html#apply[A](expr:kantan.xpath.XPathExpression)(implicitevidence$1:kantan.xpath.Compiler[A]):kantan.xpath.Query[kantan.xpath.DecodeResult[A]]
 [`XPathExpression`]:{{ site.baseurl }}/api/kantan/xpath/index.html#XPathExpression=javax.xml.xpath.XPathExpression

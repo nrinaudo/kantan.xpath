@@ -152,7 +152,7 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">XPathLiteral</span><span class="result"> extends <span class="extype" name="contextual.Interpolator">Interpolator</span></span>
+        <span class="name">XPathLiteral</span><span class="result"> extends <span class="extype" name="contextual.Verifier">Verifier</span>[<a href="../index.html#XPathExpression=javax.xml.xpath.XPathExpression" class="extmbr" name="kantan.xpath.XPathExpression">XPathExpression</a>]</span>
       </span>
       </h4>
 
@@ -161,7 +161,7 @@
           <span class="toggle">
             Linear Supertypes
           </span>
-          <div class="superTypes hiddenContent"><span class="extype" name="contextual.Interpolator">Interpolator</span>, <a href="http://www.scala-lang.org/api/2.12.4/scala/collection/immutable/List.html#scala.AnyRef" class="extype" name="scala.collection.immutable.List">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.12.4/scala/collection/immutable/List.html#scala.Any" class="extype" name="scala.collection.immutable.List">Any</a></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="contextual.Verifier">Verifier</span>[<a href="../index.html#XPathExpression=javax.xml.xpath.XPathExpression" class="extmbr" name="kantan.xpath.XPathExpression">XPathExpression</a>], <span class="extype" name="contextual.Interpolator">Interpolator</span>, <a href="http://www.scala-lang.org/api/2.12.4/scala/collection/immutable/List.html#scala.AnyRef" class="extype" name="scala.collection.immutable.List">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.12.4/scala/collection/immutable/List.html#scala.Any" class="extype" name="scala.collection.immutable.List">Any</a></div>
         </div></div>
         
 
@@ -187,7 +187,7 @@
                   <span class="filtertype">Inherited<br />
                   </span>
                   <ol id="linearization">
-                    <li class="in" name="kantan.xpath.literals.XPathLiteral"><span>XPathLiteral</span></li><li class="in" name="contextual.Interpolator"><span>Interpolator</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                    <li class="in" name="kantan.xpath.literals.XPathLiteral"><span>XPathLiteral</span></li><li class="in" name="contextual.Verifier"><span>Verifier</span></li><li class="in" name="contextual.Interpolator"><span>Interpolator</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                   </ol>
                 </div><div class="ancestors">
               <span class="filtertype"></span>
@@ -209,22 +209,22 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="contextual.Interpolator.ContextType" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="ContextType&lt;:contextual.Context"></a><a id="ContextType:ContextType"></a>
+              <ol><li name="contextual.Verifier.ContextType" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ContextType=contextual.Context"></a><a id="ContextType:ContextType"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#ContextType&lt;:contextual.Context" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#ContextType=contextual.Context" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
       <span class="modifier_kind">
-        <span class="modifier">abstract </span>
+        <span class="modifier"></span>
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">ContextType</span><span class="result"> &lt;: <span class="extype" name="contextual.Context">Context</span></span>
+        <span class="name">ContextType</span><span class="result alias"> = <span class="extype" name="contextual.Context">Context</span></span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Interpolator</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Verifier → Interpolator</dd></dl></div>
     </li><li name="contextual.Interpolator.Embedding" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="Embedding[Value,Input]extendsAnyRef"></a><a id="Embedding[Value,Input]:Embedding[Value,Input]"></a>
       <span class="permalink">
@@ -289,10 +289,10 @@
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Interpolator</dd></dl></div>
-    </li><li name="kantan.xpath.literals.XPathLiteral.Output" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Output=kantan.xpath.XPathExpression"></a><a id="Output:Output"></a>
+    </li><li name="contextual.Verifier.Output" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Output=Out"></a><a id="Output:Output"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#Output=kantan.xpath.XPathExpression" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#Output=Out" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -301,10 +301,10 @@
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">Output</span><span class="result alias"> = <span class="extype" name="javax.xml.xpath.XPathExpression">javax.xml.xpath.XPathExpression</span></span>
+        <span class="name">Output</span><span class="result alias"> = <a href="../index.html#XPathExpression=javax.xml.xpath.XPathExpression" class="extmbr" name="kantan.xpath.XPathExpression">XPathExpression</a></span>
       </span>
       
-      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Verifier → Interpolator</dd></dl></div>
     </li><li name="contextual.Interpolator.Part" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="PartextendsProductwithSerializable"></a><a id="Part:Part"></a>
       <span class="permalink">
@@ -473,6 +473,22 @@
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="kantan.xpath.literals.XPathLiteral#check" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="check(string:String):Either[(Int,String),kantan.xpath.XPathExpression]"></a><a id="check(String):Either[(Int,String),XPathExpression]"></a>
+      <span class="permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#check(string:String):Either[(Int,String),kantan.xpath.XPathExpression]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">check</span><span class="params">(<span name="string">string: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Either">Either</span>[(<a href="http://www.scala-lang.org/api/2.12.4/scala/Int.html#scala.Int" class="extype" name="scala.Int">Int</a>, <span class="extype" name="scala.Predef.String">String</span>), <a href="../index.html#XPathExpression=javax.xml.xpath.XPathExpression" class="extmbr" name="kantan.xpath.XPathExpression">XPathExpression</a>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kantan.xpath.literals.XPathLiteral">XPathLiteral</a> → Verifier</dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a><a id="clone():AnyRef"></a>
       <span class="permalink">
@@ -497,10 +513,10 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="kantan.xpath.literals.XPathLiteral#contextualize" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="contextualize(interpolation:kantan.xpath.literals.XPathLiteral.StaticInterpolation):Seq[kantan.xpath.literals.XPathLiteral.ContextType]"></a><a id="contextualize(StaticInterpolation):Seq[ContextType]"></a>
+    </li><li name="contextual.Verifier#contextualize" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="contextualize(interpolation:Verifier.this.StaticInterpolation):Seq[Verifier.this.ContextType]"></a><a id="contextualize(StaticInterpolation):Seq[ContextType]"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#contextualize(interpolation:kantan.xpath.literals.XPathLiteral.StaticInterpolation):Seq[kantan.xpath.literals.XPathLiteral.ContextType]" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#contextualize(interpolation:Verifier.this.StaticInterpolation):Seq[Verifier.this.ContextType]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -509,13 +525,10 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">contextualize</span><span class="params">(<span name="interpolation">interpolation: <a href="#StaticInterpolationextendsAnyRef" class="extmbr" name="kantan.xpath.literals.XPathLiteral.StaticInterpolation">StaticInterpolation</a></span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<a href="#ContextType&lt;:contextual.Context" class="extmbr" name="kantan.xpath.literals.XPathLiteral.ContextType">ContextType</a>]</span>
+        <span class="name">contextualize</span><span class="params">(<span name="interpolation">interpolation: <a href="#StaticInterpolationextendsAnyRef" class="extmbr" name="kantan.xpath.literals.XPathLiteral.StaticInterpolation">StaticInterpolation</a></span>)</span><span class="result">: <span class="extype" name="scala.Seq">Seq</span>[<a href="#ContextType=contextual.Context" class="extmbr" name="kantan.xpath.literals.XPathLiteral.ContextType">ContextType</a>]</span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="kantan.xpath.literals.XPathLiteral">XPathLiteral</a> → Interpolator</dd><dt>Annotations</dt><dd>
-                <span class="name">@SuppressWarnings</span><span class="args">()</span>
-              
-        </dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Verifier → Interpolator</dd></dl></div>
     </li><li name="contextual.Interpolator#embed" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="embed[Value]:Interpolator.this.Embedding[Value,Interpolator.this.Input]"></a><a id="embed[Value]:Embedding[Value,Input]"></a>
       <span class="permalink">
@@ -564,10 +577,10 @@
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="kantan.xpath.literals.XPathLiteral#evaluate" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="evaluate(interpolation:kantan.xpath.literals.XPathLiteral.RuntimeInterpolation):kantan.xpath.XPathExpression"></a><a id="evaluate(RuntimeInterpolation):XPathExpression"></a>
+    </li><li name="contextual.Verifier#evaluate" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="evaluate(contextual:Verifier.this.RuntimeInterpolation):Out"></a><a id="evaluate(RuntimeInterpolation):XPathExpression"></a>
       <span class="permalink">
-      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#evaluate(interpolation:kantan.xpath.literals.XPathLiteral.RuntimeInterpolation):kantan.xpath.XPathExpression" title="Permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#evaluate(contextual:Verifier.this.RuntimeInterpolation):Out" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -576,10 +589,10 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">evaluate</span><span class="params">(<span name="interpolation">interpolation: <a href="#RuntimeInterpolationextendsAnyRef" class="extmbr" name="kantan.xpath.literals.XPathLiteral.RuntimeInterpolation">RuntimeInterpolation</a></span>)</span><span class="result">: <a href="../index.html#XPathExpression=javax.xml.xpath.XPathExpression" class="extmbr" name="kantan.xpath.XPathExpression">XPathExpression</a></span>
+        <span class="name">evaluate</span><span class="params">(<span name="contextual">contextual: <a href="#RuntimeInterpolationextendsAnyRef" class="extmbr" name="kantan.xpath.literals.XPathLiteral.RuntimeInterpolation">RuntimeInterpolation</a></span>)</span><span class="result">: <a href="../index.html#XPathExpression=javax.xml.xpath.XPathExpression" class="extmbr" name="kantan.xpath.XPathExpression">XPathExpression</a></span>
       </span>
       
-      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Verifier</dd></dl></div>
     </li><li name="contextual.Interpolator#evaluator" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="evaluator(contexts:Seq[Interpolator.this.ContextType],interpolation:Interpolator.this.StaticInterpolation):interpolation.macroContext.Tree"></a><a id="evaluator(Seq[ContextType],StaticInterpolation):scala.reflect.macros.whitebox.Context.Tree"></a>
       <span class="permalink">
@@ -592,7 +605,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">evaluator</span><span class="params">(<span name="contexts">contexts: <span class="extype" name="scala.Seq">Seq</span>[<a href="#ContextType&lt;:contextual.Context" class="extmbr" name="kantan.xpath.literals.XPathLiteral.ContextType">ContextType</a>]</span>, <span name="interpolation">interpolation: <a href="#StaticInterpolationextendsAnyRef" class="extmbr" name="kantan.xpath.literals.XPathLiteral.StaticInterpolation">StaticInterpolation</a></span>)</span><span class="result">: <span class="extype" name="scala.reflect.macros.Aliases.Tree">scala.reflect.macros.whitebox.Context.Tree</span></span>
+        <span class="name">evaluator</span><span class="params">(<span name="contexts">contexts: <span class="extype" name="scala.Seq">Seq</span>[<a href="#ContextType=contextual.Context" class="extmbr" name="kantan.xpath.literals.XPathLiteral.ContextType">ContextType</a>]</span>, <span name="interpolation">interpolation: <a href="#StaticInterpolationextendsAnyRef" class="extmbr" name="kantan.xpath.literals.XPathLiteral.StaticInterpolation">StaticInterpolation</a></span>)</span><span class="result">: <span class="extype" name="scala.reflect.macros.Aliases.Tree">scala.reflect.macros.whitebox.Context.Tree</span></span>
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Interpolator</dd></dl></div>
@@ -688,6 +701,22 @@
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="contextual.Verifier#noSubsMsg" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="noSubsMsg:String"></a>
+      <span class="permalink">
+      <a href="../../../kantan/xpath/literals/XPathLiteral$.html#noSubsMsg:String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">noSubsMsg</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Verifier</dd></dl></div>
     </li><li name="scala.AnyRef#notify" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
       <span class="permalink">
@@ -836,7 +865,9 @@
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="contextual.Interpolator">
+        <div class="parent" name="contextual.Verifier">
+              <h3>Inherited from <span class="extype" name="contextual.Verifier">Verifier</span>[<a href="../index.html#XPathExpression=javax.xml.xpath.XPathExpression" class="extmbr" name="kantan.xpath.XPathExpression">XPathExpression</a>]</h3>
+            </div><div class="parent" name="contextual.Interpolator">
               <h3>Inherited from <span class="extype" name="contextual.Interpolator">Interpolator</span></h3>
             </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <a href="http://www.scala-lang.org/api/2.12.4/scala/collection/immutable/List.html#scala.AnyRef" class="extype" name="scala.collection.immutable.List">AnyRef</a></h3>

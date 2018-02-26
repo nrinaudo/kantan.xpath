@@ -101,6 +101,42 @@
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="kantan">kantan</a></dd></dl></div>
+    </li><li name="kantan.xpath.java8" visbl="pub" class="indented3 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="java8"></a><a id="java8:java8"></a>
+      <span class="permalink">
+      <a href="../../kantan/xpath/index.html#java8" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="Declares kantan.xpath.NodeDecoder instances java8 date and time types." href="java8/index.html"><span class="name">java8</span></a>
+      </span>
+      
+      <p class="shortcomment cmt">Declares <a href="package$$NodeDecoder.html" class="extype" name="kantan.xpath.NodeDecoder">kantan.xpath.NodeDecoder</a> instances java8 date and time types.</p><div class="fullcomment"><div class="comment cmt"><p>Declares <a href="package$$NodeDecoder.html" class="extype" name="kantan.xpath.NodeDecoder">kantan.xpath.NodeDecoder</a> instances java8 date and time types.</p><p>Note that the type for default codecs might come as a surprise: the wrapping <code>Exported</code> is used to lower their
+priority. This is necessary because the standard use case will be to <code>import kantan.xpath.java8._</code>, which
+brings both the instance creation and default instances in scope. Without this type trickery, custom instances
+and default ones would always clash.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="index.html" class="extype" name="kantan.xpath">xpath</a></dd></dl></div>
+    </li><li name="kantan.xpath.joda" visbl="pub" class="indented3 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="joda"></a><a id="joda:joda"></a>
+      <span class="permalink">
+      <a href="../../kantan/xpath/index.html#joda" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="joda/index.html"><span class="name">joda</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="index.html" class="extype" name="kantan.xpath">xpath</a></dd></dl></div>
     </li><li name="kantan.xpath.laws" visbl="pub" class="indented3 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="laws"></a><a id="laws:laws"></a>
       <span class="permalink">
@@ -1217,9 +1253,9 @@
               
         </dd></dl></div>
     </li><li name="kantan.codecs.DecoderCompanion#from" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="from[D](f:E=&gt;kantan.codecs.Result[F,D]):kantan.codecs.Decoder[E,D,F,T]"></a><a id="from[D]((Option[Node])⇒Result[DecodeError,D]):Decoder[Option[Node],D,DecodeError,codecs.type]"></a>
+      <a id="from[D](f:E=&gt;Either[F,D]):kantan.codecs.Decoder[E,D,F,T]"></a><a id="from[D]((Option[Node])⇒Either[DecodeError,D]):Decoder[Option[Node],D,DecodeError,codecs.type]"></a>
       <span class="permalink">
-      <a href="../../kantan/xpath/NodeDecoder$.html#from[D](f:E=&gt;kantan.codecs.Result[F,D]):kantan.codecs.Decoder[E,D,F,T]" title="Permalink">
+      <a href="../../kantan/xpath/NodeDecoder$.html#from[D](f:E=&gt;Either[F,D]):kantan.codecs.Decoder[E,D,F,T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -1228,7 +1264,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">from</span><span class="tparams">[<span name="D">D</span>]</span><span class="params">(<span name="f">f: (<a href="http://www.scala-lang.org/api/2.12.4/scala/Option.html#scala.Option" class="extype" name="scala.Option">Option</a>[<a href="index.html#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>]) ⇒ <a href="https://nrinaudo.github.io/kantan.codecs/api/kantan/codecs/Result.html#kantan.codecs.Result" class="extype" name="kantan.codecs.Result">Result</a>[<a href="DecodeError.html" class="extype" name="kantan.xpath.DecodeError">DecodeError</a>, <span class="extype" name="kantan.codecs.DecoderCompanion.from.D">D</span>]</span>)</span><span class="result">: <a href="https://nrinaudo.github.io/kantan.codecs/api/kantan/codecs/Decoder.html#kantan.codecs.Decoder" class="extype" name="kantan.codecs.Decoder">Decoder</a>[<a href="http://www.scala-lang.org/api/2.12.4/scala/Option.html#scala.Option" class="extype" name="scala.Option">Option</a>[<a href="index.html#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>], <span class="extype" name="kantan.codecs.DecoderCompanion.from.D">D</span>, <a href="DecodeError.html" class="extype" name="kantan.xpath.DecodeError">DecodeError</a>, <a href="codecs$.html" class="extype" name="kantan.xpath.codecs">codecs</a>.type]</span>
+        <span class="name">from</span><span class="tparams">[<span name="D">D</span>]</span><span class="params">(<span name="f">f: (<a href="http://www.scala-lang.org/api/2.12.4/scala/Option.html#scala.Option" class="extype" name="scala.Option">Option</a>[<a href="index.html#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>]) ⇒ <span class="extype" name="scala.Either">Either</span>[<a href="DecodeError.html" class="extype" name="kantan.xpath.DecodeError">DecodeError</a>, <span class="extype" name="kantan.codecs.DecoderCompanion.from.D">D</span>]</span>)</span><span class="result">: <a href="https://nrinaudo.github.io/kantan.codecs/api/kantan/codecs/Decoder.html#kantan.codecs.Decoder" class="extype" name="kantan.codecs.Decoder">Decoder</a>[<a href="http://www.scala-lang.org/api/2.12.4/scala/Option.html#scala.Option" class="extype" name="scala.Option">Option</a>[<a href="index.html#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>], <span class="extype" name="kantan.codecs.DecoderCompanion.from.D">D</span>, <a href="DecodeError.html" class="extype" name="kantan.xpath.DecodeError">DecodeError</a>, <a href="codecs$.html" class="extype" name="kantan.xpath.codecs">codecs</a>.type]</span>
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>DecoderCompanion</dd><dt>Annotations</dt><dd>
@@ -1252,9 +1288,9 @@
       
       
     </li><li name="kantan.codecs.DecoderCompanion#fromPartial" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="fromPartial[D](f:PartialFunction[E,kantan.codecs.Result[F,D]])(implicitt:kantan.codecs.error.IsError[F]):kantan.codecs.Decoder[E,D,F,T]"></a><a id="fromPartial[D](PartialFunction[Option[Node],Result[DecodeError,D]])(IsError[DecodeError]):Decoder[Option[Node],D,DecodeError,codecs.type]"></a>
+      <a id="fromPartial[D](f:PartialFunction[E,Either[F,D]])(implicitt:kantan.codecs.error.IsError[F]):kantan.codecs.Decoder[E,D,F,T]"></a><a id="fromPartial[D](PartialFunction[Option[Node],Either[DecodeError,D]])(IsError[DecodeError]):Decoder[Option[Node],D,DecodeError,codecs.type]"></a>
       <span class="permalink">
-      <a href="../../kantan/xpath/NodeDecoder$.html#fromPartial[D](f:PartialFunction[E,kantan.codecs.Result[F,D]])(implicitt:kantan.codecs.error.IsError[F]):kantan.codecs.Decoder[E,D,F,T]" title="Permalink">
+      <a href="../../kantan/xpath/NodeDecoder$.html#fromPartial[D](f:PartialFunction[E,Either[F,D]])(implicitt:kantan.codecs.error.IsError[F]):kantan.codecs.Decoder[E,D,F,T]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -1263,7 +1299,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">fromPartial</span><span class="tparams">[<span name="D">D</span>]</span><span class="params">(<span name="f">f: <a href="http://www.scala-lang.org/api/2.12.4/scala/PartialFunction.html#scala.PartialFunction" class="extype" name="scala.PartialFunction">PartialFunction</a>[<a href="http://www.scala-lang.org/api/2.12.4/scala/Option.html#scala.Option" class="extype" name="scala.Option">Option</a>[<a href="index.html#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>], <a href="https://nrinaudo.github.io/kantan.codecs/api/kantan/codecs/Result.html#kantan.codecs.Result" class="extype" name="kantan.codecs.Result">Result</a>[<a href="DecodeError.html" class="extype" name="kantan.xpath.DecodeError">DecodeError</a>, <span class="extype" name="kantan.codecs.DecoderCompanion.fromPartial.D">D</span>]]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="t">t: <span class="extype" name="kantan.codecs.error.IsError">IsError</span>[<a href="DecodeError.html" class="extype" name="kantan.xpath.DecodeError">DecodeError</a>]</span>)</span><span class="result">: <a href="https://nrinaudo.github.io/kantan.codecs/api/kantan/codecs/Decoder.html#kantan.codecs.Decoder" class="extype" name="kantan.codecs.Decoder">Decoder</a>[<a href="http://www.scala-lang.org/api/2.12.4/scala/Option.html#scala.Option" class="extype" name="scala.Option">Option</a>[<a href="index.html#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>], <span class="extype" name="kantan.codecs.DecoderCompanion.fromPartial.D">D</span>, <a href="DecodeError.html" class="extype" name="kantan.xpath.DecodeError">DecodeError</a>, <a href="codecs$.html" class="extype" name="kantan.xpath.codecs">codecs</a>.type]</span>
+        <span class="name">fromPartial</span><span class="tparams">[<span name="D">D</span>]</span><span class="params">(<span name="f">f: <a href="http://www.scala-lang.org/api/2.12.4/scala/PartialFunction.html#scala.PartialFunction" class="extype" name="scala.PartialFunction">PartialFunction</a>[<a href="http://www.scala-lang.org/api/2.12.4/scala/Option.html#scala.Option" class="extype" name="scala.Option">Option</a>[<a href="index.html#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>], <span class="extype" name="scala.Either">Either</span>[<a href="DecodeError.html" class="extype" name="kantan.xpath.DecodeError">DecodeError</a>, <span class="extype" name="kantan.codecs.DecoderCompanion.fromPartial.D">D</span>]]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="t">t: <span class="extype" name="kantan.codecs.error.IsError">IsError</span>[<a href="DecodeError.html" class="extype" name="kantan.xpath.DecodeError">DecodeError</a>]</span>)</span><span class="result">: <a href="https://nrinaudo.github.io/kantan.codecs/api/kantan/codecs/Decoder.html#kantan.codecs.Decoder" class="extype" name="kantan.codecs.Decoder">Decoder</a>[<a href="http://www.scala-lang.org/api/2.12.4/scala/Option.html#scala.Option" class="extype" name="scala.Option">Option</a>[<a href="index.html#Node=org.w3c.dom.Node" class="extmbr" name="kantan.xpath.Node">Node</a>], <span class="extype" name="kantan.codecs.DecoderCompanion.fromPartial.D">D</span>, <a href="DecodeError.html" class="extype" name="kantan.xpath.DecodeError">DecodeError</a>, <a href="codecs$.html" class="extype" name="kantan.xpath.codecs">codecs</a>.type]</span>
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>DecoderCompanion</dd></dl></div>

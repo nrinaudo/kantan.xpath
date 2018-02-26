@@ -8,7 +8,7 @@ kantan.xpath comes with a [refined](https://github.com/fthomas/refined) module t
 by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-refined" % "0.3.2"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-refined" % "0.4.0"
 ```
 
 You then need to import the corresponding package:
@@ -33,12 +33,12 @@ We can then simply write the following:
 
 ```scala
 scala> "<foo><bar value='1'/></foo>".evalXPath[PositiveInt](xp"//bar/@value")
-res1: kantan.xpath.XPathResult[PositiveInt] = Success(1)
+res1: kantan.xpath.XPathResult[PositiveInt] = Right(1)
 ```
 
 And, for an error case:
 
 ```scala
 scala> "<foo><bar value='-1'/></foo>".evalXPath[PositiveInt](xp"//bar/@value")
-res2: kantan.xpath.XPathResult[PositiveInt] = Failure(TypeError: Not acceptable: 'Predicate failed: (-1 > 0).')
+res2: kantan.xpath.XPathResult[PositiveInt] = Left(TypeError: Not acceptable: 'Predicate failed: (-1 > 0).')
 ```

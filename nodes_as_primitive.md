@@ -37,7 +37,7 @@ This allows us to write the following code, which will attempt to extract the `i
 
 ```scala
 scala> rawData.evalXPath[Int](xp"//element/@id")
-res1: kantan.xpath.XPathResult[Int] = Success(1)
+res1: kantan.xpath.XPathResult[Int] = Right(1)
 ```
 
 
@@ -49,7 +49,7 @@ of your code. For example:
 
 ```scala
 scala> rawData.evalXPath[java.net.URL](xp"//element/@id")
-res2: kantan.xpath.XPathResult[java.net.URL] = Failure(TypeError: '1' is not a valid URL)
+res2: kantan.xpath.XPathResult[java.net.URL] = Left(TypeError: '1' is not a valid URL)
 ```
 
 In some cases, however, we don't really care for runtime safety and are fine with our program crashing at the first
@@ -69,7 +69,7 @@ type, we told kantan.xpath that we only wanted the first result. We could get th
 
 ```scala
 scala> rawData.evalXPath[List[Int]](xp"//element/@id")
-res4: kantan.xpath.XPathResult[List[Int]] = Success(List(1, 2, 3, 4))
+res4: kantan.xpath.XPathResult[List[Int]] = Right(List(1, 2, 3, 4))
 ```
 
 Any type constructor that has a [`CanBuildFrom`] instance could have been used instead of [`List`] - that's essentially
@@ -77,7 +77,7 @@ all collections. By the same token, any primitive time could have been used inst
 
 ```scala
 scala> rawData.evalXPath[Vector[Boolean]](xp"//element/@enabled")
-res5: kantan.xpath.XPathResult[Vector[Boolean]] = Success(Vector(true, false, true, false))
+res5: kantan.xpath.XPathResult[Vector[Boolean]] = Right(Vector(true, false, true, false))
 ```
 
 [`evalXPath`]:{{ site.baseurl }}/api/kantan/xpath/ops/XmlSourceOps.html#evalXPath[B](expr:kantan.xpath.XPathExpression)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]

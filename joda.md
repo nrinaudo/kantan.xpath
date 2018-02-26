@@ -11,7 +11,7 @@ support for it through a dedicated module.
 The `joda-time` module can be used by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-joda-time" % "0.3.2"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-joda-time" % "0.4.0"
 ```
 
 You then need to import the corresponding package:
@@ -40,7 +40,7 @@ This is directly supported:
 
 ```scala
 scala> input.evalXPath[List[org.joda.time.LocalDate]](xp"//date/@value")
-res1: kantan.xpath.XPathResult[List[org.joda.time.LocalDate]] = Success(List(1978-10-12, 2015-01-09))
+res1: kantan.xpath.XPathResult[List[org.joda.time.LocalDate]] = Right(List(1978-10-12, 2015-01-09))
 ```
 
 It is, of course, possible to declare your own [`NodeDecoder`]. This is, for example, how you'd create a custom
@@ -59,10 +59,24 @@ And we're done, as far as decoding is concerned. We only need to get an XPath ex
 
 ```scala
 scala> input.evalXPath[List[org.joda.time.LocalDate]](xp"//date/@value")
-res4: kantan.xpath.XPathResult[List[org.joda.time.LocalDate]] = Success(List(1978-10-12, 2015-01-09))
+res4: kantan.xpath.XPathResult[List[org.joda.time.LocalDate]] = Right(List(1978-10-12, 2015-01-09))
 ```
 
+Note that while you can pass a [`DateTimeFormatter`] directly, the preferred way of dealing with pattern strings is to
+use the literal syntax provided by kantan.xpath:
 
+```scala
+localDateDecoder(fmt"dd-MM-yyyy")
+```
+
+The advantage is that this is checked at compile time - invalid pattern strings will cause a compilation error:
+
+```scala
+scala> localDateDecoder(fmt"FOOBAR")
+<console>:27: error: Invalid pattern: 'FOOBAR'
+       localDateDecoder(fmt"FOOBAR")
+                            ^
+```
 
 [`Date`]:https://docs.oracle.com/javase/7/docs/api/java/util/Date.html
 [`DateTime`]:http://joda-time.sourceforge.net/apidocs/org/joda/time/DateTime.html
@@ -71,3 +85,4 @@ res4: kantan.xpath.XPathResult[List[org.joda.time.LocalDate]] = Success(List(197
 [`LocalTime`]:http://joda-time.sourceforge.net/apidocs/org/joda/time/LocalTime.html
 [`DateTimeFormat`]:http://joda-time.sourceforge.net/apidocs/org/joda/time/format/DateTimeFormat.html
 [`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html
+[`DateTimeFormatter`]:http://joda-time.sourceforge.net/apidocs/org/joda/time/format/DateTimeFormatter.html

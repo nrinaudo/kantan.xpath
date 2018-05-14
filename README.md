@@ -5,7 +5,7 @@
 [![Latest version](https://index.scala-lang.org/nrinaudo/kantan.xpath/kantan.xpath/latest.svg)](https://index.scala-lang.org/nrinaudo/kantan.xpath)
 [![Join the chat at https://gitter.im/nrinaudo/kantan.xpath](https://img.shields.io/badge/gitter-join%20chat-52c435.svg)](https://gitter.im/nrinaudo/kantan.xpath)
 
-I find myself having to scrap websites with some regularity, and Scala always makes the whole process
+I find myself having to scrape websites with some regularity, and Scala always makes the whole process
 more painful than it really needs to be - the standard XML API is ok, I suppose, but the lack of XPath support
 (or actually usable XPath-like DSL) is frustrating.
 

@@ -47,7 +47,7 @@ libraryDependencies += "com.nrinaudo" %% "kantan.xpath-libra" % "@VERSION@"
 
 ## Motivation
 
-Web scrapping is something that I have to do with some regularity, and the standard Scala XML library is not well suited
+Web scraping is something that I have to do with some regularity, and the standard Scala XML library is not well suited
 for that task - not as well, at least, as a proper XPath implementation.
 
 The standard Java library, on the other hand, has an acceptably efficient XPath API, but one that is hobbled, from a

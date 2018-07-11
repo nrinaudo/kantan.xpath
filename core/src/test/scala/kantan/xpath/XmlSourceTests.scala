@@ -16,9 +16,9 @@
 
 package kantan.xpath
 
-import java.nio.file.Files
 
 import implicits._
+import java.nio.file.Files
 import org.scalatest.{FunSuite, Matchers}
 
 class XmlSourceTests extends FunSuite with Matchers {

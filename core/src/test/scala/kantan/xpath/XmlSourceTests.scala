@@ -16,7 +16,6 @@
 
 package kantan.xpath
 
-
 import implicits._
 import java.nio.file.Files
 import org.scalatest.{FunSuite, Matchers}

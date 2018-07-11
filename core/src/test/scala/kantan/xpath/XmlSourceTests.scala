@@ -24,12 +24,12 @@ import org.scalatest.{FunSuite, Matchers}
 class XmlSourceTests extends FunSuite with Matchers {
 
   test("XmlSource[File] should correctly handle XML encoding") {
-    val path = Files.createTempFile("kx", ".xml")
+    val path     = Files.createTempFile("kx", ".xml")
     val data1251 = """
       <?xml version="1.0" encoding="windows-1251"?>
       <abc>Проверка 1251</abc>
     """.trim
     Files.write(path, data1251.getBytes("windows-1251"))
-    path.evalXPath[String](xp"//abc") should be (Right("Проверка 1251"))
+    path.evalXPath[String](xp"//abc") should be(Right("Проверка 1251"))
   }
 }

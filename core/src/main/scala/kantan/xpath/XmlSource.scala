@@ -118,13 +118,12 @@ object XmlSource extends LowPriorityXmlSourceInstances {
 trait LowPriorityXmlSourceInstances {
   // Low priority since it assumes the encoding
   implicit def fromReaderResource[A: ReaderResource](implicit parser: XmlParser): XmlSource[A] =
-    XmlSource.from(parser.parse)
-      .contramapResult { a ⇒
-        ReaderResource[A]
-          .open(a)
-          .right
-          .map(r ⇒ new InputSource(r))
-          .left
-          .map(e ⇒ ParseError.IOError(e.getMessage, e.getCause))
-      }
+    XmlSource.from(parser.parse).contramapResult { a ⇒
+      ReaderResource[A]
+        .open(a)
+        .right
+        .map(r ⇒ new InputSource(r))
+        .left
+        .map(e ⇒ ParseError.IOError(e.getMessage, e.getCause))
+    }
 }

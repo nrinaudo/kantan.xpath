@@ -17,7 +17,7 @@
 package kantan.xpath
 
 import java.io._
-import kantan.codecs.resource.ReaderResource
+import kantan.codecs.resource.{InputResource, ReaderResource}
 
 /** Type class for turning instances of `A` into valid instances of [[Node]].
   *
@@ -87,7 +87,7 @@ trait XmlSource[-A] extends Serializable { self ⇒
   * and already have an `XmlSource[S]` and a `T ⇒ S`, you just need to call [[XmlSource.contramap]] to get your
   * implementation.
   */
-object XmlSource {
+object XmlSource extends LowPriorityXmlSourceInstances {
 
   /** Summons an [[XmlSource]] instance if one can be found. */
   def apply[A](implicit ev: XmlSource[A]): XmlSource[A] = macro imp.summon[XmlSource[A]]
@@ -104,8 +104,21 @@ object XmlSource {
   implicit def inputSource(implicit parser: XmlParser): XmlSource[InputSource] =
     XmlSource.from(parser.parse)
 
-  implicit def fromResource[A: ReaderResource](implicit parser: XmlParser): XmlSource[A] =
+  implicit def fromInputResource[A: InputResource](implicit parser: XmlParser): XmlSource[A] =
     inputSource.contramapResult { a ⇒
+      InputResource[A]
+        .open(a)
+        .right
+        .map(r ⇒ new InputSource(r))
+        .left
+        .map(e ⇒ ParseError.IOError(e.getMessage, e.getCause))
+    }
+}
+
+trait LowPriorityXmlSourceInstances {
+  // Low priority since it assumes the encoding
+  implicit def fromReaderResource[A: ReaderResource](implicit parser: XmlParser): XmlSource[A] =
+    XmlSource.from(parser.parse).contramapResult { a ⇒
       ReaderResource[A]
         .open(a)
         .right

@@ -47,7 +47,7 @@ You can now use the compiled query where you used to specify strings, such as in
 
 ```scala
 scala> rawData.evalXPath(query)
-res2: kantan.xpath.ReadResult[List[Int]] = Right(List(1, 2, 3, 4))
+res1: kantan.xpath.ReadResult[List[Int]] = Right(List(1, 2, 3, 4))
 ```
 
 Note that since compiled queries carry the information of the type they return, you don't need to specify type
@@ -61,7 +61,7 @@ You can use [`compile`] to compile raw strings:
 
 ```scala
 scala> val query = Query.compile[List[Int]]("//element/@id")
-query: kantan.xpath.CompileResult[kantan.xpath.Query[kantan.xpath.DecodeResult[List[Int]]]] = Right(kantan.xpath.Query$$anon$1@645cb04b)
+query: kantan.xpath.CompileResult[kantan.xpath.Query[kantan.xpath.DecodeResult[List[Int]]]] = Right(kantan.xpath.Query$$anon$1@538138e6)
 ```
 
 The returned value is not directly a [`Query`], though, but rather a [`CompileResult`] containing an instance of

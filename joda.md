@@ -11,7 +11,7 @@ support for it through a dedicated module.
 The `joda-time` module can be used by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-joda-time" % "0.4.0"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-joda-time" % "0.5.0"
 ```
 
 You then need to import the corresponding package:
@@ -40,7 +40,7 @@ This is directly supported:
 
 ```scala
 scala> input.evalXPath[List[org.joda.time.LocalDate]](xp"//date/@value")
-res1: kantan.xpath.XPathResult[List[org.joda.time.LocalDate]] = Right(List(1978-10-12, 2015-01-09))
+res0: kantan.xpath.XPathResult[List[org.joda.time.LocalDate]] = Right(List(1978-10-12, 2015-01-09))
 ```
 
 It is, of course, possible to declare your own [`NodeDecoder`]. This is, for example, how you'd create a custom
@@ -59,7 +59,7 @@ And we're done, as far as decoding is concerned. We only need to get an XPath ex
 
 ```scala
 scala> input.evalXPath[List[org.joda.time.LocalDate]](xp"//date/@value")
-res4: kantan.xpath.XPathResult[List[org.joda.time.LocalDate]] = Right(List(1978-10-12, 2015-01-09))
+res1: kantan.xpath.XPathResult[List[org.joda.time.LocalDate]] = Right(List(1978-10-12, 2015-01-09))
 ```
 
 Note that while you can pass a [`DateTimeFormatter`] directly, the preferred way of dealing with pattern strings is to

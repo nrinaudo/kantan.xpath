@@ -9,7 +9,7 @@ kantan.xpath API - we still support Java 7. There is, however, a dedicated optio
 adding the following line to your `build.sbt` file:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-java8" % "0.4.0"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-java8" % "0.5.0"
 ```
 
 You then need to import the corresponding package:
@@ -41,7 +41,7 @@ We can decode the bracketed dates without providing an explicit decoder:
 
 ```scala
 scala> input.evalXPath[List[LocalDate]](xp"//date/@value")
-res1: kantan.xpath.XPathResult[List[java.time.LocalDate]] = Right(List(1978-10-12, 2015-01-09))
+res0: kantan.xpath.XPathResult[List[java.time.LocalDate]] = Right(List(1978-10-12, 2015-01-09))
 ```
 
 It's also possible to provide your own format. For example, for [`LocalDateTime`]:
@@ -58,7 +58,7 @@ And we can now simply write:
 
 ```scala
 scala> input.evalXPath[List[LocalDate]](xp"//date/@value")
-res4: kantan.xpath.XPathResult[List[java.time.LocalDate]] = Right(List(1978-10-12, 2015-01-09))
+res1: kantan.xpath.XPathResult[List[java.time.LocalDate]] = Right(List(1978-10-12, 2015-01-09))
 ```
 
 Note that while you can pass a [`DateTimeFormatter`] directly, the preferred way of dealing with pattern strings is to

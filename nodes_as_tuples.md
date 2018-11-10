@@ -46,7 +46,7 @@ Now that we have told kantan.xpath how to decode an XML node to an instance of `
 
 ```scala
 scala> rawData.evalXPath[List[(Int, Boolean)]](xp"//element")
-res2: kantan.xpath.XPathResult[List[(Int, Boolean)]] = Right(List((1,true), (2,false), (3,true), (4,false)))
+res1: kantan.xpath.XPathResult[List[(Int, Boolean)]] = Right(List((1,true), (2,false), (3,true), (4,false)))
 ```
 
 [`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html

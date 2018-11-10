@@ -8,7 +8,7 @@ kantan.xpath comes with a [libra](https://github.com/to-ithaca/libra) module tha
 by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-libra" % "0.4.0"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-libra" % "0.5.0"
 ```
 
 You then need to import the corresponding package:
@@ -23,7 +23,6 @@ Let's first set our types up:
 
 ```scala
 import libra._
-import libra.si._
 import kantan.xpath.implicits._
 
 type Duration = QuantityOf[Int, Time, Second]
@@ -33,5 +32,5 @@ We can then simply write the following:
 
 ```scala
 scala> "<foo><bar duration='1'/></foo>".evalXPath[Duration](xp"//bar/@duration")
-res1: kantan.xpath.XPathResult[Duration] = Right(Quantity(1))
+res0: kantan.xpath.XPathResult[Duration] = Right(Quantity(1))
 ```

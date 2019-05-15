@@ -34,14 +34,14 @@ class ErrorTests extends DisciplineSuite {
   checkAll("ParseError.IOError", EqTests[ParseError.IOError].eqv)
 
   test("Show[CompileError] should yield a string containing the expected message") {
-    forAll { error: CompileError ⇒
+    forAll { error: CompileError =>
       Show[CompileError].show(error) should include(error.message)
       Show[XPathError].show(error) should include(error.message)
     }
   }
 
   test("Show[DecodeError.TypeError] should yield a string containing the expected message") {
-    forAll { error: DecodeError.TypeError ⇒
+    forAll { error: DecodeError.TypeError =>
       Show[DecodeError.TypeError].show(error) should include(error.message)
       Show[DecodeError].show(error) should include(error.message)
       Show[ReadError].show(error) should include(error.message)
@@ -50,7 +50,7 @@ class ErrorTests extends DisciplineSuite {
   }
 
   test("Show[DecodeError.NotFound] should yield a string containing the expected message") {
-    forAll { error: DecodeError.NotFound.type ⇒
+    forAll { error: DecodeError.NotFound.type =>
       val expected = "no matched node"
 
       Show[DecodeError.NotFound.type].show(error) should include(expected)
@@ -62,7 +62,7 @@ class ErrorTests extends DisciplineSuite {
 
   test("Show[ParseError.SyntaxError] should yield a string containing the expected message") {
 
-    forAll { error: ParseError.SyntaxError ⇒
+    forAll { error: ParseError.SyntaxError =>
       Show[ParseError.SyntaxError].show(error) should include(error.message)
       Show[ParseError].show(error) should include(error.message)
       Show[ReadError].show(error) should include(error.message)
@@ -72,7 +72,7 @@ class ErrorTests extends DisciplineSuite {
 
   test("Show[ParseError.IOError] should yield a string containing the expected message") {
 
-    forAll { error: ParseError.IOError ⇒
+    forAll { error: ParseError.IOError =>
       Show[ParseError.IOError].show(error) should include(error.message)
       Show[ParseError].show(error) should include(error.message)
       Show[ReadError].show(error) should include(error.message)

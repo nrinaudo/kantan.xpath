@@ -35,7 +35,7 @@ trait XmlParser {
 object XmlParser {
 
   /** Helper creation method, turns the specified function into an `XmlParser`. */
-  def apply(f: InputSource ⇒ ParseResult[Node]): XmlParser = new XmlParser {
+  def apply(f: InputSource => ParseResult[Node]): XmlParser = new XmlParser {
     override def parse(source: InputSource) = f(source)
   }
 
@@ -47,6 +47,6 @@ object XmlParser {
   implicit val builtIn: XmlParser = {
     val factory: DocumentBuilderFactory = DocumentBuilderFactory.newInstance()
     factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
-    XmlParser(source ⇒ ParseResult(factory.newDocumentBuilder().parse(source)))
+    XmlParser(source => ParseResult(factory.newDocumentBuilder().parse(source)))
   }
 }

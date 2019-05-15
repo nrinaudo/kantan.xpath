@@ -32,12 +32,12 @@ package object scalaz extends DecoderInstances with CommonInstances {
   implicit val xpathSyntaxErrorEqual: Equal[ParseError.SyntaxError] = Equal.equalA
   implicit val xpathIOErrorEqual: Equal[ParseError.IOError]         = Equal.equalA
   implicit val xpathXPathErrorEqual: Equal[XPathError]              = Equal.equalA
-  implicit val xpathNodeEqual: Equal[Node]                          = Equal.equal((n1, n2) ⇒ n1.isEqualNode(n2))
+  implicit val xpathNodeEqual: Equal[Node]                          = Equal.equal((n1, n2) => n1.isEqualNode(n2))
 
   // - Misc. instances -------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
   /** `Contravariant` instance for `XmlSource`. */
   implicit val xmlSource: Contravariant[XmlSource] = new Contravariant[XmlSource] {
-    override def contramap[A, B](fa: XmlSource[A])(f: B ⇒ A) = fa.contramap(f)
+    override def contramap[A, B](fa: XmlSource[A])(f: B => A) = fa.contramap(f)
   }
 }

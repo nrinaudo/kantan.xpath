@@ -18,7 +18,7 @@ package kantan.xpath
 package scalaz
 
 import _root_.scalaz.Scalaz._
-import _root_.scalaz.scalacheck.ScalazProperties.{equal ⇒ equ}
+import _root_.scalaz.scalacheck.ScalazProperties.{equal => equ}
 import arbitrary._
 import kantan.codecs.scalaz.laws.discipline.ScalazDisciplineSuite
 import org.scalacheck.Arbitrary

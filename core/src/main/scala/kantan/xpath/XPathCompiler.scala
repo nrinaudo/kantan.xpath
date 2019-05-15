@@ -36,14 +36,14 @@ trait XPathCompiler extends Serializable {
 object XPathCompiler {
 
   /** Creates a new [[XPathCompiler]] from the specified function. */
-  def apply(f: String ⇒ CompileResult[XPathExpression]): XPathCompiler = new XPathCompiler {
+  def apply(f: String => CompileResult[XPathExpression]): XPathCompiler = new XPathCompiler {
     override def compile(str: String) = f(str)
   }
 
   /** Default compiler, always in scope. */
   @SuppressWarnings(Array("org.wartremover.warts.Serializable"))
-  implicit val builtIn: XPathCompiler = XPathCompiler { str ⇒
-    CompileResult(XPathFactory.newInstance().newXPath().compile(str)).right.map { _ ⇒
+  implicit val builtIn: XPathCompiler = XPathCompiler { str =>
+    CompileResult(XPathFactory.newInstance().newXPath().compile(str)).right.map { _ =>
       new XPathExpression with Serializable {
         private val expression: String       = str
         @transient private lazy val compiled = XPathFactory.newInstance().newXPath().compile(expression)

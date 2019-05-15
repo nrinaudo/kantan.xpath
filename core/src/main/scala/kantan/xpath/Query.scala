@@ -20,12 +20,12 @@ package kantan.xpath
   *
   * Instance creation is achieved through the [[Query$ companion object]].
   */
-trait Query[A] extends Serializable { self ⇒
+trait Query[A] extends Serializable { self =>
   def eval(n: Node): A
 
-  def map[B](f: A ⇒ B): Query[B] = Query(n ⇒ f(self.eval(n)))
+  def map[B](f: A => B): Query[B] = Query(n => f(self.eval(n)))
 
-  def flatMap[B](f: A ⇒ Query[B]): Query[B] = Query(n ⇒ f(self.eval(n)).eval(n))
+  def flatMap[B](f: A => Query[B]): Query[B] = Query(n => f(self.eval(n)).eval(n))
 }
 
 /** Provides convenient methods for XPath expression compilation.
@@ -34,7 +34,7 @@ trait Query[A] extends Serializable { self ⇒
   * implicit value.
   */
 object Query {
-  def apply[A](f: Node ⇒ A): Query[A] = new Query[A] {
+  def apply[A](f: Node => A): Query[A] = new Query[A] {
     override def eval(n: Node): A = f(n)
   }
 

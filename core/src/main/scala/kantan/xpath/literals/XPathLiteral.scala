@@ -22,6 +22,6 @@ import contextual._
 object XPathLiteral extends Verifier[XPathExpression] {
 
   override def check(string: String): Either[(Int, String), XPathExpression] =
-    implicitly[XPathCompiler].compile(string).left.map(e ⇒ (0, e.getMessage))
+    implicitly[XPathCompiler].compile(string).left.map(e => (0, e.getMessage))
 
 }

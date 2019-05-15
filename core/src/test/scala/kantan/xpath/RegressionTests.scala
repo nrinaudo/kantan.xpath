@@ -24,8 +24,8 @@ class RegressionTests extends FunSuite {
   class A
   class B
 
-  implicit val nodeDecoderA: NodeDecoder[A] = NodeDecoder.from(_ ⇒ DecodeResult.success(new A))
-  implicit val nodeDecoderB: NodeDecoder[B] = NodeDecoder.from(_ ⇒ DecodeResult.success(new B))
+  implicit val nodeDecoderA: NodeDecoder[A] = NodeDecoder.from(_ => DecodeResult.success(new A))
+  implicit val nodeDecoderB: NodeDecoder[B] = NodeDecoder.from(_ => DecodeResult.success(new B))
 
   test("Either decoders should be available for types that do not have a StringDecoder") {
     NodeDecoder[Either[A, B]]

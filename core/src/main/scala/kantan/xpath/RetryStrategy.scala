@@ -26,20 +26,20 @@ package kantan.xpath
   *               In order to double waiting times between each attempt, for example, one would pass
   *               `i ⇒ 2 ^ i`.
   */
-final case class RetryStrategy(max: Int, delay: Long, factor: Int ⇒ Int) {
+final case class RetryStrategy(max: Int, delay: Long, factor: Int => Int) {
   def delayFor(count: Int): Long = factor(count) * delay
 }
 
 object RetryStrategy {
 
   /** Retry strategy that will retry up to `count` times without any delay between attempts. */
-  def noDelay(count: Int): RetryStrategy = RetryStrategy(count, 0, _ ⇒ 0)
+  def noDelay(count: Int): RetryStrategy = RetryStrategy(count, 0, _ => 0)
 
   /** No failure will be retried. */
   val none: RetryStrategy = noDelay(0)
 
   /** Retry strategy that will retry up to `count` times with a fixed delay of `delay` ms between each attempt. */
-  def fixed(count: Int, delay: Long): RetryStrategy = RetryStrategy(count, delay, _ ⇒ 1)
+  def fixed(count: Int, delay: Long): RetryStrategy = RetryStrategy(count, delay, _ => 1)
 
   /** Retry strategy that will retry up to `count` times with a linearly increasing delay between each attempt.
     *
@@ -51,5 +51,5 @@ object RetryStrategy {
     *
     * The first attempt will be done with a delay of `delay` ms, the second one `4 * delay`, the third `8 * delay`...
     */
-  def quadratic(count: Int, delay: Long): RetryStrategy = RetryStrategy(count, delay, i ⇒ i * i)
+  def quadratic(count: Int, delay: Long): RetryStrategy = RetryStrategy(count, delay, i => i * i)
 }

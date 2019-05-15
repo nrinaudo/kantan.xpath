@@ -27,7 +27,7 @@ import kantan.codecs.resource.{InputResource, ReaderResource}
   *
   * See the [[XmlSource$ companion object]] for construction methods and default instances.
   */
-trait XmlSource[-A] extends Serializable { self ⇒
+trait XmlSource[-A] extends Serializable { self =>
 
   /** Turns the specified value into a [[Node]].
     *
@@ -60,22 +60,22 @@ trait XmlSource[-A] extends Serializable { self ⇒
   /** Evaluates the specified XPath expression against specified value. */
   def eval[B](a: A, expr: Query[DecodeResult[B]]): ReadResult[B] =
     for {
-      node ← asNode(a).right
-      b    ← expr.eval(node).right
+      node <- asNode(a).right
+      b    <- expr.eval(node).right
     } yield b
 
   /** Turns an `XmlSource[A]` into an `XmlSource[B]`.
     *
     * @see [[contramapResult]].
     */
-  def contramap[B](f: B ⇒ A): XmlSource[B] = XmlSource.from(f andThen self.asNode)
+  def contramap[B](f: B => A): XmlSource[B] = XmlSource.from(f andThen self.asNode)
 
   /** Turns an `XmlSource[A]` into an `XmlSource[B]`.
     *
     * @see [[contramap]]
     */
-  def contramapResult[AA <: A, B](f: B ⇒ ParseResult[AA]): XmlSource[B] =
-    XmlSource.from((b: B) ⇒ f(b).right.flatMap(self.asNode))
+  def contramapResult[AA <: A, B](f: B => ParseResult[AA]): XmlSource[B] =
+    XmlSource.from((b: B) => f(b).right.flatMap(self.asNode))
 }
 
 /** Defines convenience methods for creating and summoning [[XmlSource]] instances.
@@ -93,7 +93,7 @@ object XmlSource extends LowPriorityXmlSourceInstances {
   def apply[A](implicit ev: XmlSource[A]): XmlSource[A] = macro imp.summon[XmlSource[A]]
 
   /** Turns the specified function into a new [[XmlSource]] instance. */
-  def from[A](f: A ⇒ ParseResult[Node]): XmlSource[A] = new XmlSource[A] {
+  def from[A](f: A => ParseResult[Node]): XmlSource[A] = new XmlSource[A] {
     override def asNode(a: A) = f(a)
   }
 
@@ -105,25 +105,25 @@ object XmlSource extends LowPriorityXmlSourceInstances {
     XmlSource.from(parser.parse)
 
   implicit def fromInputResource[A: InputResource](implicit parser: XmlParser): XmlSource[A] =
-    inputSource.contramapResult { a ⇒
+    inputSource.contramapResult { a =>
       InputResource[A]
         .open(a)
         .right
-        .map(r ⇒ new InputSource(r))
+        .map(r => new InputSource(r))
         .left
-        .map(e ⇒ ParseError.IOError(e.getMessage, e.getCause))
+        .map(e => ParseError.IOError(e.getMessage, e.getCause))
     }
 }
 
 trait LowPriorityXmlSourceInstances {
   // Low priority since it assumes the encoding
   implicit def fromReaderResource[A: ReaderResource](implicit parser: XmlParser): XmlSource[A] =
-    XmlSource.from(parser.parse).contramapResult { a ⇒
+    XmlSource.from(parser.parse).contramapResult { a =>
       ReaderResource[A]
         .open(a)
         .right
-        .map(r ⇒ new InputSource(r))
+        .map(r => new InputSource(r))
         .left
-        .map(e ⇒ ParseError.IOError(e.getMessage, e.getCause))
+        .map(e => ParseError.IOError(e.getMessage, e.getCause))
     }
 }

@@ -32,7 +32,7 @@ object ParseResult extends ResultCompanion.WithDefault[ParseError] {
     * res0: ParseResult[Int] = Left(IOError: something bad happened)
     * }}}
     */
-  def io[A](a: ⇒ A): ParseResult[A] = ParseError.IOError.safe(a)
+  def io[A](a: => A): ParseResult[A] = ParseError.IOError.safe(a)
 
   /** Attempts to evaluate the specified expression, wrapping errors in a [[ParseError.SyntaxError]].
     *
@@ -44,11 +44,11 @@ object ParseResult extends ResultCompanion.WithDefault[ParseError] {
     * res0: ParseResult[Int] = Left(SyntaxError: something bad happened)
     * }}}
     */
-  def syntax[A](a: ⇒ A): ParseResult[A] = ParseError.SyntaxError.safe(a)
+  def syntax[A](a: => A): ParseResult[A] = ParseError.SyntaxError.safe(a)
 
   /** Evaluates the specified by-name parameter and passes it to the specified parsing function, wrapping any error
     * along the way in a failure.
     */
-  def open[A, B](a: ⇒ A)(parse: A ⇒ ParseResult[B]): ParseResult[B] =
+  def open[A, B](a: => A)(parse: A => ParseResult[B]): ParseResult[B] =
     io(a).right.flatMap(parse)
 }

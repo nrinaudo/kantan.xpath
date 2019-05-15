@@ -33,13 +33,13 @@ package object cats extends DecoderInstances with CommonInstances {
   implicit val xpathSyntaxErrorEq: Eq[ParseError.SyntaxError] = Eq.fromUniversalEquals
   implicit val xpathIOErrorEq: Eq[ParseError.IOError]         = Eq.fromUniversalEquals
   implicit val xpathXPathErrorEq: Eq[XPathError]              = Eq.fromUniversalEquals
-  implicit val xpathNodeEq: Eq[Node]                          = Eq.instance((n1, n2) ⇒ n1.isEqualNode(n2))
+  implicit val xpathNodeEq: Eq[Node]                          = Eq.instance((n1, n2) => n1.isEqualNode(n2))
 
   // - Misc. instances -------------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
 
   /** `Contravariant` instance for `XmlSource`. */
   implicit val xmlSource: Contravariant[XmlSource] = new Contravariant[XmlSource] {
-    override def contramap[A, B](fa: XmlSource[A])(f: B ⇒ A) = fa.contramap(f)
+    override def contramap[A, B](fa: XmlSource[A])(f: B => A) = fa.contramap(f)
   }
 }

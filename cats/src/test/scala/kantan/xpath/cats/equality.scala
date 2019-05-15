@@ -26,14 +26,14 @@ import org.scalacheck.Arbitrary
 
 object equality extends EqInstances {
   implicit def queryEq[A: Eq: Arbitrary]: Eq[Query[A]] = new Eq[Query[A]] {
-    implicit val arb = arbNode((a: A) ⇒ a.toString)
+    implicit val arb = arbNode((a: A) => a.toString)
     override def eqv(a1: Query[A], a2: Query[A]) =
-      kantan.codecs.laws.discipline.equality.eq(a1.eval, a2.eval) { (d1, d2) ⇒
+      kantan.codecs.laws.discipline.equality.eq(a1.eval, a2.eval) { (d1, d2) =>
         d1 === d2
       }
   }
 
-  implicit def eqXmlSource[A: Eq: Arbitrary]: Eq[XmlSource[A]] = Eq.by { source ⇒ (a: A) ⇒
+  implicit def eqXmlSource[A: Eq: Arbitrary]: Eq[XmlSource[A]] = Eq.by { source => (a: A) =>
     source.asNode(a)
   }
 

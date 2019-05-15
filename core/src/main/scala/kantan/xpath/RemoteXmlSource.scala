@@ -23,40 +23,40 @@ import java.net.{URL, URLConnection}
   * The main purpose here is to allow application developers to set their own HTTP headers: when scraping websites,
   * it's typically necessary to change the default user agent to something a bit more browser-like.
   */
-final case class RemoteXmlSource[A](toURL: A ⇒ ParseResult[URL], retry: RetryStrategy, headers: Map[String, String])(
+final case class RemoteXmlSource[A](toURL: A => ParseResult[URL], retry: RetryStrategy, headers: Map[String, String])(
   implicit parser: XmlParser
 ) extends XmlSource[A] {
   private def open(url: URL): URLConnection = {
     val con = url.openConnection()
-    headers.foreach { case (n, v) ⇒ con.setRequestProperty(n, v) }
+    headers.foreach { case (n, v) => con.setRequestProperty(n, v) }
     con
   }
 
   private def download(url: URL, count: Int): ParseResult[Node] =
     (for {
-      con ← ParseResult(open(url)).right
-      res ← ParseResult.open {
-             con.connect()
-             new InputSource(con.getInputStream)
-           }(parser.parse).right
+      con <- ParseResult(open(url)).right
+      res <- ParseResult.open {
+              con.connect()
+              new InputSource(con.getInputStream)
+            }(parser.parse).right
     } yield res).left.flatMap {
-      case ParseError.IOError(_) if retry.max > count ⇒
+      case ParseError.IOError(_) if retry.max > count =>
         Thread.sleep(retry.delayFor(count))
         download(url, count + 1)
-      case other ⇒ Left(other)
+      case other => Left(other)
     }
 
   override def asNode(a: A): ParseResult[Node] =
-    toURL(a).right.flatMap(url ⇒ download(url, 0))
+    toURL(a).right.flatMap(url => download(url, 0))
 
-  override def contramap[B](f: B ⇒ A): RemoteXmlSource[B] = copy(toURL = f andThen toURL)
+  override def contramap[B](f: B => A): RemoteXmlSource[B] = copy(toURL = f andThen toURL)
 
-  override def contramapResult[AA <: A, B](f: B ⇒ ParseResult[AA]): RemoteXmlSource[B] =
-    copy(toURL = (b: B) ⇒ f(b).right.flatMap(toURL))
+  override def contramapResult[AA <: A, B](f: B => ParseResult[AA]): RemoteXmlSource[B] =
+    copy(toURL = (b: B) => f(b).right.flatMap(toURL))
 
   /** Sets the specified header to the specified value. */
   def withHeader(name: String, value: String): RemoteXmlSource[A] =
-    copy(headers = headers + (name → value))
+    copy(headers = headers + (name -> value))
 
   /** Sets the user-agent to use whenever connecting to a URL. */
   def withUserAgent(value: String): RemoteXmlSource[A] = withHeader("User-Agent", value)

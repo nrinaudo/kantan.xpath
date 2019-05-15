@@ -41,7 +41,7 @@ object Compiler {
   /** Compiles XPath expressions into [[Query]] instances that will only retrieve the first match. */
   implicit def xpath1[A: NodeDecoder]: Compiler[Id[A]] = new Compiler[Id[A]] {
     @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
-    override def compile(expr: XPathExpression) = Query { n ⇒
+    override def compile(expr: XPathExpression) = Query { n =>
       NodeDecoder[A].decode(Option(expr.evaluate(n, XPathConstants.NODE).asInstanceOf[Node]))
     }
   }
@@ -52,15 +52,15 @@ object Compiler {
       def fold(i: Int, nodes: NodeList, out: mutable.Builder[A, F[A]]): DecodeResult[F[A]] =
         if(i < nodes.getLength) {
           NodeDecoder[A].decode(Option(nodes.item(i))) match {
-            case Right(a) ⇒
+            case Right(a) =>
               out += a
               fold(i + 1, nodes, out)
-            case Left(f) ⇒ Left(f)
+            case Left(f) => Left(f)
           }
         }
         else DecodeResult.success(out.result())
       @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
-      override def compile(expr: XPathExpression) = Query { n ⇒
+      override def compile(expr: XPathExpression) = Query { n =>
         fold(0, expr.evaluate(n, XPathConstants.NODESET).asInstanceOf[NodeList], cbf.newBuilder)
       }
     }

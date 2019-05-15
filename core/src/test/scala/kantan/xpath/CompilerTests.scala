@@ -30,7 +30,7 @@ class CompilerTests extends FunSuite with GeneratorDrivenPropertyChecks with Mat
 
   @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
   def encodeAll[A](bs: List[Value[A]]): Element = {
-    val n = bs.foldLeft("<root></root>".asNode.right.get.asInstanceOf[Document]) { (doc, b) ⇒
+    val n = bs.foldLeft("<root></root>".asNode.right.get.asInstanceOf[Document]) { (doc, b) =>
       val an = b.encoded.cloneNode(true)
       doc.adoptNode(an)
       doc.getFirstChild.appendChild(an)
@@ -40,21 +40,21 @@ class CompilerTests extends FunSuite with GeneratorDrivenPropertyChecks with Mat
   }
 
   test("'first' expressions should fail on illegal values and succeed on legal ones") {
-    forAll { value: Value[Int] ⇒
+    forAll { value: Value[Int] =>
       value.encoded.evalXPath[Int](xp"//element") should be(NodeDecoder[Int].decode(Option(value.encoded)))
     }
   }
 
   test("'first' expressions should fail on empty results") {
-    forAll { value: Value[Int] ⇒
+    forAll { value: Value[Int] =>
       value.encoded.evalXPath[Int](xp"//element2") should be(DecodeResult.notFound)
     }
   }
 
   test("'all' expressions should fail on lists containing at least one illegal value and succeed on others") {
-    forAll { values: List[Value[Int]] ⇒
+    forAll { values: List[Value[Int]] =>
       encodeAll(values).evalXPath[List[Int]](xp"//element") should be(
-        DecodeResult.sequence(values.map(v ⇒ NodeDecoder[Int].decode(Option(v.encoded))))
+        DecodeResult.sequence(values.map(v => NodeDecoder[Int].decode(Option(v.encoded))))
       )
     }
   }

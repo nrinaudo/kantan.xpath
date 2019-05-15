@@ -24,7 +24,7 @@ sealed abstract class XPathError(msg: String) extends Error(msg)
 /** Describes a XPath expression compilation error. */
 sealed case class CompileError(message: String) extends XPathError(message)
 
-object CompileError extends ErrorCompanion("an unspecified compilation error occurred")(s ⇒ new CompileError(s))
+object CompileError extends ErrorCompanion("an unspecified compilation error occurred")(s => new CompileError(s))
 
 /** Describes an error that occurred while parsing and / or decoding XML content. */
 sealed abstract class ReadError(msg: String) extends XPathError(msg)
@@ -40,7 +40,7 @@ object DecodeError {
   /** Error that occurs when a node was attempted to be decoded as a type its value is not compatible with. */
   sealed case class TypeError(message: String) extends DecodeError(message)
 
-  object TypeError extends ErrorCompanion("an unspecified type error occurred")(s ⇒ new TypeError(s))
+  object TypeError extends ErrorCompanion("an unspecified type error occurred")(s => new TypeError(s))
 }
 
 /** Describes errors that occur while parsing XML content. */
@@ -51,10 +51,10 @@ object ParseError {
   /** Error that occurs when an XML document is not valid. */
   sealed case class SyntaxError(message: String) extends ParseError(message)
 
-  object SyntaxError extends ErrorCompanion("an unspecified syntax error occurred")(s ⇒ new SyntaxError(s))
+  object SyntaxError extends ErrorCompanion("an unspecified syntax error occurred")(s => new SyntaxError(s))
 
   /** Error that occurs when something IO related went bad. */
   sealed case class IOError(message: String) extends ParseError(message)
 
-  object IOError extends ErrorCompanion("an unspecified IO error occurred")(s ⇒ new IOError(s))
+  object IOError extends ErrorCompanion("an unspecified IO error occurred")(s => new IOError(s))
 }

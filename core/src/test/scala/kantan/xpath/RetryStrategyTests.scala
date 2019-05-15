@@ -25,45 +25,45 @@ class RetryStrategyTests extends FunSuite with GeneratorDrivenPropertyChecks wit
   implicit val arbLong: Arbitrary[Long] = Arbitrary(Gen.choose(0L, 24 * 60 * 60 * 1000L))
 
   test("RetryStrategy.noDelay should always have a delay of 0") {
-    forAll { max: Int ⇒
+    forAll { max: Int =>
       val strat = RetryStrategy.noDelay(max)
-      (0 to max).foreach { i ⇒
+      (0 to max).foreach { i =>
         strat.delayFor(i) should be(0)
       }
     }
   }
 
   test("RetryStrategy.none should always have a delay of 0") {
-    forAll { max: Int ⇒
+    forAll { max: Int =>
       val strat = RetryStrategy.none
-      (0 to max).foreach { i ⇒
+      (0 to max).foreach { i =>
         strat.delayFor(i) should be(0)
       }
     }
   }
 
   test("RetryStrategy.fixed should have a fixed delay") {
-    forAll { (max: Int, delay: Long) ⇒
+    forAll { (max: Int, delay: Long) =>
       val strat = RetryStrategy.fixed(max, delay)
-      (0 to max).foreach { i ⇒
+      (0 to max).foreach { i =>
         strat.delayFor(i) should be(delay)
       }
     }
   }
 
   test("RetryStrategy.linear should have a linearly increasing delay") {
-    forAll { (max: Int, delay: Long) ⇒
+    forAll { (max: Int, delay: Long) =>
       val strat = RetryStrategy.linear(max, delay)
-      (0 to max).foreach { i ⇒
+      (0 to max).foreach { i =>
         strat.delayFor(i) should be(i * delay)
       }
     }
   }
 
   test("RetryStrategy.quadratic should have a quadratically increasing delay") {
-    forAll { (max: Int, delay: Long) ⇒
+    forAll { (max: Int, delay: Long) =>
       val strat = RetryStrategy.quadratic(max, delay)
-      (0 to max).foreach { i ⇒
+      (0 to max).foreach { i =>
         strat.delayFor(i) should be(delay * (i * i))
       }
     }

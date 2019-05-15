@@ -20,7 +20,7 @@ package discipline
 
 import kantan.codecs.laws._, CodecValue.{IllegalValue, LegalValue}
 import ops._
-import org.scalacheck._, Arbitrary.{arbitrary ⇒ arb}, Gen._
+import org.scalacheck._, Arbitrary.{arbitrary => arb}, Gen._
 import org.scalacheck.rng.Seed
 
 object arbitrary extends ArbitraryInstances
@@ -47,33 +47,33 @@ trait ArbitraryInstances
 
   implicit val cogenCompileError: Cogen[CompileError]          = Cogen[String].contramap(_.message)
   implicit val cogenTypeError: Cogen[DecodeError.TypeError]    = Cogen[String].contramap(_.message)
-  implicit val cogenNotFound: Cogen[DecodeError.NotFound.type] = Cogen[Unit].contramap(_ ⇒ ())
-  implicit val cogenDecodeError: Cogen[DecodeError] = Cogen { (seed: Seed, error: DecodeError) ⇒
+  implicit val cogenNotFound: Cogen[DecodeError.NotFound.type] = Cogen[Unit].contramap(_ => ())
+  implicit val cogenDecodeError: Cogen[DecodeError] = Cogen { (seed: Seed, error: DecodeError) =>
     error match {
-      case err: DecodeError.TypeError     ⇒ cogenTypeError.perturb(seed, err)
-      case err: DecodeError.NotFound.type ⇒ cogenNotFound.perturb(seed, err)
+      case err: DecodeError.TypeError     => cogenTypeError.perturb(seed, err)
+      case err: DecodeError.NotFound.type => cogenNotFound.perturb(seed, err)
     }
   }
   implicit val cogenSyntaxError: Cogen[ParseError.SyntaxError] = Cogen[String].contramap(_.message)
   implicit val cogenIOError: Cogen[ParseError.IOError]         = Cogen[String].contramap(_.message)
-  implicit val cogenParseError: Cogen[ParseError] = Cogen { (seed: Seed, error: ParseError) ⇒
+  implicit val cogenParseError: Cogen[ParseError] = Cogen { (seed: Seed, error: ParseError) =>
     error match {
-      case err: ParseError.SyntaxError ⇒ cogenSyntaxError.perturb(seed, err)
-      case err: ParseError.IOError     ⇒ cogenIOError.perturb(seed, err)
+      case err: ParseError.SyntaxError => cogenSyntaxError.perturb(seed, err)
+      case err: ParseError.IOError     => cogenIOError.perturb(seed, err)
     }
   }
 
-  implicit val cogenReadError: Cogen[ReadError] = Cogen { (seed: Seed, error: ReadError) ⇒
+  implicit val cogenReadError: Cogen[ReadError] = Cogen { (seed: Seed, error: ReadError) =>
     error match {
-      case err: DecodeError ⇒ cogenDecodeError.perturb(seed, err)
-      case err: ParseError  ⇒ cogenParseError.perturb(seed, err)
+      case err: DecodeError => cogenDecodeError.perturb(seed, err)
+      case err: ParseError  => cogenParseError.perturb(seed, err)
     }
   }
 
-  implicit val cogenXPathError: Cogen[XPathError] = Cogen { (seed: Seed, error: XPathError) ⇒
+  implicit val cogenXPathError: Cogen[XPathError] = Cogen { (seed: Seed, error: XPathError) =>
     error match {
-      case err: ReadError    ⇒ cogenReadError.perturb(seed, err)
-      case err: CompileError ⇒ cogenCompileError.perturb(seed, err)
+      case err: ReadError    => cogenReadError.perturb(seed, err)
+      case err: CompileError => cogenCompileError.perturb(seed, err)
     }
   }
 
@@ -87,8 +87,8 @@ trait ArbitraryInstances
   }
 
   implicit val arbLegalXml: Arbitrary[LegalValue[String, Node, codecs.type]] = Arbitrary(for {
-    element ← Gen.identifier
-    content ← Gen.identifier
+    element <- Gen.identifier
+    content <- Gen.identifier
   } yield {
     val n = s"<$element>$content</$element>"
     LegalValue(n, n.asUnsafeNode)
@@ -118,33 +118,33 @@ trait ArbitraryInstances
   implicit def arbLegalNodeOpt[A](implicit la: Arbitrary[LegalString[A]]): Arbitrary[LegalNode[Option[A]]] =
     Arbitrary(
       Gen.oneOf(
-        la.arbitrary.map(_.mapEncoded(e ⇒ Option(asCDataNode(e))).mapDecoded(Option.apply).tag[codecs.type]),
+        la.arbitrary.map(_.mapEncoded(e => Option(asCDataNode(e))).mapDecoded(Option.apply).tag[codecs.type]),
         Gen.const(CodecValue.LegalValue[Option[Node], Option[A], codecs.type](Option.empty, Option.empty))
       )
     )
 
   implicit def arbIllegalNodeOpt[A](implicit la: Arbitrary[IllegalString[A]]): Arbitrary[IllegalNode[Option[A]]] =
-    Arbitrary(la.arbitrary.map(_.mapEncoded(e ⇒ Option(asCDataNode(e))).mapDecoded(Option.apply).tag[codecs.type]))
+    Arbitrary(la.arbitrary.map(_.mapEncoded(e => Option(asCDataNode(e))).mapDecoded(Option.apply).tag[codecs.type]))
 
   // - Misc. arbitraries -----------------------------------------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
-  def arbNode[A: Arbitrary](f: A ⇒ String): Arbitrary[Node] =
-    Arbitrary(Arbitrary.arbitrary[A].map(a ⇒ s"<root>${f(a)}</root>".asUnsafeNode))
+  def arbNode[A: Arbitrary](f: A => String): Arbitrary[Node] =
+    Arbitrary(Arbitrary.arbitrary[A].map(a => s"<root>${f(a)}</root>".asUnsafeNode))
 
   implicit val cogenNode: Cogen[Node] = {
     def accumulate(node: Node, acc: List[(String, Short)]): List[(String, Short)] = {
       val children = node.getChildNodes
-      (0 until children.getLength).foldLeft((node.getNodeName, node.getNodeType) :: acc) { (a, i) ⇒
+      (0 until children.getLength).foldLeft((node.getNodeName, node.getNodeType) :: acc) { (a, i) =>
         accumulate(children.item(i), a)
       }
     }
 
-    Cogen.cogenList[(String, Short)].contramap(n ⇒ accumulate(n, List.empty))
+    Cogen.cogenList[(String, Short)].contramap(n => accumulate(n, List.empty))
   }
 
   implicit def arbQuery[A: Arbitrary]: Arbitrary[Query[A]] =
-    Arbitrary(implicitly[Arbitrary[Node ⇒ A]].arbitrary.map(f ⇒ Query(f)))
+    Arbitrary(implicitly[Arbitrary[Node => A]].arbitrary.map(f => Query(f)))
 
   implicit def arbXmlSource[A: Arbitrary: Cogen](implicit n: Arbitrary[Node]): Arbitrary[XmlSource[A]] =
-    Arbitrary(arb[A ⇒ ParseResult[Node]].map(XmlSource.from))
+    Arbitrary(arb[A => ParseResult[Node]].map(XmlSource.from))
 }

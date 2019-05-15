@@ -27,15 +27,15 @@ class XmlSourceOpsTests extends FunSuite with GeneratorDrivenPropertyChecks with
   type Value[A] = CodecValue[Node, A, codecs.type]
 
   private def cmp[A, F, E, T](value: CodecValue[E, A, T], res: Either[F, A]): Unit = (value, res) match {
-    case (CodecValue.LegalValue(_, n1), Right(n2)) ⇒
+    case (CodecValue.LegalValue(_, n1), Right(n2)) =>
       n1 should be(n2)
       ()
-    case (CodecValue.IllegalValue(_), Left(_)) ⇒ ()
-    case (a, b)                                ⇒ fail(s"$a is not compatible with $b")
+    case (CodecValue.IllegalValue(_), Left(_)) => ()
+    case (a, b)                                => fail(s"$a is not compatible with $b")
   }
 
   test("XmlSource instances should have a working asNode method") {
-    forAll { value: Value[Int] ⇒
+    forAll { value: Value[Int] =>
       cmp(value, value.encoded.asNode.right.flatMap(_.evalXPath[Int](xp"/element")))
     }
   }
@@ -43,27 +43,27 @@ class XmlSourceOpsTests extends FunSuite with GeneratorDrivenPropertyChecks with
   // This test is not as good as it could be - we're not comparing decoded XML. The reason for that is that, apparently,
   // Node equality is not something the JDK deals with.
   test("XmlSource instances should have a working asUnsafeNode method") {
-    forAll { value: CodecValue[String, Node, codecs.type] ⇒
+    forAll { value: CodecValue[String, Node, codecs.type] =>
       (value, ParseResult.fromTry(Try(value.encoded.asUnsafeNode))) match {
-        case (CodecValue.LegalValue(_, _), Right(_)) ⇒ true
-        case (CodecValue.IllegalValue(_), Left(_))   ⇒ true
-        case (a, b)                                  ⇒ fail(s"$a is not compatible with $b")
+        case (CodecValue.LegalValue(_, _), Right(_)) => true
+        case (CodecValue.IllegalValue(_), Left(_))   => true
+        case (a, b)                                  => fail(s"$a is not compatible with $b")
       }
     }
   }
 
   test("XmlSource instances should have a working evalXPath(String) method") {
-    forAll { value: Value[Int] ⇒
+    forAll { value: Value[Int] =>
       cmp(value, value.encoded.evalXPath[Int](xp"/element"))
     }
   }
 
   test("XmlSource instances should have a working unsafeEvalXPath(String) method") {
-    forAll { value: Value[Int] ⇒
+    forAll { value: Value[Int] =>
       // Scala 2.11 doesn't have Try.toEither...
       cmp(value, Try(value.encoded.unsafeEvalXPath[Int](xp"/element")) match {
-        case Success(s) ⇒ Right(s)
-        case Failure(f) ⇒ Left(f)
+        case Success(s) => Right(s)
+        case Failure(f) => Left(f)
       })
     }
   }

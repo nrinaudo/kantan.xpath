@@ -18,7 +18,7 @@ package kantan.xpath
 package scalaz
 
 import _root_.scalaz.Show
-import _root_.scalaz.scalacheck.ScalazProperties.{equal ⇒ equ}
+import _root_.scalaz.scalacheck.ScalazProperties.{equal => equ}
 import arbitrary._
 import kantan.codecs.scalaz.laws.discipline.ScalazDisciplineSuite
 
@@ -35,14 +35,14 @@ class ErrorTests extends ScalazDisciplineSuite {
   checkAll("ParseError.IOError", equ.laws[ParseError.IOError])
 
   test("Show[CompileError] should yield a string containing the expected message") {
-    forAll { error: CompileError ⇒
+    forAll { error: CompileError =>
       Show[CompileError].shows(error) should include(error.message)
       Show[XPathError].shows(error) should include(error.message)
     }
   }
 
   test("Show[DecodeError.TypeError] should yield a string containing the expected message") {
-    forAll { error: DecodeError.TypeError ⇒
+    forAll { error: DecodeError.TypeError =>
       Show[DecodeError.TypeError].shows(error) should include(error.message)
       Show[DecodeError].shows(error) should include(error.message)
       Show[ReadError].shows(error) should include(error.message)
@@ -51,7 +51,7 @@ class ErrorTests extends ScalazDisciplineSuite {
   }
 
   test("Show[DecodeError.NotFound] should yield a string containing the expected message") {
-    forAll { error: DecodeError.NotFound.type ⇒
+    forAll { error: DecodeError.NotFound.type =>
       val expected = "no matched node"
 
       Show[DecodeError.NotFound.type].shows(error) should include(expected)
@@ -63,7 +63,7 @@ class ErrorTests extends ScalazDisciplineSuite {
 
   test("Show[ParseError.SyntaxError] should yield a string containing the expected message") {
 
-    forAll { error: ParseError.SyntaxError ⇒
+    forAll { error: ParseError.SyntaxError =>
       Show[ParseError.SyntaxError].shows(error) should include(error.message)
       Show[ParseError].shows(error) should include(error.message)
       Show[ReadError].shows(error) should include(error.message)
@@ -73,7 +73,7 @@ class ErrorTests extends ScalazDisciplineSuite {
 
   test("Show[ParseError.IOError] should yield a string containing the expected message") {
 
-    forAll { error: ParseError.IOError ⇒
+    forAll { error: ParseError.IOError =>
       Show[ParseError.IOError].shows(error) should include(error.message)
       Show[ParseError].shows(error) should include(error.message)
       Show[ReadError].shows(error) should include(error.message)

@@ -1,7 +1,7 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Refined module"
-section: tutorial
+section: scala mdocorial
 sort_order: 14
 ---
 kantan.xpath comes with a [refined](https://github.com/fthomas/refined) module that can be used
@@ -13,7 +13,7 @@ libraryDependencies += "com.nrinaudo" %% "kantan.xpath-refined" % "@VERSION@"
 
 You then need to import the corresponding package:
 
-```tut:silent
+```scala mdoc:silent
 import kantan.xpath.refined._
 ```
 
@@ -21,7 +21,7 @@ And that's pretty much it. You can now decode refined types directly.
 
 Let's first set our types up:
 
-```tut:silent
+```scala mdoc:silent
 import eu.timepit.refined.api.Refined
 import eu.timepit.refined.numeric.Positive
 import kantan.xpath.implicits._
@@ -31,12 +31,12 @@ type PositiveInt = Int Refined Positive
 
 We can then simply write the following:
 
-```tut
+```scala mdoc
 "<foo><bar value='1'/></foo>".evalXPath[PositiveInt](xp"//bar/@value")
 ```
 
 And, for an error case:
 
-```tut
+```scala mdoc
 "<foo><bar value='-1'/></foo>".evalXPath[PositiveInt](xp"//bar/@value")
 ```

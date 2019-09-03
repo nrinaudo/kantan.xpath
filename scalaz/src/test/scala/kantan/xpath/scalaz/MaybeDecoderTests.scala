@@ -18,11 +18,10 @@ package kantan.xpath.scalaz
 
 import kantan.xpath.laws.discipline.NodeDecoderTests
 import kantan.xpath.scalaz.arbitrary._
-import org.scalatest.FunSuite
-import org.scalatest.prop.GeneratorDrivenPropertyChecks
+import org.scalatest.funsuite.AnyFunSuite
 import org.typelevel.discipline.scalatest.Discipline
 import scalaz.Maybe
 
-class MaybeDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
+class MaybeDecoderTests extends AnyFunSuite with Discipline {
   checkAll("NodeDecoder[Maybe[Int]]", NodeDecoderTests[Maybe[Int]].decoder[Int, Int])
 }

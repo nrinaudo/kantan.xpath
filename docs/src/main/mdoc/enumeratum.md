@@ -1,7 +1,7 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Enumeratum module"
-section: tutorial
+section: scala mdocorial
 sort_order: 15
 ---
 kantan.xpath comes with an [enumeratum](https://github.com/lloydmeta/enumeratum) module that can be used
@@ -15,7 +15,7 @@ libraryDependencies += "com.nrinaudo" %% "kantan.xpath-enumeratum" % "@VERSION@"
 
 When working with enumerations of type `Enum`, you should import the following package:
 
-```tut:silent
+```scala mdoc:silent
 import kantan.xpath.enumeratum._
 ```
 
@@ -23,7 +23,7 @@ And that's pretty much it. You can now encode and decode your enumeration direct
 
 Let's first set our types up:
 
-```tut:silent
+```scala mdoc:silent
 import enumeratum._
 
 // We need to put this all in a faked out package object due to the way
@@ -45,7 +45,7 @@ object somePackage {
 
 And a few further imports, to bring our enumeration and the kantan.csv syntax in scope:
 
-```tut:silent
+```scala mdoc:silent
 import kantan.xpath.implicits._
 import somePackage._
 ```
@@ -53,7 +53,7 @@ import somePackage._
 
 We can then simply write the following:
 
-```tut
+```scala mdoc
 "<foo><bar value='Hello'/></foo>".evalXPath[DummyEnum](xp"//bar/@value")
 
 "<foo><bar value='GoodDay'/></foo>".evalXPath[DummyEnum](xp"//bar/@value")
@@ -65,7 +65,7 @@ We can then simply write the following:
 
 For enumerations of type `ValueEnum`, you should import the following package:
 
-```tut:silent:reset
+```scala mdoc:silent:reset
 import kantan.xpath.enumeratum.values._
 ```
 
@@ -73,7 +73,7 @@ And that's pretty much it. You can now encode and decode your enumeration direct
 
 Let's first set our types up:
 
-```tut:silent
+```scala mdoc:silent
 import enumeratum.values._
 
 // We need to put this all in a faked out package object due to the way
@@ -98,14 +98,14 @@ object somePackage {
 
 And a few further imports, to bring our enumeration and the kantan.csv syntax in scope:
 
-```tut:silent
+```scala mdoc:silent
 import kantan.xpath.implicits._
 import somePackage._
 ```
 
 We can then simply write the following:
 
-```tut
+```scala mdoc
 "<foo><bar value='1'/></foo>".evalXPath[Greeting](xp"//bar/@value")
 
 "<foo><bar value='-1'/></foo>".evalXPath[Greeting](xp"//bar/@value")

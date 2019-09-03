@@ -1,7 +1,7 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "What can be parsed as XML data?"
-section: tutorial
+section: scala mdocorial
 sort_order: 7
 ---
 Before we can even think about applying XPath expressions to an XML document, we need to get our hands on that document
@@ -21,14 +21,14 @@ Implementing our own [`XmlSource`] for types that aren't supported by default is
 
 ## Implementation from scratch
 
-Reduced to its simplest expression, an [`XmlSource[A]`][`XmlSource`] is essentially an `A ⇒ ParseResult[Node]` - that
+Reduced to its simplest expression, an [`XmlSource[A]`][`XmlSource`] is essentially an `A => ParseResult[Node]` - that
 is, a function that takes an `A` and turns it into a [`Node`], with the possibility of safe failure encoded in
 [`ParseResult`].
 
 If you can write such a function, you can trivially turn it into a valid instance of [`XmlSource`]. A simple example
 would be to provide an [`XmlSource`] instance for [`Node`]:
 
-```tut:silent
+```scala mdoc:silent
 import kantan.xpath._
 
 implicit val node: XmlSource[Node] = XmlSource.from(ParseResult.success)
@@ -48,9 +48,9 @@ the [`nekohtml`] module does.
 In order to write an [`XmlSource`] instance for [`String`], say, one would only need to know how to turn an instance
 of [`String`] into one of [`InputSource`]:
 
-```tut:silent
+```scala mdoc:silent
 implicit def stringSource(implicit parser: XmlParser): XmlSource[String] =
-  XmlSource[InputSource].contramap(s ⇒ new InputSource(new java.io.StringReader(s)))
+  XmlSource[InputSource].contramap(s => new InputSource(new java.io.StringReader(s)))
 ```
 
 

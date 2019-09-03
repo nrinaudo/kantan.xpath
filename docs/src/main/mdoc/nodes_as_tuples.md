@@ -1,22 +1,22 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Decoding nodes as tuples"
-section: tutorial
+section: scala mdocorial
 sort_order: 2
 ---
-We've seen in a [previous tutorial](nodes_as_primitive.html) how to extract primitive types from XML documents. Often,
+We've seen in a [previous scala mdocorial](nodes_as_primitive.html) how to extract primitive types from XML documents. Often,
 however, these primitive values need to be assembled in more complex types, such as tuples. kantan.xpath provides a
 simple way of doing so.
 
 In order to show how that works, we'll first need some sample XML data, which we'll get from this project's resources:
 
-```tut:silent
+```scala mdoc:silent
 val rawData: java.net.URL = getClass.getResource("/simple.xml")
 ```
 
 This is what we're working with:
 
-```tut
+```scala mdoc
 scala.io.Source.fromURL(rawData).mkString
 ```
 
@@ -27,7 +27,7 @@ used when we request XML nodes to be interpreted as `(Int, Boolean)` values.
 The easier way to declare a [`NodeDecoder`] instance for tuples is to use the dedicated [`tuple`] method, which takes
 one XPath expression per field to extract:
 
-```tut:silent
+```scala mdoc:silent
 import kantan.xpath._
 import kantan.xpath.implicits._
 
@@ -37,7 +37,7 @@ implicit val elementDecoder: NodeDecoder[(Int, Boolean)] = NodeDecoder.tuple[Int
 Now that we have told kantan.xpath how to decode an XML node to an instance of `(Int, Boolean)`, we can simply call
 [`evalXPath`] with the right type parameters:
 
-```tut
+```scala mdoc
 rawData.evalXPath[List[(Int, Boolean)]](xp"//element")
 ```
 

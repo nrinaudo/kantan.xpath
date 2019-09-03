@@ -1,7 +1,7 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Compiling queries for reuse"
-section: tutorial
+section: scala mdocorial
 sort_order: 6
 ---
 In the examples we've seen so far, XPath expressions were passed around as [`XPathExpression`]s. This can be
@@ -12,13 +12,13 @@ instances of [`Query`].
 
 In order to show how that works, we'll need some sample XML data, which we'll get from this project's resources:
 
-```tut:silent
+```scala mdoc:silent
 val rawData: java.net.URL = getClass.getResource("/simple.xml")
 ```
 
 This is what we're working with:
 
-```tut
+```scala mdoc
 scala.io.Source.fromURL(rawData).mkString
 ```
 
@@ -29,7 +29,7 @@ We'll be trying to extract the `id` attribute of each `element` node as an `int`
 
 Compiling XPath literals is done through [`Query.apply`]:
 
-```tut:silent
+```scala mdoc:silent
 import kantan.xpath._
 import kantan.xpath.implicits._
 
@@ -38,7 +38,7 @@ val query = Query[List[Int]](xp"//element/@id")
 
 You can now use the compiled query where you used to specify strings, such as in [`evalXPath`]:
 
-```tut
+```scala mdoc
 rawData.evalXPath(query)
 ```
 
@@ -51,8 +51,8 @@ parameters to [`evalXPath`].
 You cannot always express your XPath expressions as literals - some expressions are built dynamically, for instance.
 You can use [`compile`] to compile raw strings:
 
-```tut
-val query = Query.compile[List[Int]]("//element/@id")
+```scala mdoc
+Query.compile[List[Int]]("//element/@id")
 ```
 
 The returned value is not directly a [`Query`], though, but rather a [`CompileResult`] containing an instance of

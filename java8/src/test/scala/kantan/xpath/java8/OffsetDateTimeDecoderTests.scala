@@ -18,7 +18,8 @@ package kantan.xpath
 package java8
 
 import java.time.OffsetDateTime
-import laws.discipline._, arbitrary._
+import kantan.xpath.java8.arbitrary._
+import laws.discipline._
 
 class OffsetDateTimeDecoderTests extends DisciplineSuite {
 

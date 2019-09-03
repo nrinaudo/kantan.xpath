@@ -1,34 +1,34 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Decoding nodes as primitive types"
-section: tutorial
+section: scala mdocorial
 sort_order: 1
 ---
 The simplest possible use of kantan.xpath is to extract primitive types from XML documents.
 
 In order to show how that works, we'll first need some sample XML data, which we'll get from this project's resources:
 
-```tut:silent
+```scala mdoc:silent
 val rawData: java.net.URL = getClass.getResource("/simple.xml")
 ```
 
 This is what we're working with:
 
-```tut
+```scala mdoc
 scala.io.Source.fromURL(rawData).mkString
 ```
 
 We'll then need to import kantan.xpath's syntax, which will let us evaluate XPath expressions directly on something
 that can be turned into an XML document:
 
-```tut:silent
+```scala mdoc:silent
 import kantan.xpath.implicits._
 ```
 
 This allows us to write the following code, which will attempt to extract the `id` field of any `element` node as an
 `Int`:
 
-```tut
+```scala mdoc
 rawData.evalXPath[Int](xp"//element/@id")
 ```
 
@@ -39,14 +39,14 @@ either a failure if something went wrong (the XPath expression is not valid, the
 a success otherwise. This mechanism ensures that [`evalXPath`] is safe: no exception will be thrown and break the flow
 of your code. For example:
 
-```tut
+```scala mdoc
 rawData.evalXPath[java.net.URL](xp"//element/@id")
 ```
 
 In some cases, however, we don't really care for runtime safety and are fine with our program crashing at the first
 error. This is what the [`unsafeEvalXPath`] method was designed for:
 
-```tut
+```scala mdoc
 rawData.unsafeEvalXPath[Int](xp"//element/@id")
 ```
 
@@ -57,14 +57,14 @@ type, we told kantan.xpath that we only wanted the first result. We could get th
 [`List[Int]`][`List`], for example:
 
 
-```tut
+```scala mdoc
 rawData.evalXPath[List[Int]](xp"//element/@id")
 ```
 
 Any type constructor that has a [`CanBuildFrom`] instance could have been used instead of [`List`] - that's essentially
 all collections. By the same token, any primitive time could have been used instead of `Int`. For example:
 
-```tut
+```scala mdoc
 rawData.evalXPath[Vector[Boolean]](xp"//element/@enabled")
 ```
 

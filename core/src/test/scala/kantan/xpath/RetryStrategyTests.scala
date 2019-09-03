@@ -17,10 +17,11 @@
 package kantan.xpath
 
 import org.scalacheck.{Arbitrary, Gen}
-import org.scalatest.{FunSuite, Matchers}
-import org.scalatest.prop.GeneratorDrivenPropertyChecks
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
+import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
 
-class RetryStrategyTests extends FunSuite with GeneratorDrivenPropertyChecks with Matchers {
+class RetryStrategyTests extends AnyFunSuite with ScalaCheckPropertyChecks with Matchers {
   implicit val arbInt: Arbitrary[Int]   = Arbitrary(Gen.choose(0, 100))
   implicit val arbLong: Arbitrary[Long] = Arbitrary(Gen.choose(0L, 24 * 60 * 60 * 1000L))
 

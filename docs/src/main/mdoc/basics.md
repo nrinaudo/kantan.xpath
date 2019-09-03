@@ -1,7 +1,7 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Basics"
-section: tutorial
+section: scala mdocorial
 sort_order: 0
 ---
 There are a few concepts to get familiar with before getting to grips with kantan.xpath proper.
@@ -15,7 +15,7 @@ as soon as possible.
 There are various ways of enabling the feature, the simplest and most common one being to import
 [`kantan.xpath.implicits._`]:
 
-```tut:silent
+```scala mdoc:silent
 import kantan.xpath.implicits._
 ```
 
@@ -24,13 +24,13 @@ This will also bring kantan.xpath syntax in scope though, so if you only want th
 
 This lets you create new regular expression by prefixing string literals with [`xp`]:
 
-```tut
+```scala mdoc
 xp"//a[@href]"
 ```
 
 And, as promised, this fails *at compile time* if the xpath expression is not valid:
 
-```tut:fail
+```scala mdoc:fail
 xp"!@#"
 ```
 
@@ -42,13 +42,13 @@ strings using kantan.xpath is through the [`evalXPath`] method that enriches str
 
 For example, retrieving only the first match:
 
-```tut
+```scala mdoc
 "<users><user id='1'/><user id='2'/></users>".evalXPath[Int](xp"//user/@id")
 ```
 
 And retrieving all matches:
 
-```tut
+```scala mdoc
 "<users><user id='1'/><user id='2'/></users>".evalXPath[List[Int]](xp"//user/@id")
 ```
 

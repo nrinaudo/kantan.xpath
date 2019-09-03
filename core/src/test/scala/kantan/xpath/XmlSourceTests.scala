@@ -18,9 +18,10 @@ package kantan.xpath
 
 import implicits._
 import java.nio.file.Files
-import org.scalatest.{FunSuite, Matchers}
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
 
-class XmlSourceTests extends FunSuite with Matchers {
+class XmlSourceTests extends AnyFunSuite with Matchers {
 
   test("XmlSource[File] should correctly handle XML encoding") {
     val path     = Files.createTempFile("kx", ".xml")

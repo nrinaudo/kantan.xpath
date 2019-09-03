@@ -19,10 +19,9 @@ package kantan.xpath.scalaz
 import _root_.scalaz.\/
 import kantan.xpath.laws.discipline.NodeDecoderTests
 import kantan.xpath.scalaz.arbitrary._
-import org.scalatest.FunSuite
-import org.scalatest.prop.GeneratorDrivenPropertyChecks
+import org.scalatest.funsuite.AnyFunSuite
 import org.typelevel.discipline.scalatest.Discipline
 
-class DisjunctionDecoderTests extends FunSuite with GeneratorDrivenPropertyChecks with Discipline {
+class DisjunctionDecoderTests extends AnyFunSuite with Discipline {
   checkAll("NodeDecoder[Int \\/ Boolean]", NodeDecoderTests[Int \/ Boolean].decoder[Int, Int])
 }

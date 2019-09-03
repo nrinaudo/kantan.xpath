@@ -19,11 +19,12 @@ package kantan.xpath
 import implicits._
 import kantan.codecs.laws.CodecValue
 import laws.discipline.arbitrary._
-import org.scalatest.{FunSuite, Matchers}
-import org.scalatest.prop.GeneratorDrivenPropertyChecks
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
+import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
 import scala.util.{Failure, Success, Try}
 
-class XmlSourceOpsTests extends FunSuite with GeneratorDrivenPropertyChecks with Matchers {
+class XmlSourceOpsTests extends AnyFunSuite with ScalaCheckPropertyChecks with Matchers {
   type Value[A] = CodecValue[Node, A, codecs.type]
 
   private def cmp[A, F, E, T](value: CodecValue[E, A, T], res: Either[F, A]): Unit = (value, res) match {
@@ -36,7 +37,7 @@ class XmlSourceOpsTests extends FunSuite with GeneratorDrivenPropertyChecks with
 
   test("XmlSource instances should have a working asNode method") {
     forAll { value: Value[Int] =>
-      cmp(value, value.encoded.asNode.right.flatMap(_.evalXPath[Int](xp"/element")))
+      cmp(value, value.encoded.asNode.flatMap(_.evalXPath[Int](xp"/element")))
     }
   }
 

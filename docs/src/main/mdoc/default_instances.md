@@ -1,7 +1,7 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Default instances"
-section: tutorial
+section: scala mdocorial
 sort_order: 8
 ---
 
@@ -40,7 +40,7 @@ provides easy tools for creating decoders from an instance of [`DateFormat`].
 
 We could for example declare a decoder for something ISO 8601-like:
 
-```tut:silent
+```scala mdoc:silent
 import kantan.xpath.implicits._
 import kantan.xpath.NodeDecoder
 import java.util.{Locale, Date}
@@ -50,7 +50,7 @@ implicit val decoder: NodeDecoder[Date] = NodeDecoder.dateDecoder(new java.text.
 
 And we're now capable of decoding XML content as dates:
 
-```tut
+```scala mdoc
 "<date>2000-01-00T00:00:00.000</date>".evalXPath[Date](xp"/date")
 ```
 
@@ -65,7 +65,7 @@ For any two types `A` and `B` that each have a [`NodeDecoder`], there exists a
 This is useful for dodgy XML data where the type of a value is not well defined - it might sometimes be an int,
 sometimes a boolean, for example:
 
-```tut
+```scala mdoc
 "<root><either>123</either><either>true</either></root>".evalXPath[List[Either[Int, Boolean]]](xp"//either")
 ```
 
@@ -76,7 +76,7 @@ For any type `A` that has a [`NodeDecoder`], there exists a [`NodeDecoder[Option
 
 This is useful for XML where some nodes or attributes are optional. For example:
 
-```tut
+```scala mdoc
 "<root><opt/></root>".evalXPath[Option[Int]](xp"//opt/@value")
 ```
 

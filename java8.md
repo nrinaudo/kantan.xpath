@@ -1,15 +1,16 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Java 8 dates and times"
-section: tutorial
+section: scala mdocorial
 sort_order: 11
 ---
+
 Java 8 comes with a better thought out dates and times API. Unfortunately, it cannot be supported as part of the core
 kantan.xpath API - we still support Java 7. There is, however, a dedicated optional module that you can include by
 adding the following line to your `build.sbt` file:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-java8" % "0.5.0"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-java8" % "0.5.1"
 ```
 
 You then need to import the corresponding package:
@@ -40,14 +41,19 @@ val input = "<root><date value='1978-10-12'/><date value='2015-01-09'/></root>"
 We can decode the bracketed dates without providing an explicit decoder:
 
 ```scala
-scala> input.evalXPath[List[LocalDate]](xp"//date/@value")
-res0: kantan.xpath.XPathResult[List[java.time.LocalDate]] = Right(List(1978-10-12, 2015-01-09))
+input.evalXPath[List[LocalDate]](xp"//date/@value")
+// res0: XPathResult[List[LocalDate]] = Right(List(1978-10-12, 2015-01-09))
 ```
 
 It's also possible to provide your own format. For example, for [`LocalDateTime`]:
 
 ```scala
+import java.time._
 import java.time.format.DateTimeFormatter
+import kantan.xpath._
+import kantan.xpath.implicits._
+
+import kantan.xpath.java8._
 
 val input = "<root><date value='12-10-1978'/><date value='09-01-2015'/></root>"
 
@@ -57,8 +63,8 @@ implicit val decoder: NodeDecoder[LocalDate] = localDateDecoder(DateTimeFormatte
 And we can now simply write:
 
 ```scala
-scala> input.evalXPath[List[LocalDate]](xp"//date/@value")
-res1: kantan.xpath.XPathResult[List[java.time.LocalDate]] = Right(List(1978-10-12, 2015-01-09))
+input.evalXPath[List[LocalDate]](xp"//date/@value")
+// res2: XPathResult[List[LocalDate]] = Right(List(1978-10-12, 2015-01-09))
 ```
 
 Note that while you can pass a [`DateTimeFormatter`] directly, the preferred way of dealing with pattern strings is to
@@ -71,10 +77,10 @@ localDateDecoder(fmt"dd-MM-yyyy")
 The advantage is that this is checked at compile time - invalid pattern strings will cause a compilation error:
 
 ```scala
-scala> localDateDecoder(fmt"FOOBAR")
-<console>:27: error: Invalid pattern: 'FOOBAR'
-       localDateDecoder(fmt"FOOBAR")
-                            ^
+localDateDecoder(fmt"FOOBAR")
+// error: Illegal format: 'FOOBAR'
+// localDateDecoder(fmt"FOOBAR")
+//                  ^^^^^^^^^^^
 ```
 
 [`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html

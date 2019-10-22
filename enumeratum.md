@@ -1,14 +1,15 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Enumeratum module"
-section: tutorial
+section: scala mdocorial
 sort_order: 15
 ---
+
 kantan.xpath comes with an [enumeratum](https://github.com/lloydmeta/enumeratum) module that can be used
 by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-enumeratum" % "0.5.0"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-enumeratum" % "0.5.1"
 ```
 
 ## Name-based enumerations
@@ -54,13 +55,14 @@ import somePackage._
 We can then simply write the following:
 
 ```scala
-scala> "<foo><bar value='Hello'/></foo>".evalXPath[DummyEnum](xp"//bar/@value")
-res2: kantan.xpath.XPathResult[somePackage.DummyEnum] = Right(Hello)
+"<foo><bar value='Hello'/></foo>".evalXPath[DummyEnum](xp"//bar/@value")
+// res0: kantan.xpath.package.XPathResult[DummyEnum] = Right(Hello)
 
-scala> "<foo><bar value='GoodDay'/></foo>".evalXPath[DummyEnum](xp"//bar/@value")
-res3: kantan.xpath.XPathResult[somePackage.DummyEnum] = Left(TypeError: 'GoodDay' is not a member of enumeration [Hello, GoodBye, Hi])
+"<foo><bar value='GoodDay'/></foo>".evalXPath[DummyEnum](xp"//bar/@value")
+// res1: kantan.xpath.package.XPathResult[DummyEnum] = Left(
+//   TypeError("'GoodDay' is not a member of enumeration [Hello, GoodBye, Hi]")
+// )
 ```
-
 
 
 ## Value-based enumerations
@@ -108,9 +110,12 @@ import somePackage._
 We can then simply write the following:
 
 ```scala
-scala> "<foo><bar value='1'/></foo>".evalXPath[Greeting](xp"//bar/@value")
-res2: kantan.xpath.XPathResult[somePackage.Greeting] = Right(Hello)
+"<foo><bar value='1'/></foo>".evalXPath[Greeting](xp"//bar/@value")
+// res3: kantan.xpath.package.XPathResult[Greeting] = Right(Hello)
 
-scala> "<foo><bar value='-1'/></foo>".evalXPath[Greeting](xp"//bar/@value")
-res3: kantan.xpath.XPathResult[somePackage.Greeting] = Left(TypeError: '-1' is not in values [1, 2, 3, 4])
+"<foo><bar value='-1'/></foo>".evalXPath[Greeting](xp"//bar/@value")
+// res4: kantan.xpath.package.XPathResult[Greeting] = Left(
+//   TypeError("'-1' is not in values [1, 2, 3, 4]")
+// )
 ```
+

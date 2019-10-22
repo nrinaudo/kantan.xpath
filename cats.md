@@ -1,16 +1,17 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Cats module"
-section: tutorial
+section: scala mdocorial
 sort_order: 12
 ---
+
 kantan.xpath has a [cats](https://github.com/typelevel/cats) module that is, in its current incarnation, fairly bare
 bones: it provides a few useful type class instances.
 
 The `cats` module can be used by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-cats" % "0.5.0"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-cats" % "0.5.1"
 ```
 
 You then need to import the corresponding package:
@@ -33,6 +34,7 @@ The following instance for cats type classes are provided:
 [`Contravariant`]:http://typelevel.org/cats/api/cats/Contravariant.html
 [`Show`]:https://typelevel.org/cats/api/cats/Show.html
 [`Eq`]:https://typelevel.org/cats/api/cats/kernel/Eq.html
+
 [`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html
 [`Node`]:{{ site.baseurl }}/api/kantan/xpath/index.html#Node=org.w3c.dom.Node
 [`XPathError`]:{{ site.baseurl }}/api/kantan/xpath/XPathError.html

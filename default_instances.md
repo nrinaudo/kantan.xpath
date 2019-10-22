@@ -1,7 +1,7 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Default instances"
-section: tutorial
+section: scala mdocorial
 sort_order: 8
 ---
 
@@ -51,8 +51,10 @@ implicit val decoder: NodeDecoder[Date] = NodeDecoder.dateDecoder(new java.text.
 And we're now capable of decoding XML content as dates:
 
 ```scala
-scala> "<date>2000-01-00T00:00:00.000</date>".evalXPath[Date](xp"/date")
-res0: kantan.xpath.XPathResult[java.util.Date] = Right(Fri Dec 31 00:00:00 CET 1999)
+"<date>2000-01-00T00:00:00.000</date>".evalXPath[Date](xp"/date")
+// res0: kantan.xpath.package.XPathResult[Date] = Right(
+//   Fri Dec 31 00:00:00 CET 1999
+// )
 ```
 
 Note that kantan.xpath has a joda-time module, a very well thought out alternative to `java.util.Date`.
@@ -67,8 +69,10 @@ This is useful for dodgy XML data where the type of a value is not well defined 
 sometimes a boolean, for example:
 
 ```scala
-scala> "<root><either>123</either><either>true</either></root>".evalXPath[List[Either[Int, Boolean]]](xp"//either")
-res1: kantan.xpath.XPathResult[List[Either[Int,Boolean]]] = Right(List(Left(123), Right(true)))
+"<root><either>123</either><either>true</either></root>".evalXPath[List[Either[Int, Boolean]]](xp"//either")
+// res1: kantan.xpath.package.XPathResult[List[Either[Int, Boolean]]] = Right(
+//   List(Left(123), Right(true))
+// )
 ```
 
 ### `Option`
@@ -79,8 +83,8 @@ For any type `A` that has a [`NodeDecoder`], there exists a [`NodeDecoder[Option
 This is useful for XML where some nodes or attributes are optional. For example:
 
 ```scala
-scala> "<root><opt/></root>".evalXPath[Option[Int]](xp"//opt/@value")
-res2: kantan.xpath.XPathResult[Option[Int]] = Right(None)
+"<root><opt/></root>".evalXPath[Option[Int]](xp"//opt/@value")
+// res2: kantan.xpath.package.XPathResult[Option[Int]] = Right(None)
 ```
 
 ## `XmlSource`
@@ -116,6 +120,7 @@ The following types have an instance of [`XmlSource`] out of the box:
 [`InputStream`]:https://docs.oracle.com/javase/7/docs/api/java/io/InputStream.html
 [`File`]:https://docs.oracle.com/javase/7/docs/api/java/io/File.html
 [`Path`]:https://docs.oracle.com/javase/7/docs/api/java/nio/file/Path.html
+
 [`XmlSource`]:{{ site.baseurl }}/api/kantan/xpath/XmlSource.html
 [`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html
 [`Date`]:https://docs.oracle.com/javase/7/docs/api/java/util/Date.html

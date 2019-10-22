@@ -1,9 +1,10 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Basics"
-section: tutorial
+section: scala mdocorial
 sort_order: 0
 ---
+
 There are a few concepts to get familiar with before getting to grips with kantan.xpath proper.
 
 ## Regular expression literals
@@ -25,17 +26,17 @@ This will also bring kantan.xpath syntax in scope though, so if you only want th
 This lets you create new regular expression by prefixing string literals with [`xp`]:
 
 ```scala
-scala> xp"//a[@href]"
-res0: kantan.xpath.XPathExpression = kantan.xpath.XPathCompiler$$anonfun$1$$anonfun$apply$2$$anon$2@5fab78e0
+xp"//a[@href]"
+// res0: kantan.xpath.package.XPathExpression = kantan.xpath.XPathCompiler$$anon$2@726d7110
 ```
 
 And, as promised, this fails *at compile time* if the xpath expression is not valid:
 
 ```scala
-scala> xp"!@#"
-<console>:16: error: javax.xml.transform.TransformerException: A location path was expected, but the following token was encountered:  !
-       xp"!@#"
-          ^
+xp"!@#"
+// error: Illegal XPath expression: '!@#'
+// xp"!@#"
+// ^^^^^^^
 ```
 
 ## Simple evaluation
@@ -47,15 +48,15 @@ strings using kantan.xpath is through the [`evalXPath`] method that enriches str
 For example, retrieving only the first match:
 
 ```scala
-scala> "<users><user id='1'/><user id='2'/></users>".evalXPath[Int](xp"//user/@id")
-res2: kantan.xpath.XPathResult[Int] = Right(1)
+"<users><user id='1'/><user id='2'/></users>".evalXPath[Int](xp"//user/@id")
+// res2: kantan.xpath.package.XPathResult[Int] = Right(1)
 ```
 
 And retrieving all matches:
 
 ```scala
-scala> "<users><user id='1'/><user id='2'/></users>".evalXPath[List[Int]](xp"//user/@id")
-res3: kantan.xpath.XPathResult[List[Int]] = Right(List(1, 2))
+"<users><user id='1'/><user id='2'/></users>".evalXPath[List[Int]](xp"//user/@id")
+// res3: kantan.xpath.package.XPathResult[List[Int]] = Right(List(1, 2))
 ```
 
 [`kantan.xpath.implicits._`]:{{ site.baseurl }}/api/kantan/xpath/implicits$.html

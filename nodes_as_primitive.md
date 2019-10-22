@@ -1,9 +1,10 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Decoding nodes as primitive types"
-section: tutorial
+section: scala mdocorial
 sort_order: 1
 ---
+
 The simplest possible use of kantan.xpath is to extract primitive types from XML documents.
 
 In order to show how that works, we'll first need some sample XML data, which we'll get from this project's resources:
@@ -15,14 +16,13 @@ val rawData: java.net.URL = getClass.getResource("/simple.xml")
 This is what we're working with:
 
 ```scala
-scala> scala.io.Source.fromURL(rawData).mkString
-res0: String =
-<root>
-    <element id="1" enabled="true"/>
-    <element id="2" enabled="false"/>
-    <element id="3" enabled="true"/>
-    <element id="4" enabled="false"/>
-</root>
+scala.io.Source.fromURL(rawData).mkString
+// res0: String = """<root>
+//     <element id="1" enabled="true"/>
+//     <element id="2" enabled="false"/>
+//     <element id="3" enabled="true"/>
+//     <element id="4" enabled="false"/>
+// </root>"""
 ```
 
 We'll then need to import kantan.xpath's syntax, which will let us evaluate XPath expressions directly on something
@@ -36,8 +36,8 @@ This allows us to write the following code, which will attempt to extract the `i
 `Int`:
 
 ```scala
-scala> rawData.evalXPath[Int](xp"//element/@id")
-res1: kantan.xpath.XPathResult[Int] = Right(1)
+rawData.evalXPath[Int](xp"//element/@id")
+// res1: kantan.xpath.package.XPathResult[Int] = Right(1)
 ```
 
 
@@ -48,16 +48,18 @@ a success otherwise. This mechanism ensures that [`evalXPath`] is safe: no excep
 of your code. For example:
 
 ```scala
-scala> rawData.evalXPath[java.net.URL](xp"//element/@id")
-res2: kantan.xpath.XPathResult[java.net.URL] = Left(TypeError: '1' is not a valid URL)
+rawData.evalXPath[java.net.URL](xp"//element/@id")
+// res2: kantan.xpath.package.XPathResult[java.net.URL] = Left(
+//   TypeError("'1' is not a valid URL")
+// )
 ```
 
 In some cases, however, we don't really care for runtime safety and are fine with our program crashing at the first
 error. This is what the [`unsafeEvalXPath`] method was designed for:
 
 ```scala
-scala> rawData.unsafeEvalXPath[Int](xp"//element/@id")
-res3: Int = 1
+rawData.unsafeEvalXPath[Int](xp"//element/@id")
+// res3: Int = 1
 ```
 
 
@@ -68,16 +70,18 @@ type, we told kantan.xpath that we only wanted the first result. We could get th
 
 
 ```scala
-scala> rawData.evalXPath[List[Int]](xp"//element/@id")
-res4: kantan.xpath.XPathResult[List[Int]] = Right(List(1, 2, 3, 4))
+rawData.evalXPath[List[Int]](xp"//element/@id")
+// res4: kantan.xpath.package.XPathResult[List[Int]] = Right(List(1, 2, 3, 4))
 ```
 
 Any type constructor that has a [`CanBuildFrom`] instance could have been used instead of [`List`] - that's essentially
 all collections. By the same token, any primitive time could have been used instead of `Int`. For example:
 
 ```scala
-scala> rawData.evalXPath[Vector[Boolean]](xp"//element/@enabled")
-res5: kantan.xpath.XPathResult[Vector[Boolean]] = Right(Vector(true, false, true, false))
+rawData.evalXPath[Vector[Boolean]](xp"//element/@enabled")
+// res5: kantan.xpath.package.XPathResult[Vector[Boolean]] = Right(
+//   Vector(true, false, true, false)
+// )
 ```
 
 [`evalXPath`]:{{ site.baseurl }}/api/kantan/xpath/ops/XmlSourceOps.html#evalXPath[B](expr:kantan.xpath.XPathExpression)(implicitevidence$2:kantan.xpath.Compiler[B],implicitsource:kantan.xpath.XmlSource[A]):kantan.xpath.XPathResult[B]

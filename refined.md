@@ -1,14 +1,15 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Refined module"
-section: tutorial
+section: scala mdocorial
 sort_order: 14
 ---
+
 kantan.xpath comes with a [refined](https://github.com/fthomas/refined) module that can be used
 by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-refined" % "0.5.0"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-refined" % "0.5.1"
 ```
 
 You then need to import the corresponding package:
@@ -32,13 +33,16 @@ type PositiveInt = Int Refined Positive
 We can then simply write the following:
 
 ```scala
-scala> "<foo><bar value='1'/></foo>".evalXPath[PositiveInt](xp"//bar/@value")
-res0: kantan.xpath.XPathResult[PositiveInt] = Right(1)
+"<foo><bar value='1'/></foo>".evalXPath[PositiveInt](xp"//bar/@value")
+// res0: kantan.xpath.package.XPathResult[PositiveInt] = Right(1)
 ```
 
 And, for an error case:
 
 ```scala
-scala> "<foo><bar value='-1'/></foo>".evalXPath[PositiveInt](xp"//bar/@value")
-res1: kantan.xpath.XPathResult[PositiveInt] = Left(TypeError: Not acceptable: 'Predicate failed: (-1 > 0).')
+"<foo><bar value='-1'/></foo>".evalXPath[PositiveInt](xp"//bar/@value")
+// res1: kantan.xpath.package.XPathResult[PositiveInt] = Left(
+//   TypeError("Not acceptable: 'Predicate failed: (-1 > 0).'")
+// )
 ```
+

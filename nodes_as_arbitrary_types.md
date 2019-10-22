@@ -1,10 +1,11 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Decoding nodes as arbitrary types"
-section: tutorial
+section: scala mdocorial
 sort_order: 4
 ---
-We've seen in a previous tutorial how to extract [primitive types](nodes_as_primitive.html),
+
+We've seen in a previous scala mdocorial how to extract [primitive types](nodes_as_primitive.html),
 [tuples](nodes_as_tuples.html) and [case classes](nodes_as_case_classes.html) from XML documents. Sometimes however,
 none of these fit our requirements. kantan.xpath provides support for extracting arbitrary types, which works almost
 exactly the same as case classes.
@@ -18,14 +19,13 @@ val rawData: java.net.URL = getClass.getResource("/simple.xml")
 This is what we're working with:
 
 ```scala
-scala> scala.io.Source.fromURL(rawData).mkString
-res0: String =
-<root>
-    <element id="1" enabled="true"/>
-    <element id="2" enabled="false"/>
-    <element id="3" enabled="true"/>
-    <element id="4" enabled="false"/>
-</root>
+scala.io.Source.fromURL(rawData).mkString
+// res0: String = """<root>
+//     <element id="1" enabled="true"/>
+//     <element id="2" enabled="false"/>
+//     <element id="3" enabled="true"/>
+//     <element id="4" enabled="false"/>
+// </root>"""
 ```
 
 We'll be trying to turn each `element` node into values of the following type:
@@ -44,7 +44,7 @@ instance creation function to provide as a parameter and will need to write it o
 import kantan.xpath._
 import kantan.xpath.implicits._
 
-implicit val elDecoder: NodeDecoder[El] = NodeDecoder.decoder(xp"./@id", xp"./@enabled") { (id: Int, enabled: Boolean) ⇒
+implicit val elDecoder: NodeDecoder[El] = NodeDecoder.decoder(xp"./@id", xp"./@enabled") { (id: Int, enabled: Boolean) =>
   new El(id, enabled)
 }
 ```
@@ -53,8 +53,10 @@ Now that we have told kantan.xpath how to decode an XML node to an instance of `
 [`evalXPath`] with the right type parameters:
 
 ```scala
-scala> rawData.evalXPath[List[El]](xp"//element")
-res1: kantan.xpath.XPathResult[List[El]] = Right(List(El(1, true), El(2, false), El(3, true), El(4, false)))
+rawData.evalXPath[List[El]](xp"//element")
+// res1: XPathResult[List[El]] = Right(
+//   List(El(1, true), El(2, false), El(3, true), El(4, false))
+// )
 ```
 
 [`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html

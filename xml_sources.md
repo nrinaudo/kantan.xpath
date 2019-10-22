@@ -1,9 +1,10 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "What can be parsed as XML data?"
-section: tutorial
+section: scala mdocorial
 sort_order: 7
 ---
+
 Before we can even think about applying XPath expressions to an XML document, we need to get our hands on that document
 somehow. kantan.xpath extends most things that "can be turned into XML" with useful methods, such as the oft-used
 [`evalXPath`] method. Among such things are:
@@ -21,7 +22,7 @@ Implementing our own [`XmlSource`] for types that aren't supported by default is
 
 ## Implementation from scratch
 
-Reduced to its simplest expression, an [`XmlSource[A]`][`XmlSource`] is essentially an `A ⇒ ParseResult[Node]` - that
+Reduced to its simplest expression, an [`XmlSource[A]`][`XmlSource`] is essentially an `A => ParseResult[Node]` - that
 is, a function that takes an `A` and turns it into a [`Node`], with the possibility of safe failure encoded in
 [`ParseResult`].
 
@@ -50,7 +51,7 @@ of [`String`] into one of [`InputSource`]:
 
 ```scala
 implicit def stringSource(implicit parser: XmlParser): XmlSource[String] =
-  XmlSource[InputSource].contramap(s ⇒ new InputSource(new java.io.StringReader(s)))
+  XmlSource[InputSource].contramap(s => new InputSource(new java.io.StringReader(s)))
 ```
 
 
@@ -58,6 +59,7 @@ implicit def stringSource(implicit parser: XmlParser): XmlSource[String] =
 [`URI`]:https://docs.oracle.com/javase/7/docs/api/java/net/URI.html
 [`File`]:https://docs.oracle.com/javase/7/docs/api/java/io/File.html
 [`String`]:https://docs.oracle.com/javase/7/docs/api/java/lang/String.html
+
 [`XmlSource`]:{{ site.baseurl }}/api/kantan/xpath/XmlSource.html
 [`Node`]:{{ site.baseurl }}/api/kantan/xpath/index.html#Node=org.w3c.dom.Node
 [`ParseResult`]:{{ site.baseurl }}/api/kantan/xpath/package$$ParseResult.html

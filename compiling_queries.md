@@ -1,9 +1,10 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Compiling queries for reuse"
-section: tutorial
+section: scala mdocorial
 sort_order: 6
 ---
+
 In the examples we've seen so far, XPath expressions were passed around as [`XPathExpression`]s. This can be
 inefficient as kantan.xpath needs to bake in the decoding code each time they're evaluated against a node.
 
@@ -19,14 +20,13 @@ val rawData: java.net.URL = getClass.getResource("/simple.xml")
 This is what we're working with:
 
 ```scala
-scala> scala.io.Source.fromURL(rawData).mkString
-res0: String =
-<root>
-    <element id="1" enabled="true"/>
-    <element id="2" enabled="false"/>
-    <element id="3" enabled="true"/>
-    <element id="4" enabled="false"/>
-</root>
+scala.io.Source.fromURL(rawData).mkString
+// res0: String = """<root>
+//     <element id="1" enabled="true"/>
+//     <element id="2" enabled="false"/>
+//     <element id="3" enabled="true"/>
+//     <element id="4" enabled="false"/>
+// </root>"""
 ```
 
 We'll be trying to extract the `id` attribute of each `element` node as an `int`.
@@ -46,8 +46,8 @@ val query = Query[List[Int]](xp"//element/@id")
 You can now use the compiled query where you used to specify strings, such as in [`evalXPath`]:
 
 ```scala
-scala> rawData.evalXPath(query)
-res1: kantan.xpath.ReadResult[List[Int]] = Right(List(1, 2, 3, 4))
+rawData.evalXPath(query)
+// res1: ReadResult[List[Int]] = Right(List(1, 2, 3, 4))
 ```
 
 Note that since compiled queries carry the information of the type they return, you don't need to specify type
@@ -60,8 +60,10 @@ You cannot always express your XPath expressions as literals - some expressions 
 You can use [`compile`] to compile raw strings:
 
 ```scala
-scala> val query = Query.compile[List[Int]]("//element/@id")
-query: kantan.xpath.CompileResult[kantan.xpath.Query[kantan.xpath.DecodeResult[List[Int]]]] = Right(kantan.xpath.Query$$anon$1@538138e6)
+Query.compile[List[Int]]("//element/@id")
+// res2: CompileResult[Query[DecodeResult[List[Int]]]] = Right(
+//   kantan.xpath.Query$$anon$1@63d89c52
+// )
 ```
 
 The returned value is not directly a [`Query`], though, but rather a [`CompileResult`] containing an instance of

@@ -1,10 +1,11 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Decoding nodes as case classes"
-section: tutorial
+section: scala mdocorial
 sort_order: 3
 ---
-We've seen in a [previous tutorial](nodes_as_tuples.html) how to extract tuples from XML documents. The next step up
+
+We've seen in a [previous scala mdocorial](nodes_as_tuples.html) how to extract tuples from XML documents. The next step up
 from tuples is case classes, which work in a very similar fashion.
 
 In order to show how that works, we'll first need some sample XML data, which we'll get from this project's resources:
@@ -16,14 +17,13 @@ val rawData: java.net.URL = getClass.getResource("/simple.xml")
 This is what we're working with:
 
 ```scala
-scala> scala.io.Source.fromURL(rawData).mkString
-res0: String =
-<root>
-    <element id="1" enabled="true"/>
-    <element id="2" enabled="false"/>
-    <element id="3" enabled="true"/>
-    <element id="4" enabled="false"/>
-</root>
+scala.io.Source.fromURL(rawData).mkString
+// res0: String = """<root>
+//     <element id="1" enabled="true"/>
+//     <element id="2" enabled="false"/>
+//     <element id="3" enabled="true"/>
+//     <element id="4" enabled="false"/>
+// </root>"""
 ```
 
 We'll be trying to turn each `element` node into values of the following type:
@@ -48,8 +48,10 @@ Now that we have told kantan.xpath how to decode an XML node to an instance of `
 [`evalXPath`] with the right type parameters:
 
 ```scala
-scala> rawData.evalXPath[List[El]](xp"//element")
-res2: kantan.xpath.XPathResult[List[El]] = Right(List(El(1,true), El(2,false), El(3,true), El(4,false)))
+rawData.evalXPath[List[El]](xp"//element")
+// res1: XPathResult[List[El]] = Right(
+//   List(El(1, true), El(2, false), El(3, true), El(4, false))
+// )
 ```
 
 [`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html

@@ -1,10 +1,11 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Decoding nodes as tuples"
-section: tutorial
+section: scala mdocorial
 sort_order: 2
 ---
-We've seen in a [previous tutorial](nodes_as_primitive.html) how to extract primitive types from XML documents. Often,
+
+We've seen in a [previous scala mdocorial](nodes_as_primitive.html) how to extract primitive types from XML documents. Often,
 however, these primitive values need to be assembled in more complex types, such as tuples. kantan.xpath provides a
 simple way of doing so.
 
@@ -17,14 +18,13 @@ val rawData: java.net.URL = getClass.getResource("/simple.xml")
 This is what we're working with:
 
 ```scala
-scala> scala.io.Source.fromURL(rawData).mkString
-res0: String =
-<root>
-    <element id="1" enabled="true"/>
-    <element id="2" enabled="false"/>
-    <element id="3" enabled="true"/>
-    <element id="4" enabled="false"/>
-</root>
+scala.io.Source.fromURL(rawData).mkString
+// res0: String = """<root>
+//     <element id="1" enabled="true"/>
+//     <element id="2" enabled="false"/>
+//     <element id="3" enabled="true"/>
+//     <element id="4" enabled="false"/>
+// </root>"""
 ```
 
 We'll be trying to turn each `element` node into an `(Int, Boolean)` tuple. In order to do that, we need to declare an
@@ -45,8 +45,10 @@ Now that we have told kantan.xpath how to decode an XML node to an instance of `
 [`evalXPath`] with the right type parameters:
 
 ```scala
-scala> rawData.evalXPath[List[(Int, Boolean)]](xp"//element")
-res1: kantan.xpath.XPathResult[List[(Int, Boolean)]] = Right(List((1,true), (2,false), (3,true), (4,false)))
+rawData.evalXPath[List[(Int, Boolean)]](xp"//element")
+// res1: XPathResult[List[(Int, Boolean)]] = Right(
+//   List((1, true), (2, false), (3, true), (4, false))
+// )
 ```
 
 [`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html

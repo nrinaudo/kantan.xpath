@@ -16,9 +16,9 @@
 
 package kantan.xpath
 
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 
-class RegressionTests extends FunSuite {
+class RegressionTests extends AnyFunSuite {
   // - Node & Match Decoder instances for non default types ------------------------------------------------------------
   // -------------------------------------------------------------------------------------------------------------------
   class A

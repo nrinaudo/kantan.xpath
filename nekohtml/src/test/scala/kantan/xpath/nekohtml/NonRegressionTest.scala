@@ -17,10 +17,19 @@
 package kantan.xpath.nekohtml
 
 import kantan.xpath.implicits._
-import org.scalatest.{FunSuite, Matchers}
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
+import scala.concurrent.{Await, Future}
+import scala.concurrent.duration._
 
-class NonRegressionTests extends FunSuite with Matchers {
+class NonRegressionTests extends AnyFunSuite with Matchers {
   test("Parsing should be thread safe") {
-    all((1 to 10).par.map(_ => "<html><body>text</body></html>".asNode)) should be a 'right
+
+    implicit val ec: scala.concurrent.ExecutionContext = scala.concurrent.ExecutionContext.global
+
+    val results =
+      Await.result(Future.sequence((1 to 10).map(_ => Future("<html><body>text</body></html>".asNode))), 10.second)
+
+    all(results.map(_.isRight)) should be(true)
   }
 }

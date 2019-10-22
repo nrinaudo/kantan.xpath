@@ -1,7 +1,7 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Scalaz module"
-section: tutorial
+section: scala mdocorial
 sort_order: 13
 ---
 kantan.xpath has a [scalaz](https://github.com/scalaz/scalaz) module that is, in its current incarnation, fairly bare
@@ -15,7 +15,7 @@ libraryDependencies += "com.nrinaudo" %% "kantan.xpath-scalaz" % "@VERSION@"
 
 You then need to import the corresponding package:
 
-```tut:silent
+```scala mdoc:silent
 import kantan.xpath.scalaz._
 ```
 
@@ -26,14 +26,14 @@ The `scalaz` module provides a [`NodeDecoder`] instance for [`\/`]: for any type
 
 First, a few imports:
 
-```tut:silent
+```scala mdoc:silent
 import scalaz._
 import kantan.xpath.implicits._
 ```
 
 We can then simply write the following:
 
-```tut
+```scala mdoc
 "<foo><bar value='1'/><bar value='foo'/></foo>".evalXPath[List[Int \/ String]](xp"//bar/@value")
 ```
 
@@ -42,7 +42,7 @@ We can then simply write the following:
 The `scalaz` module provides a [`NodeDecoder`] instance for [`Maybe`]: for any type `A` that has a [`NodeDecoder`]
 instance, there exists a [`NodeDecoder`] instance for `Maybe[A]`.
 
-```tut
+```scala mdoc
 "<foo><bar/></foo>".evalXPath[Maybe[Int]](xp"//bar/@value")
 ```
 

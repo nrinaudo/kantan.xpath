@@ -24,7 +24,7 @@ import kantan.codecs.laws.{IllegalString, LegalString}
 import org.scalacheck.Arbitrary
 
 trait ArbitraryArities {
-  @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
+  @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf", "org.wartremover.warts.StringPlusAny"))
   def asTextAttributes(atts: String*): Element = {
     val n = s"<element></element>".asUnsafeNode.getFirstChild.asInstanceOf[Element]
     atts.zipWithIndex.foreach { case (att, i) => n.setAttribute(s"field${i + 1}", att) }

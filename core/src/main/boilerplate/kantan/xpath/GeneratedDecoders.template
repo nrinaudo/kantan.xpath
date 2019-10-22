@@ -17,15 +17,15 @@
 package kantan.xpath
 
 trait GeneratedDecoders {
-  [#def decoder[[#I1#], O]([#x1: Query[DecodeResult[I1]]#])(f: ([#I1#]) ⇒ O): NodeDecoder[O] = NodeDecoder.fromFound { n ⇒
+  [#def decoder[[#I1#], O]([#x1: Query[DecodeResult[I1]]#])(f: ([#I1#]) => O): NodeDecoder[O] = NodeDecoder.fromFound { n =>
       for {
-        [#i1 ← x1.eval(n).right#
+        [#i1 <- x1.eval(n)#
         ]
       } yield f([#i1#])
     }#
   ]
 
-  [#def decoder[[#I1: Compiler#], O]([#x1: XPathExpression#])(f: ([#I1#]) ⇒ O): NodeDecoder[O] =
+  [#def decoder[[#I1: Compiler#], O]([#x1: XPathExpression#])(f: ([#I1#]) => O): NodeDecoder[O] =
     decoder([#Compiler[I1].compile(x1)#])(f)#
 
   ]
@@ -36,7 +36,7 @@ trait GeneratedDecoders {
   ]
 
   [#def tuple[[#I1: Compiler#]]([#x1: XPathExpression#]): NodeDecoder[Tuple1[[#I1#]]] =
-    decoder([#x1#])(([#i1: I1#]) ⇒ Tuple1([#i1#]))#
+    decoder([#x1#])(([#i1: I1#]) => Tuple1([#i1#]))#
 
   ]
 }

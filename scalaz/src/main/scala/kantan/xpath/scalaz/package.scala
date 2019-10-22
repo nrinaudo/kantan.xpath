@@ -16,7 +16,7 @@
 
 package kantan.xpath
 
-import _root_.scalaz._
+import _root_.scalaz.{Contravariant, Equal}
 import kantan.codecs.scalaz._
 
 package object scalaz extends DecoderInstances with CommonInstances {

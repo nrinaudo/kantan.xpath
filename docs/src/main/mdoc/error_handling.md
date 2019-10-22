@@ -1,7 +1,7 @@
 ---
-layout: tutorial
+layout: scala mdocorial
 title: "Error handling"
-section: tutorial
+section: scala mdocorial
 sort_order: 7
 status: wip
 ---

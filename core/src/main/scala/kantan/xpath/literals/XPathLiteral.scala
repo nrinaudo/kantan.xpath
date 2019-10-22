@@ -17,11 +17,41 @@
 package kantan.xpath
 package literals
 
-import contextual._
+import scala.reflect.macros.blackbox.Context
 
-object XPathLiteral extends Verifier[XPathExpression] {
+final class XPathLiteral(val sc: StringContext) extends AnyVal {
+  def xp(args: Any*): XPathExpression = macro XPathLiteral.xpImpl
+}
 
-  override def check(string: String): Either[(Int, String), XPathExpression] =
-    implicitly[XPathCompiler].compile(string).left.map(e => (0, e.getMessage))
+// Relatively distatefull trick to get rid of spurious warnings.
+trait XPathLiteralMacro {
+  def xpImpl(c: Context)(args: c.Expr[Any]*): c.Expr[XPathExpression]
+}
 
+object XPathLiteral extends XPathLiteralMacro {
+  override def xpImpl(c: Context)(args: c.Expr[Any]*): c.Expr[XPathExpression] = {
+    import c.universe._
+
+    c.prefix.tree match {
+      case Apply(_, List(Apply(_, List(lit @ Literal(Constant(str: String)))))) =>
+        implicitly[XPathCompiler].compile(str) match {
+          case Left(_) => c.abort(c.enclosingPosition, s"Illegal XPath expression: '$str'")
+          case Right(_) =>
+            reify {
+              val spliced = c.Expr[String](lit).splice
+
+              implicitly[XPathCompiler]
+                .compile(spliced)
+                .getOrElse(sys.error((s"Illegal XPath expression: '$spliced'")))
+            }
+        }
+
+      case _ =>
+        c.abort(c.enclosingPosition, "xp can only be used on string literals")
+    }
+  }
+}
+
+trait ToXPathLiteral {
+  implicit def toXPathLiteral(sc: StringContext): XPathLiteral = new XPathLiteral(sc)
 }

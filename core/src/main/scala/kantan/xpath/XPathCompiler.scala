@@ -41,9 +41,9 @@ object XPathCompiler {
   }
 
   /** Default compiler, always in scope. */
-  @SuppressWarnings(Array("org.wartremover.warts.Serializable"))
+  @SuppressWarnings(Array("org.wartremover.warts.JavaSerializable", "org.wartremover.warts.Serializable"))
   implicit val builtIn: XPathCompiler = XPathCompiler { str =>
-    CompileResult(XPathFactory.newInstance().newXPath().compile(str)).right.map { _ =>
+    CompileResult(XPathFactory.newInstance().newXPath().compile(str)).map { _ =>
       new XPathExpression with Serializable {
         private val expression: String       = str
         @transient private lazy val compiled = XPathFactory.newInstance().newXPath().compile(expression)

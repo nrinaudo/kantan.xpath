@@ -41,27 +41,27 @@ trait XmlSource[-A] extends Serializable { self =>
     * This method is unsafe - it will throw an exception should any error occur during parsing. For a safe alternative,
     * see [[asNode]].
     */
-  @SuppressWarnings(Array("org.wartremover.warts.EitherProjectionPartial"))
-  def asUnsafeNode(a: A): Node = asNode(a).right.get
+  @SuppressWarnings(Array("org.wartremover.warts.Throw"))
+  def asUnsafeNode(a: A): Node = asNode(a).fold(e => throw e, identity)
 
   /** Compiles the specified XPath expression and evaluates it against specified value. */
-  @SuppressWarnings(Array("org.wartremover.warts.EitherProjectionPartial"))
+  @SuppressWarnings(Array("org.wartremover.warts.Throw"))
   def unsafeEval[B: Compiler](a: A, expr: XPathExpression): B =
-    eval(a, expr).right.get
+    eval(a, expr).fold(e => throw e, identity)
 
   /** Compiles the specified XPath expression and evaluates it against the specified value. */
   def eval[B: Compiler](a: A, expr: XPathExpression): XPathResult[B] =
     eval(a, Compiler[B].compile(expr))
 
   /** Evaluates the specified XPath expression against specified value. */
-  @SuppressWarnings(Array("org.wartremover.warts.EitherProjectionPartial"))
-  def unsafeEval[B](a: A, expr: Query[DecodeResult[B]]): B = eval(a, expr).right.get
+  @SuppressWarnings(Array("org.wartremover.warts.Throw"))
+  def unsafeEval[B](a: A, expr: Query[DecodeResult[B]]): B = eval(a, expr).fold(e => throw e, identity)
 
   /** Evaluates the specified XPath expression against specified value. */
   def eval[B](a: A, expr: Query[DecodeResult[B]]): ReadResult[B] =
     for {
-      node <- asNode(a).right
-      b    <- expr.eval(node).right
+      node <- asNode(a)
+      b    <- expr.eval(node)
     } yield b
 
   /** Turns an `XmlSource[A]` into an `XmlSource[B]`.
@@ -75,7 +75,7 @@ trait XmlSource[-A] extends Serializable { self =>
     * @see [[contramap]]
     */
   def contramapResult[AA <: A, B](f: B => ParseResult[AA]): XmlSource[B] =
-    XmlSource.from((b: B) => f(b).right.flatMap(self.asNode))
+    XmlSource.from((b: B) => f(b).flatMap(self.asNode))
 }
 
 /** Defines convenience methods for creating and summoning [[XmlSource]] instances.
@@ -108,7 +108,6 @@ object XmlSource extends LowPriorityXmlSourceInstances {
     inputSource.contramapResult { a =>
       InputResource[A]
         .open(a)
-        .right
         .map(r => new InputSource(r))
         .left
         .map(e => ParseError.IOError(e.getMessage, e.getCause))
@@ -121,7 +120,6 @@ trait LowPriorityXmlSourceInstances {
     XmlSource.from(parser.parse).contramapResult { a =>
       ReaderResource[A]
         .open(a)
-        .right
         .map(r => new InputSource(r))
         .left
         .map(e => ParseError.IOError(e.getMessage, e.getCause))

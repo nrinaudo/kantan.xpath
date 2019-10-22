@@ -1,46 +1,51 @@
 ---
-layout: tutorial
-title: "Decoding nodes as case classes"
-section: tutorial
-sort_order: 3
+layout: scala mdocorial
+title: "Decoding nodes as arbitrary types"
+section: scala mdocorial
+sort_order: 4
 ---
-We've seen in a [previous tutorial](nodes_as_tuples.html) how to extract tuples from XML documents. The next step up
-from tuples is case classes, which work in a very similar fashion.
+We've seen in a previous scala mdocorial how to extract [primitive types](nodes_as_primitive.html),
+[tuples](nodes_as_tuples.html) and [case classes](nodes_as_case_classes.html) from XML documents. Sometimes however,
+none of these fit our requirements. kantan.xpath provides support for extracting arbitrary types, which works almost
+exactly the same as case classes.
 
 In order to show how that works, we'll first need some sample XML data, which we'll get from this project's resources:
 
-```tut:silent
+```scala mdoc:silent
 val rawData: java.net.URL = getClass.getResource("/simple.xml")
 ```
 
 This is what we're working with:
 
-```tut
+```scala mdoc
 scala.io.Source.fromURL(rawData).mkString
 ```
 
 We'll be trying to turn each `element` node into values of the following type:
 
-```tut:silent
-final case class El(id: Int, enabled: Boolean)
+```scala mdoc:silent
+class El(val id: Int, val enabled: Boolean) {
+  override def toString = s"El($id, $enabled)"
+}
 ```
 
-In the same way that we had to declare a [`NodeCoder[(Int, Boolean)]`][`NodeDecoder`] to decode tuples, we'll need a
-[`NodeDecoder[El]`][`NodeDecoder`] for this case class, which we can easily create through the [`decoder`] method:
+This is done as usual, by declaring an  implicit [`NodeDecoder[El]`][`NodeDecoder`] value. We'll be using the same
+[`decoder`] method as for [case classes](nodes_as_case_classes.html), but we don't have a convenient, pre-existing
+instance creation function to provide as a parameter and will need to write it ourselves:
 
-
-```tut:silent
+```scala mdoc:silent
 import kantan.xpath._
 import kantan.xpath.implicits._
 
-// There is no need to specify type parameters here, the Scala compiler works them out from El.apply.
-implicit val elDecoder: NodeDecoder[El] = NodeDecoder.decoder(xp"./@id", xp"./@enabled")(El.apply)
+implicit val elDecoder: NodeDecoder[El] = NodeDecoder.decoder(xp"./@id", xp"./@enabled") { (id: Int, enabled: Boolean) =>
+  new El(id, enabled)
+}
 ```
 
 Now that we have told kantan.xpath how to decode an XML node to an instance of `El`, we can simply call
 [`evalXPath`] with the right type parameters:
 
-```tut
+```scala mdoc
 rawData.evalXPath[List[El]](xp"//element")
 ```
 

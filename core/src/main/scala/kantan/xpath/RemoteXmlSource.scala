@@ -34,11 +34,11 @@ final case class RemoteXmlSource[A](toURL: A => ParseResult[URL], retry: RetrySt
 
   private def download(url: URL, count: Int): ParseResult[Node] =
     (for {
-      con <- ParseResult(open(url)).right
+      con <- ParseResult(open(url))
       res <- ParseResult.open {
               con.connect()
               new InputSource(con.getInputStream)
-            }(parser.parse).right
+            }(parser.parse)
     } yield res).left.flatMap {
       case ParseError.IOError(_) if retry.max > count =>
         Thread.sleep(retry.delayFor(count))
@@ -47,12 +47,12 @@ final case class RemoteXmlSource[A](toURL: A => ParseResult[URL], retry: RetrySt
     }
 
   override def asNode(a: A): ParseResult[Node] =
-    toURL(a).right.flatMap(url => download(url, 0))
+    toURL(a).flatMap(url => download(url, 0))
 
   override def contramap[B](f: B => A): RemoteXmlSource[B] = copy(toURL = f andThen toURL)
 
   override def contramapResult[AA <: A, B](f: B => ParseResult[AA]): RemoteXmlSource[B] =
-    copy(toURL = (b: B) => f(b).right.flatMap(toURL))
+    copy(toURL = (b: B) => f(b).flatMap(toURL))
 
   /** Sets the specified header to the specified value. */
   def withHeader(name: String, value: String): RemoteXmlSource[A] =

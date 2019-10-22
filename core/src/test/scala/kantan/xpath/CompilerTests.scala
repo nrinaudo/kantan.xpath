@@ -19,18 +19,19 @@ package kantan.xpath
 import implicits._
 import kantan.codecs.laws.CodecValue
 import laws.discipline.arbitrary._
-import org.scalatest.{FunSuite, Matchers}
-import org.scalatest.prop.GeneratorDrivenPropertyChecks
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
+import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
 
 // TODO: these tests rely on CodeValue serializing values to a node named 'element'. This is fragile.
 // TODO: Arbitrary[List[CodecValue[Node, A]]] never ends up generating lists of legal values only, which sorts of
 //       defeats the purpose.
-class CompilerTests extends FunSuite with GeneratorDrivenPropertyChecks with Matchers {
+class CompilerTests extends AnyFunSuite with ScalaCheckPropertyChecks with Matchers {
   type Value[A] = CodecValue[Node, A, codecs.type]
 
   @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
   def encodeAll[A](bs: List[Value[A]]): Element = {
-    val n = bs.foldLeft("<root></root>".asNode.right.get.asInstanceOf[Document]) { (doc, b) =>
+    val n = bs.foldLeft("<root></root>".asNode.fold(e => throw e, identity).asInstanceOf[Document]) { (doc, b) =>
       val an = b.encoded.cloneNode(true)
       doc.adoptNode(an)
       doc.getFirstChild.appendChild(an)

@@ -19,10 +19,11 @@ package kantan.xpath
 import DecodeError.TypeError
 import ParseError.{IOError, SyntaxError}
 import laws.discipline.arbitrary._
-import org.scalatest.{FunSuite, Matchers}
-import org.scalatest.prop.GeneratorDrivenPropertyChecks
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
+import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
 
-class ErrorTests extends FunSuite with GeneratorDrivenPropertyChecks with Matchers {
+class ErrorTests extends AnyFunSuite with ScalaCheckPropertyChecks with Matchers {
   test("CompileErrors should be equal if the underlying errors are the same") {
     forAll { (e1: CompileError, e2: XPathError) =>
       (e1, e2) match {

@@ -10,7 +10,7 @@ kantan.xpath API - we still support Java 7. There is, however, a dedicated optio
 adding the following line to your `build.sbt` file:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-java8" % "0.5.1"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-java8" % "0.5.2-SNAPSHOT"
 ```
 
 You then need to import the corresponding package:

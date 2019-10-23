@@ -9,7 +9,7 @@ kantan.xpath comes with an [enumeratum](https://github.com/lloydmeta/enumeratum)
 by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-enumeratum" % "0.5.1"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-enumeratum" % "0.5.2-SNAPSHOT"
 ```
 
 ## Name-based enumerations

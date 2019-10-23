@@ -9,7 +9,7 @@ kantan.xpath comes with a [libra](https://github.com/to-ithaca/libra) module tha
 by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-libra" % "0.5.1"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-libra" % "0.5.2-SNAPSHOT"
 ```
 
 You then need to import the corresponding package:

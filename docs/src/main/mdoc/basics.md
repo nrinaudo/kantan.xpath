@@ -1,7 +1,7 @@
 ---
-layout: scala mdocorial
+layout: tutorial
 title: "Basics"
-section: scala mdocorial
+section: tutorial
 sort_order: 0
 ---
 There are a few concepts to get familiar with before getting to grips with kantan.xpath proper.

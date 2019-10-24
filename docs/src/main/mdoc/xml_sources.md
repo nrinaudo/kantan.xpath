@@ -1,7 +1,7 @@
 ---
-layout: scala mdocorial
+layout: tutorial
 title: "What can be parsed as XML data?"
-section: scala mdocorial
+section: tutorial
 sort_order: 7
 ---
 Before we can even think about applying XPath expressions to an XML document, we need to get our hands on that document

@@ -1,7 +1,7 @@
 ---
-layout: scala mdocorial
+layout: tutorial
 title: "Decoding HTML with nekohtml"
-section: scala mdocorial
+section: tutorial
 sort_order: 9
 status: wip
 ---

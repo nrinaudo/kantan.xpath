@@ -1,10 +1,10 @@
 ---
-layout: scala mdocorial
+layout: tutorial
 title: "Decoding nodes as tuples"
-section: scala mdocorial
+section: tutorial
 sort_order: 2
 ---
-We've seen in a [previous scala mdocorial](nodes_as_primitive.html) how to extract primitive types from XML documents. Often,
+We've seen in a [previous tutorial](nodes_as_primitive.html) how to extract primitive types from XML documents. Often,
 however, these primitive values need to be assembled in more complex types, such as tuples. kantan.xpath provides a
 simple way of doing so.
 

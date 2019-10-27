@@ -1,7 +1,7 @@
 ---
-layout: scala mdocorial
+layout: tutorial
 title: "Enumeratum module"
-section: scala mdocorial
+section: tutorial
 sort_order: 15
 ---
 kantan.xpath comes with an [enumeratum](https://github.com/lloydmeta/enumeratum) module that can be used

@@ -1,7 +1,7 @@
 ---
-layout: scala mdocorial
+layout: tutorial
 title: "Compiling queries for reuse"
-section: scala mdocorial
+section: tutorial
 sort_order: 6
 ---
 In the examples we've seen so far, XPath expressions were passed around as [`XPathExpression`]s. This can be

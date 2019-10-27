@@ -1,11 +1,11 @@
 ---
-layout: scala mdocorial
+layout: tutorial
 title: "Decoding nodes as case classes"
-section: scala mdocorial
+section: tutorial
 sort_order: 3
 ---
 
-We've seen in a [previous scala mdocorial](nodes_as_tuples.html) how to extract tuples from XML documents. The next step up
+We've seen in a [previous tutorial](nodes_as_tuples.html) how to extract tuples from XML documents. The next step up
 from tuples is case classes, which work in a very similar fashion.
 
 In order to show how that works, we'll first need some sample XML data, which we'll get from this project's resources:

@@ -1,7 +1,7 @@
 ---
-layout: scala mdocorial
+layout: tutorial
 title: "What can be parsed as XML data?"
-section: scala mdocorial
+section: tutorial
 sort_order: 7
 ---
 

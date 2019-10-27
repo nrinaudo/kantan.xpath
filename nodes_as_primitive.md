@@ -1,7 +1,7 @@
 ---
-layout: scala mdocorial
+layout: tutorial
 title: "Decoding nodes as primitive types"
-section: scala mdocorial
+section: tutorial
 sort_order: 1
 ---
 

@@ -1,7 +1,7 @@
 ---
-layout: scala mdocorial
+layout: tutorial
 title: "Compiling queries for reuse"
-section: scala mdocorial
+section: tutorial
 sort_order: 6
 ---
 
@@ -62,7 +62,7 @@ You can use [`compile`] to compile raw strings:
 ```scala
 Query.compile[List[Int]]("//element/@id")
 // res2: CompileResult[Query[DecodeResult[List[Int]]]] = Right(
-//   kantan.xpath.Query$$anon$1@781ed989
+//   kantan.xpath.Query$$anon$1@37c31928
 // )
 ```
 

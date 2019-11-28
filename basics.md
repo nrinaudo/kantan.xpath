@@ -4,7 +4,6 @@ title: "Basics"
 section: tutorial
 sort_order: 0
 ---
-
 There are a few concepts to get familiar with before getting to grips with kantan.xpath proper.
 
 ## Regular expression literals
@@ -27,7 +26,7 @@ This lets you create new regular expression by prefixing string literals with [`
 
 ```scala
 xp"//a[@href]"
-// res0: kantan.xpath.package.XPathExpression = kantan.xpath.XPathCompiler$$anon$2@d14f64a
+// res0: kantan.xpath.package.XPathExpression = kantan.xpath.XPathCompiler$$anon$2@76bdfce5
 ```
 
 And, as promised, this fails *at compile time* if the xpath expression is not valid:

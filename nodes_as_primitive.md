@@ -4,7 +4,6 @@ title: "Decoding nodes as primitive types"
 section: tutorial
 sort_order: 1
 ---
-
 The simplest possible use of kantan.xpath is to extract primitive types from XML documents.
 
 In order to show how that works, we'll first need some sample XML data, which we'll get from this project's resources:

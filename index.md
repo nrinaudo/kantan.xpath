@@ -11,38 +11,35 @@ kantan.xpath is an XPath expression evaluation library for the [Scala programmin
 
 ## Getting started
 
-kantan.xpath is currently available for Scala 2.11 and 2.12.
+kantan.xpath is currently available for Scala 2.12 and 2.13.
 
-The current version is `0.5.2-SNAPSHOT`, which can be added to your project with one or more of the following line(s)
+The current version is `0.5.1`, which can be added to your project with one or more of the following line(s)
 in your SBT build file:
 
 ```scala
 // Core library, included automatically if any other module is imported.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath" % "0.5.2-SNAPSHOT"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath" % "0.5.1"
 
 // Java 8 date and time instances.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-java8" % "0.5.2-SNAPSHOT"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-java8" % "0.5.1"
 
 // Provides scalaz type class instances.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-scalaz" % "0.5.2-SNAPSHOT"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-scalaz" % "0.5.1"
 
 // Provides cats type class instances.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-cats" % "0.5.2-SNAPSHOT"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-cats" % "0.5.1"
 
 // Provides "dirty" HTML parsing through NekoHTML.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-nekohtml" % "0.5.2-SNAPSHOT"
-
-// Provides joda-time decoders.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-joda-time" % "0.5.2-SNAPSHOT"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-nekohtml" % "0.5.1"
 
 // Provides refined decoders.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-refined" % "0.5.2-SNAPSHOT"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-refined" % "0.5.1"
 
 // Provides enumeratum decoders.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-enumeratum" % "0.5.2-SNAPSHOT"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-enumeratum" % "0.5.1"
 
 // Provides libra decoders.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-libra" % "0.5.2-SNAPSHOT"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-libra" % "0.5.1"
 ```
 
 ## Motivation

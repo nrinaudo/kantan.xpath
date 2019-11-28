@@ -4,13 +4,12 @@ title: "Java 8 dates and times"
 section: tutorial
 sort_order: 11
 ---
-
 Java 8 comes with a better thought out dates and times API. Unfortunately, it cannot be supported as part of the core
 kantan.xpath API - we still support Java 7. There is, however, a dedicated optional module that you can include by
 adding the following line to your `build.sbt` file:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-java8" % "0.5.2-SNAPSHOT"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-java8" % "0.5.1"
 ```
 
 You then need to import the corresponding package:

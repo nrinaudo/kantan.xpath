@@ -4,12 +4,11 @@ title: "Refined module"
 section: tutorial
 sort_order: 14
 ---
-
 kantan.xpath comes with a [refined](https://github.com/fthomas/refined) module that can be used
 by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-refined" % "0.5.2-SNAPSHOT"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-refined" % "0.5.1"
 ```
 
 You then need to import the corresponding package:
@@ -45,4 +44,3 @@ And, for an error case:
 //   TypeError("Not acceptable: 'Predicate failed: (-1 > 0).'")
 // )
 ```
-

@@ -4,7 +4,6 @@ title: "Decoding nodes as arbitrary types"
 section: tutorial
 sort_order: 4
 ---
-
 We've seen in a previous tutorial how to extract [primitive types](nodes_as_primitive.html),
 [tuples](nodes_as_tuples.html) and [case classes](nodes_as_case_classes.html) from XML documents. Sometimes however,
 none of these fit our requirements. kantan.xpath provides support for extracting arbitrary types, which works almost

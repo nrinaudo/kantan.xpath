@@ -57,8 +57,6 @@ And we're now capable of decoding XML content as dates:
 // )
 ```
 
-Note that kantan.xpath has a joda-time module, a very well thought out alternative to `java.util.Date`.
-
 ### `Either`
 
 For any two types `A` and `B` that each have a [`NodeDecoder`], there exists a
@@ -120,7 +118,6 @@ The following types have an instance of [`XmlSource`] out of the box:
 [`InputStream`]:https://docs.oracle.com/javase/7/docs/api/java/io/InputStream.html
 [`File`]:https://docs.oracle.com/javase/7/docs/api/java/io/File.html
 [`Path`]:https://docs.oracle.com/javase/7/docs/api/java/nio/file/Path.html
-
 [`XmlSource`]:{{ site.baseurl }}/api/kantan/xpath/XmlSource.html
 [`NodeDecoder`]:{{ site.baseurl }}/api/kantan/xpath/NodeDecoder$.html
 [`Date`]:https://docs.oracle.com/javase/7/docs/api/java/util/Date.html

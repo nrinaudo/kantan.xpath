@@ -4,7 +4,6 @@ title: "Compiling queries for reuse"
 section: tutorial
 sort_order: 6
 ---
-
 In the examples we've seen so far, XPath expressions were passed around as [`XPathExpression`]s. This can be
 inefficient as kantan.xpath needs to bake in the decoding code each time they're evaluated against a node.
 
@@ -62,7 +61,7 @@ You can use [`compile`] to compile raw strings:
 ```scala
 Query.compile[List[Int]]("//element/@id")
 // res2: CompileResult[Query[DecodeResult[List[Int]]]] = Right(
-//   kantan.xpath.Query$$anon$1@37c31928
+//   kantan.xpath.Query$$anon$1@758d8040
 // )
 ```
 

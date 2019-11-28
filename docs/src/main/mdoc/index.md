@@ -11,7 +11,7 @@ kantan.xpath is an XPath expression evaluation library for the [Scala programmin
 
 ## Getting started
 
-kantan.xpath is currently available for Scala 2.11 and 2.12.
+kantan.xpath is currently available for Scala 2.12 and 2.13.
 
 The current version is `@VERSION@`, which can be added to your project with one or more of the following line(s)
 in your SBT build file:
@@ -31,9 +31,6 @@ libraryDependencies += "com.nrinaudo" %% "kantan.xpath-cats" % "@VERSION@"
 
 // Provides "dirty" HTML parsing through NekoHTML.
 libraryDependencies += "com.nrinaudo" %% "kantan.xpath-nekohtml" % "@VERSION@"
-
-// Provides joda-time decoders.
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-joda-time" % "@VERSION@"
 
 // Provides refined decoders.
 libraryDependencies += "com.nrinaudo" %% "kantan.xpath-refined" % "@VERSION@"

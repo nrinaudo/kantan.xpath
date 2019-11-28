@@ -54,8 +54,6 @@ And we're now capable of decoding XML content as dates:
 "<date>2000-01-00T00:00:00.000</date>".evalXPath[Date](xp"/date")
 ```
 
-Note that kantan.xpath has a joda-time module, a very well thought out alternative to `java.util.Date`.
-
 ### `Either`
 
 For any two types `A` and `B` that each have a [`NodeDecoder`], there exists a

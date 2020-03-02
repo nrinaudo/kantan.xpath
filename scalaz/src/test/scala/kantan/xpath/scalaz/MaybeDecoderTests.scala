@@ -16,12 +16,11 @@
 
 package kantan.xpath.scalaz
 
-import kantan.xpath.laws.discipline.NodeDecoderTests
+import kantan.xpath.laws.discipline.{DisciplineSuite, NodeDecoderTests}
 import kantan.xpath.scalaz.arbitrary._
 import org.scalatest.funsuite.AnyFunSuite
-import org.typelevel.discipline.scalatest.Discipline
 import scalaz.Maybe
 
-class MaybeDecoderTests extends AnyFunSuite with Discipline {
+class MaybeDecoderTests extends AnyFunSuite with DisciplineSuite {
   checkAll("NodeDecoder[Maybe[Int]]", NodeDecoderTests[Maybe[Int]].decoder[Int, Int])
 }

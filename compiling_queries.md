@@ -61,7 +61,7 @@ You can use [`compile`] to compile raw strings:
 ```scala
 Query.compile[List[Int]]("//element/@id")
 // res2: CompileResult[Query[DecodeResult[List[Int]]]] = Right(
-//   kantan.xpath.Query$$anon$1@758d8040
+//   kantan.xpath.Query$$anon$1@3bcf13d9
 // )
 ```
 

@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package scalaz
+package kantan.xpath.scalaz
 
-import _root_.scalaz.Equal
-import _root_.scalaz.Scalaz._
-import arbitrary._
+import kantan.xpath.{Query, XmlSource}
+import kantan.xpath.scalaz.arbitrary._
 import org.scalacheck.Arbitrary
+import scalaz.Equal
+import scalaz.Scalaz._
 
 object equality extends kantan.codecs.scalaz.laws.discipline.EqualInstances {
 

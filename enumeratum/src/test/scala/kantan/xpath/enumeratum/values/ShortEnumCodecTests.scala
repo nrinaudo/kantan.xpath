@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package enumeratum.values
+package kantan.xpath.enumeratum.values
 
-import enumeratum.arbitrary._
 import kantan.codecs.enumeratum.laws.discipline.EnumeratedShort
-import laws.discipline._
+import kantan.xpath.NodeDecoder
+import kantan.xpath.enumeratum.arbitrary._
+import kantan.xpath.laws.discipline.{DisciplineSuite, NodeDecoderTests, SerializableTests}
 
 class ShortEnumCodecTests extends DisciplineSuite {
 

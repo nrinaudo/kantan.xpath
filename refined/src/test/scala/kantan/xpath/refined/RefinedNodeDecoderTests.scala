@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package refined
+package kantan.xpath.refined
 
 import eu.timepit.refined.api.Refined
 import eu.timepit.refined.numeric.Positive
+import kantan.xpath.NodeDecoder
+import kantan.xpath.laws.discipline.{DisciplineSuite, NodeDecoderTests, SerializableTests}
 import kantan.xpath.refined.arbitrary._
-import laws.discipline._
 
 class RefinedNodeDecoderTests extends DisciplineSuite {
 

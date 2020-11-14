@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package cats
+package kantan.xpath.cats
 
-import _root_.cats.implicits._
-import _root_.cats.laws.discipline.ContravariantTests
-import laws.discipline._, arbitrary._, equality._
+import cats.implicits._
+import cats.laws.discipline.ContravariantTests
+import kantan.xpath.{Node, XmlSource}
+import kantan.xpath.cats.arbitrary._
+import kantan.xpath.cats.equality._
+import kantan.xpath.laws.discipline.DisciplineSuite
 import org.scalacheck.Arbitrary
 
 class XmlSourceTests extends DisciplineSuite {

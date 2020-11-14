@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package java8
+package kantan.xpath.java8
 
 import java.time.ZonedDateTime
+import kantan.xpath.NodeDecoder
 import kantan.xpath.java8.arbitrary._
-import laws.discipline._
+import kantan.xpath.laws.discipline.{DisciplineSuite, NodeDecoderTests, SerializableTests}
 
 class ZonedDateTimeDecoderTests extends DisciplineSuite {
 

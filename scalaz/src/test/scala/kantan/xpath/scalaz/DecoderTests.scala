@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package scalaz
+package kantan.xpath.scalaz
 
-import _root_.scalaz.Scalaz._
-import _root_.scalaz.scalacheck.ScalazProperties._
-import arbitrary._, equality._
 import kantan.codecs.scalaz.laws.discipline.ScalazDisciplineSuite
+import kantan.xpath.{DecodeError, Node, NodeDecoder}
+import kantan.xpath.scalaz.arbitrary._
+import kantan.xpath.scalaz.equality._
 import org.scalacheck.Arbitrary
+import scalaz.Scalaz._
+import scalaz.scalacheck.ScalazProperties._
 
 class DecoderTests extends ScalazDisciplineSuite {
 

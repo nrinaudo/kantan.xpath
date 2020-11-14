@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package enumeratum
+package kantan.xpath.enumeratum
 
 package object values extends kantan.codecs.enumeratum.values.DecoderInstances

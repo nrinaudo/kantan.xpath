@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package scalaz
+package kantan.xpath.scalaz
 
-import _root_.scalaz.Show
-import _root_.scalaz.scalacheck.ScalazProperties.{equal => equ}
-import arbitrary._
 import kantan.codecs.scalaz.laws.discipline.ScalazDisciplineSuite
+import kantan.xpath.{CompileError, DecodeError, ParseError, ReadError, XPathError}
+import kantan.xpath.scalaz.arbitrary._
+import scalaz.Show
+import scalaz.scalacheck.ScalazProperties.{equal => equ}
 
 class ErrorTests extends ScalazDisciplineSuite {
 

@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package cats
+package kantan.xpath.cats
 
-import _root_.cats.Eq
-import _root_.cats.data.EitherT
-import _root_.cats.instances.all._
-import _root_.cats.laws.discipline.{MonadErrorTests, SemigroupKTests}
-import _root_.cats.laws.discipline.SemigroupalTests.Isomorphisms
-import laws.discipline._, arbitrary._, equality._
+import cats.Eq
+import cats.data.EitherT
+import cats.instances.all._
+import cats.laws.discipline.{MonadErrorTests, SemigroupKTests}
+import cats.laws.discipline.SemigroupalTests.Isomorphisms
+import kantan.codecs.laws.discipline.DisciplineSuite
+import kantan.xpath.{DecodeError, Node, NodeDecoder}
+import kantan.xpath.cats.arbitrary._
+import kantan.xpath.cats.equality._
 import org.scalacheck.Arbitrary
 
 class DecoderTests extends DisciplineSuite {

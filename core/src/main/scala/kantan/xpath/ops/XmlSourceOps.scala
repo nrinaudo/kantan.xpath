@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package ops
+package kantan.xpath.ops
+
+import kantan.xpath._
 
 /** Provides syntax for all types that have an implicit instance of [[XmlSource]] in scope.
   *

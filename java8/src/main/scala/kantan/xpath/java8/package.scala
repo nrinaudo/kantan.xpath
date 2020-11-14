@@ -16,7 +16,7 @@
 
 package kantan.xpath
 
-import java.time._
+import java.time.{Instant, LocalDate, LocalDateTime, LocalTime, OffsetDateTime, ZonedDateTime}
 import kantan.codecs.export.Exported
 import kantan.codecs.strings.StringDecoder
 import kantan.codecs.strings.java8.{TimeDecoderCompanion, ToFormatLiteral}

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package literals
+package kantan.xpath.literals
 
+import kantan.xpath.{XPathCompiler, XPathExpression}
 import scala.reflect.macros.blackbox.Context
 
 final class XPathLiteral(val sc: StringContext) extends AnyVal {

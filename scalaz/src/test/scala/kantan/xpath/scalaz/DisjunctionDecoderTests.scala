@@ -16,10 +16,10 @@
 
 package kantan.xpath.scalaz
 
-import _root_.scalaz.\/
 import kantan.xpath.laws.discipline.{DisciplineSuite, NodeDecoderTests}
 import kantan.xpath.scalaz.arbitrary._
 import org.scalatest.funsuite.AnyFunSuite
+import scalaz.\/
 
 class DisjunctionDecoderTests extends AnyFunSuite with DisciplineSuite {
   checkAll("NodeDecoder[Int \\/ Boolean]", NodeDecoderTests[Int \/ Boolean].decoder[Int, Int])

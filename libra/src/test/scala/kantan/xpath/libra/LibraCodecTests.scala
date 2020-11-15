@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package libra
+package kantan.xpath.libra
 
-import _root_.libra.Quantity
-import arbitrary._
-import laws.discipline._
+import kantan.xpath.NodeDecoder
+import kantan.xpath.laws.discipline.{DisciplineSuite, NodeDecoderTests, SerializableTests}
+import kantan.xpath.libra.arbitrary._
+import libra.Quantity
 import shapeless.HNil
 
 class LibraCodecTests extends DisciplineSuite {

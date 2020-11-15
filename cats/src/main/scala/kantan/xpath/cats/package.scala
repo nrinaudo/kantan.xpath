@@ -16,8 +16,8 @@
 
 package kantan.xpath
 
-import _root_.cats._
-import kantan.codecs.cats._
+import _root_.cats.{Contravariant, Eq}
+import kantan.codecs.cats.{CommonInstances, DecoderInstances}
 
 package object cats extends DecoderInstances with CommonInstances {
 

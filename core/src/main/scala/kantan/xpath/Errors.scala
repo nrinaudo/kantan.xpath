@@ -16,7 +16,7 @@
 
 package kantan.xpath
 
-import kantan.codecs.error._
+import kantan.codecs.error.{Error, ErrorCompanion}
 
 /** Describes an error that can occur while dealing with XPath. */
 sealed abstract class XPathError(msg: String) extends Error(msg)

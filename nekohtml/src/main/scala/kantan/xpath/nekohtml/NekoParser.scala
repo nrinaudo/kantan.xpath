@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package nekohtml
+package kantan.xpath.nekohtml
 
+import kantan.xpath.{InputSource, Node, ParseResult, XmlParser}
 import org.apache.xerces.parsers.DOMParser
 import org.cyberneko.html.HTMLConfiguration
 

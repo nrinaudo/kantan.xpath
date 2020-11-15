@@ -17,7 +17,8 @@
 package kantan.xpath
 
 import java.net.URI
-import laws.discipline._, arbitrary._
+import kantan.xpath.laws.discipline.{DisciplineSuite, NodeDecoderTests, SerializableTests}
+import kantan.xpath.laws.discipline.arbitrary._
 
 class URIDecoderTests extends DisciplineSuite {
 

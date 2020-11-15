@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package laws
-package discipline
+package kantan.xpath.laws.discipline
 
-import ops._
+import kantan.xpath.Element
+import kantan.xpath.ops._
 import kantan.codecs.laws.CodecValue.{IllegalValue, LegalValue}
 import kantan.codecs.laws.{IllegalString, LegalString}
 import org.scalacheck.Arbitrary

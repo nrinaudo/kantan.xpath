@@ -16,7 +16,8 @@
 
 package kantan.xpath
 
-import laws.discipline._, arbitrary._
+import kantan.xpath.laws.discipline.{DisciplineSuite, NodeDecoderTests, SerializableTests}
+import kantan.xpath.laws.discipline.arbitrary._
 
 class ShortDecoderTests extends DisciplineSuite {
 

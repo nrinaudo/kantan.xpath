@@ -16,8 +16,9 @@
 
 package kantan.xpath
 
-import laws.discipline._, arbitrary._
-import implicits._
+import kantan.xpath.laws.discipline.{DisciplineSuite, NodeDecoderTests, SerializableTests, LegalNode, IllegalNode}
+import kantan.xpath.laws.discipline.arbitrary._
+import kantan.xpath.implicits._
 import org.scalacheck.Arbitrary
 
 class TupleTests extends DisciplineSuite {

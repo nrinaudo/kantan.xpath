@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package laws
-package discipline
+package kantan.xpath.laws.discipline
 
-import kantan.codecs.laws._, CodecValue.{IllegalValue, LegalValue}
-import ops._
-import org.scalacheck._, Arbitrary.{arbitrary => arb}, Gen._
+import kantan.codecs.laws.{CodecValue, IllegalString, LegalString}
+import kantan.codecs.laws.CodecValue.{IllegalValue, LegalValue}
+import kantan.xpath.{codecs, Element, Node, Query, XmlSource}
+import kantan.xpath.{CompileError, DecodeError, ParseError, ParseResult, ReadError, XPathError}
+import kantan.xpath.ops._
+import org.scalacheck.{Arbitrary, Cogen, Gen}
+import org.scalacheck.Arbitrary.{arbitrary => arb}
 import org.scalacheck.rng.Seed
 
 object arbitrary extends ArbitraryInstances
@@ -31,19 +33,19 @@ trait ArbitraryInstances
   // -------------------------------------------------------------------------------------------------------------------
   implicit val arbCompileError: Arbitrary[CompileError]          = Arbitrary(genException.map(CompileError.apply))
   implicit val arbTypeError: Arbitrary[DecodeError.TypeError]    = Arbitrary(genException.map(DecodeError.TypeError.apply))
-  implicit val arbNotFound: Arbitrary[DecodeError.NotFound.type] = Arbitrary(const(DecodeError.NotFound))
+  implicit val arbNotFound: Arbitrary[DecodeError.NotFound.type] = Arbitrary(Gen.const(DecodeError.NotFound))
   implicit val arbDecodeError: Arbitrary[DecodeError] =
-    Arbitrary(oneOf(arbNotFound.arbitrary, arbTypeError.arbitrary))
+    Arbitrary(Gen.oneOf(arbNotFound.arbitrary, arbTypeError.arbitrary))
   implicit val arbSyntaxError: Arbitrary[ParseError.SyntaxError] = Arbitrary(
     genException.map(ParseError.SyntaxError.apply)
   )
   implicit val arbIOError: Arbitrary[ParseError.IOError] = Arbitrary(genIoException.map(ParseError.IOError.apply))
   implicit val arbParseError: Arbitrary[ParseError] =
-    Arbitrary(oneOf(arbSyntaxError.arbitrary, arbIOError.arbitrary))
+    Arbitrary(Gen.oneOf(arbSyntaxError.arbitrary, arbIOError.arbitrary))
   implicit val arbReadError: Arbitrary[ReadError] =
-    Arbitrary(oneOf(arb[DecodeError], arb[ParseError]))
+    Arbitrary(Gen.oneOf(arb[DecodeError], arb[ParseError]))
   implicit val arbXPathError: Arbitrary[XPathError] =
-    Arbitrary(oneOf(arb[ReadError], arb[CompileError]))
+    Arbitrary(Gen.oneOf(arb[ReadError], arb[CompileError]))
 
   implicit val cogenCompileError: Cogen[CompileError]          = Cogen[String].contramap(_.message)
   implicit val cogenTypeError: Cogen[DecodeError.TypeError]    = Cogen[String].contramap(_.message)

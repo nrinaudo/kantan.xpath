@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package cats
+package kantan.xpath.cats
 
-import _root_.cats.Eq
-import _root_.cats.implicits._
-import _root_.cats.laws.discipline.eq._
+import cats.Eq
+import cats.implicits._
+import cats.laws.discipline.eq._
 import kantan.codecs.cats.laws.discipline.EqInstances
-import laws.discipline.arbitrary._
+import kantan.xpath.{Query, XmlSource}
+import kantan.xpath.laws.discipline.arbitrary._
 import org.scalacheck.Arbitrary
 
 object equality extends EqInstances {

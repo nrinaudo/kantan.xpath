@@ -16,9 +16,9 @@
 
 package kantan.xpath
 
-import DecodeError.TypeError
-import ParseError.{IOError, SyntaxError}
-import laws.discipline.arbitrary._
+import kantan.xpath.DecodeError.TypeError
+import kantan.xpath.ParseError.{IOError, SyntaxError}
+import kantan.xpath.laws.discipline.arbitrary._
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks

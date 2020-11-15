@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package cats
+package kantan.xpath.cats
 
-import _root_.cats.Show
-import _root_.cats.kernel.laws.discipline.EqTests
-import laws.discipline._, arbitrary._
+import cats.Show
+import cats.kernel.laws.discipline.EqTests
+import kantan.xpath.{CompileError, DecodeError, ParseError, ReadError, XPathError}
+import kantan.xpath.cats.arbitrary._
+import kantan.xpath.laws.discipline.DisciplineSuite
 
 class ErrorTests extends DisciplineSuite {
 

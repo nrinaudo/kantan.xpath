@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-package kantan.xpath
-package java8
+package kantan.xpath.java8
 
 object arbitrary
     extends kantan.xpath.laws.discipline.ArbitraryInstances

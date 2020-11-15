@@ -17,7 +17,8 @@
 package kantan.xpath
 
 import java.io.File
-import laws.discipline._, arbitrary._
+import kantan.xpath.laws.discipline.{DisciplineSuite, NodeDecoderTests, SerializableTests}
+import kantan.xpath.laws.discipline.arbitrary._
 
 class FileDecoderTests extends DisciplineSuite {
   checkAll("NodeDecoder[File]", NodeDecoderTests[File].bijectiveDecoder[Int, Int])

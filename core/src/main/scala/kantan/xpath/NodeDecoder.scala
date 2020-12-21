@@ -36,8 +36,11 @@ trait NodeDecoderInstances {
   implicit val node: NodeDecoder[Node] = NodeDecoder.fromFound(n => DecodeResult.success(n))
 
   /** Decodes nodes as elements. */
-  @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))
-  implicit val element: NodeDecoder[Element] = NodeDecoder.fromFound(n => DecodeResult(n.asInstanceOf[Element]))
+  implicit val element: NodeDecoder[Element] = NodeDecoder.fromFound {
+    case e: Element  => DecodeResult(e)
+    case d: Document => DecodeResult(d.getDocumentElement)
+    case x           => DecodeResult.typeError(s"${x.getClass.getName} is not an Element")
+  }
 
   /** Decodes nodes as attributes. */
   @SuppressWarnings(Array("org.wartremover.warts.AsInstanceOf"))

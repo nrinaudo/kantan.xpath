@@ -16,7 +16,6 @@
 
 package kantan.xpath.cats
 
-import cats.implicits._
 import cats.laws.discipline.ContravariantTests
 import kantan.xpath.{Node, XmlSource}
 import kantan.xpath.cats.arbitrary._

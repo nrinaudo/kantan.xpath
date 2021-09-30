@@ -54,7 +54,7 @@ Now that we have told kantan.xpath how to decode an XML node to an instance of `
 ```scala
 rawData.evalXPath[List[El]](xp"//element")
 // res1: XPathResult[List[El]] = Right(
-//   List(El(1, true), El(2, false), El(3, true), El(4, false))
+//   value = List(El(1, true), El(2, false), El(3, true), El(4, false))
 // )
 ```
 

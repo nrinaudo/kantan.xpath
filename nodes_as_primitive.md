@@ -36,7 +36,7 @@ This allows us to write the following code, which will attempt to extract the `i
 
 ```scala
 rawData.evalXPath[Int](xp"//element/@id")
-// res1: kantan.xpath.package.XPathResult[Int] = Right(1)
+// res1: kantan.xpath.package.XPathResult[Int] = Right(value = 1)
 ```
 
 
@@ -49,7 +49,7 @@ of your code. For example:
 ```scala
 rawData.evalXPath[java.net.URL](xp"//element/@id")
 // res2: kantan.xpath.package.XPathResult[java.net.URL] = Left(
-//   TypeError("'1' is not a valid URL")
+//   value = TypeError(message = "'1' is not a valid URL")
 // )
 ```
 
@@ -70,7 +70,9 @@ type, we told kantan.xpath that we only wanted the first result. We could get th
 
 ```scala
 rawData.evalXPath[List[Int]](xp"//element/@id")
-// res4: kantan.xpath.package.XPathResult[List[Int]] = Right(List(1, 2, 3, 4))
+// res4: kantan.xpath.package.XPathResult[List[Int]] = Right(
+//   value = List(1, 2, 3, 4)
+// )
 ```
 
 Any type constructor that has a [`CanBuildFrom`] instance could have been used instead of [`List`] - that's essentially
@@ -79,7 +81,7 @@ all collections. By the same token, any primitive time could have been used inst
 ```scala
 rawData.evalXPath[Vector[Boolean]](xp"//element/@enabled")
 // res5: kantan.xpath.package.XPathResult[Vector[Boolean]] = Right(
-//   Vector(true, false, true, false)
+//   value = Vector(true, false, true, false)
 // )
 ```
 

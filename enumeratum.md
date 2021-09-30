@@ -8,7 +8,7 @@ kantan.xpath comes with an [enumeratum](https://github.com/lloydmeta/enumeratum)
 by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-enumeratum" % "0.5.2"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-enumeratum" % "0.5.3"
 ```
 
 ## Name-based enumerations
@@ -49,11 +49,13 @@ We can then simply write the following:
 
 ```scala
 "<foo><bar value='Hello'/></foo>".evalXPath[DummyEnum](xp"//bar/@value")
-// res0: kantan.xpath.package.XPathResult[DummyEnum] = Right(Hello)
+// res0: kantan.xpath.package.XPathResult[DummyEnum] = Right(value = Hello)
 
 "<foo><bar value='GoodDay'/></foo>".evalXPath[DummyEnum](xp"//bar/@value")
 // res1: kantan.xpath.package.XPathResult[DummyEnum] = Left(
-//   TypeError("'GoodDay' is not a member of enumeration [Hello, GoodBye, Hi]")
+//   value = TypeError(
+//     message = "'GoodDay' is not a member of enumeration [Hello, GoodBye, Hi]"
+//   )
 // )
 ```
 
@@ -97,10 +99,10 @@ We can then simply write the following:
 
 ```scala
 "<foo><bar value='1'/></foo>".evalXPath[Greeting](xp"//bar/@value")
-// res3: kantan.xpath.package.XPathResult[Greeting] = Right(Hello)
+// res3: kantan.xpath.package.XPathResult[Greeting] = Right(value = Hello)
 
 "<foo><bar value='-1'/></foo>".evalXPath[Greeting](xp"//bar/@value")
 // res4: kantan.xpath.package.XPathResult[Greeting] = Left(
-//   TypeError("'-1' is not in values [1, 2, 3, 4]")
+//   value = TypeError(message = "'-1' is not in values [1, 2, 3, 4]")
 // )
 ```

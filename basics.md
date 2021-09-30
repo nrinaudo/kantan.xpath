@@ -26,7 +26,7 @@ This lets you create new regular expression by prefixing string literals with [`
 
 ```scala
 xp"//a[@href]"
-// res0: kantan.xpath.package.XPathExpression = kantan.xpath.XPathCompiler$$anon$2@6b660996
+// res0: kantan.xpath.package.XPathExpression = kantan.xpath.XPathCompiler$$anon$2@71e3f412
 ```
 
 And, as promised, this fails *at compile time* if the xpath expression is not valid:
@@ -48,14 +48,16 @@ For example, retrieving only the first match:
 
 ```scala
 "<users><user id='1'/><user id='2'/></users>".evalXPath[Int](xp"//user/@id")
-// res2: kantan.xpath.package.XPathResult[Int] = Right(1)
+// res2: kantan.xpath.package.XPathResult[Int] = Right(value = 1)
 ```
 
 And retrieving all matches:
 
 ```scala
 "<users><user id='1'/><user id='2'/></users>".evalXPath[List[Int]](xp"//user/@id")
-// res3: kantan.xpath.package.XPathResult[List[Int]] = Right(List(1, 2))
+// res3: kantan.xpath.package.XPathResult[List[Int]] = Right(
+//   value = List(1, 2)
+// )
 ```
 
 [`kantan.xpath.implicits._`]:{{ site.baseurl }}/api/kantan/xpath/implicits$.html

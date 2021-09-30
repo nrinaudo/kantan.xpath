@@ -53,7 +53,7 @@ And we're now capable of decoding XML content as dates:
 ```scala
 "<date>2000-01-00T00:00:00.000</date>".evalXPath[Date](xp"/date")
 // res0: kantan.xpath.package.XPathResult[Date] = Right(
-//   Fri Dec 31 00:00:00 CET 1999
+//   value = Fri Dec 31 00:00:00 CET 1999
 // )
 ```
 
@@ -69,7 +69,7 @@ sometimes a boolean, for example:
 ```scala
 "<root><either>123</either><either>true</either></root>".evalXPath[List[Either[Int, Boolean]]](xp"//either")
 // res1: kantan.xpath.package.XPathResult[List[Either[Int, Boolean]]] = Right(
-//   List(Left(123), Right(true))
+//   value = List(Left(value = 123), Right(value = true))
 // )
 ```
 
@@ -82,7 +82,7 @@ This is useful for XML where some nodes or attributes are optional. For example:
 
 ```scala
 "<root><opt/></root>".evalXPath[Option[Int]](xp"//opt/@value")
-// res2: kantan.xpath.package.XPathResult[Option[Int]] = Right(None)
+// res2: kantan.xpath.package.XPathResult[Option[Int]] = Right(value = None)
 ```
 
 ## `XmlSource`

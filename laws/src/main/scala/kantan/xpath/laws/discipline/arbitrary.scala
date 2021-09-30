@@ -147,6 +147,6 @@ trait ArbitraryInstances
   implicit def arbQuery[A: Arbitrary]: Arbitrary[Query[A]] =
     Arbitrary(implicitly[Arbitrary[Node => A]].arbitrary.map(f => Query(f)))
 
-  implicit def arbXmlSource[A: Arbitrary: Cogen](implicit n: Arbitrary[Node]): Arbitrary[XmlSource[A]] =
+  implicit def arbXmlSource[A: Cogen](implicit n: Arbitrary[Node]): Arbitrary[XmlSource[A]] =
     Arbitrary(arb[A => ParseResult[Node]].map(XmlSource.from))
 }

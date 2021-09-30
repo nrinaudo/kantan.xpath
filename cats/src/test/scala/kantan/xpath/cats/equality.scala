@@ -33,7 +33,7 @@ object equality extends EqInstances {
       }
   }
 
-  implicit def eqXmlSource[A: Eq: Arbitrary]: Eq[XmlSource[A]] = Eq.by { source => (a: A) =>
+  implicit def eqXmlSource[A: Arbitrary]: Eq[XmlSource[A]] = Eq.by { source => (a: A) =>
     source.asNode(a)
   }
 

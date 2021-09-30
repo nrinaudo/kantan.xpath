@@ -1,5 +1,5 @@
-kantanProject in ThisBuild := "xpath"
-startYear in ThisBuild     := Some(2016)
+ThisBuild / kantanProject := "xpath"
+ThisBuild / startYear     := Some(2016)
 
 // - root projects -----------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------------------------
@@ -7,7 +7,7 @@ lazy val root = Project(id = "kantan-xpath", base = file("."))
   .settings(moduleName := "root")
   .enablePlugins(UnpublishedPlugin)
   .settings(
-    initialCommands in console :=
+    console / initialCommands :=
       """
       |import kantan.xpath._
       |import kantan.xpath.implicits._
@@ -19,7 +19,7 @@ lazy val root = Project(id = "kantan-xpath", base = file("."))
 
 lazy val docs = project
   .settings(
-    unidocProjectFilter in (ScalaUnidoc, unidoc) :=
+    ScalaUnidoc / unidoc / unidocProjectFilter :=
       inAnyProject
   )
   .enablePlugins(DocumentationPlugin)

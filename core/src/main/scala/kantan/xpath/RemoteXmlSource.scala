@@ -32,6 +32,7 @@ final case class RemoteXmlSource[A](toURL: A => ParseResult[URL], retry: RetrySt
     con
   }
 
+  @SuppressWarnings(Array("org.wartremover.warts.ThreadSleep"))
   private def download(url: URL, count: Int): ParseResult[Node] =
     (for {
       con <- ParseResult(open(url))

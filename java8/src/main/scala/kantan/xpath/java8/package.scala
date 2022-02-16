@@ -28,7 +28,10 @@ import kantan.codecs.strings.java8.{TimeDecoderCompanion, ToFormatLiteral}
   * brings both the instance creation and default instances in scope. Without this type trickery, custom instances
   * and default ones would always clash.
   */
-package object java8 extends TimeDecoderCompanion[Option[Node], DecodeError, codecs.type] with ToFormatLiteral {
+package object java8
+// I'm not entirely sure why an explicit org.w3c.dom.Node type was needed, but when upgrading from 2.13.6 to 2.13.7,
+// kantan.xpath.Node fails to resolve for whatever reason...
+    extends TimeDecoderCompanion[Option[org.w3c.dom.Node], DecodeError, codecs.type] with ToFormatLiteral {
 
   override def decoderFrom[D](d: StringDecoder[D]) = codecs.fromString(d)
 

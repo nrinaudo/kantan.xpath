@@ -21,9 +21,8 @@ import javax.xml.xpath.XPathFactory
 
 /** Compiles XPath expressions.
   *
-  * There's always a [[XPathCompiler$.builtIn default instance]] in scope, which should be perfectly suitable for
-  * most circumstances. Still, if some non-standard options are required, one can always declare a local implicit
-  * instance.
+  * There's always a [[XPathCompiler$.builtIn default instance]] in scope, which should be perfectly suitable for most
+  * circumstances. Still, if some non-standard options are required, one can always declare a local implicit instance.
   *
   * Be careful, however: the default compiler performs some tricks to make sure its results are serializable. If you're
   * planning on using frameworks that require serialization, such as Apache Spark, think twice about using a non-default
@@ -36,9 +35,11 @@ trait XPathCompiler extends Serializable {
 object XPathCompiler {
 
   /** Creates a new [[XPathCompiler]] from the specified function. */
-  def apply(f: String => CompileResult[XPathExpression]): XPathCompiler = new XPathCompiler {
-    override def compile(str: String) = f(str)
-  }
+  def apply(f: String => CompileResult[XPathExpression]): XPathCompiler =
+    new XPathCompiler {
+      override def compile(str: String) =
+        f(str)
+    }
 
   /** Default compiler, always in scope. */
   @SuppressWarnings(Array("org.wartremover.warts.JavaSerializable", "org.wartremover.warts.Serializable"))
@@ -48,10 +49,14 @@ object XPathCompiler {
         private val expression: String       = str
         @transient private lazy val compiled = XPathFactory.newInstance().newXPath().compile(expression)
 
-        override def evaluate(item: scala.Any, returnType: QName)     = compiled.evaluate(item, returnType)
-        override def evaluate(item: scala.Any)                        = compiled.evaluate(item)
-        override def evaluate(source: InputSource, returnType: QName) = compiled.evaluate(source, returnType)
-        override def evaluate(source: InputSource)                    = compiled.evaluate(source)
+        override def evaluate(item: scala.Any, returnType: QName) =
+          compiled.evaluate(item, returnType)
+        override def evaluate(item: scala.Any) =
+          compiled.evaluate(item)
+        override def evaluate(source: InputSource, returnType: QName) =
+          compiled.evaluate(source, returnType)
+        override def evaluate(source: InputSource) =
+          compiled.evaluate(source)
       }
     }
   }

@@ -17,11 +17,11 @@
 package kantan.xpath.scalaz
 
 import kantan.codecs.scalaz.laws.discipline.ScalazDisciplineSuite
-import kantan.xpath.{Node, XmlSource}
+import kantan.xpath.Node
+import kantan.xpath.XmlSource
 import kantan.xpath.scalaz.arbitrary._
 import kantan.xpath.scalaz.equality._
 import org.scalacheck.Arbitrary
-import scalaz.Scalaz._
 import scalaz.scalacheck.ScalazProperties._
 
 class XmlSourceTests extends ScalazDisciplineSuite {

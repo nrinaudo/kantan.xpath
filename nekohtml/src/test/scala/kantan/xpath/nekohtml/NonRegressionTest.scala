@@ -19,7 +19,9 @@ package kantan.xpath.nekohtml
 import kantan.xpath.implicits._
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
-import scala.concurrent.{Await, Future}
+
+import scala.concurrent.Await
+import scala.concurrent.Future
 import scala.concurrent.duration._
 
 class NonRegressionTests extends AnyFunSuite with Matchers {

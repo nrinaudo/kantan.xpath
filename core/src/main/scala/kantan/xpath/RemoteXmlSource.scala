@@ -16,12 +16,13 @@
 
 package kantan.xpath
 
-import java.net.{URL, URLConnection}
+import java.net.URL
+import java.net.URLConnection
 
 /** [[XmlSource]] implementation anything that can be turned into a `java.io.URL`.
   *
-  * The main purpose here is to allow application developers to set their own HTTP headers: when scraping websites,
-  * it's typically necessary to change the default user agent to something a bit more browser-like.
+  * The main purpose here is to allow application developers to set their own HTTP headers: when scraping websites, it's
+  * typically necessary to change the default user agent to something a bit more browser-like.
   */
 @SuppressWarnings(Array("org.wartremover.warts.ForeachEntry"))
 final case class RemoteXmlSource[A](toURL: A => ParseResult[URL], retry: RetryStrategy, headers: Map[String, String])(
@@ -38,9 +39,9 @@ final case class RemoteXmlSource[A](toURL: A => ParseResult[URL], retry: RetrySt
     (for {
       con <- ParseResult(open(url))
       res <- ParseResult.open {
-              con.connect()
-              new InputSource(con.getInputStream)
-            }(parser.parse)
+               con.connect()
+               new InputSource(con.getInputStream)
+             }(parser.parse)
     } yield res).left.flatMap {
       case ParseError.IOError(_) if retry.max > count =>
         Thread.sleep(retry.delayFor(count))
@@ -51,7 +52,8 @@ final case class RemoteXmlSource[A](toURL: A => ParseResult[URL], retry: RetrySt
   override def asNode(a: A): ParseResult[Node] =
     toURL(a).flatMap(url => download(url, 0))
 
-  override def contramap[B](f: B => A): RemoteXmlSource[B] = copy(toURL = f andThen toURL)
+  override def contramap[B](f: B => A): RemoteXmlSource[B] =
+    copy(toURL = f.andThen(toURL))
 
   override def contramapResult[AA <: A, B](f: B => ParseResult[AA]): RemoteXmlSource[B] =
     copy(toURL = (b: B) => f(b).flatMap(toURL))
@@ -61,7 +63,9 @@ final case class RemoteXmlSource[A](toURL: A => ParseResult[URL], retry: RetrySt
     copy(headers = headers + (name -> value))
 
   /** Sets the user-agent to use whenever connecting to a URL. */
-  def withUserAgent(value: String): RemoteXmlSource[A] = withHeader("User-Agent", value)
+  def withUserAgent(value: String): RemoteXmlSource[A] =
+    withHeader("User-Agent", value)
 
-  def withRetry(strategy: RetryStrategy): RemoteXmlSource[A] = copy(retry = strategy)
+  def withRetry(strategy: RetryStrategy): RemoteXmlSource[A] =
+    copy(retry = strategy)
 }

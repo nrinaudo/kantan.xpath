@@ -17,7 +17,9 @@
 package kantan.xpath.libra
 
 import kantan.xpath.NodeDecoder
-import kantan.xpath.laws.discipline.{DisciplineSuite, NodeDecoderTests, SerializableTests}
+import kantan.xpath.laws.discipline.DisciplineSuite
+import kantan.xpath.laws.discipline.NodeDecoderTests
+import kantan.xpath.laws.discipline.SerializableTests
 import kantan.xpath.libra.arbitrary._
 import libra.Quantity
 import shapeless.HNil

@@ -16,10 +16,14 @@
 
 package kantan.xpath.laws
 
-import kantan.codecs.laws.{CodecValue, DecoderLaws}
-import kantan.codecs.laws.CodecValue.{IllegalValue, LegalValue}
-import kantan.codecs.laws.discipline.{DisciplinePackage}
-import kantan.xpath.{codecs, DecodeError, Node}
+import kantan.codecs.laws.CodecValue
+import kantan.codecs.laws.CodecValue.IllegalValue
+import kantan.codecs.laws.CodecValue.LegalValue
+import kantan.codecs.laws.DecoderLaws
+import kantan.codecs.laws.discipline.DisciplinePackage
+import kantan.xpath.DecodeError
+import kantan.xpath.Node
+import kantan.xpath.codecs
 
 package object discipline extends DisciplinePackage {
   type LegalNode[A]   = LegalValue[Option[Node], A, codecs.type]

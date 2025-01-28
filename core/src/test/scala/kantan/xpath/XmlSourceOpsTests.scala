@@ -22,18 +22,22 @@ import kantan.xpath.laws.discipline.arbitrary._
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
-import scala.util.{Failure, Success, Try}
+
+import scala.util.Failure
+import scala.util.Success
+import scala.util.Try
 
 class XmlSourceOpsTests extends AnyFunSuite with ScalaCheckPropertyChecks with Matchers {
   type Value[A] = CodecValue[Node, A, codecs.type]
 
-  private def cmp[A, F, E, T](value: CodecValue[E, A, T], res: Either[F, A]): Unit = (value, res) match {
-    case (CodecValue.LegalValue(_, n1), Right(n2)) =>
-      n1 should be(n2)
-      ()
-    case (CodecValue.IllegalValue(_), Left(_)) => ()
-    case (a, b)                                => fail(s"$a is not compatible with $b")
-  }
+  private def cmp[A, F, E, T](value: CodecValue[E, A, T], res: Either[F, A]): Unit =
+    (value, res) match {
+      case (CodecValue.LegalValue(_, n1), Right(n2)) =>
+        n1 should be(n2)
+        ()
+      case (CodecValue.IllegalValue(_), Left(_)) => ()
+      case (a, b)                                => fail(s"$a is not compatible with $b")
+    }
 
   test("XmlSource instances should have a working asNode method") {
     forAll { value: Value[Int] =>
@@ -62,10 +66,13 @@ class XmlSourceOpsTests extends AnyFunSuite with ScalaCheckPropertyChecks with M
   test("XmlSource instances should have a working unsafeEvalXPath(String) method") {
     forAll { value: Value[Int] =>
       // Scala 2.11 doesn't have Try.toEither...
-      cmp(value, Try(value.encoded.unsafeEvalXPath[Int](xp"/element")) match {
-        case Success(s) => Right(s)
-        case Failure(f) => Left(f)
-      })
+      cmp(
+        value,
+        Try(value.encoded.unsafeEvalXPath[Int](xp"/element")) match {
+          case Success(s) => Right(s)
+          case Failure(f) => Left(f)
+        }
+      )
     }
   }
 }

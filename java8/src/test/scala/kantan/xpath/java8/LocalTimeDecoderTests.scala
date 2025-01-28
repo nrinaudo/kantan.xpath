@@ -16,10 +16,13 @@
 
 package kantan.xpath.java8
 
-import java.time.LocalTime
 import kantan.xpath.NodeDecoder
 import kantan.xpath.java8.arbitrary._
-import kantan.xpath.laws.discipline.{DisciplineSuite, NodeDecoderTests, SerializableTests}
+import kantan.xpath.laws.discipline.DisciplineSuite
+import kantan.xpath.laws.discipline.NodeDecoderTests
+import kantan.xpath.laws.discipline.SerializableTests
+
+import java.time.LocalTime
 
 class LocalTimeDecoderTests extends DisciplineSuite {
 

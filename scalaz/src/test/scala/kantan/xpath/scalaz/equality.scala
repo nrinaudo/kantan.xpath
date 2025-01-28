@@ -16,7 +16,8 @@
 
 package kantan.xpath.scalaz
 
-import kantan.xpath.{Query, XmlSource}
+import kantan.xpath.Query
+import kantan.xpath.XmlSource
 import kantan.xpath.scalaz.arbitrary._
 import org.scalacheck.Arbitrary
 import scalaz.Equal
@@ -24,20 +25,22 @@ import scalaz.Scalaz._
 
 object equality extends kantan.codecs.scalaz.laws.discipline.EqualInstances {
 
-  implicit def xmlSourceEqual[A: Arbitrary]: Equal[XmlSource[A]] = new Equal[XmlSource[A]] {
+  implicit def xmlSourceEqual[A: Arbitrary]: Equal[XmlSource[A]] =
+    new Equal[XmlSource[A]] {
 
-    override def equal(a1: XmlSource[A], a2: XmlSource[A]) =
-      kantan.codecs.laws.discipline.equality.eq(a1.asNode, a2.asNode) { (d1, d2) =>
-        d1 === d2
-      }
-  }
+      override def equal(a1: XmlSource[A], a2: XmlSource[A]) =
+        kantan.codecs.laws.discipline.equality.eq(a1.asNode, a2.asNode) { (d1, d2) =>
+          d1 === d2
+        }
+    }
 
-  implicit def queryEqual[A: Equal: Arbitrary]: Equal[Query[A]] = new Equal[Query[A]] {
-    implicit val arb = arbNode((a: A) => a.toString)
-    override def equal(a1: Query[A], a2: Query[A]) =
-      kantan.codecs.laws.discipline.equality.eq(a1.eval, a2.eval) { (d1, d2) =>
-        d1 === d2
-      }
-  }
+  implicit def queryEqual[A: Equal: Arbitrary]: Equal[Query[A]] =
+    new Equal[Query[A]] {
+      implicit val arb = arbNode((a: A) => a.toString)
+      override def equal(a1: Query[A], a2: Query[A]) =
+        kantan.codecs.laws.discipline.equality.eq(a1.eval, a2.eval) { (d1, d2) =>
+          d1 === d2
+        }
+    }
 
 }

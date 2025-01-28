@@ -19,7 +19,9 @@ package kantan.xpath.refined
 import eu.timepit.refined.api.Refined
 import eu.timepit.refined.numeric.Positive
 import kantan.xpath.NodeDecoder
-import kantan.xpath.laws.discipline.{DisciplineSuite, NodeDecoderTests, SerializableTests}
+import kantan.xpath.laws.discipline.DisciplineSuite
+import kantan.xpath.laws.discipline.NodeDecoderTests
+import kantan.xpath.laws.discipline.SerializableTests
 import kantan.xpath.refined.arbitrary._
 
 class RefinedNodeDecoderTests extends DisciplineSuite {

@@ -19,10 +19,13 @@ package kantan.xpath.cats
 import cats.Eq
 import cats.data.EitherT
 import cats.instances.all._
-import cats.laws.discipline.{MonadErrorTests, SemigroupKTests}
+import cats.laws.discipline.MonadErrorTests
+import cats.laws.discipline.SemigroupKTests
 import cats.laws.discipline.SemigroupalTests.Isomorphisms
 import kantan.codecs.laws.discipline.DisciplineSuite
-import kantan.xpath.{DecodeError, Node, NodeDecoder}
+import kantan.xpath.DecodeError
+import kantan.xpath.Node
+import kantan.xpath.NodeDecoder
 import kantan.xpath.cats.arbitrary._
 import kantan.xpath.cats.equality._
 import org.scalacheck.Arbitrary

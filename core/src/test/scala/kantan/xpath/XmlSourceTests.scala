@@ -16,15 +16,16 @@
 
 package kantan.xpath
 
-import java.nio.file.Files
 import kantan.xpath.implicits._
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
+import java.nio.file.Files
+
 class XmlSourceTests extends AnyFunSuite with Matchers {
 
   test("XmlSource[File] should correctly handle XML encoding") {
-    val path     = Files.createTempFile("kx", ".xml")
+    val path = Files.createTempFile("kx", ".xml")
     val data1251 = """
       <?xml version="1.0" encoding="windows-1251"?>
       <abc>Проверка 1251</abc>

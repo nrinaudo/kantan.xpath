@@ -19,7 +19,9 @@ package kantan.xpath.enumeratum.values
 import kantan.codecs.enumeratum.laws.discipline.EnumeratedLong
 import kantan.xpath.NodeDecoder
 import kantan.xpath.enumeratum.arbitrary._
-import kantan.xpath.laws.discipline.{DisciplineSuite, NodeDecoderTests, SerializableTests}
+import kantan.xpath.laws.discipline.DisciplineSuite
+import kantan.xpath.laws.discipline.NodeDecoderTests
+import kantan.xpath.laws.discipline.SerializableTests
 
 class LongEnumCodecTests extends DisciplineSuite {
 

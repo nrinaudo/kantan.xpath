@@ -20,7 +20,6 @@ import kantan.codecs.scalaz.laws.discipline.ScalazDisciplineSuite
 import kantan.xpath.Node
 import kantan.xpath.scalaz.arbitrary._
 import org.scalacheck.Arbitrary
-import scalaz.Scalaz._
 import scalaz.scalacheck.ScalazProperties.{equal => equ}
 
 class NodeTests extends ScalazDisciplineSuite {

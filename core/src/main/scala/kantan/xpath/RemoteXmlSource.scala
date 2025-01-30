@@ -23,6 +23,7 @@ import java.net.{URL, URLConnection}
   * The main purpose here is to allow application developers to set their own HTTP headers: when scraping websites,
   * it's typically necessary to change the default user agent to something a bit more browser-like.
   */
+@SuppressWarnings(Array("org.wartremover.warts.ForeachEntry"))
 final case class RemoteXmlSource[A](toURL: A => ParseResult[URL], retry: RetryStrategy, headers: Map[String, String])(
   implicit parser: XmlParser
 ) extends XmlSource[A] {

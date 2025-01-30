@@ -35,6 +35,7 @@ sealed abstract class DecodeError(msg: String) extends ReadError(msg)
 object DecodeError {
 
   /** Error that occurs when a single result was requested by an XPath expression, but no node was matched. */
+  @SuppressWarnings(Array("org.wartremover.warts.ObjectThrowable"))
   case object NotFound extends DecodeError("no matched node")
 
   /** Error that occurs when a node was attempted to be decoded as a type its value is not compatible with. */

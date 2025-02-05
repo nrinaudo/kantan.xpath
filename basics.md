@@ -26,7 +26,7 @@ This lets you create new regular expression by prefixing string literals with [`
 
 ```scala
 xp"//a[@href]"
-// res0: kantan.xpath.package.XPathExpression = kantan.xpath.XPathCompiler$$anon$2@71e3f412
+// res0: kantan.xpath.package.XPathExpression = kantan.xpath.XPathCompiler$$anon$2@1f457b6c
 ```
 
 And, as promised, this fails *at compile time* if the xpath expression is not valid:
@@ -34,8 +34,6 @@ And, as promised, this fails *at compile time* if the xpath expression is not va
 ```scala
 xp"!@#"
 // error: Illegal XPath expression: '!@#'
-// xp"!@#"
-// ^^^^^^^
 ```
 
 ## Simple evaluation

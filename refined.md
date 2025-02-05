@@ -8,7 +8,7 @@ kantan.xpath comes with a [refined](https://github.com/fthomas/refined) module t
 by adding the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.nrinaudo" %% "kantan.xpath-refined" % "0.5.3"
+libraryDependencies += "com.nrinaudo" %% "kantan.xpath-refined" % "0.6.0"
 ```
 
 You then need to import the corresponding package:

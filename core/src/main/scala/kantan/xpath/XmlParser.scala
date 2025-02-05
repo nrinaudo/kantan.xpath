@@ -35,9 +35,11 @@ trait XmlParser {
 object XmlParser {
 
   /** Helper creation method, turns the specified function into an `XmlParser`. */
-  def apply(f: InputSource => ParseResult[Node]): XmlParser = new XmlParser {
-    override def parse(source: InputSource) = f(source)
-  }
+  def apply(f: InputSource => ParseResult[Node]): XmlParser =
+    new XmlParser {
+      override def parse(source: InputSource) =
+        f(source)
+    }
 
   /** Default implementation.
     *

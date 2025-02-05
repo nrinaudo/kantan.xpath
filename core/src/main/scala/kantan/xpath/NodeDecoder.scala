@@ -16,17 +16,21 @@
 
 package kantan.xpath
 
-import java.text.DateFormat
-import java.util.Date
-import kantan.codecs.{Decoder, DecoderCompanion}
+import kantan.codecs.Decoder
+import kantan.codecs.DecoderCompanion
 import kantan.codecs.strings.StringDecoder
 import kantan.xpath.DecodeError.TypeError
 
+import java.text.DateFormat
+import java.util.Date
+
 /** Provides instance creation and summoning methods. */
 object NodeDecoder extends GeneratedDecoders with DecoderCompanion[Option[Node], DecodeError, codecs.type] {
-  def fromFound[A](f: Node => DecodeResult[A]): NodeDecoder[A] = Decoder.from(_.map(f).getOrElse(DecodeResult.notFound))
+  def fromFound[A](f: Node => DecodeResult[A]): NodeDecoder[A] =
+    Decoder.from(_.map(f).getOrElse(DecodeResult.notFound))
 
-  def dateDecoder(format: DateFormat): NodeDecoder[Date] = codecs.fromString(StringDecoder.dateDecoder(format))
+  def dateDecoder(format: DateFormat): NodeDecoder[Date] =
+    codecs.fromString(StringDecoder.dateDecoder(format))
 }
 
 /** Provides default [[NodeDecoder]] instances. */

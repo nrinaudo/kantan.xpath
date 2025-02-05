@@ -18,7 +18,11 @@ package kantan.xpath.cats
 
 import cats.Show
 import cats.kernel.laws.discipline.EqTests
-import kantan.xpath.{CompileError, DecodeError, ParseError, ReadError, XPathError}
+import kantan.xpath.CompileError
+import kantan.xpath.DecodeError
+import kantan.xpath.ParseError
+import kantan.xpath.ReadError
+import kantan.xpath.XPathError
 import kantan.xpath.cats.arbitrary._
 import kantan.xpath.laws.discipline.DisciplineSuite
 

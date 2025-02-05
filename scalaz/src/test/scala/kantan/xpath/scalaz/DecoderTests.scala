@@ -17,7 +17,9 @@
 package kantan.xpath.scalaz
 
 import kantan.codecs.scalaz.laws.discipline.ScalazDisciplineSuite
-import kantan.xpath.{DecodeError, Node, NodeDecoder}
+import kantan.xpath.DecodeError
+import kantan.xpath.Node
+import kantan.xpath.NodeDecoder
 import kantan.xpath.scalaz.arbitrary._
 import kantan.xpath.scalaz.equality._
 import org.scalacheck.Arbitrary

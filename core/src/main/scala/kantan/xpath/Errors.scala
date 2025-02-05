@@ -16,7 +16,8 @@
 
 package kantan.xpath
 
-import kantan.codecs.error.{Error, ErrorCompanion}
+import kantan.codecs.error.Error
+import kantan.codecs.error.ErrorCompanion
 
 /** Describes an error that can occur while dealing with XPath. */
 sealed abstract class XPathError(msg: String) extends Error(msg)
@@ -35,6 +36,7 @@ sealed abstract class DecodeError(msg: String) extends ReadError(msg)
 object DecodeError {
 
   /** Error that occurs when a single result was requested by an XPath expression, but no node was matched. */
+  @SuppressWarnings(Array("org.wartremover.warts.ObjectThrowable"))
   case object NotFound extends DecodeError("no matched node")
 
   /** Error that occurs when a node was attempted to be decoded as a type its value is not compatible with. */

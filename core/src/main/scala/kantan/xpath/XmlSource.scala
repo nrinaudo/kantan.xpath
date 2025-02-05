@@ -16,14 +16,16 @@
 
 package kantan.xpath
 
+import kantan.codecs.resource.InputResource
+import kantan.codecs.resource.ReaderResource
+
 import java.io._
-import kantan.codecs.resource.{InputResource, ReaderResource}
 
 /** Type class for turning instances of `A` into valid instances of [[Node]].
   *
-  * While it's certainly possible, instances of [[XmlSource]] are rarely used directly. The preferred, idiomatic way
-  * is to use the implicit syntax provided by [[kantan.xpath.ops.XmlSourceOps XmlSourceOps]], brought in scope by
-  * importing `kantan.xpath.ops._`.
+  * While it's certainly possible, instances of [[XmlSource]] are rarely used directly. The preferred, idiomatic way is
+  * to use the implicit syntax provided by [[kantan.xpath.ops.XmlSourceOps XmlSourceOps]], brought in scope by importing
+  * `kantan.xpath.ops._`.
   *
   * See the [[XmlSource$ companion object]] for construction methods and default instances.
   */
@@ -42,7 +44,8 @@ trait XmlSource[-A] extends Serializable { self =>
     * see [[asNode]].
     */
   @SuppressWarnings(Array("org.wartremover.warts.Throw"))
-  def asUnsafeNode(a: A): Node = asNode(a).fold(e => throw e, identity)
+  def asUnsafeNode(a: A): Node =
+    asNode(a).fold(e => throw e, identity)
 
   /** Compiles the specified XPath expression and evaluates it against specified value. */
   @SuppressWarnings(Array("org.wartremover.warts.Throw"))
@@ -55,7 +58,8 @@ trait XmlSource[-A] extends Serializable { self =>
 
   /** Evaluates the specified XPath expression against specified value. */
   @SuppressWarnings(Array("org.wartremover.warts.Throw"))
-  def unsafeEval[B](a: A, expr: Query[DecodeResult[B]]): B = eval(a, expr).fold(e => throw e, identity)
+  def unsafeEval[B](a: A, expr: Query[DecodeResult[B]]): B =
+    eval(a, expr).fold(e => throw e, identity)
 
   /** Evaluates the specified XPath expression against specified value. */
   def eval[B](a: A, expr: Query[DecodeResult[B]]): ReadResult[B] =
@@ -66,13 +70,16 @@ trait XmlSource[-A] extends Serializable { self =>
 
   /** Turns an `XmlSource[A]` into an `XmlSource[B]`.
     *
-    * @see [[contramapResult]].
+    * @see
+    *   [[contramapResult]].
     */
-  def contramap[B](f: B => A): XmlSource[B] = XmlSource.from(f andThen self.asNode)
+  def contramap[B](f: B => A): XmlSource[B] =
+    XmlSource.from(f.andThen(self.asNode))
 
   /** Turns an `XmlSource[A]` into an `XmlSource[B]`.
     *
-    * @see [[contramap]]
+    * @see
+    *   [[contramap]]
     */
   def contramapResult[AA <: A, B](f: B => ParseResult[AA]): XmlSource[B] =
     XmlSource.from((b: B) => f(b).flatMap(self.asNode))
@@ -90,12 +97,15 @@ trait XmlSource[-A] extends Serializable { self =>
 object XmlSource extends LowPriorityXmlSourceInstances {
 
   /** Summons an [[XmlSource]] instance if one can be found. */
-  def apply[A](implicit ev: XmlSource[A]): XmlSource[A] = macro imp.summon[XmlSource[A]]
+  def apply[A](implicit ev: XmlSource[A]): XmlSource[A] =
+    macro imp.summon[XmlSource[A]]
 
   /** Turns the specified function into a new [[XmlSource]] instance. */
-  def from[A](f: A => ParseResult[Node]): XmlSource[A] = new XmlSource[A] {
-    override def asNode(a: A) = f(a)
-  }
+  def from[A](f: A => ParseResult[Node]): XmlSource[A] =
+    new XmlSource[A] {
+      override def asNode(a: A) =
+        f(a)
+    }
 
   /** Turns a [[Node]] into a source of XML data. */
   implicit val node: XmlSource[Node] = XmlSource.from(ParseResult.success)

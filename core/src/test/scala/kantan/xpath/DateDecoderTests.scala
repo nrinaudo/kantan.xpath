@@ -16,11 +16,15 @@
 
 package kantan.xpath
 
-import java.text.SimpleDateFormat
-import java.util.{Date, Locale}
 import kantan.codecs.strings.StringCodec
-import kantan.xpath.laws.discipline.{DisciplineSuite, NodeDecoderTests, SerializableTests}
+import kantan.xpath.laws.discipline.DisciplineSuite
+import kantan.xpath.laws.discipline.NodeDecoderTests
+import kantan.xpath.laws.discipline.SerializableTests
 import kantan.xpath.laws.discipline.arbitrary._
+
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class DateDecoderTests extends DisciplineSuite {
   implicit val codec: StringCodec[Date] =

@@ -16,24 +16,33 @@
 
 package kantan.xpath
 
-import java.time.{Instant, LocalDate, LocalDateTime, LocalTime, OffsetDateTime, ZonedDateTime}
+import kantan.codecs.Decoder
 import kantan.codecs.export.Exported
 import kantan.codecs.strings.StringDecoder
-import kantan.codecs.strings.java8.{TimeDecoderCompanion, ToFormatLiteral}
+import kantan.codecs.strings.java8.TimeDecoderCompanion
+import kantan.codecs.strings.java8.ToFormatLiteral
+
+import java.time.Instant
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.OffsetDateTime
+import java.time.ZonedDateTime
 
 /** Declares [[kantan.xpath.NodeDecoder]] instances java8 date and time types.
   *
   * Note that the type for default codecs might come as a surprise: the wrapping `Exported` is used to lower their
-  * priority. This is necessary because the standard use case will be to `import kantan.xpath.java8._`, which
-  * brings both the instance creation and default instances in scope. Without this type trickery, custom instances
-  * and default ones would always clash.
+  * priority. This is necessary because the standard use case will be to `import kantan.xpath.java8._`, which brings
+  * both the instance creation and default instances in scope. Without this type trickery, custom instances and default
+  * ones would always clash.
   */
 package object java8
 // I'm not entirely sure why an explicit org.w3c.dom.Node type was needed, but when upgrading from 2.13.6 to 2.13.7,
 // kantan.xpath.Node fails to resolve for whatever reason...
     extends TimeDecoderCompanion[Option[org.w3c.dom.Node], DecodeError, codecs.type] with ToFormatLiteral {
 
-  override def decoderFrom[D](d: StringDecoder[D]) = codecs.fromString(d)
+  override def decoderFrom[D](d: StringDecoder[D]): Decoder[Option[Node], D, DecodeError, codecs.type] =
+    codecs.fromString(d)
 
   implicit val defaultInstantNodeDecoder: Exported[NodeDecoder[Instant]] =
     Exported(defaultInstantDecoder)

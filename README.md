@@ -1,7 +1,7 @@
 # kantan.xpath
 
-[![Build Status](https://travis-ci.org/nrinaudo/kantan.xpath.svg?branch=master)](https://travis-ci.org/nrinaudo/kantan.xpath)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.nrinaudo/kantan.xpath_2.13/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.nrinaudo/kantan.xpath_2.13)
+[![Build Status](https://github.com/nrinaudo/kantan.xpath/actions/workflows/cli.yml/badge.svg?branch=master)](https://github.com/nrinaudo/kantan.xpath/actions/workflows/cli.yml?branch=master)
+[![kantan.xpath Scala version support](https://index.scala-lang.org/nrinaudo/kantan.xpath/kantan.xpath/latest.svg)](https://index.scala-lang.org/nrinaudo/kantan.xpath/kantan.xpath)
 [![Join the chat at https://gitter.im/nrinaudo/kantan.xpath](https://img.shields.io/badge/gitter-join%20chat-52c435.svg)](https://gitter.im/nrinaudo/kantan.xpath)
 
 I find myself having to scrape websites with some regularity, and Scala always makes the whole process

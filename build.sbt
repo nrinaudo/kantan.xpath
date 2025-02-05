@@ -58,11 +58,11 @@ lazy val java8 = project
     name       := "java8"
   )
   .enablePlugins(PublishedPlugin)
-  .dependsOn(core, laws % "test")
+  .dependsOn(core, laws % Test)
   .settings(
     libraryDependencies ++= Seq(
       "com.nrinaudo" %% "kantan.codecs-java8"      % Versions.kantanCodecs,
-      "com.nrinaudo" %% "kantan.codecs-java8-laws" % Versions.kantanCodecs % "test"
+      "com.nrinaudo" %% "kantan.codecs-java8-laws" % Versions.kantanCodecs % Test
     )
   )
 
@@ -74,7 +74,7 @@ lazy val nekohtml = project
     name       := "nekohtml"
   )
   .enablePlugins(PublishedPlugin)
-  .dependsOn(core, laws % "test")
+  .dependsOn(core, laws % Test)
   .settings(
     libraryDependencies ++= Seq(
       "net.sourceforge.nekohtml" % "nekohtml" % Versions.nekoHtml
@@ -89,11 +89,11 @@ lazy val cats = project
     name       := "cats"
   )
   .enablePlugins(PublishedPlugin)
-  .dependsOn(core, laws % "test")
+  .dependsOn(core, laws % Test)
   .settings(
     libraryDependencies ++= Seq(
       "com.nrinaudo" %% "kantan.codecs-cats"      % Versions.kantanCodecs,
-      "com.nrinaudo" %% "kantan.codecs-cats-laws" % Versions.kantanCodecs % "test"
+      "com.nrinaudo" %% "kantan.codecs-cats-laws" % Versions.kantanCodecs % Test
     )
   )
 
@@ -105,11 +105,11 @@ lazy val scalaz = project
     name       := "scalaz"
   )
   .enablePlugins(PublishedPlugin)
-  .dependsOn(core, laws % "test")
+  .dependsOn(core, laws % Test)
   .settings(
     libraryDependencies ++= Seq(
       "com.nrinaudo" %% "kantan.codecs-scalaz"      % Versions.kantanCodecs,
-      "com.nrinaudo" %% "kantan.codecs-scalaz-laws" % Versions.kantanCodecs % "test"
+      "com.nrinaudo" %% "kantan.codecs-scalaz-laws" % Versions.kantanCodecs % Test
     )
   )
 
@@ -121,11 +121,11 @@ lazy val refined = project
     name       := "refined"
   )
   .enablePlugins(PublishedPlugin)
-  .dependsOn(core, laws % "test")
+  .dependsOn(core, laws % Test)
   .settings(
     libraryDependencies ++= Seq(
       "com.nrinaudo" %% "kantan.codecs-refined"      % Versions.kantanCodecs,
-      "com.nrinaudo" %% "kantan.codecs-refined-laws" % Versions.kantanCodecs % "test"
+      "com.nrinaudo" %% "kantan.codecs-refined-laws" % Versions.kantanCodecs % Test
     )
   )
 
@@ -137,11 +137,11 @@ lazy val enumeratum = project
     name       := "enumeratum"
   )
   .enablePlugins(PublishedPlugin)
-  .dependsOn(core, laws % "test")
+  .dependsOn(core, laws % Test)
   .settings(
     libraryDependencies ++= Seq(
       "com.nrinaudo" %% "kantan.codecs-enumeratum"      % Versions.kantanCodecs,
-      "com.nrinaudo" %% "kantan.codecs-enumeratum-laws" % Versions.kantanCodecs % "test"
+      "com.nrinaudo" %% "kantan.codecs-enumeratum-laws" % Versions.kantanCodecs % Test
     )
   )
 
@@ -153,10 +153,10 @@ lazy val libra = project
     name       := "libra"
   )
   .enablePlugins(PublishedPlugin)
-  .dependsOn(core, laws % "test")
+  .dependsOn(core, laws % Test)
   .settings(
     libraryDependencies ++= Seq(
       "com.nrinaudo" %% "kantan.codecs-libra"      % Versions.kantanCodecs,
-      "com.nrinaudo" %% "kantan.codecs-libra-laws" % Versions.kantanCodecs % "test"
+      "com.nrinaudo" %% "kantan.codecs-libra-laws" % Versions.kantanCodecs % Test
     )
   )

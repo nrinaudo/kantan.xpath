@@ -16,8 +16,10 @@
 
 package kantan.xpath
 
-import _root_.scalaz.{Contravariant, Equal}
-import kantan.codecs.scalaz.{CommonInstances, DecoderInstances}
+import _root_.scalaz.Contravariant
+import _root_.scalaz.Equal
+import kantan.codecs.scalaz.CommonInstances
+import kantan.codecs.scalaz.DecoderInstances
 
 package object scalaz extends DecoderInstances with CommonInstances {
   // - Equal instances for errors --------------------------------------------------------------------------------------
@@ -38,6 +40,7 @@ package object scalaz extends DecoderInstances with CommonInstances {
   // -------------------------------------------------------------------------------------------------------------------
   /** `Contravariant` instance for `XmlSource`. */
   implicit val xmlSource: Contravariant[XmlSource] = new Contravariant[XmlSource] {
-    override def contramap[A, B](fa: XmlSource[A])(f: B => A) = fa.contramap(f)
+    override def contramap[A, B](fa: XmlSource[A])(f: B => A) =
+      fa.contramap(f)
   }
 }

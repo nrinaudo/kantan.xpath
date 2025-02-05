@@ -16,17 +16,21 @@
 
 package kantan.xpath.nekohtml
 
-import kantan.xpath.{InputSource, Node, ParseResult, XmlParser}
+import kantan.xpath.InputSource
+import kantan.xpath.Node
+import kantan.xpath.ParseResult
+import kantan.xpath.XmlParser
 import org.apache.xerces.parsers.DOMParser
 import org.cyberneko.html.HTMLConfiguration
 
 class NekoParser(val conf: HTMLConfiguration) extends XmlParser {
-  override def parse(source: InputSource): ParseResult[Node] = conf.synchronized {
-    val parser = new DOMParser(conf)
+  override def parse(source: InputSource): ParseResult[Node] =
+    conf.synchronized {
+      val parser = new DOMParser(conf)
 
-    ParseResult {
-      parser.parse(source)
-      parser.getDocument
+      ParseResult {
+        parser.parse(source)
+        parser.getDocument
+      }
     }
-  }
 }

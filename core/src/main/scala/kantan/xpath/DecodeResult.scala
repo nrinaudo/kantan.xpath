@@ -20,10 +20,13 @@ import kantan.codecs.ResultCompanion
 
 /** Provides instance creation methods for [[DecodeResult]]. */
 object DecodeResult extends ResultCompanion.WithDefault[DecodeError] {
-  override protected def fromThrowable(t: Throwable) = DecodeError.TypeError(t)
+  override protected def fromThrowable(t: Throwable): DecodeError.TypeError =
+    DecodeError.TypeError(t)
 
   /** Failure with an error of [[DecodeError.NotFound]]. */
-  val notFound: DecodeResult[Nothing]                = failure(DecodeError.NotFound)
-  def typeError(str: String): DecodeResult[Nothing]  = failure(DecodeError.TypeError(str))
-  def typeError(e: Exception): DecodeResult[Nothing] = failure(DecodeError.TypeError(e))
+  val notFound: DecodeResult[Nothing] = failure(DecodeError.NotFound)
+  def typeError(str: String): DecodeResult[Nothing] =
+    failure(DecodeError.TypeError(str))
+  def typeError(e: Exception): DecodeResult[Nothing] =
+    failure(DecodeError.TypeError(e))
 }

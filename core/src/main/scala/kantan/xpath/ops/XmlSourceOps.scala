@@ -29,22 +29,29 @@ import kantan.xpath._
 final class XmlSourceOps[A: XmlSource](val a: A) {
 
   /** Shorthand for [[XmlSource.asNode]]. */
-  def asNode: ParseResult[Node] = XmlSource[A].asNode(a)
+  def asNode: ParseResult[Node] =
+    XmlSource[A].asNode(a)
 
   /** Shorthand for [[XmlSource.asUnsafeNode]]. */
-  def asUnsafeNode: Node = XmlSource[A].asUnsafeNode(a)
+  def asUnsafeNode: Node =
+    XmlSource[A].asUnsafeNode(a)
 
-  def unsafeEvalXPath[B: Compiler](expr: XPathExpression): B = XmlSource[A].unsafeEval(a, expr)
+  def unsafeEvalXPath[B: Compiler](expr: XPathExpression): B =
+    XmlSource[A].unsafeEval(a, expr)
 
-  def evalXPath[B: Compiler](expr: XPathExpression): XPathResult[B] = XmlSource[A].eval(a, expr)
+  def evalXPath[B: Compiler](expr: XPathExpression): XPathResult[B] =
+    XmlSource[A].eval(a, expr)
 
-  def unsafeEvalXPath[B](expr: Query[DecodeResult[B]]): B = XmlSource[A].unsafeEval(a, expr)
+  def unsafeEvalXPath[B](expr: Query[DecodeResult[B]]): B =
+    XmlSource[A].unsafeEval(a, expr)
 
-  def evalXPath[B](expr: Query[DecodeResult[B]]): ReadResult[B] = XmlSource[A].eval(a, expr)
+  def evalXPath[B](expr: Query[DecodeResult[B]]): ReadResult[B] =
+    XmlSource[A].eval(a, expr)
 }
 
 trait ToXmlSourceOps {
-  implicit def toXmlSourceOps[A: XmlSource](a: A): XmlSourceOps[A] = new XmlSourceOps(a)
+  implicit def toXmlSourceOps[A: XmlSource](a: A): XmlSourceOps[A] =
+    new XmlSourceOps(a)
 }
 
 object xmlSource extends ToXmlSourceOps

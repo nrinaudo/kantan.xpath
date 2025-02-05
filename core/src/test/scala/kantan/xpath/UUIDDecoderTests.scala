@@ -16,9 +16,12 @@
 
 package kantan.xpath
 
-import java.util.UUID
-import kantan.xpath.laws.discipline.{DisciplineSuite, NodeDecoderTests, SerializableTests}
+import kantan.xpath.laws.discipline.DisciplineSuite
+import kantan.xpath.laws.discipline.NodeDecoderTests
+import kantan.xpath.laws.discipline.SerializableTests
 import kantan.xpath.laws.discipline.arbitrary._
+
+import java.util.UUID
 
 class UUIDDecoderTests extends DisciplineSuite {
 

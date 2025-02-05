@@ -16,11 +16,14 @@
 
 package kantan.xpath.literals
 
-import kantan.xpath.{XPathCompiler, XPathExpression}
+import kantan.xpath.XPathCompiler
+import kantan.xpath.XPathExpression
+
 import scala.reflect.macros.blackbox.Context
 
 final class XPathLiteral(val sc: StringContext) extends AnyVal {
-  def xp(args: Any*): XPathExpression = macro XPathLiteral.xpImpl
+  def xp(args: Any*): XPathExpression =
+    macro XPathLiteral.xpImpl
 }
 
 // Relatively distatefull trick to get rid of spurious warnings.
@@ -42,7 +45,7 @@ object XPathLiteral extends XPathLiteralMacro {
 
               implicitly[XPathCompiler]
                 .compile(spliced)
-                .getOrElse(sys.error((s"Illegal XPath expression: '$spliced'")))
+                .getOrElse(sys.error(s"Illegal XPath expression: '$spliced'"))
             }
         }
 
@@ -53,5 +56,6 @@ object XPathLiteral extends XPathLiteralMacro {
 }
 
 trait ToXPathLiteral {
-  implicit def toXPathLiteral(sc: StringContext): XPathLiteral = new XPathLiteral(sc)
+  implicit def toXPathLiteral(sc: StringContext): XPathLiteral =
+    new XPathLiteral(sc)
 }

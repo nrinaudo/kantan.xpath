@@ -18,23 +18,25 @@ package kantan.xpath.cats
 
 import cats.Eq
 import cats.implicits._
-import cats.laws.discipline.eq._
 import kantan.codecs.cats.laws.discipline.EqInstances
-import kantan.xpath.{Query, XmlSource}
+import kantan.xpath.Query
+import kantan.xpath.XmlSource
 import kantan.xpath.laws.discipline.arbitrary._
 import org.scalacheck.Arbitrary
 
 object equality extends EqInstances {
-  implicit def queryEq[A: Eq: Arbitrary]: Eq[Query[A]] = new Eq[Query[A]] {
-    implicit val arb = arbNode((a: A) => a.toString)
-    override def eqv(a1: Query[A], a2: Query[A]) =
-      kantan.codecs.laws.discipline.equality.eq(a1.eval, a2.eval) { (d1, d2) =>
-        d1 === d2
-      }
-  }
+  implicit def queryEq[A: Eq: Arbitrary]: Eq[Query[A]] =
+    new Eq[Query[A]] {
+      implicit val arb = arbNode((a: A) => a.toString)
+      override def eqv(a1: Query[A], a2: Query[A]) =
+        kantan.codecs.laws.discipline.equality.eq(a1.eval, a2.eval) { (d1, d2) =>
+          d1 === d2
+        }
+    }
 
-  implicit def eqXmlSource[A: Arbitrary]: Eq[XmlSource[A]] = Eq.by { source => (a: A) =>
-    source.asNode(a)
-  }
+  implicit def eqXmlSource[A: Arbitrary]: Eq[XmlSource[A]] =
+    Eq.by { source => (a: A) =>
+      source.asNode(a)
+    }
 
 }

@@ -16,9 +16,13 @@
 
 package kantan.xpath.laws.discipline
 
-import kantan.xpath.{codecs, DecodeError, Node}
+import kantan.xpath.DecodeError
+import kantan.xpath.Node
+import kantan.xpath.codecs
 import kantan.xpath.laws.discipline.arbitrary._
-import org.scalacheck.{Arbitrary, Cogen, Gen}
+import org.scalacheck.Arbitrary
+import org.scalacheck.Cogen
+import org.scalacheck.Gen
 
 object NodeDecoderTests {
   implicit val arb: Arbitrary[Node] = arbNode(identity[String])(Arbitrary(Gen.identifier))
